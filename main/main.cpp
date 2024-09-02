@@ -81,7 +81,6 @@ void app_main(void) {
   st7789_spi_register_flush_cb(flush_callback);
 
   light.init(GPIO_NUM_2);
-  ESP_LOGI(TAG, "dont init ledc");
 
   // Run GUI on core 1.
   xTaskCreatePinnedToCore(guiLoop, "gui-loop", 4096 * 2, NULL, 3, NULL,
@@ -113,8 +112,8 @@ void initialize_controls() {
     abort();
   }
 
-  encoder->max = 10;
-  encoder->min = -10;
+  encoder->max = 63;
+  encoder->min = 0;
   encoder->step_size = 1;
   encoder->overflow = true;
   encoder->pinA = 18;
@@ -131,11 +130,16 @@ uint32_t get_milliseconds() { return esp_timer_get_time() / 1000; }
 static void sample_inputs() {
   if (rep_sample(encoder)) {
     lv_label_set_text_fmt(label, "%d", encoder->value);
+    ESP_LOGI(TAG, "encoder value changed");
+    light.set_duty(encoder->value);
+    light.update();
   }
   float d = hcsr04.sample();
   filter.filter_sample(d);
-  auto dist = static_cast<unsigned int>(d);
-  lv_label_set_text_fmt(label, "%d", dist);
+
+  // Display distance for testing.
+  // auto dist = static_cast<unsigned int>(d);
+  // lv_label_set_text_fmt(label, "%d", dist);
   // ESP_LOGI(TAG, "d: %0.2f", d);
 }
 

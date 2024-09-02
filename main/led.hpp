@@ -1,3 +1,4 @@
+#include <cmath>
 #include <cstdint>
 #include <inttypes.h>
 
@@ -15,7 +16,8 @@ public:
   //   settings when the PWM ended anyway, it didn't have anything to do with
   //   the max speed you can get out of a channel.
   ledc_mode_t speed_mode = LEDC_LOW_SPEED_MODE;
-  uint16_t duty = 100;
+  ledc_timer_bit_t res = LEDC_TIMER_6_BIT;
+  uint16_t duty = pow(2, LEDC_TIMER_6_BIT) - 1; // set max duty 100%
   bool state = true;
   int hpoint = 0;
 
@@ -45,7 +47,7 @@ public:
 
     ledc_timer_config_t timercfg;
     timercfg.speed_mode = this->speed_mode;
-    timercfg.duty_resolution = LEDC_TIMER_8_BIT;
+    timercfg.duty_resolution = res;
     timercfg.timer_num = this->timer;
     timercfg.freq_hz = 40000;
     timercfg.clk_cfg = LEDC_USE_APB_CLK;
@@ -67,22 +69,35 @@ public:
     // Update duty to apply the new value
     // ESP_ERROR_CHECK(ledc_update_duty(LEDC_MODE, LEDC_CHANNEL));
   }
-  void set_duty(uint16_t d) {
+
+  void disable() {
+    ESP_ERROR_CHECK(ledc_set_duty(speed_mode, channel, 0));
+    ESP_ERROR_CHECK(ledc_update_duty(speed_mode, channel));
+  }
+
+  void enable() {
     // This API call is thread safe.
     // This API call needs a fade service installed on the channel before use.
     // ESP_ERROR_CHECK(ledc_set_duty_and_update(speed_mode, channel, d,
     // hpoint));
-    ESP_ERROR_CHECK(ledc_set_duty(speed_mode, channel, d));
+    ESP_ERROR_CHECK(ledc_set_duty(speed_mode, channel, duty));
     ESP_ERROR_CHECK(ledc_update_duty(speed_mode, channel));
   }
-  void toggle() {
-    state = !state;
+
+  void update() {
     if (state) {
       // Restore the current active duty.
-      set_duty(duty);
+      enable();
     } else {
       // Turn the light off.
-      set_duty(0);
+      disable();
     }
+  }
+
+  void set_duty(uint16_t d) { duty = d; }
+
+  void toggle() {
+    state = !state;
+    update();
   }
 };
