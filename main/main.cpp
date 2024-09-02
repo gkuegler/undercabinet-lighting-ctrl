@@ -130,12 +130,14 @@ uint32_t get_milliseconds() { return esp_timer_get_time() / 1000; }
 static void sample_inputs() {
   if (rep_sample(encoder)) {
     lv_label_set_text_fmt(label, "%d", encoder->value);
-    ESP_LOGI(TAG, "encoder value changed");
-    light.set_duty(encoder->value);
-    light.update();
+    light.set_user_duty(encoder->value);
   }
+
   float d = hcsr04.sample();
   filter.filter_sample(d);
+
+  // TODO: use lvgl style queue and handle where I only update once per cycle?
+  light.update_timeout_tick();
 
   // Display distance for testing.
   // auto dist = static_cast<unsigned int>(d);

@@ -3,11 +3,16 @@
 #include <inttypes.h>
 
 #include "driver/ledc.h"
+#include "esp_attr.h" // for IRAM_ATTR
 #include "esp_log.h"
 #include "freertos/FreeRTOS.h"
 #include "freertos/queue.h"
 
 class Led {
+  enum class STATE { OFF, ON };
+
+  static constexpr char *TAG = "LEDC";
+
 public:
   ledc_channel_t channel = LEDC_CHANNEL_0;
   ledc_timer_t timer = LEDC_TIMER_0;
@@ -17,9 +22,16 @@ public:
   //   the max speed you can get out of a channel.
   ledc_mode_t speed_mode = LEDC_LOW_SPEED_MODE;
   ledc_timer_bit_t res = LEDC_TIMER_6_BIT;
-  uint16_t duty = pow(2, LEDC_TIMER_6_BIT) - 1; // set max duty 100%
-  bool state = true;
-  int hpoint = 0;
+  uint16_t user_duty = pow(2, LEDC_TIMER_6_BIT) - 1; // set max duty 100%
+  uint16_t cur_duty = user_duty;                     // current led duty
+  STATE state = STATE::ON;
+  int hpoint = 0; // duty cycle wave start period
+  uint32_t warning_level = 0;
+
+  // TODO: convert to ticks
+  const int primary_timeout = 20 * (1000 / 10);
+  const int secondary_timeout = 10 * (1000 / 10);
+  int count = 0;
 
   Led(){};
   ~Led(){};
@@ -61,43 +73,77 @@ public:
     chancfg.timer_sel = this->timer;
     chancfg.intr_type = LEDC_INTR_DISABLE;
     chancfg.gpio_num = pin;
-    chancfg.duty = this->duty;
+    chancfg.duty = this->cur_duty;
     chancfg.hpoint = this->hpoint;
     ESP_ERROR_CHECK(ledc_channel_config(&chancfg));
-
-    // ESP_ERROR_CHECK(ledc_set_duty(LEDC_MODE, LEDC_CHANNEL, LEDC_DUTY));
-    // Update duty to apply the new value
-    // ESP_ERROR_CHECK(ledc_update_duty(LEDC_MODE, LEDC_CHANNEL));
   }
 
-  void disable() {
-    ESP_ERROR_CHECK(ledc_set_duty(speed_mode, channel, 0));
-    ESP_ERROR_CHECK(ledc_update_duty(speed_mode, channel));
+  void set_user_duty(uint16_t d) {
+    user_duty = d;
+    set_duty(d);
   }
 
-  void enable() {
+  void set_duty(uint16_t d) {
     // This API call is thread safe.
     // This API call needs a fade service installed on the channel before use.
     // ESP_ERROR_CHECK(ledc_set_duty_and_update(speed_mode, channel, d,
     // hpoint));
-    ESP_ERROR_CHECK(ledc_set_duty(speed_mode, channel, duty));
+    cur_duty = d;
+    ESP_ERROR_CHECK(ledc_set_duty(speed_mode, channel, cur_duty));
     ESP_ERROR_CHECK(ledc_update_duty(speed_mode, channel));
   }
 
+  /* Set LED dim level based on current state.*/
   void update() {
-    if (state) {
+    if (STATE::ON == state) {
       // Restore the current active duty.
-      enable();
+      if (1 == warning_level) {
+        set_duty(user_duty / 2);
+      } else if (2 == warning_level) {
+        set_duty(0);
+      } else {
+        set_duty(user_duty);
+      }
     } else {
       // Turn the light off.
-      disable();
+      set_duty(0);
     }
   }
 
-  void set_duty(uint16_t d) { duty = d; }
+  void update_timeout_tick() {
+    if (state == STATE::OFF) {
+      return;
+    }
+
+    ++count;
+    if (warning_level < 2 && count >= secondary_timeout + primary_timeout) {
+      warning_level = 2;
+      update();
+    } else if (warning_level < 1 && count >= primary_timeout) {
+      warning_level = 1;
+      update();
+    }
+  }
+
+  void reset_timeout() {}
+
+  void enter_timeout_warning() {
+    // dim to 50% of cur dim lvl?
+  }
 
   void toggle() {
-    state = !state;
+    if (STATE::ON == state) {
+      if (warning_level > 0) { // User renewed lights.
+        count = 0;
+        warning_level = 0;
+      } else { // User turned off lights.
+        state = STATE::OFF;
+      }
+    } else { // User turned on lights.
+      state = STATE::ON;
+      warning_level = 0;
+      count = 0;
+    }
     update();
   }
 };
