@@ -5,8 +5,8 @@
 #include <atomic>
 #include <cstdint>
 
+#include "esp_attr.h"     // for IRAM_ATTR
 #include "soc/gpio_num.h" // for GPIOs
-#include "esp_attr.h" // for IRAM_ATTR
 
 /*
 Max range measurement is ~46,713us
@@ -54,11 +54,16 @@ After Install:
  */
 class HCSR04 {
 private:
+  static constexpr char *const TAG = "HCSR04";
+
   int64_t _pulse_start_us = 0;
   int64_t _pulse_duration_us = 0;
   std::atomic<bool> _pulse_in_flight = false;
+  std::atomic<bool> _pulse_capture = false;
   gpio_num_t _trig_pin;
   gpio_num_t _echo_pin;
+  const int _timeout_start_count = 10;
+  int _timeout_samples_remaining = _timeout_start_count; // 100ms
 
 public:
   HCSR04(){};

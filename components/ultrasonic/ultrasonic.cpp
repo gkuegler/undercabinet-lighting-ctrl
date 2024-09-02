@@ -10,8 +10,10 @@
 #include "driver/gpio.h"
 #include "esp_attr.h"     // using IRAM_ATTR
 #include "esp_bit_defs.h" // using BIT64() macro
+#include "esp_log.h"
 #include "esp_timer.h"
 #include "freertos/FreeRTOS.h"
+
 #include "rom/ets_sys.h"     // using ets_delay_us()
 #include "soc/gpio_struct.h" // using GPIO.out1_w1ts
 
@@ -30,29 +32,30 @@ amount of time it takes for the interrupt to be handled and cleared.
 Interrupts get cleared just before the IRQ returns.
 */
 void IRAM_ATTR HCSR04::echo_interrupt_handler(void *pvParameter) {
-  auto sensor = reinterpret_cast<HCSR04 *>(pvParameter);
-  if (!sensor->_pulse_in_flight) {
-    sensor->_pulse_in_flight = true;
-    sensor->_pulse_start_us = esp_timer_get_time();
-    gpio_set_intr_type(sensor->_echo_pin, GPIO_INTR_LOW_LEVEL);
+  auto self = reinterpret_cast<HCSR04 *>(pvParameter);
+
+  if (!self->_pulse_capture) {
+    self->_pulse_start_us = esp_timer_get_time();
+    gpio_set_intr_type(self->_echo_pin, GPIO_INTR_LOW_LEVEL);
+    self->_pulse_capture = true;
   } else {
-    sensor->_pulse_duration_us = esp_timer_get_time() - sensor->_pulse_start_us;
-    gpio_set_intr_type(sensor->_echo_pin, GPIO_INTR_HIGH_LEVEL);
-    sensor->_pulse_in_flight = false;
+    self->_pulse_duration_us = esp_timer_get_time() - self->_pulse_start_us;
+    gpio_set_intr_type(self->_echo_pin, GPIO_INTR_HIGH_LEVEL);
+    self->_pulse_in_flight = false;
+    self->_pulse_capture = false;
   }
 
-  // TODO: I could use a queue to stash measurements and wake up a task to
+  // OPTIMIZATION: Implement inter-period triggering. Current Problem: if I
+  // sample every 10ms, but the echo pulse completes at the 11ms mark I'd have
+  // to wait another 9ms to trigger another ranging session. This reduces my
+  // effective sampling rate to ~2x in certain situations.
+  // Solution: I could use a queue to stash measurements and wake up a task to
   // immediatly take a new measurement if its been longer than my sampling
-  // period? Current Problem: if I sample every 10ms, but this completes at
-  // the 11ms mark I'd have to wait another 9ms to trigger another pulse.
-  // This reduces my effective sampling rate to ~2x in certain situations.
-  // This would introduce a 9ms lag when going from long distances to short
-  // distances.
+  // period?
   return;
 }
 
 void HCSR04::init(gpio_num_t trig_pin, gpio_num_t echo_pin) {
-  // Note: Using external 10K pulldown resistors on the trigger and echo pins.
   _trig_pin = trig_pin;
   _echo_pin = echo_pin;
 
@@ -85,15 +88,23 @@ void HCSR04::init(gpio_num_t trig_pin, gpio_num_t echo_pin) {
 }
 
 float HCSR04::sample() {
+  if (_timeout_samples_remaining <= 0) {
+    ESP_LOGE(TAG, "no echo pulse recived in %dms", _timeout_start_count * 10);
+    _pulse_in_flight = false;
+  }
   // Send a 10 microsecond pulse to the trigger pin.
   // Offloading pulse to peripherals is not warranted. Pulse is too short and
   // does not need to be exact.
   if (!_pulse_in_flight) {
+    _pulse_in_flight = true;
+    _timeout_samples_remaining = _timeout_start_count; // Reset timeout.
     portDISABLE_INTERRUPTS(); // Disables all non-maskable interupts.
     GPIO_SET_FAST_0_31(_trig_pin);
     ets_delay_us(10); // lowest level c api for delay
     GPIO_CLEAR_FAST_0_31(_trig_pin);
     portENABLE_INTERRUPTS();
+  } else {
+    --_timeout_samples_remaining;
   }
   return _pulse_duration_us * 0.01715;
 }
