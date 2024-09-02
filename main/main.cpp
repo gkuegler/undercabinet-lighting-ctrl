@@ -11,6 +11,7 @@
 #include "esp_timer.h"
 
 #include "freertos/FreeRTOS.h"
+#include "freertos/queue.h"
 #include "freertos/semphr.h"
 #include "freertos/task.h"
 
@@ -20,6 +21,8 @@
 #include "st7789.h"
 
 /*** Local includes ***/
+#include "filter.hpp"
+#include "led.hpp"
 #include "rotary-encoder-polling.h"
 #include "ultrasonic.hpp"
 
@@ -34,10 +37,15 @@ static const char *TAG = "[main]";
 /*** USER INPUT DEVICES ***/
 static re_polling_rotary_encoder_t *encoder;
 static HCSR04 hcsr04;
+static Filter<float, 10.0f, 5, 4, 30> filter;
+static Led light;
 
 /*** LVGL STATIC OBJECTS ***/
 static lv_obj_t *label;
 static lv_display_t *disp;
+
+/*** OTHERS ***/
+QueueHandle_t event_q;
 
 // Creates a semaphore to handle concurrent call to lvgl stuff.
 // If you wish to call *any* lvgl function from other threads/tasks
@@ -71,6 +79,9 @@ void app_main(void) {
   // Using dependency injection here so there's no st7789 compile dependency on
   // lvgl.
   st7789_spi_register_flush_cb(flush_callback);
+
+  light.init(GPIO_NUM_2);
+  ESP_LOGI(TAG, "dont init ledc");
 
   // Run GUI on core 1.
   xTaskCreatePinnedToCore(guiLoop, "gui-loop", 4096 * 2, NULL, 3, NULL,
@@ -122,18 +133,35 @@ static void sample_inputs() {
     lv_label_set_text_fmt(label, "%d", encoder->value);
   }
   float d = hcsr04.sample();
+  filter.filter_sample(d);
   auto dist = static_cast<unsigned int>(d);
   lv_label_set_text_fmt(label, "%d", dist);
   // ESP_LOGI(TAG, "d: %0.2f", d);
 }
 
+static void handle_events() {
+  Event event;
+  while (pdTRUE == xQueueReceive(event_q, &event,
+                                 0 // Return immediately if empty.
+                                 )) {
+    switch (event) {
+    case Event::EVENT_HAND_ENTER:
+      ESP_LOGI(TAG, "Toggle the light.");
+      light.toggle();
+      break;
+    case Event::EVENT_HAND_EXIT:
+      break;
+    }
+  }
+}
+
 static void guiLoop(void *pvParameter) {
   (void)pvParameter; // not used
 
+  event_q = create_event_q();
   initialize_controls();
-
   hcsr04.init(GPIO_NUM_9, GPIO_NUM_10);
-
+  filter.init(event_q);
   lv_init();
 
   // Let lvgl know where to update the ticks from.
@@ -173,6 +201,8 @@ static void guiLoop(void *pvParameter) {
       const int64_t start = esp_timer_get_time();
 
       sample_inputs();
+
+      handle_events();
 
       lv_task_handler();
 
