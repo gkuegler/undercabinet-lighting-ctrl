@@ -1,0 +1,4 @@
+(sym_lib_table
+  (version 0)
+  (lib (name "Adafruit QT Py ESP32-S3-eagle-import")(type "KiCad")(uri "${KIPRJMOD}/Adafruit QT Py ESP32-S3-eagle-import.kicad_sym")(options "")(descr ""))
+)

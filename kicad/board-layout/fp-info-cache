@@ -1,4 +1,4 @@
-23759067891106548
+23767703478530251
 Audio_Module
 Reverb_BTDR-1H
 Digital Reverberation Unit, http://www.belton.co.kr/inc/downfile.php?seq=17&file=pdf (footprint from http://www.uk-electronic.de/PDF/BTDR-1.pdf)
@@ -96649,12 +96649,19 @@ AdafruitQTPyEsp32S3
 14
 14
 user
+Bourns-PEC11R
+https://octopart.com/pec11r-4220f-s0024-bourns-26648301#CadModels
+
+0
+7
+5
+user
 Bourns-PEC11R-4220F-S0024-0-0-0
 https://octopart.com/pec11r-4220f-s0024-bourns-26648301#CadModels
 
 0
 7
-7
+5
 user
 CUI_SPDT_500mA_3mm
 
@@ -96663,9 +96670,37 @@ CUI_SPDT_500mA_3mm
 5
 2
 user
+Hole8mm
+
+
+0
+0
+0
+user
+Hole10mm
+
+
+0
+0
+0
+user
 MountingHole_2.7mm_M2.5_ISO7380_Pad
 Mounting Hole 2.7mm, M2.5, ISO7380
 mounting hole 2.7mm m2.5 iso7380
+0
+1
+1
+user
+MountingHole_2.7mm_M2.5_ISO7380_Pad_Heated_Insert
+Mounting Hole 2.7mm, M2.5, ISO7380
+mounting hole 2.7mm m2.5 iso7380
+0
+1
+1
+user
+MountingHole_3.2mm_M3_ISO14580_Pad_TopOnly
+Mounting Hole 3.2mm, M3, ISO14580
+mounting hole 3.2mm m3 iso14580
 0
 1
 1
@@ -96688,7 +96723,7 @@ RCWL-1601
 
 
 0
-4
+8
 4
 user
 TO-220F-3_H_Heatsink
