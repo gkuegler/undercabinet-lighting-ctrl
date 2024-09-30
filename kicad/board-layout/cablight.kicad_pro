@@ -58,7 +58,9 @@
           "width": 0.0
         }
       ],
-      "drc_exclusions": [],
+      "drc_exclusions": [
+        "starved_thermal|-44258000|4560000|0b1cb120-0e47-46d5-944a-5cc7ec9ee53b|0866da53-733c-4c3f-983a-24602b3692d0|F.Cu"
+      ],
       "meta": {
         "version": 2
       },
@@ -118,15 +120,15 @@
         "max_error": 0.005,
         "min_clearance": 0.2,
         "min_connection": 0.0,
-        "min_copper_edge_clearance": 0.8,
+        "min_copper_edge_clearance": 0.5,
         "min_hole_clearance": 0.25,
         "min_hole_to_hole": 0.25,
         "min_microvia_diameter": 0.2,
         "min_microvia_drill": 0.1,
         "min_resolved_spokes": 2,
         "min_silk_clearance": 0.2,
-        "min_text_height": 0.8,
-        "min_text_thickness": 0.08,
+        "min_text_height": 1.0,
+        "min_text_thickness": 0.15,
         "min_through_hole_diameter": 0.3,
         "min_track_width": 0.3,
         "min_via_annular_width": 0.25,
@@ -574,10 +576,10 @@
       "gencad": "",
       "idf": "",
       "netlist": "",
-      "plot": "../",
+      "plot": "../fabrication_output/",
       "pos_files": "",
       "specctra_dsn": "",
-      "step": "",
+      "step": "cablight2.step",
       "svg": "",
       "vrml": ""
     },
