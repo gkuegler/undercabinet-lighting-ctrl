@@ -3,51 +3,31 @@
 #include <array>
 
 #include "esp_log.h"
+#include "event.hpp"
 
-#include "freertos/FreeRTOS.h"
-#include "freertos/queue.h"
-
-// TODO: put this with the Q
-enum class Event : int { EVENT_HAND_EXIT, EVENT_HAND_ENTER };
-enum class State : int { HAND_OUT, HAND_IN, UNDECIDED };
-
-QueueHandle_t create_event_q() {
-  //   The queue length should hold at least as many items as the multiple of
-  //   the sampling loop versus the GUI loop.
-  QueueHandle_t event_q = xQueueCreate(10, sizeof(int));
-  if (event_q == NULL) {
-    ESP_LOGE("Queue", "Could not event create queue.");
-    abort();
-  }
-  return event_q;
-}
-
-void q_event(QueueHandle_t q, Event e) {
-  Event item = e;
-  BaseType_t result = xQueueSend(q, &item, 0);
-  if (result == errQUEUE_FULL) {
-    ESP_LOGE("Queue", "Event queue was full.");
-  }
-}
+enum class State : int { UNDECIDED, HAND_OUT, HAND_IN };
 
 /**
- * A sliding window filter ignores outliers will filter against errant data.
+ * A sliding window filter to generate hand in/out event.
+ * Ignores outliers.
  */
-template <typename T, float THRESHOLD, size_t N, size_t VALID, size_t SKIP>
-class Filter {
+template <typename T, float THRESHOLD, size_t WINDOW_SIZE,
+          size_t VALID_SAMPLES_NEEDED, size_t DEBOUNCE_COUNT>
+class HandGestureFilter {
 public:
-  Filter(){};
-  ~Filter(){};
+  HandGestureFilter(){};
+  ~HandGestureFilter(){};
 
-  void init(QueueHandle_t event_q) { _event_q = event_q; };
+  void init(EventQueue *event_q) { _event_q = event_q; };
 
   // Filter the sample and generate necessary events.
   void filter_sample(T sample) {
+    // Push sample to circ buff and increment window.
     push(sample);
 
     // Deboundce the state change by skipping samples.
-    if (_sample_skip_count > 0) {
-      --_sample_skip_count;
+    if (_debounce_cnt > 0) {
+      --_debounce_cnt;
       return;
     }
 
@@ -55,26 +35,24 @@ public:
 
     if (State::HAND_OUT == _state && State::HAND_IN == hand_pos) {
       _state = State::HAND_IN;
-      q_event(_event_q, Event::EVENT_HAND_ENTER);
+      _event_q->post(Event::EVENT_HAND_ENTER);
 
     } else if (State::HAND_IN == _state && State::HAND_OUT == hand_pos) {
       _state = State::HAND_OUT;
-      q_event(_event_q, Event::EVENT_HAND_EXIT);
-      // Prevent sending the hand enter event too soon.
-      _sample_skip_count = SKIP;
+      _event_q->post(Event::EVENT_HAND_EXIT);
+      // Reset the debounce counter
+      _debounce_cnt = DEBOUNCE_COUNT;
     }
   };
 
 private:
-  const size_t _size = N;
-  const size_t _valid_sample_count = VALID;
-  size_t _sample_skip_count = 0;
+  size_t _debounce_cnt = 0;
 
   size_t _index = 0;
-  std::array<T, N> _sample_window;
+  std::array<T, WINDOW_SIZE> _sample_window;
 
   T _threshold = THRESHOLD;
-  QueueHandle_t _event_q = NULL;
+  EventQueue *_event_q = NULL;
   State _state = State::HAND_OUT;
 
   /**
@@ -84,6 +62,7 @@ private:
     size_t in = 0;
     size_t out = 0;
     for (const auto &s : _sample_window) {
+      // Ignore invalid measurement.
       if (s == 0.0) {
         continue;
       }
@@ -93,9 +72,9 @@ private:
         ++out;
       }
     }
-    if (in > _valid_sample_count) {
+    if (in > VALID_SAMPLES_NEEDED) {
       return State::HAND_IN;
-    } else if (out > _valid_sample_count) {
+    } else if (out > VALID_SAMPLES_NEEDED) {
       return State::HAND_OUT;
     } else {
       return State::UNDECIDED;
@@ -105,6 +84,6 @@ private:
   void push(T item) {
     _sample_window[_index] = item;
     // Increment index wrapping back to the beginning.
-    _index = (_index >= N - 1) ? 0 : (_index + 1);
+    _index = (_index >= WINDOW_SIZE - 1) ? 0 : (_index + 1);
   }
 };
