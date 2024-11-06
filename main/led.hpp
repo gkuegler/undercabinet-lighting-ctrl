@@ -9,9 +9,9 @@
 #include "freertos/queue.h"
 
 class Led {
+private:
   enum class STATE { OFF, ON };
-
-  static constexpr char *TAG = "LEDC";
+  static constexpr const char *TAG = "LEDC";
 
 public:
   ledc_channel_t channel = LEDC_CHANNEL_0;

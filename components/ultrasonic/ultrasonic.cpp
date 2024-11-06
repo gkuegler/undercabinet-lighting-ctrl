@@ -23,6 +23,8 @@
 #define GPIO_CLEAR_FAST_0_31(pin)                                              \
   GPIO.out_w1tc = ((uint32_t)1 << (static_cast<int>(pin)))
 
+const char *HCSR04::TAG = "HCSR04";
+
 /*
 Measure pulse width with interrupt based flipflop.
 
@@ -96,6 +98,7 @@ float HCSR04::sample() {
   // Offloading pulse to peripherals is not warranted. Pulse is too short and
   // does not need to be exact.
   if (!_pulse_in_flight) {
+    // ESP_LOGD(TAG, "Starting Ranging Session");
     _pulse_in_flight = true;
     _timeout_samples_remaining = _timeout_start_count; // Reset timeout.
     portDISABLE_INTERRUPTS(); // Disables all non-maskable interupts.

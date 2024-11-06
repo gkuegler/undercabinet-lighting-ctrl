@@ -8,14 +8,20 @@
 enum class Event : int { EVENT_HAND_EXIT, EVENT_HAND_ENTER };
 enum class State : int { UNDECIDED, HAND_OUT, HAND_IN };
 
-template <size_t SIZE> class EventQueue {
+/*
+I can't have templates here if I want to use the full class another object.*/
+// template <size_t SIZE>
+class EventQueue {
 public:
-  EventQueue();
-  ~EventQueue();
+  EventQueue(size_t SIZE_, uint8_t *ucQueueStorage_) {
+    SIZE = SIZE_;
+    ucQueueStorage = ucQueueStorage_;
+  }
+  ~EventQueue(){};
 
-  init() {
-    event_q = xQueueCreateStatic(SIZE, sizeof(Event), ucQueueStorageArea,
-                                 xStaticQueue);
+  void init() {
+    event_q =
+        xQueueCreateStatic(SIZE, sizeof(Event), ucQueueStorage, &xQueueBuffer);
     if (event_q == NULL) {
       ESP_LOGE(TAG, "Could not create event queue.");
       abort();
@@ -41,12 +47,15 @@ public:
   }
 
 private:
-  const char *TAG = "Queue";
-  QueueHandle_t event_q = nullptr;
+  static constexpr const char *TAG = "Queue";
+  size_t SIZE;
 
   /* The variable used to hold the queue's data structure. */
-  StaticQueue_t xStaticQueue;
+  StaticQueue_t xQueueBuffer;
+  
   /* The array to use as the queue's storage area. This must be at least
    * uxQueueLength * uxItemSize bytes. */
-  uint8_t ucQueueStorageArea[SIZE * sizeof(Event)];
+  uint8_t *ucQueueStorage;
+
+  QueueHandle_t event_q = nullptr;
 };

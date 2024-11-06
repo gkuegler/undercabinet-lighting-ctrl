@@ -54,8 +54,7 @@ After Install:
  */
 class HCSR04 {
 private:
-  static constexpr char *const TAG = "HCSR04";
-
+  static const char *TAG;
   int64_t _pulse_start_us = 0;
   int64_t _pulse_duration_us = 0;
   std::atomic<bool> _pulse_in_flight = false;
@@ -75,7 +74,7 @@ public:
   void init(gpio_num_t trig, gpio_num_t echo);
 
   /**
-   * Send a trigger if no pulse is in flight and return the mostrecently
+   * Send a trigger if no pulse is in flight and return the most recently
    * measured range. Call this periodically ideally no faster than the
    * time-of-flight (plus margin) for the desired working distance.
    * Example: 100cm range = 5.83ms pulse, so I could sample

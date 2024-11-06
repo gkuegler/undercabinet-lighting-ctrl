@@ -5,8 +5,6 @@
 #include "esp_log.h"
 #include "event.hpp"
 
-enum class State : int { UNDECIDED, HAND_OUT, HAND_IN };
-
 /**
  * A sliding window filter to generate hand in/out event.
  * Ignores outliers.

@@ -2,3 +2,5 @@ build/
 sdkconfig.old
 *.log
 .vscode
+
+kicad\cablight-project\cablight-project-backups\*
