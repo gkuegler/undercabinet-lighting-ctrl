@@ -1,8 +1,3 @@
-#include <stdbool.h>
-// #include <stdio.h>
-// #include <stdlib.h>
-// #include <string.h>
-
 #include "inttypes.h"
 
 #include "driver/gpio.h"
@@ -25,7 +20,7 @@
 #include "rotary-encoder-polling.h"
 #include "ultrasonic.hpp"
 
-#define GUI_PROCESSOR_CORE_ID 1
+#define HMI_PROCESSOR_CORE_ID 1
 #define POLLING_RATE_MS 10 // ms
 
 #define MODULE_ADAFRUIT_QTPY_ESP32_S3
@@ -53,15 +48,15 @@ static Led light;
 
 /*** STATIC PROTOTYPES ***/
 static void initialize_controls();
-static void guiLoop(void *pvParameter);
+static void hmi_loop(void *pvParameter);
 // static void button_callback(void *);
 
 extern "C" void app_main(void) {
   light.init(CONFIG_DUTY_RELAY_PIN);
 
   // Run GUI on core 1.
-  xTaskCreatePinnedToCore(guiLoop, "gui-loop", 4096 * 2, NULL, 3, NULL,
-                          GUI_PROCESSOR_CORE_ID);
+  xTaskCreatePinnedToCore(hmi_loop, "gui-loop", 4096 * 2, NULL, 3, NULL,
+                          HMI_PROCESSOR_CORE_ID);
 
   // For debugging purposes.
   esp_intr_dump(NULL);
@@ -79,10 +74,6 @@ static void sample_inputs() {
   float d = hcsr04.sample();
   filter.filter_sample(d);
 
-  // TODO: use lvgl style queue and handle where I only update once per cycle?
-  // TODO: re-factor lighting class. I don't believe changes to the state need
-  // to be thread safe since all events that affect the state would be generated
-  // sequentially in a super loop.
   light.update_timeout_tick();
 
   // Display distance for testing.
@@ -104,7 +95,7 @@ static void handle_events() {
   }
 }
 
-static void guiLoop(void *pvParameter) {
+static void hmi_loop(void *pvParameter) {
   (void)pvParameter; // not used
 
   event_q.init();
