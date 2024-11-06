@@ -57,9 +57,11 @@ void IRAM_ATTR HCSR04::echo_interrupt_handler(void *pvParameter) {
   return;
 }
 
-void HCSR04::init(gpio_num_t trig_pin, gpio_num_t echo_pin) {
+void HCSR04::init(gpio_num_t trig_pin, gpio_num_t echo_pin,
+                  int sample_period_ms) {
   _trig_pin = trig_pin;
   _echo_pin = echo_pin;
+  _ranging_timeout_start_count = 100 / sample_period_ms; // 100ms
 
   // TRIGGER PIN
   gpio_config_t trcfg = {};
@@ -90,8 +92,9 @@ void HCSR04::init(gpio_num_t trig_pin, gpio_num_t echo_pin) {
 }
 
 float HCSR04::sample() {
-  if (_timeout_samples_remaining <= 0) {
-    ESP_LOGE(TAG, "no echo pulse recived in %dms", _timeout_start_count * 10);
+  if (_ranging_timeout_samples_remaining <= 0) {
+    ESP_LOGE(TAG, "no echo pulse recived in %dms",
+             _ranging_timeout_start_count * 10);
     _pulse_in_flight = false;
   }
   // Send a 10 microsecond pulse to the trigger pin.
@@ -100,14 +103,17 @@ float HCSR04::sample() {
   if (!_pulse_in_flight) {
     // ESP_LOGD(TAG, "Starting Ranging Session");
     _pulse_in_flight = true;
-    _timeout_samples_remaining = _timeout_start_count; // Reset timeout.
-    portDISABLE_INTERRUPTS(); // Disables all non-maskable interupts.
+    // Reset timeout.
+    _ranging_timeout_samples_remaining = _ranging_timeout_start_count;
+    // Disables all non-maskable interupts for accurate delay. Delay is so short
+    // that there is no benefit moving the pusle to a peripheral.
+    portDISABLE_INTERRUPTS();
     GPIO_SET_FAST_0_31(_trig_pin);
-    ets_delay_us(10); // lowest level c api for delay
+    ets_delay_us(10); // esp32 lowest level c api for delay
     GPIO_CLEAR_FAST_0_31(_trig_pin);
     portENABLE_INTERRUPTS();
   } else {
-    --_timeout_samples_remaining;
+    --_ranging_timeout_samples_remaining;
   }
   return _pulse_duration_us * 0.01715;
 }

@@ -61,8 +61,9 @@ private:
   std::atomic<bool> _pulse_capture = false;
   gpio_num_t _trig_pin;
   gpio_num_t _echo_pin;
-  const int _timeout_start_count = 10;
-  int _timeout_samples_remaining = _timeout_start_count; // 100ms
+  int _ranging_timeout_start_count = 10;
+  int _ranging_timeout_samples_remaining =
+      _ranging_timeout_start_count; // 100ms
 
 public:
   HCSR04(){};
@@ -71,7 +72,7 @@ public:
   static void IRAM_ATTR echo_interrupt_handler(void *pvParameter);
 
   /* Initalize. Call before using object. */
-  void init(gpio_num_t trig, gpio_num_t echo);
+  void init(gpio_num_t trig, gpio_num_t echo, int sample_period);
 
   /**
    * Send a trigger if no pulse is in flight and return the most recently

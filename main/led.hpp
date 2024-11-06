@@ -28,15 +28,19 @@ public:
   int hpoint = 0; // duty cycle wave start period
   uint32_t warning_level = 0;
 
-  // TODO: convert to ticks
-  const int primary_timeout = 20 * (1000 / 10);
-  const int secondary_timeout = 10 * (1000 / 10);
+  float warning_dim_frac = 0.20;
+  int warning_dim_lvl = static_cast<int>(warning_dim_frac * user_duty);
+  int warn_timeout = 20 * (1000 / 10);
+  int shutoff_timeout = 10 * (1000 / 10);
   int count = 0;
 
   Led(){};
   ~Led(){};
 
-  void init(gpio_num_t pin) {
+  void init(gpio_num_t pin, int sample_period_ms, int timeout1_m,
+            int timeout2_m) {
+    warn_timeout = (timeout1_m * 60 * 1000) / sample_period_ms;
+    shutoff_timeout = (timeout2_m * 60 * 1000) / sample_period_ms;
     // clang-format off
     /*
     LEDC_CLKx           | PWM Hz | Highest Resolution (bit) 1 | Lowest Resolution (bit) 2
@@ -98,7 +102,7 @@ public:
     if (STATE::ON == state) {
       // Restore the current active duty.
       if (1 == warning_level) {
-        set_duty(user_duty / 2);
+        set_duty(warning_dim_lvl);
       } else if (2 == warning_level) {
         set_duty(0);
       } else {
@@ -116,10 +120,10 @@ public:
     }
 
     ++count;
-    if (warning_level < 2 && count >= secondary_timeout + primary_timeout) {
+    if (warning_level < 2 && count >= shutoff_timeout + warn_timeout) {
       warning_level = 2;
       update();
-    } else if (warning_level < 1 && count >= primary_timeout) {
+    } else if (warning_level < 1 && count >= warn_timeout) {
       warning_level = 1;
       update();
     }

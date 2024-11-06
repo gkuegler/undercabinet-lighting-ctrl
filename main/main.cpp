@@ -21,7 +21,7 @@
 #include "ultrasonic.hpp"
 
 #define HMI_PROCESSOR_CORE_ID 1
-#define POLLING_RATE_MS 10 // ms
+#define POLLING_PERIOD_MS 10 // ms
 
 #define MODULE_ADAFRUIT_QTPY_ESP32_S3
 
@@ -44,7 +44,7 @@ EventQueue event_q(EVENT_QUEUE_COUNT, ucQueueStorage);
 // static re_polling_rotary_encoder_t *encoder;
 static HCSR04 hcsr04;
 static HandGestureFilter<float, 10.0f, 5, 4, 30> filter;
-static Led light;
+static Led led;
 
 /*** STATIC PROTOTYPES ***/
 static void initialize_controls();
@@ -52,7 +52,7 @@ static void hmi_loop(void *pvParameter);
 // static void button_callback(void *);
 
 extern "C" void app_main(void) {
-  light.init(CONFIG_DUTY_RELAY_PIN);
+  led.init(CONFIG_DUTY_RELAY_PIN, POLLING_PERIOD_MS, 60, 120);
 
   // Run GUI on core 1.
   xTaskCreatePinnedToCore(hmi_loop, "gui-loop", 4096 * 2, NULL, 3, NULL,
@@ -68,13 +68,13 @@ uint32_t get_milliseconds() { return esp_timer_get_time() / 1000; }
 
 static void sample_inputs() {
   // if (rep_sample(encoder)) {
-  //   light.set_user_duty(encoder->value);
+  //   led.set_user_duty(encoder->value);
   // }
 
   float d = hcsr04.sample();
   filter.filter_sample(d);
 
-  light.update_timeout_tick();
+  led.update_timeout_tick();
 
   // Display distance for testing.
   // auto dist = static_cast<unsigned int>(d);
@@ -86,8 +86,8 @@ static void handle_events() {
   while (true == event_q.receive(event)) {
     switch (event) {
     case Event::EVENT_HAND_ENTER:
-      ESP_LOGI(TAG, "Toggle the light.");
-      light.toggle();
+      ESP_LOGI(TAG, "Toggle the led.");
+      led.toggle();
       break;
     case Event::EVENT_HAND_EXIT:
       break;
@@ -116,8 +116,8 @@ static void hmi_loop(void *pvParameter) {
     const int64_t task_duration_us = (esp_timer_get_time() - start);
     ESP_LOGV(TAG, "gui loop delta us: %" PRIu64, task_duration_us);
 
-    if (task_duration_us <= POLLING_RATE_MS * 1000) {
-      vTaskDelay(pdMS_TO_TICKS(POLLING_RATE_MS - (task_duration_us / 1000)));
+    if (task_duration_us <= POLLING_PERIOD_MS * 1000) {
+      vTaskDelay(pdMS_TO_TICKS(POLLING_PERIOD_MS - (task_duration_us / 1000)));
     } else {
       ESP_LOGW(TAG, "gui loop duration exceded refresh period: %" PRIu64 "us",
                task_duration_us);
@@ -160,7 +160,7 @@ void initialize_controls() {
   //   abort();
   // }
 
-  hcsr04.init(CONFIG_TRIGGER_PIN, CONFIG_ECHO_PIN);
+  hcsr04.init(CONFIG_TRIGGER_PIN, CONFIG_ECHO_PIN, POLLING_PERIOD_MS);
 }
 
 // static void button_callback(void *) { rep_reset(encoder); }
