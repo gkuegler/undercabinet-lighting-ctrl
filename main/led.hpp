@@ -8,6 +8,9 @@
 #include "freertos/FreeRTOS.h"
 #include "freertos/queue.h"
 
+/*
+Not Thread Safe
+*/
 class Led {
 private:
   enum class STATE { OFF, ON };
@@ -16,10 +19,10 @@ private:
 public:
   ledc_channel_t channel = LEDC_CHANNEL_0;
   ledc_timer_t timer = LEDC_TIMER_0;
-  //   The S3 doesn't have the distinction between low and high speed anymore;
-  //   that distinction in general was about having hardware to latch the
-  //   settings when the PWM ended anyway, it didn't have anything to do with
-  //   the max speed you can get out of a channel.
+  /* The S3 doesn't have the distinction between low and high speed anymore;
+  that distinction in general was about having hardware to latch the
+  settings when the PWM ended anyway, it didn't have anything to do with
+  the max speed you can get out of a channel. */
   ledc_mode_t speed_mode = LEDC_LOW_SPEED_MODE;
   ledc_timer_bit_t res = LEDC_TIMER_6_BIT;
   uint16_t user_duty = pow(2, LEDC_TIMER_6_BIT) - 1; // set max duty 100%
@@ -28,11 +31,13 @@ public:
   int hpoint = 0; // duty cycle wave start period
   uint32_t warning_level = 0;
 
-  float warning_dim_frac = 0.20;
+  float warning_dim_frac = 0.05;
   int warning_dim_lvl = static_cast<int>(warning_dim_frac * user_duty);
   int warn_timeout = 20 * (1000 / 10);
   int shutoff_timeout = 10 * (1000 / 10);
   int count = 0;
+  bool warn_enable = true;
+  bool shutoff_enable = true;
 
   Led(){};
   ~Led(){};
@@ -40,6 +45,8 @@ public:
   void init(gpio_num_t pin, int sample_period_ms, int timeout1_m,
             int timeout2_m) {
     warn_timeout = (timeout1_m * 60 * 1000) / sample_period_ms;
+    // Demo Mode
+    // warn_timeout = 5000 / sample_period_ms;
     shutoff_timeout = (timeout2_m * 60 * 1000) / sample_period_ms;
     // clang-format off
     /*
@@ -120,20 +127,17 @@ public:
     }
 
     ++count;
-    if (warning_level < 2 && count >= shutoff_timeout + warn_timeout) {
+    if (warning_level < 2 && count >= shutoff_timeout + warn_timeout &&
+        warn_enable) {
       warning_level = 2;
       update();
-    } else if (warning_level < 1 && count >= warn_timeout) {
+    } else if (warning_level < 1 && count >= warn_timeout && shutoff_enable) {
       warning_level = 1;
       update();
     }
   }
 
-  void reset_timeout() {}
-
-  void enter_timeout_warning() {
-    // dim to 50% of cur dim lvl?
-  }
+  void reset_timeout() { count = 0; }
 
   void toggle() {
     if (STATE::ON == state) {
