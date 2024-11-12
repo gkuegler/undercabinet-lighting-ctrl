@@ -124,7 +124,7 @@ bool rep_initialize(re_polling_rotary_encoder_t *this) {
 }
 
 void rep_reset(re_polling_rotary_encoder_t *this) {
-  // TODO: add lock here if using an multithreaded environment
+  // Add lock here if using a multithreaded environment
   this->previous_pulse_count = 0;
   this->value = 0;
   this->changed = true;

@@ -170,7 +170,6 @@ bool db_register_edge(db_edge_input_t *input) {
       (db_edge_input_ex_t *)malloc(sizeof(db_edge_input_ex_t));
 
   if (internal && input && config) {
-    // TODO: how to test for memory acquisition?
     memcpy((void *)internal, (void *)input, sizeof(db_edge_input_t));
     config->input = internal;
   }
@@ -199,6 +198,3 @@ bool db_register_edge(db_edge_input_t *input) {
 
   return true;
 }
-
-// future task suspend
-// future deregister input & pin

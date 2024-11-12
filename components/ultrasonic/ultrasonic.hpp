@@ -9,7 +9,8 @@
 #include "soc/gpio_num.h" // for GPIOs
 
 /*
-Max range measurement is ~46,713us
+NOTES ON RANGING:
+Max ranging session duration is about ~46,713us
 I can take faster samples if I am closer, with a min of 2us before pulse?
 I think variable tx excludes the benefit of using rmt tx.
 I could still use rmt for precise and continuous recieve.
@@ -18,19 +19,6 @@ I would need a ring buffer.
 I then try to sample at say 100hz, so 10ms between tx attemps.
 Every sample call I attempt a tx if no pulse is in flight.
 Every sample call I also process any completed samples in rx buffer.
-
-TODO: implememnt filter (see yellowpad)
-
-Breadboard Stage:
-- write filters
-- write event generator
-- connect events to light toggle
-- init ledc peripheral with dim levels
-- connect rotary to dim level
-- create 2 step led timeout ramp
-
-After Install:
-- create menu controllable by rotary
 */
 
 /**
@@ -38,14 +26,14 @@ After Install:
  *
  * Compatible with 3V or 5V.
  *
- * GPIO and interrupt based. Uses shared interrupts.
+ * Uses shared GPIO level interrupts.
  *
  * A range is initiated by sending a 10us pulse on trig pin.
  * The unit will then emit a 40kHz burst.
- * The echo pin will return a pulse of a duration equal to the sound time of
- * flight. The unit times out if return sound reflection is received. The max
- * duration of the echo pulse is around ~47ms. When powered by 3v, the unit
- * can't register small flat objects (such as a hand) after ~150cm.
+ * The echo pin will return a pulse of a duration equal to the echo time of
+ * flight. The unit times out if a return echo is not received. The
+ * max time of flight is around ~47ms. When powered by 3v, the unit
+ * has difficulty registering small flat objects (such as a hand) after ~150cm.
  *
  * The data sheet for the HC-SR04 shows the echo pulse begins after the
  * reflection is returned, but I have not verified if this is the case so I am
@@ -61,9 +49,9 @@ private:
   std::atomic<bool> _pulse_capture = false;
   gpio_num_t _trig_pin;
   gpio_num_t _echo_pin;
-  int _ranging_timeout_start_count = 10;
+  int _ranging_timeout_start_count = 10; // default
   int _ranging_timeout_samples_remaining =
-      _ranging_timeout_start_count; // 100ms
+      _ranging_timeout_start_count; // 100ms default
 
 public:
   HCSR04(){};

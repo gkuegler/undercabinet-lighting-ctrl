@@ -24,6 +24,7 @@ extern "C" {
  * Note:
  * The max can't be greater than the MAX_VALUE(re_count_t) + step_size.
  * The min can't be less than the MIN_VALUE(re_count_t) - step_size.
+ * Encoder functions are not thread safe.
  */
 typedef struct {
   char name;
