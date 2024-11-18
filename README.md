@@ -2,7 +2,8 @@
 <!-- | ----------------- | ----- | -------- | -------- | -------- | -------- | -------- | -------- | -------- | -->
 
 | Supported Targets | ESP32 | ESP32-S3 |
-| ----------------- | ----- | -------- |
+| ESP-IDF Ver. | 5.2 |     |
+| ------------ | --- | --- |
 
 # Kitchen Under Cabinet Lighting Controller
 This controller mounts upside down underneath kitchen cabinets enables the undercabinet lighting to be turned on/off with with wave of a hand.
