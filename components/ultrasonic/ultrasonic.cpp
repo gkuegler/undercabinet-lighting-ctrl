@@ -52,10 +52,9 @@ HCSR04::echo_interrupt_handler(void* pvParameter)
   // OPTIMIZATION: Implement inter-period triggering. Current Problem: if I
   // sample every 10ms, but the echo pulse completes at the 11ms mark I'd have
   // to wait another 9ms to trigger another ranging session. This reduces my
-  // effective sampling rate to ~2x in certain situations.
-  // Solution: I could use a queue to stash measurements and wake up a task to
-  // immediatly take a new measurement if its been longer than my sampling
-  // period?
+  // effective sampling rate to ~0.5x in certain situations.
+  // Solution: I could use a task to continuously sample and store range in an
+  // atomic variable, queue, or window?
   return;
 }
 
@@ -97,14 +96,14 @@ HCSR04::init(gpio_num_t trig_pin, gpio_num_t echo_pin, int sample_period_ms)
 float
 HCSR04::sample()
 {
+  // TODO: Use ticks?
   if (_ranging_timeout_samples_remaining <= 0) {
     ESP_LOGE(
       TAG, "no echo pulse recived in %dms", _ranging_timeout_start_count * 10);
     _pulse_in_flight = false;
   }
   // Send a 10 microsecond pulse to the trigger pin.
-  // Offloading pulse to peripherals is not warranted. Pulse is too short and
-  // does not need to be exact.
+  // Offloading pulse to peripherals is not warranted. Pulse is too short.
   if (!_pulse_in_flight) {
     // ESP_LOGD(TAG, "Starting Ranging Session");
     _pulse_in_flight = true;

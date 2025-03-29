@@ -65,7 +65,7 @@ public:
 
   /**
    * Send a trigger if no pulse is in flight and return the most recently
-   * measured range. Call this periodically ideally no faster than the
+   * measured range in (cm). Call this periodically ideally no faster than the
    * time-of-flight (plus margin) for the desired working distance.
    * Example: 100cm range = 5.83ms pulse, so I could sample
    * every 8.3ms or 120Hz
