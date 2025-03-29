@@ -88,6 +88,7 @@ public:
     // Prepare and then apply the LEDC PWM channel configuration
     ledc_channel_config_t chancfg;
     chancfg.speed_mode = this->speed_mode;
+    chancfg.sleep_mode = LEDC_SLEEP_MODE_NO_ALIVE_NO_PD;
     chancfg.channel = this->channel;
     chancfg.timer_sel = this->timer;
     chancfg.intr_type = LEDC_INTR_DISABLE;

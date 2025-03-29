@@ -27,6 +27,7 @@
 // #define ROTARY_ENCODER_ENABLED
 
 #define HMI_PROCESSOR_CORE_ID 1
+// TODO: "This should be moved to a config file or passed in as a build flag."???
 #define HMI_POLLING_PERIOD_MS 10 // milliseconds
 
 #define EVENT_QUEUE_COUNT 5
@@ -86,7 +87,7 @@ app_main(void)
            LED_SHUTOFF_TIMEOUT_M);
 
   xTaskCreatePinnedToCore(
-    hmi_loop, "gui-loop", 4096 * 2, NULL, 3, NULL, HMI_PROCESSOR_CORE_ID);
+    hmi_loop, "hmi-loop", 4096 * 2, NULL, 3, NULL, HMI_PROCESSOR_CORE_ID);
 
   // For debugging purposes.
   // esp_intr_dump(NULL);
@@ -149,9 +150,7 @@ hmi_loop(void* pvParameter)
   initialize_controls();
 
   while (1) {
-    // I use my own timing here because its easier to control which core this
-    // loop runs on with 'xTaskCreatePinnedToCore' and monitor how long my
-    // loop takes for performance testing.
+    // Monitor hmi loop processing time.
     const int64_t start = esp_timer_get_time();
 
     sample_inputs();
