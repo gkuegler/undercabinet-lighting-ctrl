@@ -1,0 +1,49 @@
+1. Use express install for "workspace folder" to install ver version.
+File hierarchy:
+
+L:\Espressif
+└──idf_v5.5.1  (make this folder for each version)
+    ├── idf              (make this folder, choose as idf location)
+    └── tools            (make this folder, choose as toolchain folder)
+
+2.
+a. Use a project sample to generate the required .vscode folder files.
+b. ESP_IDF: Add VSCode Configuration folder (will add settings.json & launch.json)
+
+--- settings.josn ---
+Use options at bottom to select:
+    - flashing method
+    - com port
+    - openocd target board (IDF_TARGET)
+
+--- c_cpp_properties.json ---
+
+Set this to the current toolchain version compiler (this will prevent include sq):
+"compilerPath": "${config:idf.toolsPathWin}\\tools\\xtensa-esp-elf\\esp-14.2.0_20241119\\xtensa-esp-elf\\bin\\xtensa-esp32s3-elf-gcc.exe",
+
+Add compiler commands:
+"compileCommands": ["${workspaceFolder}/build/compile_commands.json"],
+
+
+# Debugging
+Download Zadig tool (Zadig_X.X.exe) from https://zadig.akeo.ie/ and run it.
+Set (Interface 1) to libusbk. Don't touch (Interface 0 is serial port).
+If I need to reset the driver for the serial port. Go to Device Manager. THen USB devices and update driver.
+
+Set Adapter Speed in esp jtag config file in toolchain folder:
+adapter speed 20000
+
+In Zadig tool go to Options and check List All Devices.
+
+Check the list of devices that should contain two specific USB entries:  (Interface 0) and  (Interface 1).
+
+The first device ( (Interface 0)) is connected to the JTAG port of the ESP32. Original driver of this device should be replaced with WinUSB (v6xxxxx).
+
+Note: Do not change the second device (Interface 1). It is routed to ESP32's serial port (UART) used for upload of application to ESP32's flash.
+
+There are two versions of this board: 4MB Flash/2MB PSRAM or 8MB Flash/No PSRAM
+I have (2) of the 4MB Flash/2MB PSRAM for the smaller QTPy's.
+
+Make sure
+"idf.openOcdDebugLevel": 1,
+If it is set too high (like 4) things will take too long and it will error out.

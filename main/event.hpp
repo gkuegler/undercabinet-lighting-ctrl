@@ -7,70 +7,57 @@
 
 enum class Event : int
 {
-  EVENT_HAND_EXIT,
-  EVENT_HAND_ENTER
+  NONE = 0,
+  HAND_EXIT,
+  HAND_ENTER,
+  HAND_PRESENCE_TIMEOUT,
+  START_SET_THRESHOLD_DISTANCE,
+  COMPLETE_SET_THRESHOLD_DISTANCE,
+  TOGGLE_LED,
+  CYCLE_BRIGHTNESS,
+  CHIRP
 };
-enum class State : int
+
+/* Class wrapper around a FreeRTOS StaticQueue.*/
+template<typename TYPE, size_t COUNT>
+class StaticQueue
 {
-  UNDECIDED,
-  HAND_OUT,
-  HAND_IN
-};
-
-/*
-I can't have templates here if I want to use the full class another object.*/
-// template <size_t SIZE>
-class EventQueue
-{
-public:
-  EventQueue(size_t SIZE_, uint8_t* ucQueueStorage_)
-  {
-    SIZE = SIZE_;
-    ucQueueStorage = ucQueueStorage_;
-  }
-  ~EventQueue() {};
-
-  void init()
-  {
-    event_q =
-      xQueueCreateStatic(SIZE, sizeof(Event), ucQueueStorage, &xQueueBuffer);
-    if (event_q == NULL) {
-      ESP_LOGE(TAG, "Could not create event queue.");
-      abort();
-    }
-  }
-
-  void post(Event e)
-  {
-    Event item = e;
-    BaseType_t result = xQueueSend(event_q, &item, 0);
-    if (result == errQUEUE_FULL) {
-      ESP_LOGE(TAG, "Event queue was full.");
-    }
-  }
-
-  bool receive(Event& event)
-  {
-    if (pdTRUE == xQueueReceive(event_q,
-                                &event,
-                                0 // Return immediately if empty.
-                                )) {
-      return true;
-    } else {
-      return false;
-    }
-  }
-
 private:
-  static constexpr const char* TAG = "Queue";
-  size_t SIZE;
-
+  static constexpr const char* TAG = "StaticQueue";
   /* The variable used to hold the queue's data structure. */
   StaticQueue_t xQueueBuffer;
 
   /* The array to use as the queue's storage area. This must be at least
    * uxQueueLength * uxItemSize bytes. */
-  uint8_t* ucQueueStorage;
+  //  uint8_t* ucQueueStorage;
+  uint8_t ucQueueStorage[COUNT * sizeof(TYPE)];
 
-  QueueHandle_t event_q = nullptr;
+  QueueHandle_t hQueue = nullptr;
+
+public:
+  StaticQueue() {};
+  ~StaticQueue() {};
+
+  void init()
+  {
+    hQueue =
+      xQueueCreateStatic(COUNT, sizeof(TYPE), ucQueueStorage, &xQueueBuffer);
+    if (hQueue == NULL) {
+      ESP_LOGE(TAG, "Could not create event queue.");
+      abort();
+    }
+  }
+
+  void send(TYPE item)
+  {
+    // TYPE _item = item;
+    if (errQUEUE_FULL == xQueueSend(hQueue, &item, 0)) {
+      ESP_LOGE(TAG, "Event queue was full.");
+    }
+  }
+
+  bool receive(Event& event, TickType_t timeout = portMAX_DELAY)
+  {
+    return (pdTRUE == xQueueReceive(hQueue, &event, timeout));
+  }
 };

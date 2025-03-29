@@ -94,25 +94,6 @@ debounced_is_rising_edge(db_edge_input_t* input)
   return false;
 }
 
-// bool debounced_digital_read() {
-//   /* GCC >12 will optimize these constants out at at a minimum of
-//   optimizations enabled. Verified on: -O1, -O2, -O3 and -Og.*/ const
-//   sample_buf_t empty_buf =
-//       (sample_buf_t)((sample_buf_t)-1 << (CONFIG_DB_DEFAULT_SAMPLE_COUNT +
-//       1));
-//   const sample_buf_t state_high_buf = -1;
-
-//   static sample_buf_t debounced_state = 0;
-//   static sample_buf_t candidate_state = 0;
-//   candidate_state = empty_buf | (candidate_state << 1) | !digital_pin_read();
-//   if (candidate_state == state_high_buf) {
-//     debounced_state = 1;
-//   } else if (candidate_state == empty_buf) {
-//     debounced_state = 0;
-//   }
-//   return debounced_state;
-// }
-
 static void
 sampling_task(void* pvParameters)
 {
@@ -161,7 +142,7 @@ register_gpio(int pin, pin_pull_t pullup)
   ESP_ERROR_CHECK(gpio_config(&io_conf));
 }
 
-bool
+void*
 db_register_edge(db_edge_input_t* input)
 {
   if (NULL == input) {
@@ -174,14 +155,17 @@ db_register_edge(db_edge_input_t* input)
     ESP_LOGE(TAG, "No pin provided.");
   }
 
+  // This should return the new struct.
   db_edge_input_t* internal = (db_edge_input_t*)malloc(sizeof(db_edge_input_t));
 
-  db_edge_input_ex_t* config =
+  db_edge_input_ex_t* input_ex =
     (db_edge_input_ex_t*)malloc(sizeof(db_edge_input_ex_t));
 
-  if (internal && input && config) {
+  if (internal && input && input_ex) {
     memcpy((void*)internal, (void*)input, sizeof(db_edge_input_t));
-    config->input = internal;
+    input_ex->input = internal;
+  } else {
+    return NULL;
   }
 
   // Will abort on a failure in debug modes.
@@ -192,11 +176,17 @@ db_register_edge(db_edge_input_t* input)
   // Set the proper sampling function.
   if (DB_EDGE_FALLING == input->etype) {
     ESP_LOGD(TAG, "set falling edge");
-    config->sample = &debounced_is_falling_edge;
+    input_ex->sample = &debounced_is_falling_edge;
   } else if (DB_EDGE_RISING == input->etype) {
-    config->sample = &debounced_is_rising_edge;
+    input_ex->sample = &debounced_is_rising_edge;
   }
 
+  return input_ex;
+}
+
+bool
+db_start_task(db_edge_input_t* input)
+{
   char task_name[configMAX_TASK_NAME_LEN];
   sprintf(task_name, "edge_smpl_pin%d", input->pin);
 
@@ -205,10 +195,13 @@ db_register_edge(db_edge_input_t* input)
   xTaskCreatePinnedToCore(sampling_task,
                           task_name,
                           input->cb_task_stack_size,
-                          (void*)config,
+                          // TODO: what is the safety of this and not using
+                          // inheritance. I could pass a ptr for an input which
+                          // would not be safe
+                          (void*)input,
                           input->sampling_task_priority,
                           NULL,
                           input->core_id);
 
-  return true;
+  return 1;
 }

@@ -3,9 +3,9 @@
  */
 
 #include <atomic>
-#include <cstdint>
 
-#include "esp_attr.h"     // for IRAM_ATTR
+#include "esp_attr.h" // for IRAM_ATTR
+#include "freertos/FreeRTOS.h"
 #include "soc/gpio_num.h" // for GPIOs
 
 /*
@@ -20,6 +20,12 @@ I then try to sample at say 100hz, so 10ms between tx attemps.
 Every sample call I attempt a tx if no pulse is in flight.
 Every sample call I also process any completed samples in rx buffer.
 */
+
+enum class RangingResult : uint32_t
+{
+  BAD,
+  OKAY
+};
 
 /**
  * HC-SR04 Ultrasonic Distance Sensor from Adafruit
@@ -39,36 +45,46 @@ Every sample call I also process any completed samples in rx buffer.
  * reflection is returned, but I have not verified if this is the case so I am
  * assuming the echo pulse can begin as soon as the leading edge of the 10us
  * trigger is sent.
+ * An echo pulse is always returned, even if the object is out of range.
  */
 class HCSR04
 {
 private:
-  static const char* TAG;
-  int64_t _pulse_start_us = 0;
-  int64_t _pulse_duration_us = 0;
-  std::atomic<bool> _pulse_in_flight = false;
-  std::atomic<bool> _pulse_capture = false;
+  static const char* tag;
+  std::atomic<int> _pulse_in_flight = 0;
+  portMUX_TYPE mux = portMUX_INITIALIZER_UNLOCKED;
+  TickType_t _last_range_ticks;
+  int _timed_out_ranges = 0;
+
+  TaskHandle_t _task_handle = NULL;
   gpio_num_t _trig_pin;
   gpio_num_t _echo_pin;
-  int _ranging_timeout_start_count = 10; // default
-  int _ranging_timeout_samples_remaining =
-    _ranging_timeout_start_count; // 100ms default
+  BaseType_t _task_idx;
+
+  // Configurable Params
+  static const int _range_timeout_ms = 100;
+  static const int _min_pulse_duration_us = 11; // 11us = ~1mm range
+  int _delay_between_ranging_ms = 5;
 
 public:
   HCSR04() {};
   ~HCSR04() {};
 
-  static void IRAM_ATTR echo_interrupt_handler(void* pvParameter);
+  // Not actually public.
+  static void IRAM_ATTR echo_interrupt_handler(void* pvParam);
 
-  /* Initalize. Call before using object. */
-  void init(gpio_num_t trig, gpio_num_t echo, int sample_period);
+  /* Initalize. Call before using object.
+  This must be called from the same core that 'taskhandle' runs on.*/
+  void init(gpio_num_t trig_pin,
+            gpio_num_t echo_pin,
+            TaskHandle_t task_to_notify,
+            BaseType_t task_idx);
 
-  /**
-   * Send a trigger if no pulse is in flight and return the most recently
-   * measured range in (cm). Call this periodically ideally no faster than the
-   * time-of-flight (plus margin) for the desired working distance.
-   * Example: 100cm range = 5.83ms pulse, so I could sample
-   * every 8.3ms or 120Hz
-   */
-  float sample();
+  /* Initial ranging session and wait indefinitely for a valid range. */
+  float range_and_wait();
+
+private:
+  bool start_range_session();
+  void reset();
+  constexpr float convert_us_to_range(const uint32_t us);
 };

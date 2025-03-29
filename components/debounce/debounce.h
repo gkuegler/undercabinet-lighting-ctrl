@@ -3,6 +3,7 @@
 
 #include <stdbool.h>
 // #include <stdint.h>
+#include "freertos/FreeRTOS.h"
 
 // Response time is equal to sample period multiplied by the sample count.
 #define CONFIG_DB_DEFAULT_SAMPLE_PERIOD_MS       5 // delay period  of the timer
@@ -16,6 +17,7 @@ typedef enum
   DB_EDGE_FALLING,
   DB_EDGE_RISING
 } edge_type_t;
+
 typedef enum
 {
   DB_PIN_PULL_NONE,
@@ -44,11 +46,21 @@ typedef struct
   edge_cb_t cb;
   void* cb_params;
   int sample_period_ms;
+  // TODO: do I add a debounce time here?
+  TickType_t debouce_time_ms;
   int sample_count;
   int sampling_task_priority;
   int cb_task_stack_size;
   int core_id;
 } db_edge_input_t;
+
+typedef enum
+{
+  EDGE_LOW,
+  EDGE_HIGH,
+  EDGE_RISING,
+  EDGE_FALLING
+} SIGNAL_READ_STATE;
 
 #ifdef __cplusplus
 extern "C"
@@ -62,9 +74,14 @@ extern "C"
    * @note The response time is equal to sample period multiplied by the sample
    * count.
    */
-  bool db_register_edge(db_edge_input_t* input);
+  void* db_register_edge(db_edge_input_t* input);
   // void db_set_callback(int pin, edge_cb_t cb);
 
+  bool db_start_task();
+
+  // Manually sample the input and return the reading.
+  SIGNAL_READ_STATE
+  sample(db_edge_input_t* input);
 #ifdef __cplusplus
 } /* extern "C" */
 #endif

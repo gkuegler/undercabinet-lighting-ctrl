@@ -1,4 +1,5 @@
 #include "inttypes.h"
+#include <numeric>
 
 #include "driver/gpio.h"
 #include "esp_intr_alloc.h"
@@ -11,214 +12,304 @@
 #include "freertos/task.h"
 
 /*** LOCAL COMPONENT INCLUDES ***/
-#include "debounce.h"
+#include "debounce.hpp"
+#include "ultrasonic.hpp"
 
 /*** LOCAL INCLUDES ***/
 #include "event.hpp"
 #include "filter.hpp"
 #include "led.hpp"
-#include "rotary-encoder-polling.h"
-#include "ultrasonic.hpp"
+#include "mutex.hpp"
+#include "parameters.h"
+#include "ring-buffer.hpp"
+#include "timer.hpp"
 
-/*** TESTING DEFINES ***/
-// #define TEST_LOG_DISTANCES // log distance measurements to console
-
-/* Uncomment when rotatary encoder is soldered to board. */
-// #define ROTARY_ENCODER_ENABLED
-
-#define HMI_PROCESSOR_CORE_ID 1
-#define HMI_POLLING_PERIOD_MS 10 // milliseconds
-
-#define EVENT_QUEUE_COUNT 5
-
-#define HAND_DIST_THRESHOLD_CM    20.0f // cm
-#define HAND_SAMPLE_WINDOW_SIZE   5
-#define HAND_VALID_SAMPLES_NEEDED 4
-#define HAND_DEBOUNCE_COUNT       (int)(300 / HMI_POLLING_PERIOD_MS)
-
-#define LED_WARNING_TIMEOUT_M (8 * 60)
-#define LED_SHUTOFF_TIMEOUT_M (LED_WARNING_TIMEOUT_M + 10)
-
-#define MODULE_ADAFRUIT_QTPY_ESP32_S3
-#ifdef MODULE_ADAFRUIT_QTPY_ESP32_S3
-#define CONFIG_DUTY_RELAY_PIN GPIO_NUM_18
-#define CONFIG_ROTARY_BTN_PIN GPIO_NUM_17
-#define CONFIG_ROTARY_A_PIN   GPIO_NUM_8
-#define CONFIG_ROTARY_B_PIN   GPIO_NUM_9
-#define CONFIG_TRIGGER_PIN    GPIO_NUM_16
-#define CONFIG_ECHO_PIN       GPIO_NUM_6
-#endif // MODULE_ADAFRUIT_QTPY_ESP32_S3
-
-static const char* TAG = "[main]";
-
-uint8_t ucQueueStorage[EVENT_QUEUE_COUNT * sizeof(Event)];
-EventQueue event_q(EVENT_QUEUE_COUNT, ucQueueStorage);
-
-/*** USER INPUT DEVICES ***/
-#ifdef ROTARY_ENCODER_ENABLED
-static re_polling_rotary_encoder_t* encoder;
-#endif // ROTARY_ENCODER_ENABLED
-static HCSR04 hcsr04;
-static HandGestureFilter<float,
-                         HAND_DIST_THRESHOLD_CM,
-                         HAND_SAMPLE_WINDOW_SIZE,
-                         HAND_VALID_SAMPLES_NEEDED,
-                         HAND_DEBOUNCE_COUNT>
-  filter;
-static Led led;
+enum RANGING_MODE
+{
+  STOP,
+  LED_CONTROL,
+  SET_THRESHOLD_DISTANCE,
+  STOP_SET_THRESHOLD_DISTANCE,
+  FINISH_SET_THRESHOLD_DISTANCE
+};
 
 /*** STATIC PROTOTYPES ***/
 static void
-initialize_controls();
+ultrasonic_ranging_task(void*);
 static void
-hmi_loop(void* pvParameter);
-#ifdef ROTARY_ENCODER_ENABLED
+hmi_loop(void*);
 static void
-button_callback(void*);
-#endif // ROTARY_ENCODER_ENABLED
+led_flash_task(void*);
+void
+start_led_flash();
+void
+stop_led_flash();
+void set_thresh_dist_completed_cb(TimerHandle_t);
+
+/*** GLOBAL VARIABLES ***/
+static const char* TAG = "[main]";
+TaskHandle_t ultrasonic_ranging_task_handle = NULL;
+TaskHandle_t hmi_loop_handle = NULL;
+TaskHandle_t flash_task_handle = NULL;
+
+StaticQueue<Event, EVENT_QUEUE_COUNT> eventq;
+
+DebouncedButton btn{ CONFIG_BUTTON_PIN1 };
+static HCSR04 hcsr04;
+static HandDetectionFilter<float,
+                           HAND_DIST_THRESHOLD_CM,
+                           HAND_SAMPLE_WINDOW_SIZE,
+                           HAND_VALID_SAMPLES_NEEDED,
+                           HAND_DEBOUNCE_COUNT>
+  hand_detect_filter;
+static RingBuffer<float, 20> thresh_set_buf;
+static Led<CONFIG_LED_CTRL_PIN> ledctrl;
+
+StaticTimer<SECONDS(10), set_thresh_dist_completed_cb> set_thresh_dist_timer;
+
+std::atomic<uint32_t> ranging_mode = LED_CONTROL;
+std::atomic<bool> g_enable_flash = false;
 
 extern "C" void
 app_main(void)
 {
-  led.init(CONFIG_DUTY_RELAY_PIN,
-           HMI_POLLING_PERIOD_MS,
-           LED_WARNING_TIMEOUT_M,
-           LED_SHUTOFF_TIMEOUT_M);
+  eventq.init();
+  ledctrl.init();
+  set_thresh_dist_timer.init("CALT1");
 
-  xTaskCreatePinnedToCore(
-    hmi_loop, "gui-loop", 4096 * 2, NULL, 3, NULL, HMI_PROCESSOR_CORE_ID);
+  BaseType_t xResult;
 
   // For debugging purposes.
-  // esp_intr_dump(NULL);
+  esp_intr_dump(NULL);
+
+  xResult = xTaskCreatePinnedToCore(ultrasonic_ranging_task,
+                                    "ultrasonic-loop",
+                                    4096 * 2,
+                                    NULL,
+                                    ULTRASONIC_TASK_PRIORITY,
+                                    &ultrasonic_ranging_task_handle,
+                                    ULTRASONIC_TASK_CORE_ID);
+
+  if (xResult != pdPASS) {
+    ESP_LOGE(TAG, "Failed to create task: %d", xResult);
+  }
+
+  xResult = xTaskCreatePinnedToCore(hmi_loop,
+                                    "hmi-loop",
+                                    4096 * 2,
+                                    NULL,
+                                    HMI_LOOP_TASK_PRIORITY,
+                                    &hmi_loop_handle,
+                                    HMI_TASK_CORE_ID);
+  if (xResult != pdPASS) {
+    ESP_LOGE(TAG, "Failed to create task: %d", xResult);
+  }
+
+  xResult = xTaskCreate(
+    led_flash_task, "led-flash", 4096, NULL, 12, &flash_task_handle);
+  if (xResult != pdPASS) {
+    ESP_LOGE(TAG, "Failed to create task: %d", xResult);
+  }
 
   return;
-}
-
-uint32_t
-get_milliseconds()
-{
-  return esp_timer_get_time() / 1000;
-}
-
-static void
-sample_inputs()
-{
-#ifdef ROTARY_ENCODER_ENABLED
-  // Set LED dim level when value changes.
-  if (rep_sample(encoder)) {
-    led.set_user_duty(encoder->value);
-  }
-#endif // ROTARY_ENCODER_ENABLED
-
-  float d = hcsr04.sample();
-  filter.filter_sample(d);
-
-  led.update_timeout_tick();
-
-// Display distance for testing.
-#ifdef TESTING_LOG_DISTANCES
-  auto dist = static_cast<unsigned int>(d);
-  ESP_LOGI(TAG, "d: %0.2f", d);
-#endif // TESTING_LOG_DISTANCES
-}
-
-static void
-handle_events()
-{
-  Event event;
-  while (true == event_q.receive(event)) {
-    switch (event) {
-      case Event::EVENT_HAND_ENTER:
-        ESP_LOGI(TAG, "Toggle the led.");
-        led.toggle();
-        break;
-      case Event::EVENT_HAND_EXIT:
-        break;
-    }
-  }
 }
 
 static void
 hmi_loop(void* pvParameter)
 {
-  (void)pvParameter; // not used
+  const char* tag = "hmi";
 
-  event_q.init();
-  filter.init(&event_q);
+  // Initialize button.
+  gpio_config_t io_conf = {};
+  io_conf.mode = GPIO_MODE_INPUT;
+  io_conf.pin_bit_mask = (1ULL << (int)CONFIG_BUTTON_PIN1);
+  io_conf.pull_up_en = GPIO_PULLUP_ENABLE;
+  ESP_ERROR_CHECK(gpio_config(&io_conf));
 
-  initialize_controls();
+  /*
+  dimming - single click
+  grocery mode - long press; then single
+  setting distance
+  */
+  RingBuffer<float, 8> led_bright_values;
+  for (auto x : { 0.0, 0.05, 0.10, 0.20, 0.40, 0.60, 0.80, 1.0 }) {
+    led_bright_values.push(x);
+  }
 
-  while (1) {
-    // I use my own timing here because its easier to control which core this
-    // loop runs on with 'xTaskCreatePinnedToCore' and monitor how long my
-    // loop takes for performance testing.
-    const int64_t start = esp_timer_get_time();
+  int bmode = 0;
+  Event event;
 
-    sample_inputs();
-    handle_events();
+  for (;;) {
+    auto ticks = xTaskGetTickCount();
 
-    // Suspend the main loop until the next iteration.
-    const int64_t task_duration_us = (esp_timer_get_time() - start);
-    ESP_LOGV(TAG, "gui loop delta us: %" PRIu64, task_duration_us);
+    // Not using LED timouts at the moment.
+    // ledctrl.update_timeout_tick();
 
-    if (task_duration_us <= HMI_POLLING_PERIOD_MS * 1000) {
-      vTaskDelay(
-        pdMS_TO_TICKS(HMI_POLLING_PERIOD_MS - (task_duration_us / 1000)));
+    // --- PROCESS BUTTON ---
+    switch (btn.sample(ticks)) {
+      case ButtonEvent::LongPress:
+        // ESP_LOGD(tag, "changing button mode: %d", bmode);
+        // change it so that the button wont accept multiple clicks unless in
+        // the long press mode
+        // bmode = !bmode;
+        eventq.send(Event::START_SET_THRESHOLD_DISTANCE);
+        break;
+
+      case ButtonEvent::Click1:
+        if (bmode == 0) {
+          eventq.send(Event::CYCLE_BRIGHTNESS);
+        } else if (bmode == 1) {
+          eventq.send(Event::TOGGLE_LED);
+        }
+        break;
+
+      case ButtonEvent::Click4:
+        eventq.send(Event::CHIRP);
+        break;
+
+      default:
+        break;
+    }
+
+    // Process global events.
+    if (eventq.receive(event, 0)) {
+      switch (event) {
+        case Event::NONE:
+          break;
+
+        case Event::TOGGLE_LED:
+          ledctrl.toggle();
+          break;
+
+        case Event::CYCLE_BRIGHTNESS: {
+          auto bright = led_bright_values.next();
+          // Notify user max brightness reached.
+          if (bright == 1.0f) {
+            ledctrl.pulse(1, 200, 20);
+            vTaskDelay(pdMS_TO_TICKS(50));
+            // ledctrl.pulse(1, 150, 50);
+          }
+          ledctrl.set_brightness_user(bright);
+          break;
+        }
+
+        case Event::START_SET_THRESHOLD_DISTANCE:
+          ESP_LOGD(TAG, "begin calibration");
+          ranging_mode = SET_THRESHOLD_DISTANCE;
+          start_led_flash();
+          set_thresh_dist_timer.restart();
+          break;
+
+        case Event::CHIRP:
+          ESP_LOGD(tag, "Chirp!");
+          vTaskDelay(2000);
+          ledctrl.pulse(1, 20, 150);
+          ledctrl.pulse(1, 50, 150);
+          ledctrl.resume();
+          break;
+
+        default:
+          ESP_LOGE(TAG, "Unknown event: %d", (int)event);
+          break;
+      }
+    }
+
+    vTaskDelayUntil(&ticks, pdMS_TO_TICKS(1));
+  }
+}
+
+void
+start_led_flash()
+{
+  g_enable_flash = true;
+  vTaskResume(flash_task_handle);
+}
+
+void
+stop_led_flash()
+{
+  g_enable_flash = false;
+}
+
+static void
+led_flash_task(void* pvParameter)
+{
+  for (;;) {
+    if (g_enable_flash) {
+      ledctrl.set_brightness(1.0f);
+      vTaskDelay(1000);
+      ledctrl.set_brightness(0.0f);
+      vTaskDelay(500);
     } else {
-      ESP_LOGW(TAG,
-               "gui loop duration exceded refresh period: %" PRIu64 "us",
-               task_duration_us);
+      ledctrl.resume();
+      vTaskSuspend(NULL);
     }
   }
+}
 
+static void
+ultrasonic_ranging_task(void* pvParameter)
+{
+  (void)pvParameter; // not used
+
+  const char* tag = "ultra";
+
+  hcsr04.init(
+    CONFIG_US_TRIG_PIN, CONFIG_US_ECHO_PIN, xTaskGetCurrentTaskHandle(), 0);
+
+  while (true) {
+
+    float dist = hcsr04.range_and_wait();
+
+    auto ticks = xTaskGetTickCount();
+
+    switch (ranging_mode) {
+      case LED_CONTROL:
+        // ????
+        // Lockout if hand has been present for a while. 'Grocery Mode'
+        // ???
+        if (hand_detect_filter.process_sample(dist, ticks) ==
+            Event::HAND_ENTER) {
+          eventq.send(Event::TOGGLE_LED);
+        }
+        break;
+
+      case SET_THRESHOLD_DISTANCE:
+        // Add samples to ring buffer for the window average.
+        thresh_set_buf.push(dist);
+
+        // Slow down measurements so my buffer is meaningfull.
+        vTaskDelay(pdMS_TO_TICKS(HAND_THRESH_SET_SAMPLE_INTERVAL_MS));
+        break;
+
+      // Process and accept the new setp.
+      case FINISH_SET_THRESHOLD_DISTANCE: {
+        ranging_mode = LED_CONTROL;
+        auto& buf = thresh_set_buf.buf;
+        float avg = std::accumulate(buf.begin(), buf.end(), 0.0) / buf.size();
+        ESP_LOGD(tag, "New hand threshold setp: %.2fcm", avg);
+        hand_detect_filter.set_threshold(avg);
+        break;
+      }
+      default:
+        break;
+    }
+#ifdef TESTING_SLOW_ULTRASONIC_POLLING_PERIOD
+    ESP_LOGI(tag, "Range: %.2f", dist);
+    vTaskDelayUntil(&ticks,
+                    pdMS_TO_TICKS(TESTING_SLOW_ULTRASONIC_POLLING_PERIOD));
+#endif // TESTING_SLOW_ULTRASONIC_POLLING_PERIOD
+  }
+
+  // Normally unreachable.
   vTaskDelete(NULL);
 }
+
 void
-initialize_controls()
+set_thresh_dist_completed_cb(TimerHandle_t xTimer)
 {
-#ifdef ROTARY_ENCODER_ENABLED
-  db_edge_input_t button;
-  button.cb = button_callback;
-  button.pin = static_cast<int>(CONFIG_ROTARY_BTN_PIN);
-  button.etype = DB_EDGE_FALLING;
-  button.pull_up = DB_PIN_PULLUP;
-  button.sample_count = 8;
-  button.sample_period_ms = 5;
-  button.sampling_task_priority = 5;
-  button.cb_task_stack_size = 4096 * 2;
-  button.core_id = 1;
-  db_register_edge(&button);
-
-  encoder =
-    (re_polling_rotary_encoder_t*)malloc(sizeof(re_polling_rotary_encoder_t));
-
-  if (NULL == encoder) {
-    ESP_LOGD(TAG, "Failed to allocate encoder memory.");
-    abort();
-  }
-
-  // TODO: create logarithmic dimmer to account for les resolution needed at
-  // higher brightness levels
-  encoder->max = 63;
-  encoder->min = 0;
-  encoder->step_size = 1;
-  encoder->overflow = true;
-  encoder->pinA = static_cast<int>(CONFIG_ROTARY_A_PIN);
-  encoder->pinB = static_cast<int>(CONFIG_ROTARY_B_PIN);
-  encoder->min_pulse_duration_ns = CONFIG_RE_DEFAULT_MIN_PULSE_DURATION_NS;
-
-  if (!rep_initialize(encoder)) {
-    abort();
-  }
-#endif // ROTARY_ENCODER_ENABLED
-
-  hcsr04.init(CONFIG_TRIGGER_PIN, CONFIG_ECHO_PIN, HMI_POLLING_PERIOD_MS);
+  // TODO: fix ugly and poorly timed light flashing at end of threshold set
+  ranging_mode = FINISH_SET_THRESHOLD_DISTANCE;
+  stop_led_flash();
+  eventq.send(Event::CHIRP);
 }
-
-#ifdef ROTARY_ENCODER_ENABLED
-static void
-button_callback(void*)
-{
-  rep_reset(encoder);
-}
-#endif // ROTARY_ENCODER_ENABLED

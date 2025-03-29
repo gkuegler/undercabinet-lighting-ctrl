@@ -1,94 +1,130 @@
 #pragma once
 
-#include <array>
-
 #include "esp_log.h"
 #include "event.hpp"
+#include "freertos/FreeRTOS.h"
+
+/* Local Includes */
+#include "ring-buffer.hpp"
 
 /**
- * A sliding window filter to generate hand in/out event.
- * Ignores outliers.
+ * A sliding window filter to generate hand in/out events.
  */
 template<typename T,
-         float THRESHOLD,
+         T THRESHOLD_DIST_CM,
          size_t WINDOW_SIZE,
          size_t VALID_SAMPLES_NEEDED,
-         size_t DEBOUNCE_COUNT>
-class HandGestureFilter
+         TickType_t DEBOUNCE_TICKS>
+class HandDetectionFilter
 {
-public:
-  HandGestureFilter() {};
-  ~HandGestureFilter() {};
-
-  void init(EventQueue* event_q) { _event_q = event_q; };
-
-  // Filter the sample and generate necessary events.
-  void filter_sample(T sample)
+private:
+  enum class HandState : int
   {
-    // Push sample to circ buff and increment window.
-    push(sample);
-
-    // Deboundce the state change by skipping samples.
-    if (_debounce_cnt > 0) {
-      --_debounce_cnt;
-      return;
-    }
-
-    State hand_pos = hand_position();
-
-    if (State::HAND_OUT == _state && State::HAND_IN == hand_pos) {
-      _state = State::HAND_IN;
-      _event_q->post(Event::EVENT_HAND_ENTER);
-
-    } else if (State::HAND_IN == _state && State::HAND_OUT == hand_pos) {
-      _state = State::HAND_OUT;
-      _event_q->post(Event::EVENT_HAND_EXIT);
-      // Reset the debounce counter
-      _debounce_cnt = DEBOUNCE_COUNT;
-    }
+    UNDECIDED = 0,
+    OUT,
+    IN
   };
 
+public:
+  HandDetectionFilter() {};
+  ~HandDetectionFilter() {};
+
+  /**
+   * Filter the sample and return necessary events.
+   */
+  Event process_sample(T sample, TickType_t ticks)
+  {
+    _sample_window.push(sample);
+
+    if (ticks - _ticks_last_change < DEBOUNCE_TICKS) {
+      return Event::NONE;
+    }
+
+    HandState hs = eval_hand_presence();
+
+    // Evaluate state change.
+    if (HandState::OUT == _state && HandState::IN == hs) {
+      _state = HandState::IN;
+      _ticks_last_change = ticks;
+      return Event::HAND_ENTER;
+    } else if (HandState::IN == _state && HandState::OUT == hs) {
+      _state = HandState::OUT;
+      _ticks_last_change = ticks;
+      return Event::HAND_EXIT;
+    } else {
+      return Event::NONE;
+    }
+  };
+  void set_threshold(float sp)
+  {
+    _threshold_dist_cm = sp;
+    // Reset sample buffer to prevent false triggers on resume.
+    _sample_window.buf.fill(0.0f);
+  }
+
 private:
-  size_t _debounce_cnt = 0;
-
-  size_t _index = 0;
-  std::array<T, WINDOW_SIZE> _sample_window;
-
-  T _threshold = THRESHOLD;
-  EventQueue* _event_q = NULL;
-  State _state = State::HAND_OUT;
+  RingBuffer<T, WINDOW_SIZE> _sample_window;
+  TickType_t _ticks_last_change = 0;
+  T _threshold_dist_cm = THRESHOLD_DIST_CM;
+  HandState _state = HandState::OUT;
 
   /**
    * Return true if the filtered samples fall below the threshold.
    */
-  State hand_position()
+  HandState eval_hand_presence()
   {
-    size_t in = 0;
-    size_t out = 0;
-    for (const auto& s : _sample_window) {
-      // Ignore invalid measurement.
+    size_t cnt_below = 0;
+    size_t cnt_above = 0;
+
+    // Count samples above and below the threshold distance.
+    for (size_t i = 0; i < _sample_window.size; i++) {
+      auto s = _sample_window.buf[i];
+
+      // Ignore an invalid measurement.
       if (s == 0.0) {
         continue;
       }
-      if (s < _threshold) {
-        ++in;
-      } else if (s > _threshold) {
-        ++out;
+
+      if (s < _threshold_dist_cm) {
+        ++cnt_below;
+      } else if (s > _threshold_dist_cm) {
+        ++cnt_above;
       }
     }
-    if (in > VALID_SAMPLES_NEEDED) {
-      return State::HAND_IN;
-    } else if (out > VALID_SAMPLES_NEEDED) {
-      return State::HAND_OUT;
+
+    if (cnt_below > VALID_SAMPLES_NEEDED) {
+      return HandState::IN;
+    } else if (cnt_above > VALID_SAMPLES_NEEDED) {
+      return HandState::OUT;
     } else {
-      return State::UNDECIDED;
+      return HandState::UNDECIDED;
     }
   }
+};
 
-  void push(T item)
+template<size_t SIZE>
+class ThresholdSet
+{
+public:
+  int count = 0;
+  RingBuffer<float, SIZE> buf;
+
+  ThresholdSet() {};
+  ~ThresholdSet() {};
+
+  void sample(float d)
   {
-    _sample_window[_index] = item;
-    // Increment index wrapping back to the beginning.
-    _index = (_index >= WINDOW_SIZE - 1) ? 0 : (_index + 1);
+    count++;
+    buf.push(d);
+  }
+  float get_average()
+  {
+    if (count >= SIZE) {
+      float avg;
+      for (size_t i = 0; i < SIZE; i++) {
+        avg += buf[i];
+      }
+      return avg / SIZE;
+    }
   }
 };
