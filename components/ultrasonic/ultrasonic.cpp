@@ -23,7 +23,7 @@
 #define GPIO_CLEAR_FAST_0_31(pin)                                              \
   GPIO.out_w1tc = ((uint32_t)1 << (static_cast<int>(pin)))
 
-const char *HCSR04::TAG = "HCSR04";
+const char* HCSR04::TAG = "HCSR04";
 
 /*
 Measure pulse width with interrupt based flipflop.
@@ -33,8 +33,10 @@ This creates an effective debounce filter on the rising/falling edge for the
 amount of time it takes for the interrupt to be handled and cleared.
 Interrupts get cleared just before the IRQ returns.
 */
-void IRAM_ATTR HCSR04::echo_interrupt_handler(void *pvParameter) {
-  auto self = reinterpret_cast<HCSR04 *>(pvParameter);
+void IRAM_ATTR
+HCSR04::echo_interrupt_handler(void* pvParameter)
+{
+  auto self = reinterpret_cast<HCSR04*>(pvParameter);
 
   if (!self->_pulse_capture) {
     self->_pulse_start_us = esp_timer_get_time();
@@ -57,8 +59,9 @@ void IRAM_ATTR HCSR04::echo_interrupt_handler(void *pvParameter) {
   return;
 }
 
-void HCSR04::init(gpio_num_t trig_pin, gpio_num_t echo_pin,
-                  int sample_period_ms) {
+void
+HCSR04::init(gpio_num_t trig_pin, gpio_num_t echo_pin, int sample_period_ms)
+{
   _trig_pin = trig_pin;
   _echo_pin = echo_pin;
   _ranging_timeout_start_count = 100 / sample_period_ms; // 100ms
@@ -86,15 +89,17 @@ void HCSR04::init(gpio_num_t trig_pin, gpio_num_t echo_pin,
   // highest available user-level interrupt that can be allocated with C
   // handlers.
   ESP_ERROR_CHECK(gpio_install_isr_service(
-      ESP_INTR_FLAG_SHARED | ESP_INTR_FLAG_IRAM | ESP_INTR_FLAG_LEVEL3));
+    ESP_INTR_FLAG_SHARED | ESP_INTR_FLAG_IRAM | ESP_INTR_FLAG_LEVEL3));
   ESP_ERROR_CHECK(
-      gpio_isr_handler_add(_echo_pin, echo_interrupt_handler, this));
+    gpio_isr_handler_add(_echo_pin, echo_interrupt_handler, this));
 }
 
-float HCSR04::sample() {
+float
+HCSR04::sample()
+{
   if (_ranging_timeout_samples_remaining <= 0) {
-    ESP_LOGE(TAG, "no echo pulse recived in %dms",
-             _ranging_timeout_start_count * 10);
+    ESP_LOGE(
+      TAG, "no echo pulse recived in %dms", _ranging_timeout_start_count * 10);
     _pulse_in_flight = false;
   }
   // Send a 10 microsecond pulse to the trigger pin.

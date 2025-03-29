@@ -9,17 +9,22 @@
  * A sliding window filter to generate hand in/out event.
  * Ignores outliers.
  */
-template <typename T, float THRESHOLD, size_t WINDOW_SIZE,
-          size_t VALID_SAMPLES_NEEDED, size_t DEBOUNCE_COUNT>
-class HandGestureFilter {
+template<typename T,
+         float THRESHOLD,
+         size_t WINDOW_SIZE,
+         size_t VALID_SAMPLES_NEEDED,
+         size_t DEBOUNCE_COUNT>
+class HandGestureFilter
+{
 public:
-  HandGestureFilter(){};
-  ~HandGestureFilter(){};
+  HandGestureFilter() {};
+  ~HandGestureFilter() {};
 
-  void init(EventQueue *event_q) { _event_q = event_q; };
+  void init(EventQueue* event_q) { _event_q = event_q; };
 
   // Filter the sample and generate necessary events.
-  void filter_sample(T sample) {
+  void filter_sample(T sample)
+  {
     // Push sample to circ buff and increment window.
     push(sample);
 
@@ -50,16 +55,17 @@ private:
   std::array<T, WINDOW_SIZE> _sample_window;
 
   T _threshold = THRESHOLD;
-  EventQueue *_event_q = NULL;
+  EventQueue* _event_q = NULL;
   State _state = State::HAND_OUT;
 
   /**
    * Return true if the filtered samples fall below the threshold.
    */
-  State hand_position() {
+  State hand_position()
+  {
     size_t in = 0;
     size_t out = 0;
-    for (const auto &s : _sample_window) {
+    for (const auto& s : _sample_window) {
       // Ignore invalid measurement.
       if (s == 0.0) {
         continue;
@@ -79,7 +85,8 @@ private:
     }
   }
 
-  void push(T item) {
+  void push(T item)
+  {
     _sample_window[_index] = item;
     // Increment index wrapping back to the beginning.
     _index = (_index >= WINDOW_SIZE - 1) ? 0 : (_index + 1);

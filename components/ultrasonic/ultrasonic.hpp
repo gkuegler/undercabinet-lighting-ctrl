@@ -40,9 +40,10 @@ Every sample call I also process any completed samples in rx buffer.
  * assuming the echo pulse can begin as soon as the leading edge of the 10us
  * trigger is sent.
  */
-class HCSR04 {
+class HCSR04
+{
 private:
-  static const char *TAG;
+  static const char* TAG;
   int64_t _pulse_start_us = 0;
   int64_t _pulse_duration_us = 0;
   std::atomic<bool> _pulse_in_flight = false;
@@ -51,13 +52,13 @@ private:
   gpio_num_t _echo_pin;
   int _ranging_timeout_start_count = 10; // default
   int _ranging_timeout_samples_remaining =
-      _ranging_timeout_start_count; // 100ms default
+    _ranging_timeout_start_count; // 100ms default
 
 public:
-  HCSR04(){};
-  ~HCSR04(){};
+  HCSR04() {};
+  ~HCSR04() {};
 
-  static void IRAM_ATTR echo_interrupt_handler(void *pvParameter);
+  static void IRAM_ATTR echo_interrupt_handler(void* pvParameter);
 
   /* Initalize. Call before using object. */
   void init(gpio_num_t trig, gpio_num_t echo, int sample_period);

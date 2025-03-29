@@ -11,17 +11,22 @@
 /*
 Not Thread Safe
 */
-class Led {
+class Led
+{
 private:
-  enum class STATE { OFF, ON };
-  static constexpr const char *TAG = "LEDC";
+  enum class STATE
+  {
+    OFF,
+    ON
+  };
+  static constexpr const char* TAG = "LEDC";
 
 public:
   ledc_channel_t channel = LEDC_CHANNEL_0;
   ledc_timer_t timer = LEDC_TIMER_0;
   /* The S3 doesn't have the distinction between low and high speed anymore;
-  that distinction in general was about having hardware to latch the
-  settings when the PWM ended anyway, it didn't have anything to do with
+  that distinction was about having hardware to latch the
+  settings when the PWM ended, it didn't have anything to do with
   the max speed you can get out of a channel. */
   ledc_mode_t speed_mode = LEDC_LOW_SPEED_MODE;
   ledc_timer_bit_t res = LEDC_TIMER_6_BIT;
@@ -33,17 +38,20 @@ public:
 
   float warning_dim_frac = 0.05;
   int warning_dim_lvl = static_cast<int>(warning_dim_frac * user_duty);
-  int warn_timeout = 20 * (1000 / 10);
+  int warn_timeout = 20 * (1000 / 10); // TODO: make variable based on tickrate
   int shutoff_timeout = 10 * (1000 / 10);
   int count = 0;
-  bool warn_enable = true;
-  bool shutoff_enable = true;
+  bool warn_enable = false;
+  bool shutoff_enable = false;
 
-  Led(){};
-  ~Led(){};
+  Led() {};
+  ~Led() {};
 
-  void init(gpio_num_t pin, int sample_period_ms, int timeout1_m,
-            int timeout2_m) {
+  void init(gpio_num_t pin,
+            int sample_period_ms,
+            int timeout1_m,
+            int timeout2_m)
+  {
     warn_timeout = (timeout1_m * 60 * 1000) / sample_period_ms;
     // Demo Mode
     // warn_timeout = 5000 / sample_period_ms;
@@ -62,7 +70,7 @@ public:
 
     // https://www.espressif.com/sites/default/files/documentation/esp32_technical_reference_manual_en.pdf#ledpwm
     uint32_t bits =
-        ledc_find_suitable_duty_resolution(80 * 1000 * 1000, 40 * 1000);
+      ledc_find_suitable_duty_resolution(80 * 1000 * 1000, 40 * 1000);
     ESP_LOGI("LEDC",
              "maximum possible duty resolution in bits for "
              "ledc_timer_config: %" PRIu32,
@@ -89,12 +97,14 @@ public:
     ESP_ERROR_CHECK(ledc_channel_config(&chancfg));
   }
 
-  void set_user_duty(uint16_t d) {
+  void set_user_duty(uint16_t d)
+  {
     user_duty = d;
     set_duty(d);
   }
 
-  void set_duty(uint16_t d) {
+  void set_duty(uint16_t d)
+  {
     // This API call is thread safe.
     // This API call needs a fade service installed on the channel before use.
     // ESP_ERROR_CHECK(ledc_set_duty_and_update(speed_mode, channel, d,
@@ -105,7 +115,8 @@ public:
   }
 
   /* Set LED dim level based on current state.*/
-  void update() {
+  void update()
+  {
     if (STATE::ON == state) {
       // Restore the current active duty.
       if (1 == warning_level) {
@@ -121,17 +132,19 @@ public:
     }
   }
 
-  void update_timeout_tick() {
+  void update_timeout_tick()
+  {
     if (state == STATE::OFF) {
       return;
     }
 
     ++count;
-    if (warning_level < 2 && count >= shutoff_timeout + warn_timeout &&
+    if ((warning_level < 2) && (count >= shutoff_timeout + warn_timeout) &&
         warn_enable) {
       warning_level = 2;
       update();
-    } else if (warning_level < 1 && count >= warn_timeout && shutoff_enable) {
+    } else if ((warning_level < 1) && (count >= warn_timeout) &&
+               shutoff_enable) {
       warning_level = 1;
       update();
     }
@@ -139,7 +152,8 @@ public:
 
   void reset_timeout() { count = 0; }
 
-  void toggle() {
+  void toggle()
+  {
     if (STATE::ON == state) {
       if (warning_level > 0) { // User renewed lights.
         count = 0;

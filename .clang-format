@@ -1,0 +1,8 @@
+# ---
+# Clang Format Style
+BasedOnStyle: Mozilla
+Language: Cpp
+AlignConsecutiveMacros: true
+AllowShortFunctionsOnASingleLine: true
+AllowShortEnumsOnASingleLine: true
+# ---

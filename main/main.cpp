@@ -31,50 +31,62 @@
 
 #define EVENT_QUEUE_COUNT 5
 
-#define HAND_DIST_THRESHOLD 20.0f
-#define HAND_WINDOW_SIZE 5
+#define HAND_DIST_THRESHOLD_CM    20.0f // cm
+#define HAND_SAMPLE_WINDOW_SIZE   5
 #define HAND_VALID_SAMPLES_NEEDED 4
-#define HAND_DEBOUNCE_COUNT (int)(300 / HMI_POLLING_PERIOD_MS)
+#define HAND_DEBOUNCE_COUNT       (int)(300 / HMI_POLLING_PERIOD_MS)
 
-#define LED_WARNING_TIMEOUT_M 60
-#define LED_SHUTOFF_TIMEOUT_M 120
+#define LED_WARNING_TIMEOUT_M (8 * 60)
+#define LED_SHUTOFF_TIMEOUT_M (LED_WARNING_TIMEOUT_M + 10)
 
 #define MODULE_ADAFRUIT_QTPY_ESP32_S3
 #ifdef MODULE_ADAFRUIT_QTPY_ESP32_S3
 #define CONFIG_DUTY_RELAY_PIN GPIO_NUM_18
 #define CONFIG_ROTARY_BTN_PIN GPIO_NUM_17
-#define CONFIG_ROTARY_A_PIN GPIO_NUM_8
-#define CONFIG_ROTARY_B_PIN GPIO_NUM_9
-#define CONFIG_TRIGGER_PIN GPIO_NUM_16
-#define CONFIG_ECHO_PIN GPIO_NUM_6
+#define CONFIG_ROTARY_A_PIN   GPIO_NUM_8
+#define CONFIG_ROTARY_B_PIN   GPIO_NUM_9
+#define CONFIG_TRIGGER_PIN    GPIO_NUM_16
+#define CONFIG_ECHO_PIN       GPIO_NUM_6
 #endif // MODULE_ADAFRUIT_QTPY_ESP32_S3
 
-static const char *TAG = "[main]";
+static const char* TAG = "[main]";
 
 uint8_t ucQueueStorage[EVENT_QUEUE_COUNT * sizeof(Event)];
 EventQueue event_q(EVENT_QUEUE_COUNT, ucQueueStorage);
 
 /*** USER INPUT DEVICES ***/
-static re_polling_rotary_encoder_t *encoder;
+#ifdef ROTARY_ENCODER_ENABLED
+static re_polling_rotary_encoder_t* encoder;
+#endif // ROTARY_ENCODER_ENABLED
 static HCSR04 hcsr04;
-static HandGestureFilter<float, HAND_DIST_THRESHOLD, HAND_WINDOW_SIZE,
-                         HAND_VALID_SAMPLES_NEEDED, HAND_DEBOUNCE_COUNT>
-    filter;
+static HandGestureFilter<float,
+                         HAND_DIST_THRESHOLD_CM,
+                         HAND_SAMPLE_WINDOW_SIZE,
+                         HAND_VALID_SAMPLES_NEEDED,
+                         HAND_DEBOUNCE_COUNT>
+  filter;
 static Led led;
 
 /*** STATIC PROTOTYPES ***/
-static void initialize_controls();
-static void hmi_loop(void *pvParameter);
+static void
+initialize_controls();
+static void
+hmi_loop(void* pvParameter);
 #ifdef ROTARY_ENCODER_ENABLED
-static void button_callback(void *);
+static void
+button_callback(void*);
 #endif // ROTARY_ENCODER_ENABLED
 
-extern "C" void app_main(void) {
-  led.init(CONFIG_DUTY_RELAY_PIN, HMI_POLLING_PERIOD_MS, LED_WARNING_TIMEOUT_M,
+extern "C" void
+app_main(void)
+{
+  led.init(CONFIG_DUTY_RELAY_PIN,
+           HMI_POLLING_PERIOD_MS,
+           LED_WARNING_TIMEOUT_M,
            LED_SHUTOFF_TIMEOUT_M);
 
-  xTaskCreatePinnedToCore(hmi_loop, "gui-loop", 4096 * 2, NULL, 3, NULL,
-                          HMI_PROCESSOR_CORE_ID);
+  xTaskCreatePinnedToCore(
+    hmi_loop, "gui-loop", 4096 * 2, NULL, 3, NULL, HMI_PROCESSOR_CORE_ID);
 
   // For debugging purposes.
   // esp_intr_dump(NULL);
@@ -82,9 +94,15 @@ extern "C" void app_main(void) {
   return;
 }
 
-uint32_t get_milliseconds() { return esp_timer_get_time() / 1000; }
+uint32_t
+get_milliseconds()
+{
+  return esp_timer_get_time() / 1000;
+}
 
-static void sample_inputs() {
+static void
+sample_inputs()
+{
 #ifdef ROTARY_ENCODER_ENABLED
   // Set LED dim level when value changes.
   if (rep_sample(encoder)) {
@@ -104,21 +122,25 @@ static void sample_inputs() {
 #endif // TESTING_LOG_DISTANCES
 }
 
-static void handle_events() {
+static void
+handle_events()
+{
   Event event;
   while (true == event_q.receive(event)) {
     switch (event) {
-    case Event::EVENT_HAND_ENTER:
-      ESP_LOGI(TAG, "Toggle the led.");
-      led.toggle();
-      break;
-    case Event::EVENT_HAND_EXIT:
-      break;
+      case Event::EVENT_HAND_ENTER:
+        ESP_LOGI(TAG, "Toggle the led.");
+        led.toggle();
+        break;
+      case Event::EVENT_HAND_EXIT:
+        break;
     }
   }
 }
 
-static void hmi_loop(void *pvParameter) {
+static void
+hmi_loop(void* pvParameter)
+{
   (void)pvParameter; // not used
 
   event_q.init();
@@ -141,16 +163,19 @@ static void hmi_loop(void *pvParameter) {
 
     if (task_duration_us <= HMI_POLLING_PERIOD_MS * 1000) {
       vTaskDelay(
-          pdMS_TO_TICKS(HMI_POLLING_PERIOD_MS - (task_duration_us / 1000)));
+        pdMS_TO_TICKS(HMI_POLLING_PERIOD_MS - (task_duration_us / 1000)));
     } else {
-      ESP_LOGW(TAG, "gui loop duration exceded refresh period: %" PRIu64 "us",
+      ESP_LOGW(TAG,
+               "gui loop duration exceded refresh period: %" PRIu64 "us",
                task_duration_us);
     }
   }
 
   vTaskDelete(NULL);
 }
-void initialize_controls() {
+void
+initialize_controls()
+{
 #ifdef ROTARY_ENCODER_ENABLED
   db_edge_input_t button;
   button.cb = button_callback;
@@ -164,14 +189,16 @@ void initialize_controls() {
   button.core_id = 1;
   db_register_edge(&button);
 
-  encoder = (re_polling_rotary_encoder_t *)malloc(
-      sizeof(re_polling_rotary_encoder_t));
+  encoder =
+    (re_polling_rotary_encoder_t*)malloc(sizeof(re_polling_rotary_encoder_t));
 
   if (NULL == encoder) {
     ESP_LOGD(TAG, "Failed to allocate encoder memory.");
     abort();
   }
 
+  // TODO: create logarithmic dimmer to account for les resolution needed at
+  // higher brightness levels
   encoder->max = 63;
   encoder->min = 0;
   encoder->step_size = 1;
@@ -189,5 +216,9 @@ void initialize_controls() {
 }
 
 #ifdef ROTARY_ENCODER_ENABLED
-static void button_callback(void *) { rep_reset(encoder); }
+static void
+button_callback(void*)
+{
+  rep_reset(encoder);
+}
 #endif // ROTARY_ENCODER_ENABLED

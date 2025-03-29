@@ -11,14 +11,16 @@
 #include "esp_log.h"
 #include "sdkconfig.h"
 
-static const char *TAG = "encoder";
+static const char* TAG = "encoder";
 
-static bool IRAM_ATTR pcnt_on_reach(pcnt_unit_handle_t unit,
-                                    const pcnt_watch_event_data_t *edata,
-                                    void *pvParameter) {
+static bool IRAM_ATTR
+pcnt_on_reach(pcnt_unit_handle_t unit,
+              const pcnt_watch_event_data_t* edata,
+              void* pvParameter)
+{
 
-  re_polling_rotary_encoder_t *encoder =
-      (re_polling_rotary_encoder_t *)pvParameter;
+  re_polling_rotary_encoder_t* encoder =
+    (re_polling_rotary_encoder_t*)pvParameter;
   encoder->previous_pulse_count = 0;
   if (encoder->pcnt_unit) {
     pcnt_unit_clear_count(encoder->pcnt_unit);
@@ -30,7 +32,9 @@ static bool IRAM_ATTR pcnt_on_reach(pcnt_unit_handle_t unit,
 
 // Pulses may be missed during rollover if high and low limit or set above or
 // below the maximum and minimum values of a 16-bit integer.
-bool rep_initialize(re_polling_rotary_encoder_t *this) {
+bool
+rep_initialize(re_polling_rotary_encoder_t* this)
+{
   // High and low limit of the internal pulse value register.
   // I use the full 16-bit register provided by ESP32 and handle the user
   // counter/position in a software check.
@@ -39,13 +43,14 @@ bool rep_initialize(re_polling_rotary_encoder_t *this) {
 
   ESP_LOGI(TAG, "Initializing counter.");
 
-  pcnt_unit_config_t unit_config = {
-      .high_limit = high_limit, .low_limit = low_limit, .flags.accum_count = 1};
+  pcnt_unit_config_t unit_config = { .high_limit = high_limit,
+                                     .low_limit = low_limit,
+                                     .flags.accum_count = 1 };
   pcnt_unit_handle_t pcnt_unit = NULL;
   ESP_ERROR_CHECK(pcnt_new_unit(&unit_config, &pcnt_unit));
 
   pcnt_glitch_filter_config_t filter_config = {
-      .max_glitch_ns = this->min_pulse_duration_ns,
+    .max_glitch_ns = this->min_pulse_duration_ns,
   };
   ESP_ERROR_CHECK(pcnt_unit_set_glitch_filter(pcnt_unit, &filter_config));
 
@@ -69,8 +74,8 @@ bool rep_initialize(re_polling_rotary_encoder_t *this) {
 
   // level_gpio_num is the control signal
   pcnt_chan_config_t chan_a_config = {
-      .edge_gpio_num = this->pinA,
-      .level_gpio_num = this->pinB,
+    .edge_gpio_num = this->pinA,
+    .level_gpio_num = this->pinB,
   };
   pcnt_channel_handle_t pcnt_chan_a = NULL;
 
@@ -78,37 +83,41 @@ bool rep_initialize(re_polling_rotary_encoder_t *this) {
 
   // When pin A gets pulled low (while B is high), increase the value.
   // When pin A gets pulled low (while B is low), decrease the value.
-  ESP_ERROR_CHECK(pcnt_channel_set_edge_action(
-      pcnt_chan_a, PCNT_CHANNEL_EDGE_ACTION_INCREASE,
-      PCNT_CHANNEL_EDGE_ACTION_DECREASE));
   ESP_ERROR_CHECK(
-      pcnt_channel_set_level_action(pcnt_chan_a, PCNT_CHANNEL_LEVEL_ACTION_KEEP,
-                                    PCNT_CHANNEL_LEVEL_ACTION_INVERSE));
+    pcnt_channel_set_edge_action(pcnt_chan_a,
+                                 PCNT_CHANNEL_EDGE_ACTION_INCREASE,
+                                 PCNT_CHANNEL_EDGE_ACTION_DECREASE));
+  ESP_ERROR_CHECK(
+    pcnt_channel_set_level_action(pcnt_chan_a,
+                                  PCNT_CHANNEL_LEVEL_ACTION_KEEP,
+                                  PCNT_CHANNEL_LEVEL_ACTION_INVERSE));
 
   // When pin B gets pulled low (while A is high), decrease the value.
   // When pin B gets pulled low (while A is low), increase the value.
   pcnt_chan_config_t chan_b_config = {
-      .edge_gpio_num = this->pinB,
-      .level_gpio_num = this->pinA,
+    .edge_gpio_num = this->pinB,
+    .level_gpio_num = this->pinA,
   };
 
   pcnt_channel_handle_t pcnt_chan_b = NULL;
 
   ESP_ERROR_CHECK(pcnt_new_channel(pcnt_unit, &chan_b_config, &pcnt_chan_b));
 
-  ESP_ERROR_CHECK(pcnt_channel_set_edge_action(
-      pcnt_chan_b, PCNT_CHANNEL_EDGE_ACTION_INCREASE,
-      PCNT_CHANNEL_EDGE_ACTION_DECREASE));
-  ESP_ERROR_CHECK(pcnt_channel_set_level_action(
-      pcnt_chan_b, PCNT_CHANNEL_LEVEL_ACTION_INVERSE,
-      PCNT_CHANNEL_LEVEL_ACTION_KEEP));
+  ESP_ERROR_CHECK(
+    pcnt_channel_set_edge_action(pcnt_chan_b,
+                                 PCNT_CHANNEL_EDGE_ACTION_INCREASE,
+                                 PCNT_CHANNEL_EDGE_ACTION_DECREASE));
+  ESP_ERROR_CHECK(
+    pcnt_channel_set_level_action(pcnt_chan_b,
+                                  PCNT_CHANNEL_LEVEL_ACTION_INVERSE,
+                                  PCNT_CHANNEL_LEVEL_ACTION_KEEP));
 
   // Trigger a callback before counter rolls over.
   ESP_ERROR_CHECK(pcnt_unit_add_watch_point(pcnt_unit, high_limit));
   ESP_ERROR_CHECK(pcnt_unit_add_watch_point(pcnt_unit, low_limit));
 
   pcnt_event_callbacks_t cbs = {
-      .on_reach = pcnt_on_reach,
+    .on_reach = pcnt_on_reach,
   };
 
   ESP_ERROR_CHECK(pcnt_unit_register_event_callbacks(pcnt_unit, &cbs, this));
@@ -123,7 +132,9 @@ bool rep_initialize(re_polling_rotary_encoder_t *this) {
   return true;
 }
 
-void rep_reset(re_polling_rotary_encoder_t *this) {
+void
+rep_reset(re_polling_rotary_encoder_t* this)
+{
   // Add lock here if using a multithreaded environment
   this->previous_pulse_count = 0;
   this->value = 0;
@@ -131,11 +142,15 @@ void rep_reset(re_polling_rotary_encoder_t *this) {
   ESP_ERROR_CHECK(pcnt_unit_clear_count(this->pcnt_unit));
 }
 
-re_count_t rep_get_value(re_polling_rotary_encoder_t *this) {
+re_count_t
+rep_get_value(re_polling_rotary_encoder_t* this)
+{
   return this->value;
 }
 
-re_count_t rep_get_delta(re_polling_rotary_encoder_t *this) {
+re_count_t
+rep_get_delta(re_polling_rotary_encoder_t* this)
+{
 
   return this->delta;
 }
@@ -143,7 +158,9 @@ re_count_t rep_get_delta(re_polling_rotary_encoder_t *this) {
 /**
  * Returns true if the value was changed since it was last checked.
  */
-bool rep_sample(re_polling_rotary_encoder_t *this) {
+bool
+rep_sample(re_polling_rotary_encoder_t* this)
+{
   int pulse_count = 0;
 
   ESP_ERROR_CHECK(pcnt_unit_get_count(this->pcnt_unit, &pulse_count));

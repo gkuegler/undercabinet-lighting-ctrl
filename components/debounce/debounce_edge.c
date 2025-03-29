@@ -22,7 +22,7 @@
 
 #define DIGITAL_READ(x) gpio_get_level(x)
 
-static const char *TAG = "dbnce";
+static const char* TAG = "dbnce";
 
 // The sample buffer uses left shifts. At the buffer type to an unsigned integer
 // with a width large enough to accomodate the number of desired samples.
@@ -30,10 +30,11 @@ static const char *TAG = "dbnce";
 // to generate the least instructions.
 typedef uint32_t sample_buf_t;
 
-typedef bool (*sampling_func_t)(db_edge_input_t *);
+typedef bool (*sampling_func_t)(db_edge_input_t*);
 
-typedef struct {
-  db_edge_input_t *input;
+typedef struct
+{
+  db_edge_input_t* input;
   sampling_func_t sample;
 } db_edge_input_ex_t;
 
@@ -61,11 +62,13 @@ typedef struct {
  * We OR in 1's in the upper bits to ignore everything but the number of lower
  * bids equal to the sample count. * *
  */
-static bool debounced_is_falling_edge(db_edge_input_t *input) {
+static bool
+debounced_is_falling_edge(db_edge_input_t* input)
+{
   const sample_buf_t ignore =
-      (sample_buf_t)((sample_buf_t)-1 << (input->sample_count + 1));
+    (sample_buf_t)((sample_buf_t)-1 << (input->sample_count + 1));
   const sample_buf_t fall_edge =
-      (sample_buf_t)((sample_buf_t)-1 << (input->sample_count));
+    (sample_buf_t)((sample_buf_t)-1 << (input->sample_count));
 
   static sample_buf_t state = 0;
   state = ignore | (state << 1) | !DIGITAL_READ(input->pin);
@@ -75,11 +78,13 @@ static bool debounced_is_falling_edge(db_edge_input_t *input) {
   return false;
 }
 
-static bool debounced_is_rising_edge(db_edge_input_t *input) {
+static bool
+debounced_is_rising_edge(db_edge_input_t* input)
+{
   const sample_buf_t ignore = ((sample_buf_t)-1 << (input->sample_count + 1));
   const sample_buf_t rise_edge =
-      ((sample_buf_t)-1 >>
-       ((sizeof(sample_buf_t) * 8) - (input->sample_count + 1)));
+    ((sample_buf_t)-1 >>
+     ((sizeof(sample_buf_t) * 8) - (input->sample_count + 1)));
 
   static sample_buf_t state = 0; // Current debounce status
   state = ignore | (state << 1) | !DIGITAL_READ(input->pin);
@@ -108,10 +113,12 @@ static bool debounced_is_rising_edge(db_edge_input_t *input) {
 //   return debounced_state;
 // }
 
-static void sampling_task(void *pvParameters) {
+static void
+sampling_task(void* pvParameters)
+{
 
-  db_edge_input_ex_t *config = (db_edge_input_ex_t *)pvParameters;
-  db_edge_input_t *input = config->input;
+  db_edge_input_ex_t* config = (db_edge_input_ex_t*)pvParameters;
+  db_edge_input_t* input = config->input;
   sampling_func_t sample = config->sample;
 
   ESP_LOGD(TAG, "sample ptr: %p", sample);
@@ -130,7 +137,9 @@ static void sampling_task(void *pvParameters) {
   }
 }
 
-static void register_gpio(int pin, pin_pull_t pullup) {
+static void
+register_gpio(int pin, pin_pull_t pullup)
+{
   gpio_config_t io_conf = {};
 
   io_conf.intr_type = GPIO_INTR_DISABLE;
@@ -152,7 +161,9 @@ static void register_gpio(int pin, pin_pull_t pullup) {
   ESP_ERROR_CHECK(gpio_config(&io_conf));
 }
 
-bool db_register_edge(db_edge_input_t *input) {
+bool
+db_register_edge(db_edge_input_t* input)
+{
   if (NULL == input) {
     ESP_LOGE(TAG, "NULL check failled on 'input'.");
   }
@@ -163,14 +174,13 @@ bool db_register_edge(db_edge_input_t *input) {
     ESP_LOGE(TAG, "No pin provided.");
   }
 
-  db_edge_input_t *internal =
-      (db_edge_input_t *)malloc(sizeof(db_edge_input_t));
+  db_edge_input_t* internal = (db_edge_input_t*)malloc(sizeof(db_edge_input_t));
 
-  db_edge_input_ex_t *config =
-      (db_edge_input_ex_t *)malloc(sizeof(db_edge_input_ex_t));
+  db_edge_input_ex_t* config =
+    (db_edge_input_ex_t*)malloc(sizeof(db_edge_input_ex_t));
 
   if (internal && input && config) {
-    memcpy((void *)internal, (void *)input, sizeof(db_edge_input_t));
+    memcpy((void*)internal, (void*)input, sizeof(db_edge_input_t));
     config->input = internal;
   }
 
@@ -192,8 +202,12 @@ bool db_register_edge(db_edge_input_t *input) {
 
   // DEPRECATED: this function is deprecated in favor of more modern core
   // affinities
-  xTaskCreatePinnedToCore(sampling_task, task_name, input->cb_task_stack_size,
-                          (void *)config, input->sampling_task_priority, NULL,
+  xTaskCreatePinnedToCore(sampling_task,
+                          task_name,
+                          input->cb_task_stack_size,
+                          (void*)config,
+                          input->sampling_task_priority,
+                          NULL,
                           input->core_id);
 
   return true;
