@@ -265,9 +265,8 @@ ultrasonic_ranging_task(void* pvParameter)
 
     switch (ranging_mode) {
       case LED_CONTROL:
-        // ????
+        // TODO: grovery mode???
         // Lockout if hand has been present for a while. 'Grocery Mode'
-        // ???
         if (hand_detect_filter.process_sample(dist, ticks) ==
             Event::HAND_ENTER) {
           eventq.send(Event::TOGGLE_LED);
