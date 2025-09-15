@@ -121,33 +121,17 @@ HCSR04::init(gpio_num_t trig_pin,
     gpio_isr_handler_add(_echo_pin, echo_interrupt_handler, this));
 }
 
-// TODO: make an internal so that there are (2) apis.
-// The rang_and_wait and manual polling?
-bool
-HCSR04::start_range_session()
+void
+HCSR04::trigger_ranging_session()
 {
-  // TODO: no wait (~5ms) delay gaurd bewtween start ranging calls unless using
-  // 'rand_and_wait' api
-  if (_pulse_in_flight <= 0) {
-    _pulse_in_flight += 1;
-
-    // Inside disabled interupts for accurate delay.
-    // Send a 10 microsecond pulse to the trigger pin.
-    // Delay is too short to bother moving the pusle to a peripheral.
-    taskENTER_CRITICAL(&mux);
-    GPIO_SET_FAST_0_31(_trig_pin);
-    ets_delay_us(10); // esp32 lowest level c api for delay
-    GPIO_CLEAR_FAST_0_31(_trig_pin);
-    taskEXIT_CRITICAL(&mux);
-
-    // ESP_LOGD(tag, "Started ranging.");
-
-    return true;
-  }
-
-  // ESP_LOGD(tag, "Ranging already in progress.");
-
-  return false;
+  // Disabled interupts for accurate delay.
+  // Send a 10 microsecond pulse to the trigger pin.
+  // Delay is too short to bother moving the pusle to a peripheral.
+  taskENTER_CRITICAL(&mux);
+  GPIO_SET_FAST_0_31(_trig_pin);
+  ets_delay_us(10); // esp32 lowest level c api for delay
+  GPIO_CLEAR_FAST_0_31(_trig_pin);
+  taskEXIT_CRITICAL(&mux);
 }
 
 constexpr float
@@ -179,7 +163,12 @@ HCSR04::range_and_wait()
     // Will return immediately if the specified time is in the past.
     vTaskDelayUntil(&_last_range_ticks, _delay_between_ranging_ms);
 
-    if (!start_range_session()) {
+    // There should technically be no range in flight when we get here.
+    // Only one ranging is allowed at a time.
+    if (_pulse_in_flight <= 0) {
+      _pulse_in_flight += 1;
+      trigger_ranging_session();
+    } else {
       vTaskDelay(1);
       continue;
     }

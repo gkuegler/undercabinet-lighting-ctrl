@@ -84,7 +84,7 @@ public:
   float range_and_wait();
 
 private:
-  bool start_range_session();
+  void trigger_ranging_session();
   void reset();
   constexpr float convert_us_to_range(const uint32_t us);
 };
