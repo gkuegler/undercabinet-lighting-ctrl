@@ -1,4 +1,5 @@
 (sym_lib_table
   (version 7)
   (lib (name "cablight-eagle-import")(type "KiCad")(uri "${KIPRJMOD}/cablight-eagle-import.kicad_sym")(options "")(descr ""))
+  (lib (name "extra")(type "KiCad")(uri "${KIPRJMOD}/extra.kicad_sym")(options "")(descr ""))
 )

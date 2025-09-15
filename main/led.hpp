@@ -4,24 +4,23 @@
 
 #include "driver/ledc.h"
 #include "esp_attr.h" // for IRAM_ATTR
+#include "esp_clk_tree.h"
 #include "esp_log.h"
 #include "freertos/FreeRTOS.h"
 #include "freertos/queue.h"
 
+/* Local Inclues */
+#include "parameters.h"
+
 /*
 Not Thread Safe
 */
+template<gpio_num_t PIN>
 class Led
 {
 private:
-  enum class STATE
-  {
-    OFF,
-    ON
-  };
-  static constexpr const char* TAG = "LEDC";
-
-public:
+  static constexpr const char* tag = "LED";
+  static constexpr ledc_timer_bit_t pwm_res_bits = LEDC_TIMER_6_BIT;
   ledc_channel_t channel = LEDC_CHANNEL_0;
   ledc_timer_t timer = LEDC_TIMER_0;
   /* The S3 doesn't have the distinction between low and high speed anymore;
@@ -29,144 +28,152 @@ public:
   settings when the PWM ended, it didn't have anything to do with
   the max speed you can get out of a channel. */
   ledc_mode_t speed_mode = LEDC_LOW_SPEED_MODE;
-  ledc_timer_bit_t res = LEDC_TIMER_6_BIT;
-  uint16_t user_duty = pow(2, LEDC_TIMER_6_BIT) - 1; // set max duty 100%
-  uint16_t cur_duty = user_duty;                     // current led duty
-  STATE state = STATE::ON;
-  int hpoint = 0; // duty cycle wave start period
-  uint32_t warning_level = 0;
+  uint32_t max_duty = 0;
 
-  float warning_dim_frac = 0.05;
-  int warning_dim_lvl = static_cast<int>(warning_dim_frac * user_duty);
-  int warn_timeout = 20 * (1000 / 10); // TODO: make variable based on tickrate
-  int shutoff_timeout = 10 * (1000 / 10);
-  int count = 0;
-  bool warn_enable = false;
-  bool shutoff_enable = false;
+public:
+  float user_bright_lvl = 1.0f;
+  bool state = true;
+  bool enabled = true;
 
   Led() {};
   ~Led() {};
 
-  void init(gpio_num_t pin,
-            int sample_period_ms,
-            int timeout1_m,
-            int timeout2_m)
+  void init()
   {
-    warn_timeout = (timeout1_m * 60 * 1000) / sample_period_ms;
-    // Demo Mode
-    // warn_timeout = 5000 / sample_period_ms;
-    shutoff_timeout = (timeout2_m * 60 * 1000) / sample_period_ms;
+    // TODO: create an enable_PWM setting so user can disable with a jumper?
+
     // clang-format off
     /*
+    // https://www.espressif.com/sites/default/files/documentation/esp32_technical_reference_manual_en.pdf#ledpwm
+    --- TABLE 28.2-1 ---
     LEDC_CLKx           | PWM Hz | Highest Resolution (bit) 1 | Lowest Resolution (bit) 2
-    APB_CLK (80 MHz)    |  1 kHz | 16 | 7
-    APB_CLK (80 MHz)    |  5 kHz | 13 | 4
-    APB_CLK (80 MHz)    | 10 kHz | 12 | 3
-    RC_FAST_CLK (8 MHz) |  1 kHz | 12 | 3
-    RC_FAST_CLK (8 MHz) |  2 kHz | 11 | 2
-    REF_TICK (1 MHz)    |  1 kHz |  9 | 1
+    -------------------------------------------------------------------------------------
+    APB_CLK (80 MHz)    |  1 kHz |            16              |            7
+    APB_CLK (80 MHz)    |  5 kHz |            13              |            4
+    APB_CLK (80 MHz)    | 10 kHz |            12              |            3
+    RC_FAST_CLK (8 MHz) |  1 kHz |            12              |            3
+    RC_FAST_CLK (8 MHz) |  2 kHz |            11              |            2
+    REF_TICK (1 MHz)    |  1 kHz |             9              |            1
     */
     // clang-format on
 
-    // https://www.espressif.com/sites/default/files/documentation/esp32_technical_reference_manual_en.pdf#ledpwm
-    uint32_t bits =
-      ledc_find_suitable_duty_resolution(80 * 1000 * 1000, 40 * 1000);
+    // APB clock should be 80MHZ. It's freq can't dynamically vary so the 2nd
+    // param is ignored.
+    uint32_t apb_clock_freq = 80 * 1000 * 1000;
+    ESP_ERROR_CHECK(
+      esp_clk_tree_src_get_freq_hz(SOC_MOD_CLK_APB,
+                                   ESP_CLK_TREE_SRC_FREQ_PRECISION_CACHED,
+                                   &apb_clock_freq));
+
+    ESP_LOGI(tag, "APB Clock Frequency: %" PRIu32, apb_clock_freq);
+
+    uint32_t pwm_res_bits =
+      ledc_find_suitable_duty_resolution(apb_clock_freq, LED_PWM_FREQ_HZ);
     ESP_LOGI("LEDC",
              "maximum possible duty resolution in bits for "
              "ledc_timer_config: %" PRIu32,
-             bits);
+             pwm_res_bits);
+
+    // Integer that represents 100% duty.
+    max_duty = pow(2, pwm_res_bits) - 1;
 
     ledc_timer_config_t timercfg;
     timercfg.speed_mode = this->speed_mode;
-    timercfg.duty_resolution = res;
+    timercfg.duty_resolution = (ledc_timer_bit_t)pwm_res_bits;
     timercfg.timer_num = this->timer;
-    timercfg.freq_hz = 40000;
+    timercfg.freq_hz = LED_PWM_FREQ_HZ;
     timercfg.clk_cfg = LEDC_USE_APB_CLK;
     timercfg.deconfigure = 0; // don't deconfigure exg timer
     ESP_ERROR_CHECK(ledc_timer_config(&timercfg));
 
-    // Prepare and then apply the LEDC PWM channel configuration
+    // Prepare and then apply the LEDC PWM channel configuration.
     ledc_channel_config_t chancfg;
     chancfg.speed_mode = this->speed_mode;
     chancfg.sleep_mode = LEDC_SLEEP_MODE_NO_ALIVE_NO_PD;
     chancfg.channel = this->channel;
     chancfg.timer_sel = this->timer;
     chancfg.intr_type = LEDC_INTR_DISABLE;
-    chancfg.gpio_num = pin;
-    chancfg.duty = this->cur_duty;
-    chancfg.hpoint = this->hpoint;
+    chancfg.gpio_num = PIN;
+    chancfg.duty = (uint32_t)0;
+    chancfg.hpoint = 0;
     ESP_ERROR_CHECK(ledc_channel_config(&chancfg));
   }
 
-  void set_user_duty(uint16_t d)
+  // Converts a float percentage (0.0 to 1.0) to a n-bit integer
+  uint32_t percent_to_bit(float pc)
   {
-    user_duty = d;
-    set_duty(d);
+    if (pc <= 0.0f) {
+      return 0;
+    } else if (pc > 1.0f) {
+      return max_duty;
+    } else {
+      // +0.5 for rounding
+      return static_cast<uint32_t>(pc * (float)max_duty + 0.5f);
+    }
   }
 
-  void set_duty(uint16_t d)
+  void set_brightness_user(float lvl)
   {
-    // This API call is thread safe.
     // This API call needs a fade service installed on the channel before use.
     // ESP_ERROR_CHECK(ledc_set_duty_and_update(speed_mode, channel, d,
     // hpoint));
-    cur_duty = d;
-    ESP_ERROR_CHECK(ledc_set_duty(speed_mode, channel, cur_duty));
+    user_bright_lvl = lvl;
+    set_brightness(lvl);
+  }
+
+  // This API call is thread safe.
+  void set_brightness(float lvl)
+  {
+    // This API call needs a fade service installed on the channel before use.
+    // ESP_ERROR_CHECK(ledc_set_duty_and_update(speed_mode, channel, d,
+    // hpoint));
+    ESP_LOGD(tag, "brightness: %.2f", lvl);
+    ESP_ERROR_CHECK(ledc_set_duty(speed_mode, channel, percent_to_bit(lvl)));
     ESP_ERROR_CHECK(ledc_update_duty(speed_mode, channel));
   }
 
-  /* Set LED dim level based on current state.*/
-  void update()
+  void resume()
   {
-    if (STATE::ON == state) {
-      // Restore the current active duty.
-      if (1 == warning_level) {
-        set_duty(warning_dim_lvl);
-      } else if (2 == warning_level) {
-        set_duty(0);
-      } else {
-        set_duty(user_duty);
-      }
+    if (state) {
+      set_brightness(user_bright_lvl);
     } else {
-      // Turn the light off.
-      set_duty(0);
+      set_brightness(0.0f);
     }
   }
 
-  void update_timeout_tick()
+  void off()
   {
-    if (state == STATE::OFF) {
-      return;
-    }
-
-    ++count;
-    if ((warning_level < 2) && (count >= shutoff_timeout + warn_timeout) &&
-        warn_enable) {
-      warning_level = 2;
-      update();
-    } else if ((warning_level < 1) && (count >= warn_timeout) &&
-               shutoff_enable) {
-      warning_level = 1;
-      update();
-    }
+    state = false;
+    set_brightness(0.0f);
   }
 
-  void reset_timeout() { count = 0; }
+  void on()
+  {
+    state = true;
+    set_brightness(user_bright_lvl);
+  }
 
   void toggle()
   {
-    if (STATE::ON == state) {
-      if (warning_level > 0) { // User renewed lights.
-        count = 0;
-        warning_level = 0;
-      } else { // User turned off lights.
-        state = STATE::OFF;
-      }
-    } else { // User turned on lights.
-      state = STATE::ON;
-      warning_level = 0;
-      count = 0;
+    if (state) {
+      off();
+    } else {
+      on();
     }
-    update();
+  }
+
+  void pulse(int count, int delayoff, int delayon)
+  {
+    // If lights are on, briefly turn off.
+    if (state) {
+      set_brightness(0.0f);
+    }
+
+    for (int i = 0; i < count; i++) {
+      vTaskDelay(pdMS_TO_TICKS(delayoff));
+      set_brightness(1.0f);
+      vTaskDelay(pdMS_TO_TICKS(delayon));
+      set_brightness(0.0f);
+    }
   }
 };
