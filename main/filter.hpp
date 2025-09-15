@@ -55,6 +55,8 @@ public:
       return Event::NONE;
     }
   };
+
+  // TODO: store in NVM; also make a factory reset?
   void set_threshold(float sp)
   {
     _threshold_dist_cm = sp;

@@ -24,6 +24,12 @@
 #include "ring-buffer.hpp"
 #include "timer.hpp"
 
+// TODO: rename and clean code for v1.3
+
+// TODO: make options with jumpers and/or wifi server
+// TODO: do enclosure
+// TODO: enable OTA updates?
+
 enum RANGING_MODE
 {
   STOP,
