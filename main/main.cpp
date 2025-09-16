@@ -62,7 +62,8 @@ TaskHandle_t hLedFlash = NULL;
 
 StaticQueue<Event, EVENT_QUEUE_COUNT> qEvent;
 
-DebouncedButton btn{ CONFIG_BUTTON_PIN1 };
+// Todo don't make these templates.
+static DebouncedButton btn{ CONFIG_BTN_PIN1, GpioPullDirection::Up };
 static HCSR04 hcsr04;
 static HandDetectionFilter<float,
                            HAND_DIST_THRESHOLD_CM,
@@ -95,6 +96,9 @@ app_main(void)
   ledctrl.init();
   set_thresh_dist_timer.init("CALT1");
 
+  btn.init();
+  btn.max_multi_clicks = 1; // for bmode 0
+
   // For debugging purposes.
   // esp_intr_dump(NULL);
 
@@ -126,62 +130,60 @@ app_main(void)
   return;
 }
 
+void
+sample_button(TickType_t ticks)
+{
+  static const char* tag = "BTN";
+  static int bmode = 0;
+
+  // --- PROCESS BUTTON ---
+  switch (btn.sample(ticks)) {
+    case BUTTON_EVT_LONG_PRESS:
+      ESP_LOGD(tag, "changing button mode: %d", bmode);
+      // change it so that the button wont accept multiple clicks unless in
+      // the long press mode
+      bmode = !bmode;
+      btn.max_multi_clicks = bmode ? 4 : 1;
+      // Instead of chirp I could do a toggle?
+      qEvent.send(Event::CHIRP_DOUBLE);
+      break;
+
+    case 1:
+      if (bmode == 0) {
+        qEvent.send(Event::CYCLE_BRIGHTNESS);
+      } else if (bmode == 1) {
+        qEvent.send(Event::TOGGLE_LED);
+      }
+      break;
+
+    case 4:
+      qEvent.send(Event::START_SET_THRESHOLD_DISTANCE);
+      break;
+
+    default:
+      break;
+  }
+}
+
 static void
 hmi_task(void* pvParameter)
 {
   const char* tag = "hmi";
 
-  // Initialize button.
-  gpio_config_t io_conf = {};
-  io_conf.mode = GPIO_MODE_INPUT;
-  io_conf.pin_bit_mask = (1ULL << (int)CONFIG_BUTTON_PIN1);
-  io_conf.pull_up_en = GPIO_PULLUP_ENABLE;
-  ESP_ERROR_CHECK(gpio_config(&io_conf));
-
-  /*
-  dimming - single click
-  grocery mode - long press; then single
-  setting distance
-  */
   RingBuffer<float, 8> led_bright_values;
   for (auto x : { 0.0, 0.05, 0.10, 0.20, 0.40, 0.60, 0.80, 1.0 }) {
     led_bright_values.push(x);
   }
 
-  int bmode = 0;
   Event event;
 
   for (;;) {
     auto ticks = xTaskGetTickCount();
 
+    sample_button(ticks);
+
     // Not using LED timouts at the moment.
     // ledctrl.update_timeout_tick();
-
-    // --- PROCESS BUTTON ---
-    switch (btn.sample(ticks)) {
-      case ButtonEvent::LongPress:
-        // ESP_LOGD(tag, "changing button mode: %d", bmode);
-        // change it so that the button wont accept multiple clicks unless in
-        // the long press mode
-        // bmode = !bmode;
-        qEvent.send(Event::START_SET_THRESHOLD_DISTANCE);
-        break;
-
-      case ButtonEvent::Click1:
-        if (bmode == 0) {
-          qEvent.send(Event::CYCLE_BRIGHTNESS);
-        } else if (bmode == 1) {
-          qEvent.send(Event::TOGGLE_LED);
-        }
-        break;
-
-      case ButtonEvent::Click4:
-        qEvent.send(Event::CHIRP);
-        break;
-
-      default:
-        break;
-    }
 
     // Process global events.
     if (qEvent.receive(event, 0)) {
