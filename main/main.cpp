@@ -16,6 +16,7 @@
 #include "ultrasonic.hpp"
 
 /*** LOCAL INCLUDES ***/
+#include "error.h"
 #include "event.hpp"
 #include "filter.hpp"
 #include "led.hpp"
@@ -94,39 +95,33 @@ app_main(void)
   ledctrl.init();
   set_thresh_dist_timer.init("CALT1");
 
-  BaseType_t xResult;
-
   // For debugging purposes.
-  esp_intr_dump(NULL);
+  // esp_intr_dump(NULL);
 
-  xResult = xTaskCreatePinnedToCore(us_ranging_task,
-                                    "ultrasonic-loop",
-                                    4096 * 2,
-                                    NULL,
-                                    ULTRASONIC_TASK_PRIORITY,
-                                    &hUsRanging,
-                                    ULTRASONIC_TASK_CORE_ID);
+  freertos_error_check_abort(xTaskCreatePinnedToCore(us_ranging_task,
+                                                     "ultrasonic-loop",
+                                                     4096 * 2,
+                                                     NULL,
+                                                     ULTRASONIC_TASK_PRIORITY,
+                                                     &hUsRanging,
+                                                     ULTRASONIC_TASK_CORE_ID),
+                             TAG,
+                             "create us_ranging_task");
 
-  if (xResult != pdPASS) {
-    ESP_LOGE(TAG, "Failed to create task: %d", xResult);
-  }
+  freertos_error_check_abort(xTaskCreatePinnedToCore(hmi_task,
+                                                     "hmi-loop",
+                                                     4096 * 2,
+                                                     NULL,
+                                                     HMI_LOOP_TASK_PRIORITY,
+                                                     &hHmiTask,
+                                                     HMI_TASK_CORE_ID),
+                             TAG,
+                             "create hmi_task");
 
-  xResult = xTaskCreatePinnedToCore(hmi_task,
-                                    "hmi-loop",
-                                    4096 * 2,
-                                    NULL,
-                                    HMI_LOOP_TASK_PRIORITY,
-                                    &hHmiTask,
-                                    HMI_TASK_CORE_ID);
-  if (xResult != pdPASS) {
-    ESP_LOGE(TAG, "Failed to create task: %d", xResult);
-  }
-
-  xResult =
-    xTaskCreate(led_flash_task, "led-flash", 4096, NULL, 12, &hLedFlash);
-  if (xResult != pdPASS) {
-    ESP_LOGE(TAG, "Failed to create task: %d", xResult);
-  }
+  freertos_error_check_abort(
+    xTaskCreate(led_flash_task, "led_flash_task", 4096, NULL, 12, &hLedFlash),
+    TAG,
+    "create led_flash_task");
 
   return;
 }
