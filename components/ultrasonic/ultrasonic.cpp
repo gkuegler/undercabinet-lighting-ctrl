@@ -69,19 +69,16 @@ HCSR04::echo_interrupt_handler(void* pvParam)
     // Wake up task to handle ranging result. This should set
     // xHigherPriorityTaskWoken to pdTRUE, thus imediately enabling a context
     // switch into my ranging handler task.
-    if (self->_task_handle) {
-      xTaskNotifyIndexedFromISR(self->_task_handle,
-                                self->_task_idx,
-                                etime,
-                                eSetValueWithOverwrite,
-                                &xHigherPriorityTaskWoken);
-    }
-
-    // If xHigherPriorityTaskWoken is now set to pdTRUE then a context switch
-    // should be performed to ensure the interrupt returns directly to the
-    // highest priority task.
-    portYIELD_FROM_ISR(xHigherPriorityTaskWoken);
+    xTaskNotifyIndexedFromISR(self->_task_handle,
+                              self->_task_idx,
+                              etime,
+                              eSetValueWithOverwrite,
+                              &xHigherPriorityTaskWoken);
   }
+  // If xHigherPriorityTaskWoken is now set to pdTRUE then a context switch
+  // should be performed to ensure the interrupt returns directly to the
+  // highest priority task.
+  portYIELD_FROM_ISR(xHigherPriorityTaskWoken);
 }
 
 void
@@ -93,6 +90,7 @@ HCSR04::init(gpio_num_t trig_pin,
   _trig_pin = trig_pin;
   _echo_pin = echo_pin;
   _task_handle = task_to_notify;
+  _task_idx = task_idx;
 
   // TRIGGER SEND PIN
   gpio_config_t trcfg = {};
@@ -152,7 +150,7 @@ HCSR04::reset()
       tag, "Increasing delay between ranges: %dms", _delay_between_ranging_ms);
   }
 
-  _pulse_in_flight = false;
+  _pulse_in_flight = 0;
 }
 
 float
@@ -178,8 +176,9 @@ HCSR04::range_and_wait()
     // See notes in the ultrasonic component src files about the chip's
     // timeouts. The firmware has a hard timeout if the range is too long or
     // weak, but we add another timeout here, in case the signal is missed.
-    if (xTaskNotifyWait(
-          0, ULONG_MAX, &ulval, pdMS_TO_TICKS(_range_timeout_ms)) == pdFALSE) {
+    if (xTaskNotifyWaitIndexed(
+          _task_idx, 0, ULONG_MAX, &ulval, pdMS_TO_TICKS(_range_timeout_ms)) ==
+        pdFALSE) {
       ESP_LOGW(tag, "Ranging session watchdog timed out.");
       reset();
       continue;

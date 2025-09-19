@@ -1,4 +1,4 @@
-25240523212413594
+25242281500582504
 Audio_Module
 Reverb_BTDR-1H
 Digital Reverberation Unit, http://www.belton.co.kr/inc/downfile.php?seq=17&file=pdf (footprint from http://www.uk-electronic.de/PDF/BTDR-1.pdf)
@@ -59073,6 +59073,13 @@ CUI_SPDT_500mA_3mm
 5
 2
 GRK_Lib
+DIP-4 DS04-254 SAME SKY
+
+
+0
+8
+8
+GRK_Lib
 D_DO-41_SOD81_P2.54mm_Vertical_KathodeUp
 Diode, DO-41_SOD81 series, Axial, Vertical, pin pitch=2.54mm, , length*diameter=5.2*2.7mm^2, , http://www.diodes.com/_files/packages/DO-41%20(Plastic).pdf
 Diode DO-41_SOD81 series Axial Vertical pin pitch 2.54mm  length 5.2mm diameter 2.7mm
@@ -59112,8 +59119,8 @@ Right Angle Tactile BTN TL1105
 
 
 0
-0
-0
+4
+2
 GRK_Lib
 ScrewTerminal 2x 2.54 Small
 
