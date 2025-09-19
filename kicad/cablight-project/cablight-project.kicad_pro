@@ -500,7 +500,7 @@
         "microvia_drill": 0.1,
         "name": "+3v3",
         "pcb_color": "rgba(0, 0, 0, 0.000)",
-        "priority": 1,
+        "priority": 2,
         "schematic_color": "rgba(0, 0, 0, 0.000)",
         "track_width": 1.0,
         "via_diameter": 0.6,
@@ -517,7 +517,7 @@
         "microvia_drill": 0.1,
         "name": "+5V",
         "pcb_color": "rgba(0, 0, 0, 0.000)",
-        "priority": 2,
+        "priority": 3,
         "schematic_color": "rgba(0, 0, 0, 0.000)",
         "track_width": 1.0,
         "via_diameter": 0.6,
@@ -527,7 +527,7 @@
       {
         "name": "GND",
         "pcb_color": "rgba(0, 0, 0, 0.000)",
-        "priority": 0,
+        "priority": 1,
         "schematic_color": "rgba(0, 0, 0, 0.000)"
       },
       {
@@ -538,14 +538,22 @@
         "line_style": 0,
         "microvia_diameter": 0.3,
         "microvia_drill": 0.1,
-        "name": "Power",
+        "name": "Load",
         "pcb_color": "rgba(0, 0, 0, 0.000)",
-        "priority": 3,
+        "priority": 4,
         "schematic_color": "rgba(0, 0, 0, 0.000)",
         "track_width": 1.5,
         "via_diameter": 0.8,
         "via_drill": 0.5,
         "wire_width": 10
+      },
+      {
+        "clearance": 0.3,
+        "name": "PWRSUP",
+        "pcb_color": "rgba(0, 0, 0, 0.000)",
+        "priority": 0,
+        "schematic_color": "rgba(0, 0, 0, 0.000)",
+        "track_width": 1.0
       },
       {
         "bus_width": 12,
@@ -557,7 +565,7 @@
         "microvia_drill": 0.1,
         "name": "SIG",
         "pcb_color": "rgba(0, 0, 0, 0.000)",
-        "priority": 4,
+        "priority": 5,
         "schematic_color": "rgba(0, 0, 0, 0.000)",
         "track_width": 0.6,
         "via_diameter": 0.6,
@@ -608,15 +616,15 @@
         "pattern": "+5V"
       },
       {
-        "netclass": "Power",
+        "netclass": "Load",
         "pattern": "+24V"
       },
       {
-        "netclass": "Power",
+        "netclass": "Load",
         "pattern": "LED*"
       },
       {
-        "netclass": "+3v3",
+        "netclass": "Load",
         "pattern": "/LED-"
       },
       {
