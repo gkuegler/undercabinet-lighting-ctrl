@@ -1073,6 +1073,300 @@
 			)
 			(embedded_fonts no)
 		)
+		(symbol "Switch:SW_Push"
+			(pin_numbers
+				(hide yes)
+			)
+			(pin_names
+				(offset 1.016)
+				(hide yes)
+			)
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "SW"
+				(at 1.27 2.54 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left)
+				)
+			)
+			(property "Value" "SW_Push"
+				(at 0 -1.524 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" ""
+				(at 0 5.08 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Datasheet" "~"
+				(at 0 5.08 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Description" "Push button switch, generic, two pins"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_keywords" "switch normally-open pushbutton push-button"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(symbol "SW_Push_0_1"
+				(circle
+					(center -2.032 0)
+					(radius 0.508)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 0 1.27) (xy 0 3.048)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(circle
+					(center 2.032 0)
+					(radius 0.508)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 2.54 1.27) (xy -2.54 1.27)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(pin passive line
+					(at -5.08 0 0)
+					(length 2.54)
+					(name "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 5.08 0 180)
+					(length 2.54)
+					(name "2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(embedded_fonts no)
+		)
+		(symbol "cablight-eagle-import:RESISTOR_0805"
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "R"
+				(at 0 2.54 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Value" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.016 1.016)
+						(bold yes)
+					)
+				)
+			)
+			(property "Footprint" "cablight:_0805"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Datasheet" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Description" "Resistors\n\nFor new designs, use the packages preceded by an '_' character since they are more reliable:\n\nThe following footprints should be used on most boards:\n\n• _0402 - Standard footprint for regular board layouts\n• _0603 - Standard footprint for regular board layouts\n• _0805 - Standard footprint for regular board layouts\n• _1206 - Standard footprint for regular board layouts\n\nFor extremely tight-pitch boards where space is at a premium, the following 'micro-pitch' footprints can be used (smaller pads, no silkscreen outline, etc.):\n\n• _0402MP - Micro-pitch footprint for very dense/compact boards\n• _0603MP - Micro-pitch footprint for very dense/compact boards\n• _0805MP - Micro-pitch footprint for very dense/compact boards\n• _1206MP - Micro-pitch footprint for very dense/compact boards"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_locked" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(symbol "RESISTOR_0805_1_0"
+				(polyline
+					(pts
+						(xy -2.54 1.27) (xy 2.54 1.27)
+					)
+					(stroke
+						(width 0.254)
+						(type solid)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy -2.54 -1.27) (xy -2.54 1.27)
+					)
+					(stroke
+						(width 0.254)
+						(type solid)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 2.54 1.27) (xy 2.54 -1.27)
+					)
+					(stroke
+						(width 0.254)
+						(type solid)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 2.54 -1.27) (xy -2.54 -1.27)
+					)
+					(stroke
+						(width 0.254)
+						(type solid)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(pin passive line
+					(at -5.08 0 0)
+					(length 2.54)
+					(name "1"
+						(effects
+							(font
+								(size 0 0)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 0 0)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 5.08 0 180)
+					(length 2.54)
+					(name "2"
+						(effects
+							(font
+								(size 0 0)
+							)
+						)
+					)
+					(number "2"
+						(effects
+							(font
+								(size 0 0)
+							)
+						)
+					)
+				)
+			)
+			(embedded_fonts no)
+		)
 		(symbol "extra:Screw_Term_1x4_5mm"
 			(pin_names
 				(offset 1.016)
@@ -2399,6 +2693,12 @@
 		(uuid "06156437-9f4c-48ad-88bd-097ba05b0d86")
 	)
 	(junction
+		(at 168.91 72.39)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "418dbc34-9622-459b-a156-814746fe7f5c")
+	)
+	(junction
 		(at 71.12 146.05)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -2409,6 +2709,18 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "6b52cd28-96c7-4c7d-802f-db5cab4d73b4")
+	)
+	(junction
+		(at 162.56 52.07)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "97c6b268-68cc-4006-b2f1-e15c93ed063f")
+	)
+	(junction
+		(at 153.67 82.55)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "b03c641a-1282-4233-8d0c-32528b193e72")
 	)
 	(junction
 		(at 71.12 148.59)
@@ -2483,6 +2795,16 @@
 			(type default)
 		)
 		(uuid "0faa816e-da5b-4dff-8d3f-01d5a411e62b")
+	)
+	(wire
+		(pts
+			(xy 153.67 69.85) (xy 153.67 82.55)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "1279ab72-9f39-42bf-af0a-88a02a406f37")
 	)
 	(wire
 		(pts
@@ -2576,6 +2898,16 @@
 	)
 	(wire
 		(pts
+			(xy 189.23 52.07) (xy 189.23 72.39)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "3ac90de9-b174-4c85-bf9f-b44ffbbe566a")
+	)
+	(wire
+		(pts
 			(xy 68.58 109.22) (xy 68.58 116.84)
 		)
 		(stroke
@@ -2583,6 +2915,16 @@
 			(type default)
 		)
 		(uuid "42577fd7-92ac-4aa4-8692-c7c8f546dc16")
+	)
+	(wire
+		(pts
+			(xy 144.78 72.39) (xy 168.91 72.39)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "4564f383-b33f-44b4-9628-ccfc8470cae0")
 	)
 	(wire
 		(pts
@@ -2596,6 +2938,16 @@
 	)
 	(wire
 		(pts
+			(xy 162.56 52.07) (xy 189.23 52.07)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "465037dd-fa9a-460e-b69d-51444aa43e0b")
+	)
+	(wire
+		(pts
 			(xy 88.9 64.77) (xy 88.9 104.14)
 		)
 		(stroke
@@ -2603,6 +2955,16 @@
 			(type default)
 		)
 		(uuid "466e69e0-e076-4a4f-950a-799e18997300")
+	)
+	(wire
+		(pts
+			(xy 168.91 72.39) (xy 168.91 82.55)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "4891ecf2-1b04-4093-8ed5-f37d9424468a")
 	)
 	(wire
 		(pts
@@ -2653,6 +3015,16 @@
 			(type default)
 		)
 		(uuid "6c8c9c5f-f3af-4ac7-a8dd-6679bee5acee")
+	)
+	(wire
+		(pts
+			(xy 153.67 82.55) (xy 158.75 82.55)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "6e70bf1e-6ec9-4f42-a123-18d9854d687a")
 	)
 	(wire
 		(pts
@@ -2856,6 +3228,16 @@
 	)
 	(wire
 		(pts
+			(xy 168.91 72.39) (xy 172.72 72.39)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "b799e6c4-51ab-4e54-8989-90fbb1f97c3e")
+	)
+	(wire
+		(pts
 			(xy 80.01 148.59) (xy 71.12 148.59)
 		)
 		(stroke
@@ -2926,6 +3308,16 @@
 	)
 	(wire
 		(pts
+			(xy 182.88 72.39) (xy 189.23 72.39)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "d6d0b950-2587-4685-8364-6332f1cb055f")
+	)
+	(wire
+		(pts
 			(xy 147.32 80.01) (xy 144.78 80.01)
 		)
 		(stroke
@@ -2933,6 +3325,16 @@
 			(type default)
 		)
 		(uuid "d9075d19-3824-41a8-bbac-6cf5ebc3002e")
+	)
+	(wire
+		(pts
+			(xy 153.67 82.55) (xy 153.67 123.19)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "d9aa6520-cff4-49e3-a503-c4e897575434")
 	)
 	(wire
 		(pts
@@ -2963,16 +3365,6 @@
 			(type default)
 		)
 		(uuid "e00cdae7-4b61-4f10-b322-d16d05e7f6cd")
-	)
-	(wire
-		(pts
-			(xy 153.67 69.85) (xy 153.67 123.19)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "e09d6a7c-11f3-438a-bfa2-ad8a85df52da")
 	)
 	(wire
 		(pts
@@ -3501,6 +3893,74 @@
 		)
 	)
 	(symbol
+		(lib_id "Switch:SW_Push")
+		(at 177.8 72.39 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "4330bab5-9521-42cb-acbd-340264b64125")
+		(property "Reference" "BTN1"
+			(at 177.8 64.77 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "SW_Push"
+			(at 177.8 67.31 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 177.8 67.31 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 177.8 67.31 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Push button switch, generic, two pins"
+			(at 177.8 72.39 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "1b6f0085-e8e0-4e10-9be7-6d5f2f067ed2")
+		)
+		(pin "2"
+			(uuid "bc4539e9-f106-40b7-95a5-821c93cd9b46")
+		)
+		(instances
+			(project ""
+				(path "/2aa36568-293b-470b-bbef-a9ff44d0879c"
+					(reference "BTN1")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "user:switch_SPDT_SLW_121586")
 		(at 102.87 46.99 0)
 		(unit 1)
@@ -3837,6 +4297,75 @@
 			(project ""
 				(path "/2aa36568-293b-470b-bbef-a9ff44d0879c"
 					(reference "D1")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "cablight-eagle-import:RESISTOR_0805")
+		(at 163.83 82.55 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "8c6055d9-75ce-433b-8706-4685a3843d34")
+		(property "Reference" "R1"
+			(at 163.83 77.47 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "10k"
+			(at 163.83 80.01 0)
+			(effects
+				(font
+					(size 1.016 1.016)
+					(bold yes)
+				)
+			)
+		)
+		(property "Footprint" "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder"
+			(at 163.83 82.55 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 163.83 82.55 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Resistors\n\nFor new designs, use the packages preceded by an '_' character since they are more reliable:\n\nThe following footprints should be used on most boards:\n\n• _0402 - Standard footprint for regular board layouts\n• _0603 - Standard footprint for regular board layouts\n• _0805 - Standard footprint for regular board layouts\n• _1206 - Standard footprint for regular board layouts\n\nFor extremely tight-pitch boards where space is at a premium, the following 'micro-pitch' footprints can be used (smaller pads, no silkscreen outline, etc.):\n\n• _0402MP - Micro-pitch footprint for very dense/compact boards\n• _0603MP - Micro-pitch footprint for very dense/compact boards\n• _0805MP - Micro-pitch footprint for very dense/compact boards\n• _1206MP - Micro-pitch footprint for very dense/compact boards"
+			(at 163.83 82.55 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "d997696f-4481-4d61-b3cf-ee4bd3593141")
+		)
+		(pin "2"
+			(uuid "0396ce6f-e5fa-407b-96a8-2bf0c4e8f338")
+		)
+		(instances
+			(project ""
+				(path "/2aa36568-293b-470b-bbef-a9ff44d0879c"
+					(reference "R1")
 					(unit 1)
 				)
 			)
