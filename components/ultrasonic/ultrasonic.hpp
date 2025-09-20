@@ -53,13 +53,13 @@ private:
   static const char* tag;
   std::atomic<int> _pulse_in_flight = 0;
   portMUX_TYPE mux = portMUX_INITIALIZER_UNLOCKED;
-  TickType_t _last_range_ticks;
+  TickType_t _last_range_ticks = 0;
   int _timed_out_ranges = 0;
 
   TaskHandle_t _task_handle = NULL;
+  BaseType_t _task_idx = 0;
   gpio_num_t _trig_pin;
   gpio_num_t _echo_pin;
-  BaseType_t _task_idx;
 
   // Configurable Params
   static const int _range_timeout_ms = 100;

@@ -8,7 +8,6 @@
 
 #include "freertos/FreeRTOS.h"
 #include "freertos/queue.h"
-#include "freertos/semphr.h"
 #include "freertos/task.h"
 
 /*** LOCAL COMPONENT INCLUDES ***/
@@ -16,6 +15,7 @@
 #include "ultrasonic.hpp"
 
 /*** LOCAL INCLUDES ***/
+#include "dipswitch.h"
 #include "error.h"
 #include "event.hpp"
 #include "filter.hpp"
@@ -25,22 +25,19 @@
 #include "ring-buffer.hpp"
 #include "timer.hpp"
 
-// TODO: rename and clean code for v1.3
-
 // TODO: make options with jumpers and/or wifi server
 // TODO: do enclosure
 // TODO: enable OTA updates?
 
-enum RANGING_MODE
+enum class UltrasonicMode : int
 {
-  STOP,
-  LED_CONTROL,
-  SET_THRESHOLD_DISTANCE,
-  STOP_SET_THRESHOLD_DISTANCE,
-  FINISH_SET_THRESHOLD_DISTANCE
+  LedControl,
+  SetThreshold,
+  FinishSetThreshold
 };
 
 /*** STATIC PROTOTYPES ***/
+// Tasks
 static void
 us_ranging_task(void*);
 static void
@@ -48,66 +45,58 @@ hmi_task(void*);
 static void
 led_flash_task(void*);
 
-void
-start_led_flash();
-void
-stop_led_flash();
-void set_thresh_dist_completed_cb(TimerHandle_t);
+static void set_thresh_dist_completed_cb(TimerHandle_t);
 
 /*** GLOBAL VARIABLES ***/
-static const char* TAG = "[main]";
-TaskHandle_t hUsRanging = NULL;
-TaskHandle_t hHmiTask = NULL;
-TaskHandle_t hLedFlash = NULL;
+static const char* TAG = "main.cpp";
 
-StaticQueue<Event, EVENT_QUEUE_COUNT> qEvent;
+static TaskHandle_t ghRangeTask = NULL;
+static TaskHandle_t ghHmiTask = NULL;
+static TaskHandle_t ghLedFlashTask = NULL;
 
-// Todo don't make these templates.
+static StaticQueue<Event, EVENT_QUEUE_COUNT> eventq;
 static DebouncedButton btn{ CONFIG_BTN_PIN1, GpioPullDirection::Up };
-static HCSR04 hcsr04;
+static HCSR04 hcsr04; // Ultrasonic ranging peripheral.
 static HandDetectionFilter<float,
-                           HAND_DIST_THRESHOLD_CM,
+                           HAND_DEFAULT_DIST_THRESH_CM,
                            HAND_SAMPLE_WINDOW_SIZE,
                            HAND_VALID_SAMPLES_NEEDED,
-                           HAND_DEBOUNCE_COUNT>
-  hand_detect_filter;
+                           HAND_DEBOUNCE_PERIOD_MS>
+  range_filter;
+static RingBuffer<float, HAND_THRESH_SET_BUFSIZE> thresh_set_buf;
+static Led led{ CONFIG_LED_CTRL_PIN };
+static StaticTimer<HAND_THRESH_SET_DURATION_MS, set_thresh_dist_completed_cb>
+  set_thresh_dist_timer{ "timer1" };
+static DipSwitches dip;
 
-#define HAND_THRESH_SET_BUFSIZE 20
-
-static RingBuffer<float, 20> thresh_set_buf;
-static Led<CONFIG_LED_CTRL_PIN> ledctrl;
-
-#define HAND_THRESH_SET_DURATION_MS SECONDS(5)
-
-StaticTimer<HAND_THRESH_SET_DURATION_MS, set_thresh_dist_completed_cb>
-  set_thresh_dist_timer;
-
-std::atomic<uint32_t> gRangingMode = LED_CONTROL;
-std::atomic<bool> gEnableFlash = false;
-
-static_assert((HAND_THRESH_SET_SAMPLE_INTERVAL_MS * HAND_THRESH_SET_BUFSIZE *
-               4) < HAND_THRESH_SET_DURATION_MS,
-              "Buffer may be too large for accurate sample averaging.");
+static std::atomic<UltrasonicMode> gRangingMode = UltrasonicMode::LedControl;
+static std::atomic<bool> gEnableFlash = false;
 
 extern "C" void
 app_main(void)
 {
-  qEvent.init();
-  ledctrl.init();
-  set_thresh_dist_timer.init("CALT1");
+#ifdef TEST_FAKE_DIP_SWITCHES
+  dip.enable_led_pwm = true;
+  // dip.enable_led_shutoff_timeout = false;
+  // dip.enable_grocery_detection = false;
+  // dip.failsafe_manual_switch_mode = false;
+#else
+  read_dip_values(&dip);
+#endif // TEST_FAKE_DIP_SWITCHES
+
+  eventq.init();
+  led.init(dip.enable_led_pwm);
+  set_thresh_dist_timer.init();
 
   btn.init();
   btn.max_multi_clicks = 1; // for bmode 0
-
-  // For debugging purposes.
-  // esp_intr_dump(NULL);
 
   freertos_error_check_abort(xTaskCreatePinnedToCore(us_ranging_task,
                                                      "ultrasonic-loop",
                                                      4096 * 2,
                                                      NULL,
                                                      ULTRASONIC_TASK_PRIORITY,
-                                                     &hUsRanging,
+                                                     &ghRangeTask,
                                                      ULTRASONIC_TASK_CORE_ID),
                              TAG,
                              "create us_ranging_task");
@@ -117,17 +106,21 @@ app_main(void)
                                                      4096 * 2,
                                                      NULL,
                                                      HMI_LOOP_TASK_PRIORITY,
-                                                     &hHmiTask,
+                                                     &ghHmiTask,
                                                      HMI_TASK_CORE_ID),
                              TAG,
                              "create hmi_task");
 
   freertos_error_check_abort(
-    xTaskCreate(led_flash_task, "led_flash_task", 4096, NULL, 12, &hLedFlash),
+    xTaskCreate(
+      led_flash_task, "led_flash_task", 4096, NULL, 12, &ghLedFlashTask),
     TAG,
     "create led_flash_task");
 
   return;
+
+  // For debugging purposes.
+  esp_intr_dump(NULL);
 }
 
 void
@@ -140,24 +133,21 @@ sample_button(TickType_t ticks)
   switch (btn.sample(ticks)) {
     case BUTTON_EVT_LONG_PRESS:
       ESP_LOGD(tag, "changing button mode: %d", bmode);
-      // change it so that the button wont accept multiple clicks unless in
-      // the long press mode
       bmode = !bmode;
       btn.max_multi_clicks = bmode ? 4 : 1;
-      // Instead of chirp I could do a toggle?
-      qEvent.send(Event::CHIRP_DOUBLE);
+      eventq.send(Event::CHIRP_DOUBLE);
       break;
 
     case 1:
       if (bmode == 0) {
-        qEvent.send(Event::CYCLE_BRIGHTNESS);
+        eventq.send(Event::CYCLE_BRIGHTNESS);
       } else if (bmode == 1) {
-        qEvent.send(Event::TOGGLE_LED);
+        eventq.send(Event::TOGGLE_LED);
       }
       break;
 
     case 4:
-      qEvent.send(Event::START_SET_THRESHOLD_DISTANCE);
+      eventq.send(Event::START_SET_THRESHOLD_DISTANCE);
       break;
 
     default:
@@ -168,7 +158,7 @@ sample_button(TickType_t ticks)
 static void
 hmi_task(void* pvParameter)
 {
-  const char* tag = "hmi";
+  const char* tag = "HMI";
 
   RingBuffer<float, 8> led_bright_values;
   for (auto x : { 0.0, 0.05, 0.10, 0.20, 0.40, 0.60, 0.80, 1.0 }) {
@@ -177,54 +167,62 @@ hmi_task(void* pvParameter)
 
   Event event;
 
-  for (;;) {
+  while (true) {
     auto ticks = xTaskGetTickCount();
 
     sample_button(ticks);
 
     // Not using LED timouts at the moment.
-    // ledctrl.update_timeout_tick();
+    // led.update_timeout_tick();
 
     // Process global events.
-    if (qEvent.receive(event, 0)) {
+    if (eventq.receive(event, 0)) {
       switch (event) {
-        case Event::NONE:
-          break;
 
         case Event::TOGGLE_LED:
-          ledctrl.toggle();
+          led.toggle();
+          break;
+
+        case Event::RESUME_LED:
+          led.resume();
           break;
 
         case Event::CYCLE_BRIGHTNESS: {
-          auto bright = led_bright_values.next();
-          // Notify user max brightness reached.
-          if (bright == 1.0f) {
-            // TODO: fix chirp at top end
-            ledctrl.pulse(1, 200, 20);
-            vTaskDelay(pdMS_TO_TICKS(50));
-            // ledctrl.pulse(1, 150, 50);
+          if (led.pwm_enabled) {
+            auto bright = led_bright_values.next();
+            // Notify user max brightness reached.
+            if (bright == 1.0f) {
+              eventq.send(Event::CHIRP_SINGLE);
+            }
+            led.set_brightness_user(bright);
+          } else {
+            led.toggle();
           }
-          ledctrl.set_brightness_user(bright);
           break;
         }
 
         case Event::START_SET_THRESHOLD_DISTANCE:
           ESP_LOGD(TAG, "begin calibration");
-          gRangingMode = SET_THRESHOLD_DISTANCE;
-          start_led_flash();
+          gRangingMode = UltrasonicMode::SetThreshold;
+          vTaskResume(ghLedFlashTask);
           set_thresh_dist_timer.restart();
           break;
 
-        case Event::CHIRP:
-          ESP_LOGD(tag, "Chirp!");
-          vTaskDelay(2000);
-          ledctrl.pulse(1, 20, 150);
-          ledctrl.pulse(1, 50, 150);
-          ledctrl.resume();
+        case Event::CHIRP_SINGLE:
+          led.pulse(1, 150, 50);
+          vTaskDelay(pdMS_TO_TICKS(50));
+          led.resume();
           break;
-
-        default:
-          ESP_LOGE(TAG, "Unknown event: %d", (int)event);
+        case Event::CHIRP_DOUBLE:
+          if (led.pwm_enabled) {
+            led.pulse(2, 150, 50);
+            vTaskDelay(pdMS_TO_TICKS(50));
+          } else {
+            led.toggle();
+            vTaskDelay(pdMS_TO_TICKS(1000));
+            led.toggle();
+          }
+          led.resume();
           break;
       }
     }
@@ -233,32 +231,16 @@ hmi_task(void* pvParameter)
   }
 }
 
-void
-start_led_flash()
-{
-  gEnableFlash = true;
-  vTaskResume(hLedFlash);
-}
-
-void
-stop_led_flash()
-{
-  gEnableFlash = false;
-}
-
 static void
 led_flash_task(void* pvParameter)
 {
+  vTaskSuspend(NULL);
+
   while (true) {
-    if (gEnableFlash) {
-      ledctrl.set_brightness(1.0f);
-      vTaskDelay(1000);
-      ledctrl.set_brightness(0.0f);
-      vTaskDelay(500);
-    } else {
-      ledctrl.resume();
-      vTaskSuspend(NULL);
-    }
+    led.set_brightness(1.0f);
+    vTaskDelay(1000);
+    led.set_brightness(0.0f);
+    vTaskDelay(500);
   }
 }
 
@@ -279,16 +261,15 @@ us_ranging_task(void* pvParameter)
     auto ticks = xTaskGetTickCount();
 
     switch (gRangingMode) {
-      case LED_CONTROL:
-        // TODO: grovery mode???
+      case UltrasonicMode::LedControl:
+        // TODO: grocery mode??? use a timer??
         // Lockout if hand has been present for a while. 'Grocery Mode'
-        if (hand_detect_filter.process_sample(dist, ticks) ==
-            Event::HAND_ENTER) {
-          qEvent.send(Event::TOGGLE_LED);
+        if (range_filter.process_sample(dist, ticks) == HandEvent::ENTER) {
+          eventq.send(Event::TOGGLE_LED);
         }
         break;
 
-      case SET_THRESHOLD_DISTANCE:
+      case UltrasonicMode::SetThreshold:
         // Add samples to ring buffer for the window average.
         thresh_set_buf.push(dist);
 
@@ -297,12 +278,16 @@ us_ranging_task(void* pvParameter)
         break;
 
       // Process and accept the new setp.
-      case FINISH_SET_THRESHOLD_DISTANCE: {
-        gRangingMode = LED_CONTROL;
+      case UltrasonicMode::FinishSetThreshold: {
+        gRangingMode = UltrasonicMode::LedControl;
+
         auto& buf = thresh_set_buf.buf;
         float avg = std::accumulate(buf.begin(), buf.end(), 0.0) / buf.size();
-        ESP_LOGD(tag, "New hand threshold setp: %.2fcm", avg);
-        hand_detect_filter.set_threshold(avg);
+        range_filter.set_threshold(avg);
+        ESP_LOGI(tag, "New hand threshold setp: %.2fcm", avg);
+
+        vTaskSuspend(ghLedFlashTask);
+        eventq.send(Event::RESUME_LED);
         break;
       }
       default:
@@ -323,7 +308,5 @@ void
 set_thresh_dist_completed_cb(TimerHandle_t xTimer)
 {
   // TODO: fix ugly and poorly timed light flashing at end of threshold set
-  gRangingMode = FINISH_SET_THRESHOLD_DISTANCE;
-  stop_led_flash();
-  qEvent.send(Event::CHIRP);
+  gRangingMode = UltrasonicMode::FinishSetThreshold;
 }

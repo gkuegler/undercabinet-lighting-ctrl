@@ -27,7 +27,19 @@ struct DipSwitches
   // shall reset to normal. The controller shall resume normal control when the
   // object is removed after a set delay.
   bool enable_grocery_detection; // TODO
+
+  // User wants manual directly control of the LED switch. This switch is
+  // connected directly to the pin driving the mofset which switches the LED. If
+  // this signal is present at bootup, it means the user wishes to disable the
+  // MCU control of the led. The main power switch now acts as an on/off switch
+  // for the led.
+  // TODO look up mofset specs to find out what voltages I need to pull the pin
+  // to. See if I can even bypass the 5v power supply.
+
+  bool failsafe_manual_switch_mode; // TODO
 };
+
+#ifdef DIP_ENABLE_LED_PWM_PIN
 
 /* Read the values of the DIP switches. Will temporarily enable pullups while
  * reading pin, then pull pins low before the function exits.*/
@@ -64,3 +76,5 @@ read_dip_values(DipSwitches* jcf)
 
   return true;
 }
+
+#endif // DIP_ENABLE_LED_PWM_PIN

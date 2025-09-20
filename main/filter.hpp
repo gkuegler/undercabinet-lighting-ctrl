@@ -7,6 +7,13 @@
 /* Local Includes */
 #include "ring-buffer.hpp"
 
+enum class HandEvent
+{
+  NONE,
+  ENTER,
+  EXIT
+};
+
 /**
  * A sliding window filter to generate hand in/out events.
  */
@@ -14,7 +21,7 @@ template<typename T,
          T THRESHOLD_DIST_CM,
          size_t WINDOW_SIZE,
          size_t VALID_SAMPLES_NEEDED,
-         TickType_t DEBOUNCE_TICKS>
+         int DEBOUNCE_PERIOD_MS>
 class HandDetectionFilter
 {
 private:
@@ -32,12 +39,12 @@ public:
   /**
    * Filter the sample and return necessary events.
    */
-  Event process_sample(T sample, TickType_t ticks)
+  HandEvent process_sample(T sample, TickType_t ticks)
   {
     _sample_window.push(sample);
 
-    if (ticks - _ticks_last_change < DEBOUNCE_TICKS) {
-      return Event::NONE;
+    if (ticks - _ticks_last_change < pdMS_TO_TICKS(DEBOUNCE_PERIOD_MS)) {
+      return HandEvent::NONE;
     }
 
     HandState hs = eval_hand_presence();
@@ -46,13 +53,13 @@ public:
     if (HandState::OUT == _state && HandState::IN == hs) {
       _state = HandState::IN;
       _ticks_last_change = ticks;
-      return Event::HAND_ENTER;
+      return HandEvent::ENTER;
     } else if (HandState::IN == _state && HandState::OUT == hs) {
       _state = HandState::OUT;
       _ticks_last_change = ticks;
-      return Event::HAND_EXIT;
+      return HandEvent::EXIT;
     } else {
-      return Event::NONE;
+      return HandEvent::NONE;
     }
   };
 

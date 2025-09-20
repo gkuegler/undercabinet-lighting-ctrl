@@ -15,7 +15,6 @@
 /*
 Not Thread Safe
 */
-template<gpio_num_t PIN>
 class Led
 {
 private:
@@ -29,16 +28,19 @@ private:
   the max speed you can get out of a channel. */
   ledc_mode_t speed_mode = LEDC_LOW_SPEED_MODE;
   uint32_t max_duty = 0;
+  gpio_num_t outout_pin;
 
 public:
   float user_bright_lvl = 1.0f;
   bool state = true;
   bool enabled = true;
+  bool pwm_enabled = true;
 
-  Led() {};
+  Led(gpio_num_t outout_pin)
+    : outout_pin(outout_pin) {};
   ~Led() {};
 
-  void init()
+  void init(bool pwm_enabled)
   {
     // TODO: create an enable_PWM setting so user can disable with a jumper?
 
@@ -59,44 +61,51 @@ public:
 
     // APB clock should be 80MHZ. It's freq can't dynamically vary so the 2nd
     // param is ignored.
-    uint32_t apb_clock_freq = 80 * 1000 * 1000;
-    ESP_ERROR_CHECK(
-      esp_clk_tree_src_get_freq_hz(SOC_MOD_CLK_APB,
-                                   ESP_CLK_TREE_SRC_FREQ_PRECISION_CACHED,
-                                   &apb_clock_freq));
+    if (pwm_enabled) {
+      uint32_t apb_clock_freq = 80 * 1000 * 1000;
+      ESP_ERROR_CHECK(
+        esp_clk_tree_src_get_freq_hz(SOC_MOD_CLK_APB,
+                                     ESP_CLK_TREE_SRC_FREQ_PRECISION_CACHED,
+                                     &apb_clock_freq));
 
-    ESP_LOGI(tag, "APB Clock Frequency: %" PRIu32, apb_clock_freq);
+      ESP_LOGI(tag, "APB Clock Frequency: %" PRIu32, apb_clock_freq);
 
-    uint32_t pwm_res_bits =
-      ledc_find_suitable_duty_resolution(apb_clock_freq, LED_PWM_FREQ_HZ);
-    ESP_LOGI("LEDC",
-             "maximum possible duty resolution in bits for "
-             "ledc_timer_config: %" PRIu32,
-             pwm_res_bits);
+      uint32_t pwm_res_bits =
+        ledc_find_suitable_duty_resolution(apb_clock_freq, LED_PWM_FREQ_HZ);
+      ESP_LOGI("LEDC",
+               "maximum possible duty resolution in bits for "
+               "ledc_timer_config: %" PRIu32,
+               pwm_res_bits);
 
-    // Integer that represents 100% duty.
-    max_duty = pow(2, pwm_res_bits) - 1;
+      // Integer that represents 100% duty.
+      max_duty = pow(2, pwm_res_bits) - 1;
 
-    ledc_timer_config_t timercfg;
-    timercfg.speed_mode = this->speed_mode;
-    timercfg.duty_resolution = (ledc_timer_bit_t)pwm_res_bits;
-    timercfg.timer_num = this->timer;
-    timercfg.freq_hz = LED_PWM_FREQ_HZ;
-    timercfg.clk_cfg = LEDC_USE_APB_CLK;
-    timercfg.deconfigure = 0; // don't deconfigure exg timer
-    ESP_ERROR_CHECK(ledc_timer_config(&timercfg));
+      ledc_timer_config_t timercfg;
+      timercfg.speed_mode = this->speed_mode;
+      timercfg.duty_resolution = (ledc_timer_bit_t)pwm_res_bits;
+      timercfg.timer_num = this->timer;
+      timercfg.freq_hz = LED_PWM_FREQ_HZ;
+      timercfg.clk_cfg = LEDC_USE_APB_CLK;
+      timercfg.deconfigure = 0; // don't deconfigure exg timer
+      ESP_ERROR_CHECK(ledc_timer_config(&timercfg));
 
-    // Prepare and then apply the LEDC PWM channel configuration.
-    ledc_channel_config_t chancfg;
-    chancfg.speed_mode = this->speed_mode;
-    chancfg.sleep_mode = LEDC_SLEEP_MODE_NO_ALIVE_NO_PD;
-    chancfg.channel = this->channel;
-    chancfg.timer_sel = this->timer;
-    chancfg.intr_type = LEDC_INTR_DISABLE;
-    chancfg.gpio_num = PIN;
-    chancfg.duty = (uint32_t)0;
-    chancfg.hpoint = 0;
-    ESP_ERROR_CHECK(ledc_channel_config(&chancfg));
+      // Prepare and then apply the LEDC PWM channel configuration.
+      ledc_channel_config_t chancfg;
+      chancfg.speed_mode = this->speed_mode;
+      chancfg.sleep_mode = LEDC_SLEEP_MODE_NO_ALIVE_NO_PD;
+      chancfg.channel = this->channel;
+      chancfg.timer_sel = this->timer;
+      chancfg.intr_type = LEDC_INTR_DISABLE;
+      chancfg.gpio_num = outout_pin;
+      chancfg.duty = (uint32_t)0;
+      chancfg.hpoint = 0;
+      ESP_ERROR_CHECK(ledc_channel_config(&chancfg));
+    } else {
+      gpio_config_t io_conf = {};
+      io_conf.mode = GPIO_MODE_OUTPUT;
+      io_conf.pin_bit_mask = (1ULL << (int)outout_pin);
+      ESP_ERROR_CHECK(gpio_config(&io_conf));
+    }
   }
 
   // Converts a float percentage (0.0 to 1.0) to a n-bit integer
@@ -118,6 +127,7 @@ public:
     // ESP_ERROR_CHECK(ledc_set_duty_and_update(speed_mode, channel, d,
     // hpoint));
     user_bright_lvl = lvl;
+    state = (lvl > 0.0f);
     set_brightness(lvl);
   }
 
@@ -127,9 +137,13 @@ public:
     // This API call needs a fade service installed on the channel before use.
     // ESP_ERROR_CHECK(ledc_set_duty_and_update(speed_mode, channel, d,
     // hpoint));
-    ESP_LOGD(tag, "brightness: %.2f", lvl);
-    ESP_ERROR_CHECK(ledc_set_duty(speed_mode, channel, percent_to_bit(lvl)));
-    ESP_ERROR_CHECK(ledc_update_duty(speed_mode, channel));
+    if (pwm_enabled) {
+      ESP_LOGI(tag, "brightness: %.2f", lvl);
+      ESP_ERROR_CHECK(ledc_set_duty(speed_mode, channel, percent_to_bit(lvl)));
+      ESP_ERROR_CHECK(ledc_update_duty(speed_mode, channel));
+    } else {
+      gpio_set_level(outout_pin, static_cast<int>(lvl > 0.0f));
+    }
   }
 
   void resume()
@@ -167,6 +181,10 @@ public:
     // If lights are on, briefly turn off.
     if (state) {
       set_brightness(0.0f);
+    }
+
+    if (!pwm_enabled) {
+      return;
     }
 
     for (int i = 0; i < count; i++) {

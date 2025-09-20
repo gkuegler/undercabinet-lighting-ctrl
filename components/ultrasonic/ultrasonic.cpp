@@ -2,8 +2,6 @@
  * Control of HC-SR04.
  */
 
-#define LOGPOINT ESP_LOGE("BRK", "%s: %d", __FILE__, __LINE__);
-
 #include "ultrasonic.hpp"
 
 #include <atomic>
@@ -64,7 +62,7 @@ HCSR04::echo_interrupt_handler(void* pvParam)
     ecapture = false;
     gpio_set_intr_type(self->_echo_pin, GPIO_INTR_HIGH_LEVEL);
 
-    self->_pulse_in_flight = 0;
+    self->_pulse_in_flight = true;
 
     // Wake up task to handle ranging result. This should set
     // xHigherPriorityTaskWoken to pdTRUE, thus imediately enabling a context
@@ -74,11 +72,12 @@ HCSR04::echo_interrupt_handler(void* pvParam)
                               etime,
                               eSetValueWithOverwrite,
                               &xHigherPriorityTaskWoken);
+
+    // If xHigherPriorityTaskWoken is now set to pdTRUE then a context switch
+    // should be performed to ensure the interrupt returns directly to the
+    // highest priority task.
+    portYIELD_FROM_ISR(xHigherPriorityTaskWoken);
   }
-  // If xHigherPriorityTaskWoken is now set to pdTRUE then a context switch
-  // should be performed to ensure the interrupt returns directly to the
-  // highest priority task.
-  portYIELD_FROM_ISR(xHigherPriorityTaskWoken);
 }
 
 void
@@ -93,14 +92,14 @@ HCSR04::init(gpio_num_t trig_pin,
   _task_idx = task_idx;
 
   // TRIGGER SEND PIN
-  gpio_config_t trcfg = {};
+  gpio_config_t trcfg{};
   trcfg.pin_bit_mask = BIT64(static_cast<int>(_trig_pin));
   trcfg.mode = GPIO_MODE_OUTPUT;
   trcfg.pull_down_en = GPIO_PULLDOWN_ENABLE;
   ESP_ERROR_CHECK(gpio_config(&trcfg));
 
   // ECHO RECEIVE PIN
-  gpio_config_t eccfg = {};
+  gpio_config_t eccfg{};
   eccfg.pin_bit_mask = BIT64(static_cast<int>(_echo_pin));
   eccfg.mode = GPIO_MODE_INPUT;
   eccfg.pull_down_en = GPIO_PULLDOWN_ENABLE;
@@ -156,15 +155,19 @@ HCSR04::reset()
 float
 HCSR04::range_and_wait()
 {
-  while (true) {
+  for (size_t i = 0; i < 1000; i++) {
+
+    const auto ticks = xTaskGetTickCount();
+
+    ESP_LOGI(tag, "%d", ticks);
 
     // Will return immediately if the specified time is in the past.
     vTaskDelayUntil(&_last_range_ticks, _delay_between_ranging_ms);
 
     // There should technically be no range in flight when we get here.
     // Only one ranging is allowed at a time.
-    if (_pulse_in_flight <= 0) {
-      _pulse_in_flight += 1;
+    if (!_pulse_in_flight) {
+      _pulse_in_flight = true;
       trigger_ranging_session();
     } else {
       vTaskDelay(1);
@@ -194,4 +197,7 @@ HCSR04::range_and_wait()
 
     return convert_us_to_range(ulval);
   }
+
+  // Try and reboot if it gets stuck in a loop do to an error.
+  std::abort();
 }
