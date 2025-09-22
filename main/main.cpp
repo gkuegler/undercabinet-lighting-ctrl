@@ -70,6 +70,7 @@ static StaticTimer<HAND_THRESH_SET_DURATION_MS, set_thresh_dist_completed_cb>
 static DipSwitches dip;
 
 static std::atomic<UltrasonicMode> gRangingMode = UltrasonicMode::LedControl;
+static std::atomic<bool> gSensorObstructed = false;
 static std::atomic<bool> gEnableFlash = false;
 
 extern "C" void
@@ -86,6 +87,8 @@ app_main(void)
 
   eventq.init();
   led.init(dip.enable_led_pwm);
+  led.safety_timeout_enabled = dip.enable_led_shutoff_timeout;
+
   set_thresh_dist_timer.init();
 
   btn.init();
@@ -139,6 +142,9 @@ sample_button(TickType_t ticks)
       break;
 
     case 1:
+      // Re-enable normal led control of ultrsonic sensor.
+      gSensorObstructed = false;
+
       if (bmode == 0) {
         eventq.send(Event::CYCLE_BRIGHTNESS);
       } else if (bmode == 1) {
@@ -169,6 +175,8 @@ hmi_task(void* pvParameter)
 
   while (true) {
     auto ticks = xTaskGetTickCount();
+
+    led.check_safety_timeout(ticks);
 
     sample_button(ticks);
 
@@ -262,10 +270,20 @@ us_ranging_task(void* pvParameter)
 
     switch (gRangingMode) {
       case UltrasonicMode::LedControl:
-        // TODO: grocery mode??? use a timer??
-        // Lockout if hand has been present for a while. 'Grocery Mode'
-        if (range_filter.process_sample(dist, ticks) == HandEvent::ENTER) {
-          eventq.send(Event::TOGGLE_LED);
+        switch (range_filter.process_sample(dist, ticks)) {
+          case HandEvent::ENTER:
+            if (!gSensorObstructed) {
+              eventq.send(Event::TOGGLE_LED);
+            }
+            break;
+          case HandEvent::OBSTRUCTED:
+            // A button press shall reset this.
+            if (dip.enable_grocery_detection) {
+              gSensorObstructed = true;
+            }
+            break;
+          default:
+            break;
         }
         break;
 

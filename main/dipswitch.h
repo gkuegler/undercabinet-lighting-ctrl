@@ -18,7 +18,7 @@ struct DipSwitches
   // the mcu. This feature is primarily to protect the LED from being on for too
   // long. Will require a manual button press to resume normal ranging led
   // control. For repeat timeout violations the mcu shall shutdown?
-  bool enable_led_shutoff_timeout; // TODO
+  bool enable_led_shutoff_timeout;
 
   // When enabled, the controller shall switch to manual mode if an object is
   // held within the threshold distance for more than (n) seconds.

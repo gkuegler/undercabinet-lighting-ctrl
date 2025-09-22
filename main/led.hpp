@@ -11,6 +11,7 @@
 
 /* Local Inclues */
 #include "parameters.h"
+#include "util.h"
 
 /*
 Not Thread Safe
@@ -29,12 +30,15 @@ private:
   ledc_mode_t speed_mode = LEDC_LOW_SPEED_MODE;
   uint32_t max_duty = 0;
   gpio_num_t outout_pin;
-
-public:
+  TickType_t last_change_ticks;
+  int safety_timeout_ms = HOURS_TO_MS(12);
   float user_bright_lvl = 1.0f;
   bool state = true;
   bool enabled = true;
-  bool pwm_enabled = true;
+
+public:
+  bool pwm_enabled = true; // readonly
+  bool safety_timeout_enabled = false;
 
   Led(gpio_num_t outout_pin)
     : outout_pin(outout_pin) {};
@@ -42,8 +46,6 @@ public:
 
   void init(bool pwm_enabled)
   {
-    // TODO: create an enable_PWM setting so user can disable with a jumper?
-
     // clang-format off
     /*
     // https://www.espressif.com/sites/default/files/documentation/esp32_technical_reference_manual_en.pdf#ledpwm
@@ -108,6 +110,15 @@ public:
     }
   }
 
+  /* Shuts down led if it has been on for more than the safety timeout. */
+  void check_safety_timeout(TickType_t ticks)
+  {
+    if (safety_timeout_enabled && state &&
+        ticks - last_change_ticks > pdMS_TO_TICKS(safety_timeout_ms)) {
+      off();
+    }
+  }
+
   // Converts a float percentage (0.0 to 1.0) to a n-bit integer
   uint32_t percent_to_bit(float pc)
   {
@@ -137,6 +148,8 @@ public:
     // This API call needs a fade service installed on the channel before use.
     // ESP_ERROR_CHECK(ledc_set_duty_and_update(speed_mode, channel, d,
     // hpoint));
+    last_change_ticks = xTaskGetTickCount();
+
     if (pwm_enabled) {
       ESP_LOGI(tag, "brightness: %.2f", lvl);
       ESP_ERROR_CHECK(ledc_set_duty(speed_mode, channel, percent_to_bit(lvl)));

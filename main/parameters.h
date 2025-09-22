@@ -2,10 +2,7 @@
 
 #include "driver/gpio.h"
 
-#define LOGPOINT ESP_LOGE("BRK", "%s: %d", __FILE__, __LINE__);
-
-#define MINUTES_TO_MS(x) (x * 60 * 1000)
-#define SECONDS_TO_MS(x) (x * 1000)
+#include "util.h"
 
 #define HMI_POLLING_PERIOD_MS 1
 #define EVENT_QUEUE_COUNT     5

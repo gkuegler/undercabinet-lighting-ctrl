@@ -11,7 +11,11 @@ enum class HandEvent
 {
   NONE,
   ENTER,
-  EXIT
+  EXIT,
+
+  // When an object has been placed within the target threshold for too long.
+  OBSTRUCTED,
+  OBSTRUCTION_CLEARED
 };
 
 /**
@@ -32,6 +36,12 @@ private:
     IN
   };
 
+  RingBuffer<T, WINDOW_SIZE> _sample_window;
+  TickType_t _ticks_last_change = 0;
+  T _threshold_dist_cm = THRESHOLD_DIST_CM;
+  HandState _state = HandState::OUT;
+  int _obstruction_timeout_ms = 0;
+
 public:
   HandDetectionFilter() {};
   ~HandDetectionFilter() {};
@@ -42,6 +52,15 @@ public:
   HandEvent process_sample(T sample, TickType_t ticks)
   {
     _sample_window.push(sample);
+
+    if (_state == HandState::IN &&
+        ticks - _ticks_last_change > pdMS_TO_TICKS(_obstruction_timeout_ms)) {
+      return HandEvent::OBSTRUCTED;
+    } else if (_state == HandState::OUT &&
+               ticks - _ticks_last_change >
+                 pdMS_TO_TICKS(_obstruction_timeout_ms)) {
+      return HandEvent::OBSTRUCTION_CLEARED;
+    }
 
     if (ticks - _ticks_last_change < pdMS_TO_TICKS(DEBOUNCE_PERIOD_MS)) {
       return HandEvent::NONE;
@@ -70,12 +89,6 @@ public:
     // Reset sample buffer to prevent false triggers on resume.
     _sample_window.buf.fill(0.0f);
   }
-
-private:
-  RingBuffer<T, WINDOW_SIZE> _sample_window;
-  TickType_t _ticks_last_change = 0;
-  T _threshold_dist_cm = THRESHOLD_DIST_CM;
-  HandState _state = HandState::OUT;
 
   /**
    * Return true if the filtered samples fall below the threshold.

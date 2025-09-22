@@ -43,9 +43,8 @@ HCSR04::echo_interrupt_handler(void* pvParam)
 
   auto self = reinterpret_cast<HCSR04*>(pvParam);
 
-  // Ignore if no pulse is in flight. Must be noise on pif.
+  // Ignore if no pulse is in flight. Must be noise on pin.
   if (!self->_pulse_in_flight) {
-    ESP_EARLY_LOGE(tag, "No pulse in flight.");
     return;
   }
 
