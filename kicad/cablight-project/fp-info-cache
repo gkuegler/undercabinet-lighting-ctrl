@@ -1,4 +1,4 @@
-25242281500731297
+25358348610641008
 Audio_Module
 Reverb_BTDR-1H
 Digital Reverberation Unit, http://www.belton.co.kr/inc/downfile.php?seq=17&file=pdf (footprint from http://www.uk-electronic.de/PDF/BTDR-1.pdf)
@@ -59150,6 +59150,13 @@ TO-220F-3 Horizontal RM 2.54mm
 3
 3
 GRK_Lib
+Tactile Switch Wurth
+
+
+0
+4
+4
+GRK_Lib
 Untitled
 
 
@@ -101408,3 +101415,458 @@ Varistor VF
 0
 2
 2
+WuerthElektronik
+SW_Wurth_WS-MITV_463091370402
+Terminal with Actuator Micro Switch, 12.8 x 5.8 mm, body 12.8x5.8x6.5mm, https://www.we-online.com/en/components/products/datasheet/463091370402?ki
+THT
+0
+3
+3
+WuerthElektronik
+SW_Wurth_WS-MITV_463091370403
+Terminal with Actuator Micro Switch,19.8 x 6.4mm, body 19.8x6.4x9.5mm, https://www.we-online.com/en/components/products/datasheet/463091370403?ki
+THT
+0
+3
+3
+WuerthElektronik
+SW_Wurth_WS-MITV_463091691402
+Terminal with Actuator, Right Angle Operation Micro Switch, 12.8 x 5.8 mm, body 12.8x6.5x5.8mm, https://www.we-online.com/en/components/products/datasheet/463091691402?ki
+THT
+0
+3
+3
+WuerthElektronik
+SW_Wurth_WS-MITV_463092370402
+Terminal with Lever Micro Switch, 12.8 x 5.8 mm, body 12.8x5.8x6.5mm, https://www.we-online.com/en/components/products/datasheet/463092370402?ki
+THT
+0
+3
+3
+WuerthElektronik
+SW_Wurth_WS-MITV_463092370403
+Terminal with Lever Micro Switch, 19.8 x 6.4mm, body 19.8x6.4x10.6mm, https://www.we-online.com/en/components/products/datasheet/463092370403?ki
+THT
+0
+3
+3
+WuerthElektronik
+SW_Wurth_WS-MITV_463092691402
+Terminal with Lever, Right Angle Operation Micro Switch, 12.8 x 5.8 mm, body 12.8x6.5x5.8mm, https://www.we-online.com/en/components/products/datasheet/463092691402?ki
+THT
+0
+3
+3
+WuerthElektronik
+SW_Wurth_WS-MITV_463093370402
+Terminal with Roller Lever Micro Switch, 12.8 x 5.8 mm, body 12.8x5.8x6.5mm, https://www.we-online.com/en/components/products/datasheet/463093370402?ki
+THT
+0
+3
+3
+WuerthElektronik
+SW_Wurth_WS-MITV_463093370403
+Terminal with Roller Lever Micro Switch, 19.8 x 6.4mm, body 19.8x6.4x10.6mm, https://www.we-online.com/en/components/products/datasheet/463093370403?ki
+THT
+0
+3
+3
+WuerthElektronik
+SW_Wurth_WS-MITV_463093691402
+Terminal with Roller Lever, Right Angle Operation Micro Switch, 12.8 x 5.8 mm, body 12.8x6.5x5.8mm, https://www.we-online.com/en/components/products/datasheet/463093691402?ki
+THT
+0
+3
+3
+WuerthElektronik
+SW_Wurth_WS-ROTV_428517310910
+IP67 Rotary Switch 4x1 Terminal with Arrow Type Actuator 10x10 mm, body 10x10x6.5mm, https://www.we-online.com/en/components/products/datasheet/428517310910?ki
+THT
+0
+5
+5
+WuerthElektronik
+SW_Wurth_WS-ROTV_428517310911
+IP67 Rotary Switch 4x1 Terminal with Arrow Type Actuator 10x10 mm, body 10x10x6.5mm, https://www.we-online.com/en/components/products/datasheet/428517310911?ki
+THT
+0
+5
+5
+WuerthElektronik
+SW_Wurth_WS-ROTV_428517310916
+IP67 Rotary Switch 4x1 Terminal with Arrow Type Actuator 10x10 mm, body 10x10x6.5mm, https://www.we-online.com/en/components/products/datasheet/428517310916?ki
+THT
+0
+5
+5
+WuerthElektronik
+SW_Wurth_WS-ROTV_428517310917
+IP67 Rotary Switch 4x1 Terminal with Arrow Type Actuator 10x10 mm, body 10x10x6.5mm, https://www.we-online.com/en/components/products/datasheet/428517310917?ki
+THT
+0
+5
+5
+WuerthElektronik
+SW_Wurth_WS-ROTV_428517510910
+IP67 Rotary Switch 4x1 Terminal with Cross Type Actuator 10x10 mm, body 10x10x6.5mm, https://www.we-online.com/en/components/products/datasheet/428517510910?ki
+THT
+0
+5
+5
+WuerthElektronik
+SW_Wurth_WS-ROTV_428517510911
+IP67 Rotary Switch 4x1 Terminal with Cross Type Actuator 10x10 mm, body 10x10x6.5mm, https://www.we-online.com/en/components/products/datasheet/428517510911?ki
+THT
+0
+5
+5
+WuerthElektronik
+SW_Wurth_WS-ROTV_428517510916
+IP67 Rotary Switch 4x1 Terminal with Cross Type Actuator 10x10 mm, body 10x10x6.5mm, https://www.we-online.com/en/components/products/datasheet/428517510916?ki
+THT
+0
+5
+5
+WuerthElektronik
+SW_Wurth_WS-ROTV_428517510917
+IP67 Rotary Switch 4x1 Terminal with Cross Type Actuator 10x10 mm, body 10x10x6.5mm, https://www.we-online.com/en/components/products/datasheet/428517510917?ki
+THT
+0
+5
+5
+WuerthElektronik
+SW_Wurth_WS-ROTV_428527320908
+IP67 Rotary Switch with Arrow Type Actuator 10x10 mm, body 10x10x6.5mm, https://www.we-online.com/en/components/products/datasheet/428527320908?ki
+THT
+0
+6
+6
+WuerthElektronik
+SW_Wurth_WS-ROTV_428527320909
+IP67 Rotary Switch with Arrow Type Actuator 10x10 mm, body 10x10x6.5mm, https://www.we-online.com/en/components/products/datasheet/428527320909?ki
+THT
+0
+6
+6
+WuerthElektronik
+SW_Wurth_WS-ROTV_428527320910
+IP67 Rotary Switch with Arrow Type Actuator 10x10 mm, body 10x10x6.5mm, https://www.we-online.com/en/components/products/datasheet/428527320910?ki
+THT
+0
+6
+6
+WuerthElektronik
+SW_Wurth_WS-ROTV_428527320911
+IP67 Rotary Switch with Arrow Type Actuator 10x10 mm, body 10x10x6.5mm, https://www.we-online.com/en/components/products/datasheet/428527320911?ki
+THT
+0
+6
+6
+WuerthElektronik
+SW_Wurth_WS-ROTV_428527320916
+IP67 Rotary Switch with Arrow Type Actuator 10x10 mm, body 10x10x6.5mm, https://www.we-online.com/en/components/products/datasheet/428527320916?ki
+THT
+0
+6
+6
+WuerthElektronik
+SW_Wurth_WS-ROTV_428527320917
+IP67 Rotary Switch with Arrow Type Actuator 10x10 mm, body 10x10x6.5mm, https://www.we-online.com/en/components/products/datasheet/428527320917?ki
+THT
+0
+6
+6
+WuerthElektronik
+SW_Wurth_WS-ROTV_428527420910
+IP67 Rotary Switch with Shaft Type Actuator 10x10 mm, body 10x10x13.8mm, https://www.we-online.com/en/components/products/datasheet/428527420910?ki
+THT
+0
+6
+6
+WuerthElektronik
+SW_Wurth_WS-ROTV_428527420911
+IP67 Rotary Switch with Shaft Type Actuator 10x10 mm, body 10x10x13.8mm, https://www.we-online.com/en/components/products/datasheet/428527420911?ki
+THT
+0
+6
+6
+WuerthElektronik
+SW_Wurth_WS-ROTV_428527420916
+IP67 Rotary Switch with Shaft Type Actuator 10x10 mm, body 10x10x13.8mm, https://www.we-online.com/en/components/products/datasheet/428527420916?ki
+THT
+0
+6
+6
+WuerthElektronik
+SW_Wurth_WS-ROTV_428527420917
+IP67 Rotary Switch with Shaft Type Actuator 10x10 mm, body 10x10x13.8mm, https://www.we-online.com/en/components/products/datasheet/428527420917?ki
+THT
+0
+6
+6
+WuerthElektronik
+SW_Wurth_WS-ROTV_428527520908
+IP67 Rotary Switch with Cross Type Actuator 10x10 mm, body 10x10x6.5mm, https://www.we-online.com/en/components/products/datasheet/428527520908?ki
+THT
+0
+6
+6
+WuerthElektronik
+SW_Wurth_WS-ROTV_428527520909
+IP67 Rotary Switch with Cross Type Actuator 10x10 mm, body 10x10x6.5mm, https://www.we-online.com/en/components/products/datasheet/428527520909?ki
+THT
+0
+6
+6
+WuerthElektronik
+SW_Wurth_WS-ROTV_428527520910
+IP67 Rotary Switch with Cross Type Actuator 10x10 mm, body 10x10x6.5mm, https://www.we-online.com/en/components/products/datasheet/428527520910?ki
+THT
+0
+6
+6
+WuerthElektronik
+SW_Wurth_WS-ROTV_428527520911
+IP67 Rotary Switch with Cross Type Actuator 10x10 mm, body 10x10x6.5mm, https://www.we-online.com/en/components/products/datasheet/428527520911?ki
+THT
+0
+6
+6
+WuerthElektronik
+SW_Wurth_WS-ROTV_428527520916
+IP67 Rotary Switch with Cross Type Actuator 10x10 mm, body 10x10x6.5mm, https://www.we-online.com/en/components/products/datasheet/428527520916?ki
+THT
+0
+6
+6
+WuerthElektronik
+SW_Wurth_WS-ROTV_428527520917
+IP67 Rotary Switch with Cross Type Actuator 10x10 mm, body 10x10x6.5mm, https://www.we-online.com/en/components/products/datasheet/428527520917?ki
+THT
+0
+6
+6
+WuerthElektronik
+SW_Wurth_WS-ROTV_428547320910
+IP67 Rotary Switch with Arrow Type Actuator 7x7 mm, body 7.4x7.4x3.65mm, https://www.we-online.com/en/components/products/datasheet/428547320910?ki
+THT
+0
+6
+6
+WuerthElektronik
+SW_Wurth_WS-ROTV_428547320911
+IP67 Rotary Switch with Arrow Type Actuator 7x7 mm, body 7.4x7.4x3.65mm, https://www.we-online.com/en/components/products/datasheet/428547320911?ki
+THT
+0
+6
+6
+WuerthElektronik
+SW_Wurth_WS-ROTV_428547320916
+IP67 Rotary Switch with Arrow Type Actuator 7x7 mm, body 7.4x7.4x3.65mm, https://www.we-online.com/en/components/products/datasheet/428547320916?ki
+THT
+0
+6
+6
+WuerthElektronik
+SW_Wurth_WS-ROTV_428547320917
+IP67 Rotary Switch with Arrow Type Actuator 7x7 mm, body 7.4x7.4x3.65mm, https://www.we-online.com/en/components/products/datasheet/428547320917?ki
+THT
+0
+6
+6
+WuerthElektronik
+SW_Wurth_WS-TOTV_472121010111
+Ø 6.35mm Panel Cut-Out Vertical Operation Toggle Switch, body 12.7x6.6x28.2mm, https://www.we-online.com/en/components/products/datasheet/472121010111?ki
+THT
+0
+3
+3
+WuerthElektronik
+SW_Wurth_WS-TOTV_472121020311
+Ø 6.35mm Panel Cut-Out Vertical Operation Toggle Switch, body 12.7x6.6x23.2mm, https://www.we-online.com/en/components/products/datasheet/472121020311?ki
+THT
+0
+3
+3
+WuerthElektronik
+SW_Wurth_WS-TOTV_472121020421
+Ø 6.35 mm Panel Cut-Out Right Angle Operation Toggle Switch, body 12.7x22.6x6.6mm, https://www.we-online.com/en/components/products/datasheet/472121020421?ki
+THT
+0
+5
+5
+WuerthElektronik
+SW_Wurth_WS-TOTV_472123010111
+Ø 6.35mm Panel Cut-Out Vertical Operation Toggle Switch, body 12.7x6.6x28.5mm, https://www.we-online.com/en/components/products/datasheet/472123010111?ki
+THT
+0
+3
+3
+WuerthElektronik
+SW_Wurth_WS-TOTV_472123020311
+Ø 6.35mm Panel Cut-Out Vertical Operation Toggle Switch, body 12.7x6.6x23.4mm, https://www.we-online.com/en/components/products/datasheet/472123020311?ki
+THT
+0
+3
+3
+WuerthElektronik
+SW_Wurth_WS-TOTV_472123020421
+Ø 6.35 mm Panel Cut-Out Right Angle Operation Toggle Switch, body 12.7x22.9x6.6mm, https://www.we-online.com/en/components/products/datasheet/472123020421?ki
+THT
+0
+5
+5
+WuerthElektronik
+SW_Wurth_WS-TOTV_472131010111
+Ø 6.35mm Panel Cut-Out Vertical Operation Toggle Switch, body 12.7x11.4x29.6mm, https://www.we-online.com/en/components/products/datasheet/472131010111?ki
+THT
+0
+6
+6
+WuerthElektronik
+SW_Wurth_WS-TOTV_472131020311
+Ø 6.35mm Panel Cut-Out Vertical Operation Toggle Switch, body 12.7x11.4x24.6mm, https://www.we-online.com/en/components/products/datasheet/472131020311?ki
+THT
+0
+6
+6
+WuerthElektronik
+SW_Wurth_WS-TOTV_472131020421
+Ø 6.35 mm Panel Cut-Out Right Angle Operation Toggle Switch, body 12.7x22.6x6.6mm, https://www.we-online.com/en/components/products/datasheet/472131020421?ki
+THT
+0
+8
+8
+WuerthElektronik
+SW_Wurth_WS-TOTV_472133010111
+Ø 6.35mm Panel Cut-Out Vertical Operation Toggle Switch, body 12.7x11.4x29.9mm, https://www.we-online.com/en/components/products/datasheet/472133010111?ki
+THT
+0
+6
+6
+WuerthElektronik
+SW_Wurth_WS-TOTV_472133020311
+Ø 6.35mm Panel Cut-Out Vertical Operation Toggle Switch, body 12.7x11.4x24.8mm, https://www.we-online.com/en/components/products/datasheet/472133020311?ki
+THT
+0
+6
+6
+WuerthElektronik
+SW_Wurth_WS-TOTV_472133020421
+Ø 6.35 mm Panel Cut-Out Right Angle Operation Toggle Switch, body 12.7x22.9x6.6mm, https://www.we-online.com/en/components/products/datasheet/472133020421?ki
+THT
+0
+8
+8
+WuerthElektronik
+SW_Wurth_WS-TOTV_472221010110_NOLOCKING
+Ø 12 mm Panel Cut-Out Vertical Operation Toggle Switch with 6.3 mm quick-connect terminal, body 28.8x15.8x29mm, https://www.we-online.com/en/components/products/datasheet/472221010110?ki
+THT
+0
+3
+3
+WuerthElektronik
+SW_Wurth_WS-TOTV_472221010110_WITHLOCKING
+Ø 12 mm Panel Cut-Out Vertical Operation Toggle Switch with 6.3 mm quick-connect terminal, body 28.8x15.8x29mm, https://www.we-online.com/en/components/products/datasheet/472221010110?ki
+THT
+0
+3
+3
+WuerthElektronik
+SW_Wurth_WS-TOTV_472221010140_NOLOCKING
+Ø 12 mm Panel Cut-Out Vertical Operation Toggle Switch with Screw Terminal, body 28.8x15.8x29mm, https://www.we-online.com/en/components/products/datasheet/472221010140?ki
+THT
+0
+3
+3
+WuerthElektronik
+SW_Wurth_WS-TOTV_472221010140_WITHLOCKING
+Ø 12 mm Panel Cut-Out Vertical Operation Toggle Switch with Screw Terminal, body 28.8x15.8x29mm, https://www.we-online.com/en/components/products/datasheet/472221010140?ki
+THT
+0
+3
+3
+WuerthElektronik
+SW_Wurth_WS-TOTV_472223010110_NOLOCKING
+Ø 12 mm Panel Cut-Out Vertical Operation Toggle Switch with 6.3 mm quick-connect terminal, body 28.8x15.8x29mm, https://www.we-online.com/en/components/products/datasheet/472223010110?ki
+THT
+0
+3
+3
+WuerthElektronik
+SW_Wurth_WS-TOTV_472223010110_WITHLOCKING
+Ø 12 mm Panel Cut-Out Vertical Operation Toggle Switch with 6.3 mm quick-connect terminal, body 28.8x15.8x29mm, https://www.we-online.com/en/components/products/datasheet/472223010110?ki
+THT
+0
+3
+3
+WuerthElektronik
+SW_Wurth_WS-TOTV_472223010140_NOLOCKING
+Ø 12 mm Panel Cut-Out Vertical Operation Toggle Switch with Screw Terminal, body 28.8x15.8x29mm, https://www.we-online.com/en/components/products/datasheet/472223010140?ki
+THT
+0
+3
+3
+WuerthElektronik
+SW_Wurth_WS-TOTV_472223010140_WITHLOCKING
+Ø 12 mm Panel Cut-Out Vertical Operation Toggle Switch with Screw Terminal, body 28.8x15.8x29mm, https://www.we-online.com/en/components/products/datasheet/472223010140?ki
+THT
+0
+3
+3
+WuerthElektronik
+SW_Wurth_WS-TOTV_472231010110_NOLOCKING
+Ø 12 mm Panel Cut-Out Vertical Operation Toggle Switch with 6.3 mm quick-connect terminal, body 33.7x22.6x29mm, https://www.we-online.com/en/components/products/datasheet/472231010110?ki
+THT
+0
+6
+6
+WuerthElektronik
+SW_Wurth_WS-TOTV_472231010110_WITHLOCKING
+Ø 12 mm Panel Cut-Out Vertical Operation Toggle Switch with 6.3 mm quick-connect terminal, body 33.7x22.6x29mm, https://www.we-online.com/en/components/products/datasheet/472231010110?ki
+THT
+0
+6
+6
+WuerthElektronik
+SW_Wurth_WS-TOTV_472231010140_NOLOCKING
+Ø 12 mm Panel Cut-Out Vertical Operation Toggle Switch with Screw Terminal, body 33.7x22.6x29mm, https://www.we-online.com/en/components/products/datasheet/472231010140?ki
+THT
+0
+6
+6
+WuerthElektronik
+SW_Wurth_WS-TOTV_472231010140_WITHLOCKING
+Ø 12 mm Panel Cut-Out Vertical Operation Toggle Switch with Screw Terminal, body 33.7x22.6x29mm, https://www.we-online.com/en/components/products/datasheet/472231010140?ki
+THT
+0
+6
+6
+WuerthElektronik
+SW_Wurth_WS-TOTV_472233010110_NOLOCKING
+Ø 12 mm Panel Cut-Out Vertical Operation Toggle Switch with 6.3 mm quick-connect terminal, body 33.7x22.6x29mm, https://www.we-online.com/en/components/products/datasheet/472233010110?ki
+THT
+0
+6
+6
+WuerthElektronik
+SW_Wurth_WS-TOTV_472233010110_WITHLOCKING
+Ø 12 mm Panel Cut-Out Vertical Operation Toggle Switch with 6.3 mm quick-connect terminal, body 33.7x22.6x29mm, https://www.we-online.com/en/components/products/datasheet/472233010110?ki
+THT
+0
+6
+6
+WuerthElektronik
+SW_Wurth_WS-TOTV_472233010140_NOLOCKING
+Ø 12 mm Panel Cut-Out Vertical Operation Toggle Switch with Screw Terminal, body 33.7x22.6x29mm, https://www.we-online.com/en/components/products/datasheet/472233010140?ki
+THT
+0
+6
+6
+WuerthElektronik
+SW_Wurth_WS-TOTV_472233010140_WITHLOCKING
+Ø 12 mm Panel Cut-Out Vertical Operation Toggle Switch with Screw Terminal, body 33.7x22.6x29mm, https://www.we-online.com/en/components/products/datasheet/472233010140?ki
+THT
+0
+6
+6
