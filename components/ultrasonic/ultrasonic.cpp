@@ -61,7 +61,7 @@ HCSR04::echo_interrupt_handler(void* pvParam)
     ecapture = false;
     gpio_set_intr_type(self->_echo_pin, GPIO_INTR_HIGH_LEVEL);
 
-    self->_pulse_in_flight = true;
+    self->_pulse_in_flight = false;
 
     // Wake up task to handle ranging result. This should set
     // xHigherPriorityTaskWoken to pdTRUE, thus imediately enabling a context
