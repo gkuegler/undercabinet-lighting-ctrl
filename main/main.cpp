@@ -80,7 +80,6 @@ app_main(void)
   dip.enable_led_pwm = true;
   // dip.enable_led_shutoff_timeout = false;
   // dip.enable_grocery_detection = false;
-  // dip.failsafe_manual_switch_mode = false;
 #else
   read_dip_values(&dip);
 #endif // TEST_FAKE_DIP_SWITCHES

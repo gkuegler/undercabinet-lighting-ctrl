@@ -11,6 +11,7 @@ struct DipSwitches
   // The acceptance chirp is also disabled.
   // The set thresh indicator is slower? or just turn led off then comes on at
   // the end?
+  // TODO: fully test LED PWM disable
   bool enable_led_pwm;
 
   // When disabled, the LED will stay on.
@@ -18,25 +19,20 @@ struct DipSwitches
   // the mcu. This feature is primarily to protect the LED from being on for too
   // long. Will require a manual button press to resume normal ranging led
   // control. For repeat timeout violations the mcu shall shutdown?
+  // TODO: should this be wifi enable?
   bool enable_led_shutoff_timeout;
 
+  // 3rd switch: reserved
   // When enabled, the controller shall switch to manual mode if an object is
   // held within the threshold distance for more than (n) seconds.
   // Alternatively, the # of samples needed and debounce time shall increase to
   // add delay to the hand in/out reset. Some future defined button sequence
   // shall reset to normal. The controller shall resume normal control when the
   // object is removed after a set delay.
-  bool enable_grocery_detection; // TODO
+  // TODO: rename this to obstruction fault protection.
+  bool enable_grocery_detection;
 
-  // User wants manual directly control of the LED switch. This switch is
-  // connected directly to the pin driving the mofset which switches the LED. If
-  // this signal is present at bootup, it means the user wishes to disable the
-  // MCU control of the led. The main power switch now acts as an on/off switch
-  // for the led.
-  // TODO look up mofset specs to find out what voltages I need to pull the pin
-  // to. See if I can even bypass the 5v power supply.
-
-  bool failsafe_manual_switch_mode; // TODO
+  // 4th switch: hardwired bypass of MCU control of LED
 };
 
 #ifdef DIP_ENABLE_LED_PWM_PIN
