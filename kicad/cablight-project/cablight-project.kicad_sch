@@ -2665,6 +2665,16 @@
 		)
 		(uuid "1dc60f5c-63f3-4332-95ae-b08ea21a1602")
 	)
+	(text "Grounding all\nun-used pins."
+		(exclude_from_sim no)
+		(at 131.064 101.092 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+		)
+		(uuid "5d303530-9ccd-4623-a753-5ed145d0d91f")
+	)
 	(text "SLW-121586-5A-D\n500mA 50V SPDT"
 		(exclude_from_sim no)
 		(at 103.124 50.8 0)
@@ -2748,6 +2758,12 @@
 		(uuid "70f67e90-1486-4a64-98ac-574ea7fadb99")
 	)
 	(junction
+		(at 149.86 77.47)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "78796278-9e34-4033-b653-f3593ff0139a")
+	)
+	(junction
 		(at 162.56 52.07)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -2758,6 +2774,12 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "ad4c8725-f5b8-404c-94f6-013206fcb64e")
+	)
+	(junction
+		(at 130.81 92.71)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "ad611a02-8824-46f2-a45d-c3b0b394f827")
 	)
 	(junction
 		(at 153.67 82.55)
@@ -2887,6 +2909,26 @@
 	)
 	(wire
 		(pts
+			(xy 149.86 77.47) (xy 149.86 92.71)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "15033222-0400-4a09-80a3-1b5f62f2b82a")
+	)
+	(wire
+		(pts
+			(xy 149.86 74.93) (xy 149.86 77.47)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "20a2f1d2-874b-4c19-a926-f0a2ecaf5c2b")
+	)
+	(wire
+		(pts
 			(xy 54.61 76.2) (xy 57.15 76.2)
 		)
 		(stroke
@@ -2974,6 +3016,16 @@
 			(type default)
 		)
 		(uuid "37af7213-1c04-4a90-9166-5ce776abf642")
+	)
+	(wire
+		(pts
+			(xy 149.86 92.71) (xy 130.81 92.71)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "37e93db3-0d64-40ea-99f0-6e9d8e6ae457")
 	)
 	(wire
 		(pts
@@ -3317,6 +3369,26 @@
 	)
 	(wire
 		(pts
+			(xy 144.78 74.93) (xy 149.86 74.93)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "9a3a59d2-addb-4456-a906-f64eef9e6f73")
+	)
+	(wire
+		(pts
+			(xy 116.84 77.47) (xy 114.3 77.47)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "9d2bf2e1-8a4c-43e3-994f-e01e405e0e2b")
+	)
+	(wire
+		(pts
 			(xy 71.12 146.05) (xy 71.12 148.59)
 		)
 		(stroke
@@ -3357,6 +3429,16 @@
 	)
 	(wire
 		(pts
+			(xy 144.78 77.47) (xy 149.86 77.47)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "a81830a3-ae4c-419a-b703-ad48095b97fc")
+	)
+	(wire
+		(pts
 			(xy 116.84 69.85) (xy 106.68 69.85)
 		)
 		(stroke
@@ -3387,6 +3469,16 @@
 	)
 	(wire
 		(pts
+			(xy 114.3 92.71) (xy 130.81 92.71)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "b19056df-2e9b-480a-bd67-a31f4ceb28c4")
+	)
+	(wire
+		(pts
 			(xy 80.01 143.51) (xy 71.12 143.51)
 		)
 		(stroke
@@ -3404,6 +3496,16 @@
 			(type default)
 		)
 		(uuid "b4c3867e-71aa-47c5-84bc-228e50b5bc9b")
+	)
+	(wire
+		(pts
+			(xy 114.3 77.47) (xy 114.3 92.71)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "b5462d2a-c318-49b2-8ffa-5b7959af8fe6")
 	)
 	(wire
 		(pts
@@ -4347,6 +4449,73 @@
 			(project ""
 				(path "/2aa36568-293b-470b-bbef-a9ff44d0879c"
 					(reference "U1")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "user:GND")
+		(at 130.81 95.25 0)
+		(mirror y)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "6c8d0887-ea47-488a-9ec9-e2f16a0b169e")
+		(property "Reference" "#07"
+			(at 130.81 95.25 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "~"
+			(at 130.81 97.79 0)
+			(effects
+				(font
+					(size 1.27 1.0795)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 132.08 95.25 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 132.08 95.25 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "GND"
+			(at 130.81 95.25 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "9d229c76-cd30-459a-ab9d-4bcb997111ed")
+		)
+		(instances
+			(project "cablight-project"
+				(path "/2aa36568-293b-470b-bbef-a9ff44d0879c"
+					(reference "#07")
 					(unit 1)
 				)
 			)
@@ -5316,7 +5485,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "GRK_Lib:RCWL-1601"
+		(property "Footprint" "GRK_Lib:Molex 4pin Terminal Block 2.54mm"
 			(at 165.1 137.16 0)
 			(effects
 				(font
