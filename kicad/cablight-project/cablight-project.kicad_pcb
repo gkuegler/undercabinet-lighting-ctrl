@@ -555,7 +555,7 @@
 	(footprint "GRK_Lib:Tactile Switch Wurth"
 		(layer "F.Cu")
 		(uuid "4c74631f-550c-4b29-9916-1e08c259ca82")
-		(at -72.3 11.3 -90)
+		(at -72.3 11 -90)
 		(property "Reference" "BTN1"
 			(at 0 -2.35 270)
 			(unlocked yes)
@@ -1316,7 +1316,7 @@
 	(footprint "MountingHole:MountingHole_2.7mm_M2.5_ISO7380_Pad_TopOnly"
 		(layer "F.Cu")
 		(uuid "81f3655a-7b27-478d-ab3e-76b6c9640352")
-		(at -66.05 17.35)
+		(at -71.6 18)
 		(descr "Mounting Hole 2.7mm, M2.5, ISO7380")
 		(tags "mounting hole 2.7mm m2.5 iso7380")
 		(property "Reference" "M2.5"
@@ -3461,19 +3461,8 @@
 		(layer "Dwgs.User")
 		(uuid "5dddfde3-20d1-4f44-804c-8aea9d73d407")
 	)
-	(gr_arc
-		(start -68.171669 21.157107)
-		(mid -68.554353 21.080987)
-		(end -68.878776 20.864214)
-		(stroke
-			(width 0.15)
-			(type default)
-		)
-		(layer "Edge.Cuts")
-		(uuid "01c34d07-a96a-478d-b9be-7c4ebf8c9e86")
-	)
 	(gr_line
-		(start -67.5 22.157107)
+		(start -67.5 22.1)
 		(end -67.5 33.6)
 		(stroke
 			(width 0.15)
@@ -3483,7 +3472,7 @@
 		(uuid "0a4969e4-703a-4f28-a7f8-e14eddb981ec")
 	)
 	(gr_line
-		(start -73.200001 6.4)
+		(start -73.892893 6.4)
 		(end -71.899999 6.4)
 		(stroke
 			(width 0.15)
@@ -3493,26 +3482,15 @@
 		(uuid "206751d9-955c-49aa-8c3b-918e3e85d809")
 	)
 	(gr_arc
-		(start -67.9 42)
-		(mid -71.6 38.3)
-		(end -67.9 34.6)
+		(start -67.9 42.048333)
+		(mid -71.63623 38.600971)
+		(end -68.499999 34.6)
 		(stroke
 			(width 0.15)
 			(type default)
 		)
 		(layer "Edge.Cuts")
 		(uuid "24daa8a8-c509-4a24-87a1-c4d2796714c4")
-	)
-	(gr_arc
-		(start -66.5 21.157107)
-		(mid -65.792893 21.45)
-		(end -65.5 22.157107)
-		(stroke
-			(width 0.15)
-			(type default)
-		)
-		(layer "Edge.Cuts")
-		(uuid "2764e296-83c9-4903-a20b-00ddc979d73c")
 	)
 	(gr_line
 		(start -27.9 11)
@@ -3525,15 +3503,26 @@
 		(uuid "3212c6ab-0c4a-44fc-8c96-1d30cae7c629")
 	)
 	(gr_arc
-		(start -74.2 7.4)
-		(mid -73.907107 6.692893)
-		(end -73.2 6.4)
+		(start -74.892893 7.407107)
+		(mid -74.6 6.7)
+		(end -73.892893 6.407107)
 		(stroke
 			(width 0.15)
 			(type default)
 		)
 		(layer "Edge.Cuts")
 		(uuid "37360892-eb12-4819-8536-8f5cc4ffb034")
+	)
+	(gr_arc
+		(start -68.5 21.2)
+		(mid -67.792893 21.492893)
+		(end -67.5 22.2)
+		(stroke
+			(width 0.15)
+			(type default)
+		)
+		(layer "Edge.Cuts")
+		(uuid "39b81c78-4dbc-4d96-a8f2-111b6a742afb")
 	)
 	(gr_arc
 		(start -68.4 2.9)
@@ -3567,6 +3556,17 @@
 		(uuid "51c56931-a5aa-45da-9107-de2315c47cec")
 	)
 	(gr_arc
+		(start -73.9 21.2)
+		(mid -74.607107 20.907107)
+		(end -74.9 20.2)
+		(stroke
+			(width 0.15)
+			(type default)
+		)
+		(layer "Edge.Cuts")
+		(uuid "5ec1d8d0-f6d6-4ff6-840c-3d97b92ec42f")
+	)
+	(gr_arc
 		(start -29.3 39.8)
 		(mid -25 35.5)
 		(end -20.7 39.8)
@@ -3588,16 +3588,6 @@
 		(uuid "68bc0cc9-ec40-4972-90cf-c0301dff1d0e")
 	)
 	(gr_line
-		(start -67.1 34.6)
-		(end -67.9 34.6)
-		(stroke
-			(width 0.15)
-			(type default)
-		)
-		(layer "Edge.Cuts")
-		(uuid "78b89370-e054-4e2d-88c7-264adac86465")
-	)
-	(gr_line
 		(start -68.4 1)
 		(end -68.4 2.9)
 		(stroke
@@ -3608,8 +3598,8 @@
 		(uuid "afa487c1-5325-43c5-bd2a-54e38db66892")
 	)
 	(gr_line
-		(start -74.2 7.4)
-		(end -74.2 15.128776)
+		(start -74.9 7.4)
+		(end -74.9 20.2)
 		(stroke
 			(width 0.15)
 			(type solid)
@@ -3627,37 +3617,6 @@
 		(layer "Edge.Cuts")
 		(uuid "b706bbc0-33c1-45cd-ac3e-6f531a45ee7d")
 	)
-	(gr_line
-		(start -68.878776 20.864214)
-		(end -73.907107 15.835883)
-		(stroke
-			(width 0.15)
-			(type default)
-		)
-		(layer "Edge.Cuts")
-		(uuid "c73c5398-e18f-49cb-8854-29339ca472ee")
-	)
-	(gr_arc
-		(start -73.907107 15.835883)
-		(mid -74.12388 15.51146)
-		(end -74.2 15.128776)
-		(stroke
-			(width 0.15)
-			(type default)
-		)
-		(layer "Edge.Cuts")
-		(uuid "cd064c2d-25bd-4aa3-b9a3-eb36143a4d8d")
-	)
-	(gr_line
-		(start -66.499999 34.6)
-		(end -67.1 34.6)
-		(stroke
-			(width 0.15)
-			(type default)
-		)
-		(layer "Edge.Cuts")
-		(uuid "ce1409c1-b75b-4774-a073-bc97dac46118")
-	)
 	(gr_arc
 		(start -29.3 40)
 		(mid -29.885786 41.414214)
@@ -3669,9 +3628,20 @@
 		(layer "Edge.Cuts")
 		(uuid "d2c83a6e-0372-4d6f-bc91-d11f7b53ee03")
 	)
+	(gr_arc
+		(start -67.5 33.6)
+		(mid -67.792893 34.307107)
+		(end -68.5 34.6)
+		(stroke
+			(width 0.15)
+			(type default)
+		)
+		(layer "Edge.Cuts")
+		(uuid "d925f413-a04c-40b1-87a2-544908e25f60")
+	)
 	(gr_line
-		(start -68.171669 21.157107)
-		(end -66.499999 21.157107)
+		(start -73.9 21.2)
+		(end -68.5 21.2)
 		(stroke
 			(width 0.15)
 			(type default)
@@ -3688,17 +3658,6 @@
 		)
 		(layer "Edge.Cuts")
 		(uuid "de1d2594-acb8-4909-be77-e88423f09428")
-	)
-	(gr_arc
-		(start -65.5 33.6)
-		(mid -65.792893 34.307107)
-		(end -66.5 34.6)
-		(stroke
-			(width 0.15)
-			(type default)
-		)
-		(layer "Edge.Cuts")
-		(uuid "ee167212-6f5d-4b57-8aef-2aedf1b0a397")
 	)
 	(gr_line
 		(start -31.3 42)
@@ -3870,7 +3829,7 @@
 		(uuid "f4128ad5-3947-4faa-aa5b-422984137e51")
 	)
 	(gr_text "OUT"
-		(at -65.712 33.15 0)
+		(at -65.712 32.8 0)
 		(layer "F.SilkS")
 		(uuid "326898d9-d048-41c9-bf3f-94d66361b3e7")
 		(effects
@@ -3881,7 +3840,7 @@
 		)
 	)
 	(gr_text "(-)"
-		(at -65.7 35.5 0)
+		(at -65.7 34.8 0)
 		(layer "F.SilkS")
 		(uuid "7d3e9866-07a3-42f6-901f-4fe0bcef7bd4")
 		(effects
@@ -3903,7 +3862,7 @@
 		)
 	)
 	(gr_text "IN"
-		(at -65.7 23 0)
+		(at -65.7 23.4 0)
 		(layer "F.SilkS")
 		(uuid "bc6ea25d-829f-4e89-be70-e01c4c5aa05f")
 		(effects
@@ -3926,7 +3885,7 @@
 		)
 	)
 	(gr_text "(-)"
-		(at -65.7 20.5 0)
+		(at -65.7 21.2 0)
 		(layer "F.SilkS")
 		(uuid "ca0ec84e-8bd7-4541-a850-250baca0d6ac")
 		(effects
@@ -3982,6 +3941,18 @@
 				(thickness 0.15)
 			)
 			(justify left top)
+		)
+	)
+	(gr_text "move front out more to increase case screw clearance holes"
+		(at -99 4.6 0)
+		(layer "F.Fab")
+		(uuid "90001457-3736-4e97-86bd-1bdb061f18c2")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+			(justify left bottom)
 		)
 	)
 	(gr_text "LID SCREW SPACE"
@@ -4990,7 +4961,7 @@
 		(uuid "5a6e78ac-7673-4590-9486-5387df3a8498")
 	)
 	(via
-		(at -65.8 28.1)
+		(at -64.9 28.1)
 		(size 1)
 		(drill 0.5)
 		(layers "F.Cu" "B.Cu")
