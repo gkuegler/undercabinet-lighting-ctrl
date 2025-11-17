@@ -4108,6 +4108,16 @@
 		(uuid "3e232609-3406-485f-b486-d3bb2b39c598")
 	)
 	(gr_line
+		(start -51.5 13.4)
+		(end -51.5 -15.3)
+		(stroke
+			(width 0.15)
+			(type default)
+		)
+		(layer "F.Fab")
+		(uuid "40b0e211-b086-4092-abc2-66ce0c281540")
+	)
+	(gr_line
 		(start -75.007107 43)
 		(end 1 43)
 		(stroke
@@ -4127,6 +4137,16 @@
 		(fill no)
 		(layer "F.Fab")
 		(uuid "5b014c72-2445-4109-8fd1-519b4a3cea0d")
+	)
+	(gr_line
+		(start -37.4 13.3)
+		(end -51.5 13.4)
+		(stroke
+			(width 0.15)
+			(type default)
+		)
+		(layer "F.Fab")
+		(uuid "6ff34e47-f708-4f62-b814-0c59d05728e3")
 	)
 	(gr_line
 		(start -108.2 36.4)
