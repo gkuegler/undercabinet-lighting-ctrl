@@ -56,6 +56,16 @@
           "gap": 0.0,
           "via_gap": 0.0,
           "width": 0.0
+        },
+        {
+          "gap": 0.1,
+          "via_gap": 0.2,
+          "width": 0.1
+        },
+        {
+          "gap": 0.2,
+          "via_gap": 0.3,
+          "width": 0.2
         }
       ],
       "drc_exclusions": [],
@@ -507,7 +517,7 @@
         "microvia_drill": 0.1,
         "name": "+3v3",
         "pcb_color": "rgba(0, 0, 0, 0.000)",
-        "priority": 2,
+        "priority": 3,
         "schematic_color": "rgba(0, 0, 0, 0.000)",
         "track_width": 1.0,
         "via_diameter": 0.6,
@@ -524,7 +534,7 @@
         "microvia_drill": 0.1,
         "name": "+5V",
         "pcb_color": "rgba(0, 0, 0, 0.000)",
-        "priority": 3,
+        "priority": 4,
         "schematic_color": "rgba(0, 0, 0, 0.000)",
         "track_width": 1.0,
         "via_diameter": 0.6,
@@ -534,7 +544,7 @@
       {
         "name": "GND",
         "pcb_color": "rgba(0, 0, 0, 0.000)",
-        "priority": 1,
+        "priority": 2,
         "schematic_color": "rgba(0, 0, 0, 0.000)"
       },
       {
@@ -547,7 +557,7 @@
         "microvia_drill": 0.1,
         "name": "Load",
         "pcb_color": "rgba(0, 0, 0, 0.000)",
-        "priority": 4,
+        "priority": 5,
         "schematic_color": "rgba(0, 0, 0, 0.000)",
         "track_width": 1.5,
         "via_diameter": 0.8,
@@ -558,7 +568,7 @@
         "clearance": 0.3,
         "name": "PWRSUP",
         "pcb_color": "rgba(0, 0, 0, 0.000)",
-        "priority": 0,
+        "priority": 1,
         "schematic_color": "rgba(0, 0, 0, 0.000)",
         "track_width": 1.0
       },
@@ -572,12 +582,22 @@
         "microvia_drill": 0.1,
         "name": "SIG",
         "pcb_color": "rgba(0, 0, 0, 0.000)",
-        "priority": 5,
+        "priority": 6,
         "schematic_color": "rgba(0, 0, 0, 0.000)",
         "track_width": 0.6,
         "via_diameter": 0.6,
         "via_drill": 0.3,
         "wire_width": 6
+      },
+      {
+        "clearance": 0.2,
+        "name": "USB",
+        "pcb_color": "rgba(0, 0, 0, 0.000)",
+        "priority": 0,
+        "schematic_color": "rgba(0, 0, 0, 0.000)",
+        "track_width": 0.1,
+        "via_diameter": 0.3,
+        "via_drill": 0.5
       }
     ],
     "meta": {
@@ -640,6 +660,10 @@
       {
         "netclass": "GND",
         "pattern": "GND"
+      },
+      {
+        "netclass": "USB",
+        "pattern": "D*"
       }
     ]
   },
