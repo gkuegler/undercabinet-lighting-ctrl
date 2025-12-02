@@ -5347,16 +5347,6 @@
 		)
 		(uuid "4dbd2938-3475-4c51-a4e4-ac4a30b11b1b")
 	)
-	(text "SLW-121586-5A-D\n500mA 50V SPDT"
-		(exclude_from_sim no)
-		(at 98.806 203.454 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-		)
-		(uuid "54917c9b-750d-40be-9828-49f5fe89ad3e")
-	)
 	(text "Reverse Polarity Indicator\n"
 		(exclude_from_sim no)
 		(at 66.04 232.918 0)
@@ -10587,8 +10577,8 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "59f40f79-188f-4360-ba88-a25f70f0aa2d")
-		(property "Reference" "SW3"
-			(at 101.6 209.804 0)
+		(property "Reference" "SW1"
+			(at 101.6 211.074 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10601,9 +10591,10 @@
 				(font
 					(size 1.27 1.27)
 				)
+				(hide yes)
 			)
 		)
-		(property "Footprint" "Connector_PinHeader_2.54mm:PinHeader_1x02_P2.54mm_Vertical"
+		(property "Footprint" "GRK_Lib:1x02_P2.54mm_Vertical_Shunt"
 			(at 101.6 213.36 0)
 			(effects
 				(font
@@ -10639,7 +10630,7 @@
 		(instances
 			(project "cablight-project"
 				(path "/2aa36568-293b-470b-bbef-a9ff44d0879c"
-					(reference "SW3")
+					(reference "SW1")
 					(unit 1)
 				)
 			)
