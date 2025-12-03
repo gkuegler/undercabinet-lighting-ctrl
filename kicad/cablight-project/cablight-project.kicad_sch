@@ -6,7 +6,9 @@
 	(paper "B")
 	(title_block
 		(title "UNDERCABINET ULTRASONIC SENSOR")
-		(date "2024-09-21")
+		(date "2025-12-02")
+		(rev "4")
+		(comment 9 "O")
 	)
 	(lib_symbols
 		(symbol "Device:D"
@@ -5329,37 +5331,31 @@
 	)
 	(text "add additional pads for additional resistors"
 		(exclude_from_sim no)
-		(at 80.772 225.044 0)
+		(at 78.994 254 0)
 		(effects
 			(font
 				(size 1.27 1.27)
+				(thickness 0.254)
+				(bold yes)
+				(italic yes)
 			)
 		)
 		(uuid "28eac9a9-77c7-41fd-b72d-9c8528596827")
 	)
-	(text "TODO: weak pulldown to gnd? for sbu pins?"
+	(text "REVERSE POLARITY\nINDICATOR\n(RED)"
 		(exclude_from_sim no)
-		(at 55.88 110.744 0)
+		(at 68.326 219.71 0)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
-		)
-		(uuid "4dbd2938-3475-4c51-a4e4-ac4a30b11b1b")
-	)
-	(text "Reverse Polarity Indicator\n"
-		(exclude_from_sim no)
-		(at 66.04 232.918 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
+			(justify right)
 		)
 		(uuid "588cd980-8b03-4f93-a1ca-efaef804b461")
 	)
 	(text "5V BUCK CONVERTER\n\n"
 		(exclude_from_sim no)
-		(at 145.034 260.604 0)
+		(at 150.622 261.112 0)
 		(effects
 			(font
 				(size 3 3)
@@ -5367,29 +5363,19 @@
 		)
 		(uuid "5f70c66a-894e-4580-818e-7d3f55b9d162")
 	)
-	(text "i may forgo esd protection as\nusb plugging duty cycle isn't high\nenough for likely wrongful insertions.\nUSB is only for flashing & debugging."
+	(text "LED LOAD SWITCHING"
 		(exclude_from_sim no)
-		(at 132.842 168.656 0)
+		(at 204.47 165.608 0)
 		(effects
 			(font
-				(size 1.27 1.27)
+				(size 3 3)
 			)
 		)
-		(uuid "6145ebd1-0f3f-48d7-9d0d-6dc41691794c")
-	)
-	(text "CONSULT DATASHEET FOR IMPORTANT UART PINS ETC"
-		(exclude_from_sim no)
-		(at 312.166 124.46 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-		)
-		(uuid "775c50f9-3662-4518-84ec-010eacfbe955")
+		(uuid "70dcd955-83a3-430e-9b1b-28758ea0b278")
 	)
 	(text "PG is pulled low when\npower supply is out\nof spec."
 		(exclude_from_sim no)
-		(at 248.666 34.544 0)
+		(at 251.714 23.622 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -5397,20 +5383,9 @@
 		)
 		(uuid "7f34b203-e750-422b-b07a-0395e76d8768")
 	)
-	(text "findo out what IO corresponts to what GPIO? I think I can pick which ones I want."
-		(exclude_from_sim no)
-		(at 320.04 167.64 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-				(color 255 0 4 1)
-			)
-		)
-		(uuid "8de37ae1-f725-49cb-acff-a48eb71442dd")
-	)
 	(text "USB-C"
 		(exclude_from_sim no)
-		(at 80.264 191.262 0)
+		(at 95.504 165.862 0)
 		(effects
 			(font
 				(size 3 3)
@@ -5420,7 +5395,7 @@
 	)
 	(text "24VDC POWER IN"
 		(exclude_from_sim no)
-		(at 156.972 95.504 0)
+		(at 165.862 119.634 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -5428,19 +5403,9 @@
 		)
 		(uuid "a1412897-78e1-4751-98d4-12ebd069df59")
 	)
-	(text "can also use SMD NSR0320"
-		(exclude_from_sim no)
-		(at 87.884 123.444 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-		)
-		(uuid "a5f0c931-9ed9-489d-b640-087f0a4c50cd")
-	)
 	(text "MCU\n"
 		(exclude_from_sim no)
-		(at 259.334 157.734 0)
+		(at 315.214 162.052 0)
 		(effects
 			(font
 				(size 3 3)
@@ -5450,7 +5415,7 @@
 	)
 	(text "LED PWM OUTPUT"
 		(exclude_from_sim no)
-		(at 156.718 100.838 0)
+		(at 165.608 124.968 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -5460,7 +5425,7 @@
 	)
 	(text "SENSORS & BUTTONS"
 		(exclude_from_sim no)
-		(at 87.122 66.548 0)
+		(at 115.316 72.39 0)
 		(effects
 			(font
 				(size 3 3)
@@ -5470,7 +5435,7 @@
 	)
 	(text "ULTRASONIC DISTANCE SENSOR\nRCWL-1601\n(HC-SR04 Compatible)"
 		(exclude_from_sim no)
-		(at 154.94 26.162 0)
+		(at 172.72 31.242 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -5480,7 +5445,7 @@
 	)
 	(text "PWR SUPPLY\nON INDICATOR\n(GREEN)"
 		(exclude_from_sim no)
-		(at 259.842 223.774 0)
+		(at 260.604 206.502 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -5490,426 +5455,410 @@
 		(uuid "fb98235f-ff8d-4289-a57c-54d1e21aca3f")
 	)
 	(junction
-		(at 137.16 246.38)
+		(at 134.62 236.22)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "03bf8fd8-1097-4897-861d-cdc4978f1864")
 	)
 	(junction
-		(at 80.01 181.61)
+		(at 95.25 156.21)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "092803f3-9b87-4c62-9e07-e25ce5b988eb")
 	)
 	(junction
-		(at 163.83 220.98)
+		(at 161.29 210.82)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "0a2ef392-7a44-4c6c-accd-d8290f53bb72")
 	)
 	(junction
-		(at 172.72 246.38)
+		(at 170.18 236.22)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "0a526889-c870-4d96-9a7c-2a9bf8a8bb13")
 	)
 	(junction
-		(at 68.58 181.61)
+		(at 83.82 156.21)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "0d31af1f-5de2-481e-87ce-d8c4fcc16c0b")
 	)
 	(junction
-		(at 265.43 80.01)
+		(at 251.46 67.31)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "0f680fc9-2605-4c4a-8f0f-0e78ebe95263")
 	)
 	(junction
-		(at 68.58 132.08)
+		(at 83.82 106.68)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "113bdf2e-e4f6-4168-94b3-496ded6a6360")
 	)
 	(junction
-		(at 238.76 58.42)
+		(at 233.68 45.72)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "126bf1e4-6f4e-4499-ac01-dba834a5cdbf")
 	)
 	(junction
-		(at 31.75 172.72)
+		(at 46.99 147.32)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "12c5e947-2ad2-4272-97a6-2f75f64e2758")
 	)
 	(junction
-		(at 163.83 246.38)
+		(at 161.29 236.22)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "193a78b9-5e4b-43c0-9377-b183bdac4724")
 	)
 	(junction
-		(at 242.57 201.93)
+		(at 240.03 191.77)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "21e7f99e-7b59-4e98-8339-39edb70b3db6")
 	)
 	(junction
-		(at 227.33 201.93)
+		(at 224.79 191.77)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "2db50848-513f-40bf-a9a1-79cd86ec4c0b")
 	)
 	(junction
-		(at 320.04 57.15)
+		(at 314.96 50.8)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "300b53be-d512-481a-a0c8-ba0cb29bae4f")
 	)
 	(junction
-		(at 204.47 201.93)
+		(at 201.93 191.77)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "339122a2-295a-4fba-a54b-d69d512812c4")
 	)
 	(junction
-		(at 234.95 246.38)
+		(at 232.41 236.22)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "3862be56-5b43-4b41-b51a-8335bb4e5c6a")
 	)
 	(junction
-		(at 92.71 41.91)
+		(at 110.49 46.99)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "3baebb66-e958-4da0-8a63-fc8ff1d91259")
 	)
 	(junction
-		(at 137.16 33.02)
+		(at 251.46 241.3)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "3d3c06c6-30e4-4793-ac10-9dce3ea6b31d")
+	)
+	(junction
+		(at 154.94 38.1)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "3ddf17a2-8a21-45d2-b10e-9a37f55090cf")
 	)
 	(junction
-		(at 137.16 237.49)
+		(at 134.62 227.33)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "3ddfd2c7-24d1-43a7-8c5b-ee896ce324c1")
 	)
 	(junction
-		(at 58.42 181.61)
+		(at 73.66 156.21)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "3fd2a2ec-c44f-48da-8d65-8ca14291c119")
 	)
 	(junction
-		(at 248.92 58.42)
+		(at 196.85 118.11)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "469078fe-f2cc-4eef-a80b-c2b0ea3dc172")
+		(uuid "48c225a0-3d96-42e9-bc2b-c8a5376b967b")
 	)
 	(junction
-		(at 46.99 132.08)
+		(at 62.23 106.68)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "4cfd4223-bd1b-4ce6-9ec8-fa6d52042dac")
 	)
 	(junction
-		(at 215.9 116.84)
+		(at 217.17 140.97)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "4d942289-e65c-4610-aa53-a852d886bbdd")
 	)
 	(junction
-		(at 31.75 181.61)
+		(at 46.99 156.21)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "503dd1df-aec1-41be-b658-414574ceb9d7")
 	)
 	(junction
-		(at 46.99 149.86)
+		(at 62.23 124.46)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "521b2402-992c-4565-af4a-9dadd38c969a")
 	)
 	(junction
-		(at 31.75 43.18)
+		(at 49.53 48.26)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "52497294-64b3-4ac1-a407-ec6c02effa9d")
 	)
 	(junction
-		(at 125.73 213.36)
+		(at 251.46 45.72)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "5c268016-f465-4382-b227-538a2ca522d4")
+	)
+	(junction
+		(at 123.19 203.2)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "6eae0c1e-db90-4d95-9826-75360055d722")
 	)
 	(junction
-		(at 163.83 213.36)
+		(at 161.29 203.2)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "73320099-32c7-4ecd-8513-4dcfe7a04604")
 	)
 	(junction
-		(at 397.51 95.25)
+		(at 388.62 82.55)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "76111e58-f160-4451-bfb6-8d59ba4f5541")
 	)
 	(junction
-		(at 254 201.93)
+		(at 251.46 191.77)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "7a025669-6cad-44ed-acd7-1c010b1614ca")
 	)
 	(junction
-		(at 212.09 246.38)
+		(at 209.55 236.22)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "7d67c87c-1935-465d-8113-1d61a17cfeff")
 	)
 	(junction
-		(at 46.99 127)
+		(at 110.49 44.45)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "833c6eba-a834-4cc6-b4d6-5c0a487d1ce0")
+	)
+	(junction
+		(at 62.23 101.6)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "8b540962-915f-4d78-8c00-4bd5907a2dea")
 	)
 	(junction
-		(at 46.99 129.54)
+		(at 62.23 104.14)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "90e6408b-4dd9-45ff-819d-de5e8810c489")
 	)
 	(junction
-		(at 187.96 232.41)
+		(at 185.42 222.25)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "96625ed9-ea20-4d77-9f0a-0e79615c9e4b")
 	)
 	(junction
-		(at 135.89 138.43)
+		(at 121.92 113.03)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "96a6e2fe-99a2-4747-a610-9def5901638d")
 	)
 	(junction
-		(at 180.34 232.41)
+		(at 177.8 222.25)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "9787f15e-a495-4e23-a0c2-6aba7c6135f7")
 	)
 	(junction
-		(at 242.57 246.38)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "98fb5777-6fa1-451e-a2ab-601b1d3186c7")
-	)
-	(junction
-		(at 49.53 49.53)
+		(at 67.31 54.61)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "99323f36-99d7-41f7-ac20-75ed42fba97d")
 	)
 	(junction
-		(at 219.71 246.38)
+		(at 217.17 236.22)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "9a0259b3-4fa6-4638-9807-c7ccddb461bb")
 	)
 	(junction
-		(at 49.53 181.61)
+		(at 64.77 156.21)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "9fb3c922-8f75-4582-93c1-2f6dc447b042")
 	)
 	(junction
-		(at 173.99 96.52)
+		(at 182.88 120.65)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "a2776c2b-3f28-47e4-8f67-1ffddf3f06fc")
 	)
 	(junction
-		(at 121.92 224.79)
+		(at 119.38 214.63)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "a4c83725-0df5-44c2-bbbd-da19ff3427e4")
 	)
 	(junction
-		(at 332.74 57.15)
+		(at 327.66 50.8)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "a673c20d-874c-4fbd-8b10-ac589e7b230e")
 	)
 	(junction
-		(at 111.76 213.36)
+		(at 109.22 203.2)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "ae2136b4-dade-42f1-b72c-3f9aceae2204")
 	)
 	(junction
-		(at 234.95 201.93)
+		(at 232.41 191.77)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "ae7e46de-72ec-497e-8f6c-3a9d22273338")
 	)
 	(junction
-		(at 92.71 44.45)
+		(at 110.49 49.53)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "b45daec1-3571-430b-bd94-895e01bb39e2")
 	)
 	(junction
-		(at 227.33 246.38)
+		(at 224.79 236.22)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "ba8bfe74-2948-49c3-bd18-3bc691c24dfc")
 	)
 	(junction
-		(at 187.96 246.38)
+		(at 185.42 236.22)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "bb52ecc1-8267-4bca-b996-d407713deb49")
 	)
 	(junction
-		(at 196.85 201.93)
+		(at 194.31 191.77)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "bd2edbea-6ba9-4428-b08b-0f2eb8aa0d75")
 	)
 	(junction
-		(at 219.71 201.93)
+		(at 217.17 191.77)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "bed4ac35-9cb2-4337-8c39-61d56186b15a")
 	)
 	(junction
-		(at 151.13 246.38)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "c421b673-5cb2-4876-bc75-cbc8364e0542")
-	)
-	(junction
-		(at 195.58 104.14)
+		(at 196.85 128.27)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "c4f5b319-2534-400c-a2f1-83a29a9f6c70")
 	)
 	(junction
-		(at 163.83 217.17)
+		(at 161.29 207.01)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "c62801e0-070e-4c62-b8a6-ed426aecbbc6")
 	)
 	(junction
-		(at 187.96 201.93)
+		(at 185.42 191.77)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "d00b4605-b878-4757-a644-3d35025ca61c")
 	)
 	(junction
-		(at 248.92 246.38)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "d073183e-a9be-4944-9b71-c0a14f889e8f")
-	)
-	(junction
-		(at 212.09 201.93)
+		(at 209.55 191.77)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "d0b9af10-29b5-4c89-8701-98ac412815d8")
 	)
 	(junction
-		(at 320.04 48.26)
+		(at 314.96 41.91)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "d4814fa3-838d-4e19-a789-c9ee09826dc1")
 	)
 	(junction
-		(at 81.28 213.36)
+		(at 71.12 203.2)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "ddc06d06-e45a-462f-a14c-8ad405478a30")
 	)
 	(junction
-		(at 180.34 201.93)
+		(at 177.8 191.77)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "dea39cb0-57f9-4276-9a26-9a937bdf3c9a")
 	)
 	(junction
-		(at 135.89 158.75)
+		(at 148.59 236.22)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "e5548a2a-9e39-4dc3-a3d6-908cd60a9c53")
+	)
+	(junction
+		(at 121.92 133.35)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "ebdd180e-d0c6-45c9-9043-b2fd84d5e60b")
 	)
 	(junction
-		(at 34.29 172.72)
+		(at 49.53 147.32)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "ebf068fc-c2c5-4efe-bd3e-d31fa5940c6b")
 	)
 	(junction
-		(at 99.06 149.86)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "ecf83d75-f7a3-45a5-ac4f-0643f278ceb9")
-	)
-	(junction
-		(at 196.85 246.38)
+		(at 194.31 236.22)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "ef03f38a-f064-4501-ad14-ba4b3a4317c1")
 	)
 	(junction
-		(at 204.47 246.38)
+		(at 201.93 236.22)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "f09782c2-f17b-4292-9758-c1517d9cd3a9")
 	)
 	(junction
-		(at 46.99 147.32)
+		(at 62.23 121.92)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "f62e0c06-e183-4734-a3b9-12fed474632e")
 	)
 	(junction
-		(at 181.61 109.22)
+		(at 190.5 133.35)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "f9c4dada-ed0b-4387-a3d0-8602bd21dccb")
 	)
 	(junction
-		(at 41.91 181.61)
+		(at 57.15 156.21)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "fa5c9143-f0b7-4957-94d1-28ff36eb82d8")
 	)
 	(junction
-		(at 109.22 147.32)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "fa7d017f-ddf6-44e1-8f11-1abe76c82848")
-	)
-	(junction
-		(at 36.83 172.72)
+		(at 52.07 147.32)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "fbddd3bc-fee7-49fe-80f1-92890b23e20b")
 	)
 	(wire
 		(pts
-			(xy 71.12 39.37) (xy 74.93 39.37)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "00ab9568-b8b9-4a84-b2e0-94565b5c4879")
-	)
-	(wire
-		(pts
-			(xy 227.33 222.25) (xy 227.33 246.38)
+			(xy 224.79 212.09) (xy 224.79 236.22)
 		)
 		(stroke
 			(width 0)
@@ -5919,7 +5868,7 @@
 	)
 	(wire
 		(pts
-			(xy 172.72 246.38) (xy 187.96 246.38)
+			(xy 170.18 236.22) (xy 185.42 236.22)
 		)
 		(stroke
 			(width 0)
@@ -5929,7 +5878,7 @@
 	)
 	(wire
 		(pts
-			(xy 365.76 128.27) (xy 373.38 128.27)
+			(xy 360.68 115.57) (xy 368.3 115.57)
 		)
 		(stroke
 			(width 0)
@@ -5939,7 +5888,7 @@
 	)
 	(wire
 		(pts
-			(xy 175.26 201.93) (xy 180.34 201.93)
+			(xy 172.72 191.77) (xy 177.8 191.77)
 		)
 		(stroke
 			(width 0)
@@ -5949,7 +5898,7 @@
 	)
 	(wire
 		(pts
-			(xy 133.35 220.98) (xy 140.97 220.98)
+			(xy 130.81 210.82) (xy 138.43 210.82)
 		)
 		(stroke
 			(width 0)
@@ -5959,7 +5908,17 @@
 	)
 	(wire
 		(pts
-			(xy 135.89 217.17) (xy 140.97 217.17)
+			(xy 214.63 45.72) (xy 214.63 53.34)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "05a6a5fe-0a38-4446-928c-455ac78446fe")
+	)
+	(wire
+		(pts
+			(xy 133.35 207.01) (xy 138.43 207.01)
 		)
 		(stroke
 			(width 0)
@@ -5969,7 +5928,7 @@
 	)
 	(wire
 		(pts
-			(xy 397.51 95.25) (xy 402.59 95.25)
+			(xy 388.62 82.55) (xy 397.51 82.55)
 		)
 		(stroke
 			(width 0)
@@ -5979,7 +5938,7 @@
 	)
 	(wire
 		(pts
-			(xy 46.99 144.78) (xy 46.99 147.32)
+			(xy 62.23 119.38) (xy 62.23 121.92)
 		)
 		(stroke
 			(width 0)
@@ -5989,7 +5948,7 @@
 	)
 	(wire
 		(pts
-			(xy 121.92 201.93) (xy 167.64 201.93)
+			(xy 119.38 191.77) (xy 165.1 191.77)
 		)
 		(stroke
 			(width 0)
@@ -5999,7 +5958,7 @@
 	)
 	(wire
 		(pts
-			(xy 81.28 213.36) (xy 86.36 213.36)
+			(xy 71.12 203.2) (xy 76.2 203.2)
 		)
 		(stroke
 			(width 0)
@@ -6009,7 +5968,7 @@
 	)
 	(wire
 		(pts
-			(xy 46.99 149.86) (xy 99.06 149.86)
+			(xy 62.23 124.46) (xy 113.03 124.46)
 		)
 		(stroke
 			(width 0)
@@ -6019,17 +5978,7 @@
 	)
 	(wire
 		(pts
-			(xy 365.76 133.35) (xy 373.38 133.35)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "0a1a0bb8-a13f-4fea-813a-f67d7db32c11")
-	)
-	(wire
-		(pts
-			(xy 204.47 116.84) (xy 203.2 116.84)
+			(xy 205.74 140.97) (xy 204.47 140.97)
 		)
 		(stroke
 			(width 0)
@@ -6039,7 +5988,7 @@
 	)
 	(wire
 		(pts
-			(xy 365.76 130.81) (xy 373.38 130.81)
+			(xy 360.68 118.11) (xy 368.3 118.11)
 		)
 		(stroke
 			(width 0)
@@ -6049,7 +5998,7 @@
 	)
 	(wire
 		(pts
-			(xy 254 201.93) (xy 254 212.09)
+			(xy 251.46 191.77) (xy 251.46 201.93)
 		)
 		(stroke
 			(width 0)
@@ -6059,7 +6008,7 @@
 	)
 	(wire
 		(pts
-			(xy 36.83 172.72) (xy 39.37 172.72)
+			(xy 52.07 147.32) (xy 54.61 147.32)
 		)
 		(stroke
 			(width 0)
@@ -6069,17 +6018,7 @@
 	)
 	(wire
 		(pts
-			(xy 71.12 44.45) (xy 74.93 44.45)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "1223bc04-76b0-4be1-9dbe-f13b3e80795d")
-	)
-	(wire
-		(pts
-			(xy 242.57 214.63) (xy 242.57 201.93)
+			(xy 240.03 204.47) (xy 240.03 191.77)
 		)
 		(stroke
 			(width 0)
@@ -6089,7 +6028,7 @@
 	)
 	(wire
 		(pts
-			(xy 81.28 224.79) (xy 81.28 226.06)
+			(xy 71.12 214.63) (xy 71.12 215.9)
 		)
 		(stroke
 			(width 0)
@@ -6099,7 +6038,7 @@
 	)
 	(wire
 		(pts
-			(xy 81.28 213.36) (xy 81.28 217.17)
+			(xy 71.12 203.2) (xy 71.12 207.01)
 		)
 		(stroke
 			(width 0)
@@ -6109,7 +6048,7 @@
 	)
 	(wire
 		(pts
-			(xy 184.15 85.09) (xy 181.61 85.09)
+			(xy 196.85 114.3) (xy 193.04 114.3)
 		)
 		(stroke
 			(width 0)
@@ -6119,7 +6058,7 @@
 	)
 	(wire
 		(pts
-			(xy 187.96 201.93) (xy 196.85 201.93)
+			(xy 185.42 191.77) (xy 194.31 191.77)
 		)
 		(stroke
 			(width 0)
@@ -6129,7 +6068,7 @@
 	)
 	(wire
 		(pts
-			(xy 160.02 213.36) (xy 163.83 213.36)
+			(xy 157.48 203.2) (xy 161.29 203.2)
 		)
 		(stroke
 			(width 0)
@@ -6139,7 +6078,7 @@
 	)
 	(wire
 		(pts
-			(xy 68.58 132.08) (xy 68.58 168.91)
+			(xy 83.82 106.68) (xy 83.82 143.51)
 		)
 		(stroke
 			(width 0)
@@ -6149,7 +6088,7 @@
 	)
 	(wire
 		(pts
-			(xy 212.09 222.25) (xy 212.09 246.38)
+			(xy 209.55 212.09) (xy 209.55 236.22)
 		)
 		(stroke
 			(width 0)
@@ -6159,7 +6098,7 @@
 	)
 	(wire
 		(pts
-			(xy 397.51 93.98) (xy 397.51 95.25)
+			(xy 388.62 81.28) (xy 388.62 82.55)
 		)
 		(stroke
 			(width 0)
@@ -6169,7 +6108,7 @@
 	)
 	(wire
 		(pts
-			(xy 34.29 172.72) (xy 36.83 172.72)
+			(xy 49.53 147.32) (xy 52.07 147.32)
 		)
 		(stroke
 			(width 0)
@@ -6179,17 +6118,7 @@
 	)
 	(wire
 		(pts
-			(xy 90.17 36.83) (xy 95.25 36.83)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "21e473c4-36fb-44a8-85d7-8fe183d4e511")
-	)
-	(wire
-		(pts
-			(xy 212.09 246.38) (xy 219.71 246.38)
+			(xy 209.55 236.22) (xy 217.17 236.22)
 		)
 		(stroke
 			(width 0)
@@ -6199,7 +6128,7 @@
 	)
 	(wire
 		(pts
-			(xy 265.43 80.01) (xy 274.32 80.01)
+			(xy 251.46 67.31) (xy 269.24 67.31)
 		)
 		(stroke
 			(width 0)
@@ -6209,7 +6138,7 @@
 	)
 	(wire
 		(pts
-			(xy 238.76 45.72) (xy 238.76 48.26)
+			(xy 233.68 33.02) (xy 233.68 35.56)
 		)
 		(stroke
 			(width 0)
@@ -6219,7 +6148,7 @@
 	)
 	(wire
 		(pts
-			(xy 137.16 237.49) (xy 140.97 237.49)
+			(xy 134.62 227.33) (xy 138.43 227.33)
 		)
 		(stroke
 			(width 0)
@@ -6229,7 +6158,7 @@
 	)
 	(wire
 		(pts
-			(xy 227.33 201.93) (xy 234.95 201.93)
+			(xy 224.79 191.77) (xy 232.41 191.77)
 		)
 		(stroke
 			(width 0)
@@ -6239,7 +6168,7 @@
 	)
 	(wire
 		(pts
-			(xy 172.72 101.6) (xy 195.58 101.6)
+			(xy 181.61 125.73) (xy 196.85 125.73)
 		)
 		(stroke
 			(width 0)
@@ -6249,7 +6178,7 @@
 	)
 	(wire
 		(pts
-			(xy 327.66 48.26) (xy 332.74 48.26)
+			(xy 322.58 41.91) (xy 327.66 41.91)
 		)
 		(stroke
 			(width 0)
@@ -6259,7 +6188,7 @@
 	)
 	(wire
 		(pts
-			(xy 180.34 223.52) (xy 180.34 232.41)
+			(xy 177.8 213.36) (xy 177.8 222.25)
 		)
 		(stroke
 			(width 0)
@@ -6269,7 +6198,7 @@
 	)
 	(wire
 		(pts
-			(xy 46.99 127) (xy 46.99 129.54)
+			(xy 62.23 101.6) (xy 62.23 104.14)
 		)
 		(stroke
 			(width 0)
@@ -6279,7 +6208,17 @@
 	)
 	(wire
 		(pts
-			(xy 160.02 232.41) (xy 180.34 232.41)
+			(xy 198.12 118.11) (xy 196.85 118.11)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "2a7357df-e9fd-4a1a-affd-4502cd2c26f5")
+	)
+	(wire
+		(pts
+			(xy 157.48 222.25) (xy 177.8 222.25)
 		)
 		(stroke
 			(width 0)
@@ -6289,7 +6228,7 @@
 	)
 	(wire
 		(pts
-			(xy 58.42 157.48) (xy 46.99 157.48)
+			(xy 73.66 132.08) (xy 62.23 132.08)
 		)
 		(stroke
 			(width 0)
@@ -6299,7 +6238,7 @@
 	)
 	(wire
 		(pts
-			(xy 173.99 85.09) (xy 173.99 96.52)
+			(xy 182.88 114.3) (xy 182.88 120.65)
 		)
 		(stroke
 			(width 0)
@@ -6309,7 +6248,7 @@
 	)
 	(wire
 		(pts
-			(xy 135.89 217.17) (xy 135.89 207.01)
+			(xy 133.35 207.01) (xy 133.35 196.85)
 		)
 		(stroke
 			(width 0)
@@ -6319,7 +6258,7 @@
 	)
 	(wire
 		(pts
-			(xy 160.02 228.6) (xy 163.83 228.6)
+			(xy 157.48 218.44) (xy 161.29 218.44)
 		)
 		(stroke
 			(width 0)
@@ -6329,7 +6268,7 @@
 	)
 	(wire
 		(pts
-			(xy 137.16 33.02) (xy 146.05 33.02)
+			(xy 154.94 38.1) (xy 163.83 38.1)
 		)
 		(stroke
 			(width 0)
@@ -6339,7 +6278,7 @@
 	)
 	(wire
 		(pts
-			(xy 111.76 199.39) (xy 111.76 213.36)
+			(xy 109.22 189.23) (xy 109.22 203.2)
 		)
 		(stroke
 			(width 0)
@@ -6349,7 +6288,17 @@
 	)
 	(wire
 		(pts
-			(xy 187.96 201.93) (xy 187.96 219.71)
+			(xy 88.9 49.53) (xy 92.71 49.53)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "313b8b98-cda3-439c-835c-2b08f02176d7")
+	)
+	(wire
+		(pts
+			(xy 185.42 191.77) (xy 185.42 209.55)
 		)
 		(stroke
 			(width 0)
@@ -6359,7 +6308,7 @@
 	)
 	(wire
 		(pts
-			(xy 151.13 246.38) (xy 163.83 246.38)
+			(xy 148.59 236.22) (xy 161.29 236.22)
 		)
 		(stroke
 			(width 0)
@@ -6369,7 +6318,7 @@
 	)
 	(wire
 		(pts
-			(xy 68.58 132.08) (xy 85.09 132.08)
+			(xy 83.82 106.68) (xy 105.41 106.68)
 		)
 		(stroke
 			(width 0)
@@ -6379,7 +6328,7 @@
 	)
 	(wire
 		(pts
-			(xy 172.72 223.52) (xy 172.72 246.38)
+			(xy 170.18 213.36) (xy 170.18 236.22)
 		)
 		(stroke
 			(width 0)
@@ -6389,7 +6338,7 @@
 	)
 	(wire
 		(pts
-			(xy 127 33.02) (xy 137.16 33.02)
+			(xy 144.78 38.1) (xy 154.94 38.1)
 		)
 		(stroke
 			(width 0)
@@ -6399,7 +6348,7 @@
 	)
 	(wire
 		(pts
-			(xy 219.71 246.38) (xy 227.33 246.38)
+			(xy 217.17 236.22) (xy 224.79 236.22)
 		)
 		(stroke
 			(width 0)
@@ -6409,7 +6358,7 @@
 	)
 	(wire
 		(pts
-			(xy 163.83 246.38) (xy 172.72 246.38)
+			(xy 161.29 236.22) (xy 170.18 236.22)
 		)
 		(stroke
 			(width 0)
@@ -6419,7 +6368,7 @@
 	)
 	(wire
 		(pts
-			(xy 127 138.43) (xy 127 147.32)
+			(xy 113.03 113.03) (xy 113.03 121.92)
 		)
 		(stroke
 			(width 0)
@@ -6429,7 +6378,17 @@
 	)
 	(wire
 		(pts
-			(xy 58.42 177.8) (xy 58.42 181.61)
+			(xy 88.9 41.91) (xy 92.71 41.91)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "3aeb2b5e-431f-4913-a6e2-910e07ca20f1")
+	)
+	(wire
+		(pts
+			(xy 73.66 152.4) (xy 73.66 156.21)
 		)
 		(stroke
 			(width 0)
@@ -6439,7 +6398,7 @@
 	)
 	(wire
 		(pts
-			(xy 31.75 172.72) (xy 31.75 181.61)
+			(xy 46.99 147.32) (xy 46.99 156.21)
 		)
 		(stroke
 			(width 0)
@@ -6449,7 +6408,7 @@
 	)
 	(wire
 		(pts
-			(xy 234.95 246.38) (xy 242.57 246.38)
+			(xy 232.41 236.22) (xy 240.03 236.22)
 		)
 		(stroke
 			(width 0)
@@ -6459,7 +6418,7 @@
 	)
 	(wire
 		(pts
-			(xy 196.85 201.93) (xy 196.85 214.63)
+			(xy 194.31 191.77) (xy 194.31 204.47)
 		)
 		(stroke
 			(width 0)
@@ -6469,7 +6428,7 @@
 	)
 	(wire
 		(pts
-			(xy 187.96 243.84) (xy 187.96 246.38)
+			(xy 185.42 233.68) (xy 185.42 236.22)
 		)
 		(stroke
 			(width 0)
@@ -6479,7 +6438,7 @@
 	)
 	(wire
 		(pts
-			(xy 92.71 44.45) (xy 92.71 48.26)
+			(xy 110.49 49.53) (xy 110.49 53.34)
 		)
 		(stroke
 			(width 0)
@@ -6489,7 +6448,7 @@
 	)
 	(wire
 		(pts
-			(xy 163.83 228.6) (xy 163.83 233.68)
+			(xy 161.29 218.44) (xy 161.29 223.52)
 		)
 		(stroke
 			(width 0)
@@ -6499,7 +6458,7 @@
 	)
 	(wire
 		(pts
-			(xy 125.73 213.36) (xy 140.97 213.36)
+			(xy 123.19 203.2) (xy 138.43 203.2)
 		)
 		(stroke
 			(width 0)
@@ -6509,7 +6468,7 @@
 	)
 	(wire
 		(pts
-			(xy 242.57 201.93) (xy 254 201.93)
+			(xy 240.03 191.77) (xy 251.46 191.77)
 		)
 		(stroke
 			(width 0)
@@ -6519,7 +6478,7 @@
 	)
 	(wire
 		(pts
-			(xy 187.96 229.87) (xy 187.96 232.41)
+			(xy 185.42 219.71) (xy 185.42 222.25)
 		)
 		(stroke
 			(width 0)
@@ -6529,7 +6488,7 @@
 	)
 	(wire
 		(pts
-			(xy 242.57 222.25) (xy 242.57 246.38)
+			(xy 240.03 212.09) (xy 240.03 236.22)
 		)
 		(stroke
 			(width 0)
@@ -6539,7 +6498,7 @@
 	)
 	(wire
 		(pts
-			(xy 365.76 100.33) (xy 373.38 100.33)
+			(xy 360.68 87.63) (xy 368.3 87.63)
 		)
 		(stroke
 			(width 0)
@@ -6549,17 +6508,7 @@
 	)
 	(wire
 		(pts
-			(xy 99.06 149.86) (xy 127 149.86)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "498553f7-e103-4db6-9874-b4c081ed4196")
-	)
-	(wire
-		(pts
-			(xy 176.53 85.09) (xy 173.99 85.09)
+			(xy 187.96 114.3) (xy 182.88 114.3)
 		)
 		(stroke
 			(width 0)
@@ -6569,7 +6518,7 @@
 	)
 	(wire
 		(pts
-			(xy 31.75 41.91) (xy 31.75 43.18)
+			(xy 49.53 46.99) (xy 49.53 48.26)
 		)
 		(stroke
 			(width 0)
@@ -6579,7 +6528,7 @@
 	)
 	(wire
 		(pts
-			(xy 172.72 93.98) (xy 181.61 93.98)
+			(xy 181.61 118.11) (xy 190.5 118.11)
 		)
 		(stroke
 			(width 0)
@@ -6589,7 +6538,7 @@
 	)
 	(wire
 		(pts
-			(xy 254 201.93) (xy 261.62 201.93)
+			(xy 251.46 191.77) (xy 259.08 191.77)
 		)
 		(stroke
 			(width 0)
@@ -6599,7 +6548,7 @@
 	)
 	(wire
 		(pts
-			(xy 184.15 99.06) (xy 184.15 85.09)
+			(xy 196.85 123.19) (xy 196.85 118.11)
 		)
 		(stroke
 			(width 0)
@@ -6609,7 +6558,7 @@
 	)
 	(wire
 		(pts
-			(xy 127 38.1) (xy 146.05 38.1)
+			(xy 144.78 43.18) (xy 163.83 43.18)
 		)
 		(stroke
 			(width 0)
@@ -6619,7 +6568,7 @@
 	)
 	(wire
 		(pts
-			(xy 181.61 109.22) (xy 182.88 109.22)
+			(xy 190.5 133.35) (xy 181.61 133.35)
 		)
 		(stroke
 			(width 0)
@@ -6629,7 +6578,7 @@
 	)
 	(wire
 		(pts
-			(xy 31.75 172.72) (xy 34.29 172.72)
+			(xy 46.99 147.32) (xy 49.53 147.32)
 		)
 		(stroke
 			(width 0)
@@ -6639,7 +6588,7 @@
 	)
 	(wire
 		(pts
-			(xy 49.53 177.8) (xy 49.53 181.61)
+			(xy 64.77 152.4) (xy 64.77 156.21)
 		)
 		(stroke
 			(width 0)
@@ -6649,7 +6598,17 @@
 	)
 	(wire
 		(pts
-			(xy 92.71 39.37) (xy 92.71 41.91)
+			(xy 110.49 41.91) (xy 110.49 44.45)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "53c1e74a-c539-41b6-87cb-f22a610e78cb")
+	)
+	(wire
+		(pts
+			(xy 110.49 44.45) (xy 110.49 46.99)
 		)
 		(stroke
 			(width 0)
@@ -6659,7 +6618,7 @@
 	)
 	(wire
 		(pts
-			(xy 140.97 228.6) (xy 135.89 228.6)
+			(xy 138.43 218.44) (xy 133.35 218.44)
 		)
 		(stroke
 			(width 0)
@@ -6669,7 +6628,7 @@
 	)
 	(wire
 		(pts
-			(xy 181.61 109.22) (xy 181.61 93.98)
+			(xy 190.5 133.35) (xy 190.5 118.11)
 		)
 		(stroke
 			(width 0)
@@ -6679,7 +6638,7 @@
 	)
 	(wire
 		(pts
-			(xy 160.02 220.98) (xy 163.83 220.98)
+			(xy 157.48 210.82) (xy 161.29 210.82)
 		)
 		(stroke
 			(width 0)
@@ -6689,7 +6648,7 @@
 	)
 	(wire
 		(pts
-			(xy 46.99 139.7) (xy 80.01 139.7)
+			(xy 62.23 114.3) (xy 95.25 114.3)
 		)
 		(stroke
 			(width 0)
@@ -6699,7 +6658,7 @@
 	)
 	(wire
 		(pts
-			(xy 111.76 213.36) (xy 125.73 213.36)
+			(xy 109.22 203.2) (xy 123.19 203.2)
 		)
 		(stroke
 			(width 0)
@@ -6709,7 +6668,7 @@
 	)
 	(wire
 		(pts
-			(xy 204.47 232.41) (xy 204.47 246.38)
+			(xy 201.93 222.25) (xy 201.93 236.22)
 		)
 		(stroke
 			(width 0)
@@ -6719,7 +6678,7 @@
 	)
 	(wire
 		(pts
-			(xy 320.04 48.26) (xy 320.04 57.15)
+			(xy 314.96 41.91) (xy 314.96 50.8)
 		)
 		(stroke
 			(width 0)
@@ -6729,7 +6688,7 @@
 	)
 	(wire
 		(pts
-			(xy 49.53 181.61) (xy 58.42 181.61)
+			(xy 64.77 156.21) (xy 73.66 156.21)
 		)
 		(stroke
 			(width 0)
@@ -6739,7 +6698,7 @@
 	)
 	(wire
 		(pts
-			(xy 254 242.57) (xy 254 246.38)
+			(xy 251.46 232.41) (xy 251.46 241.3)
 		)
 		(stroke
 			(width 0)
@@ -6749,7 +6708,7 @@
 	)
 	(wire
 		(pts
-			(xy 254 231.14) (xy 254 232.41)
+			(xy 251.46 220.98) (xy 251.46 222.25)
 		)
 		(stroke
 			(width 0)
@@ -6759,7 +6718,7 @@
 	)
 	(wire
 		(pts
-			(xy 137.16 237.49) (xy 137.16 246.38)
+			(xy 134.62 227.33) (xy 134.62 236.22)
 		)
 		(stroke
 			(width 0)
@@ -6769,17 +6728,7 @@
 	)
 	(wire
 		(pts
-			(xy 127 147.32) (xy 109.22 147.32)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "5de18bcb-8aa7-45d1-8092-e09920daddfd")
-	)
-	(wire
-		(pts
-			(xy 24.13 172.72) (xy 24.13 181.61)
+			(xy 39.37 147.32) (xy 39.37 156.21)
 		)
 		(stroke
 			(width 0)
@@ -6789,7 +6738,7 @@
 	)
 	(wire
 		(pts
-			(xy 397.51 82.55) (xy 397.51 83.82)
+			(xy 388.62 69.85) (xy 388.62 71.12)
 		)
 		(stroke
 			(width 0)
@@ -6799,7 +6748,7 @@
 	)
 	(wire
 		(pts
-			(xy 111.76 246.38) (xy 137.16 246.38)
+			(xy 109.22 236.22) (xy 134.62 236.22)
 		)
 		(stroke
 			(width 0)
@@ -6809,17 +6758,7 @@
 	)
 	(wire
 		(pts
-			(xy 254 246.38) (xy 248.92 246.38)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "61fc55f6-a73f-41ea-b10d-ad479453bd78")
-	)
-	(wire
-		(pts
-			(xy 327.66 57.15) (xy 332.74 57.15)
+			(xy 322.58 50.8) (xy 327.66 50.8)
 		)
 		(stroke
 			(width 0)
@@ -6829,7 +6768,7 @@
 	)
 	(wire
 		(pts
-			(xy 46.99 129.54) (xy 46.99 132.08)
+			(xy 62.23 104.14) (xy 62.23 106.68)
 		)
 		(stroke
 			(width 0)
@@ -6839,7 +6778,7 @@
 	)
 	(wire
 		(pts
-			(xy 320.04 44.45) (xy 320.04 48.26)
+			(xy 314.96 33.02) (xy 314.96 41.91)
 		)
 		(stroke
 			(width 0)
@@ -6849,7 +6788,7 @@
 	)
 	(wire
 		(pts
-			(xy 265.43 58.42) (xy 265.43 80.01)
+			(xy 251.46 45.72) (xy 251.46 67.31)
 		)
 		(stroke
 			(width 0)
@@ -6859,7 +6798,7 @@
 	)
 	(wire
 		(pts
-			(xy 163.83 220.98) (xy 163.83 217.17)
+			(xy 161.29 210.82) (xy 161.29 207.01)
 		)
 		(stroke
 			(width 0)
@@ -6869,7 +6808,7 @@
 	)
 	(wire
 		(pts
-			(xy 172.72 96.52) (xy 173.99 96.52)
+			(xy 181.61 120.65) (xy 182.88 120.65)
 		)
 		(stroke
 			(width 0)
@@ -6879,7 +6818,7 @@
 	)
 	(wire
 		(pts
-			(xy 49.53 43.18) (xy 49.53 49.53)
+			(xy 67.31 48.26) (xy 67.31 54.61)
 		)
 		(stroke
 			(width 0)
@@ -6889,7 +6828,7 @@
 	)
 	(wire
 		(pts
-			(xy 365.76 87.63) (xy 373.38 87.63)
+			(xy 360.68 74.93) (xy 368.3 74.93)
 		)
 		(stroke
 			(width 0)
@@ -6899,17 +6838,17 @@
 	)
 	(wire
 		(pts
-			(xy 248.92 58.42) (xy 265.43 58.42)
+			(xy 196.85 118.11) (xy 196.85 114.3)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "6a3b09f0-a135-4809-8f73-2570d8c7a96c")
+		(uuid "69eed9d5-3667-4fde-84f5-ccf9cde37bbf")
 	)
 	(wire
 		(pts
-			(xy 248.92 45.72) (xy 248.92 58.42)
+			(xy 251.46 33.02) (xy 251.46 45.72)
 		)
 		(stroke
 			(width 0)
@@ -6919,7 +6858,7 @@
 	)
 	(wire
 		(pts
-			(xy 125.73 207.01) (xy 125.73 213.36)
+			(xy 123.19 196.85) (xy 123.19 203.2)
 		)
 		(stroke
 			(width 0)
@@ -6929,7 +6868,7 @@
 	)
 	(wire
 		(pts
-			(xy 172.72 99.06) (xy 184.15 99.06)
+			(xy 181.61 123.19) (xy 196.85 123.19)
 		)
 		(stroke
 			(width 0)
@@ -6939,7 +6878,7 @@
 	)
 	(wire
 		(pts
-			(xy 43.18 49.53) (xy 49.53 49.53)
+			(xy 60.96 54.61) (xy 67.31 54.61)
 		)
 		(stroke
 			(width 0)
@@ -6949,7 +6888,7 @@
 	)
 	(wire
 		(pts
-			(xy 88.9 137.16) (xy 88.9 167.64)
+			(xy 104.14 111.76) (xy 104.14 142.24)
 		)
 		(stroke
 			(width 0)
@@ -6959,7 +6898,7 @@
 	)
 	(wire
 		(pts
-			(xy 90.17 44.45) (xy 92.71 44.45)
+			(xy 107.95 49.53) (xy 110.49 49.53)
 		)
 		(stroke
 			(width 0)
@@ -6969,7 +6908,7 @@
 	)
 	(wire
 		(pts
-			(xy 180.34 232.41) (xy 187.96 232.41)
+			(xy 177.8 222.25) (xy 185.42 222.25)
 		)
 		(stroke
 			(width 0)
@@ -6979,7 +6918,7 @@
 	)
 	(wire
 		(pts
-			(xy 365.76 115.57) (xy 373.38 115.57)
+			(xy 360.68 102.87) (xy 368.3 102.87)
 		)
 		(stroke
 			(width 0)
@@ -6989,7 +6928,7 @@
 	)
 	(wire
 		(pts
-			(xy 142.24 40.64) (xy 142.24 46.99)
+			(xy 160.02 45.72) (xy 160.02 52.07)
 		)
 		(stroke
 			(width 0)
@@ -6999,7 +6938,7 @@
 	)
 	(wire
 		(pts
-			(xy 137.16 232.41) (xy 137.16 237.49)
+			(xy 134.62 222.25) (xy 134.62 227.33)
 		)
 		(stroke
 			(width 0)
@@ -7009,7 +6948,7 @@
 	)
 	(wire
 		(pts
-			(xy 90.17 39.37) (xy 92.71 39.37)
+			(xy 107.95 44.45) (xy 110.49 44.45)
 		)
 		(stroke
 			(width 0)
@@ -7019,7 +6958,7 @@
 	)
 	(wire
 		(pts
-			(xy 163.83 224.79) (xy 163.83 220.98)
+			(xy 161.29 214.63) (xy 161.29 210.82)
 		)
 		(stroke
 			(width 0)
@@ -7029,7 +6968,7 @@
 	)
 	(wire
 		(pts
-			(xy 121.92 228.6) (xy 128.27 228.6)
+			(xy 119.38 218.44) (xy 125.73 218.44)
 		)
 		(stroke
 			(width 0)
@@ -7039,7 +6978,7 @@
 	)
 	(wire
 		(pts
-			(xy 365.76 113.03) (xy 373.38 113.03)
+			(xy 360.68 100.33) (xy 368.3 100.33)
 		)
 		(stroke
 			(width 0)
@@ -7049,7 +6988,7 @@
 	)
 	(wire
 		(pts
-			(xy 180.34 201.93) (xy 180.34 215.9)
+			(xy 177.8 191.77) (xy 177.8 205.74)
 		)
 		(stroke
 			(width 0)
@@ -7059,7 +6998,7 @@
 	)
 	(wire
 		(pts
-			(xy 46.99 160.02) (xy 49.53 160.02)
+			(xy 62.23 134.62) (xy 64.77 134.62)
 		)
 		(stroke
 			(width 0)
@@ -7069,7 +7008,7 @@
 	)
 	(wire
 		(pts
-			(xy 195.58 104.14) (xy 195.58 111.76)
+			(xy 196.85 128.27) (xy 196.85 135.89)
 		)
 		(stroke
 			(width 0)
@@ -7079,7 +7018,7 @@
 	)
 	(wire
 		(pts
-			(xy 121.92 224.79) (xy 140.97 224.79)
+			(xy 119.38 214.63) (xy 138.43 214.63)
 		)
 		(stroke
 			(width 0)
@@ -7089,7 +7028,7 @@
 	)
 	(wire
 		(pts
-			(xy 204.47 246.38) (xy 212.09 246.38)
+			(xy 201.93 236.22) (xy 209.55 236.22)
 		)
 		(stroke
 			(width 0)
@@ -7099,7 +7038,7 @@
 	)
 	(wire
 		(pts
-			(xy 160.02 224.79) (xy 163.83 224.79)
+			(xy 157.48 214.63) (xy 161.29 214.63)
 		)
 		(stroke
 			(width 0)
@@ -7109,7 +7048,7 @@
 	)
 	(wire
 		(pts
-			(xy 48.26 43.18) (xy 49.53 43.18)
+			(xy 66.04 48.26) (xy 67.31 48.26)
 		)
 		(stroke
 			(width 0)
@@ -7119,7 +7058,17 @@
 	)
 	(wire
 		(pts
-			(xy 195.58 104.14) (xy 195.58 101.6)
+			(xy 88.9 46.99) (xy 92.71 46.99)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "8454baf3-423b-40d3-a482-9c38f114a985")
+	)
+	(wire
+		(pts
+			(xy 196.85 128.27) (xy 196.85 125.73)
 		)
 		(stroke
 			(width 0)
@@ -7129,7 +7078,7 @@
 	)
 	(wire
 		(pts
-			(xy 180.34 201.93) (xy 187.96 201.93)
+			(xy 177.8 191.77) (xy 185.42 191.77)
 		)
 		(stroke
 			(width 0)
@@ -7139,7 +7088,7 @@
 	)
 	(wire
 		(pts
-			(xy 80.01 177.8) (xy 80.01 181.61)
+			(xy 95.25 152.4) (xy 95.25 156.21)
 		)
 		(stroke
 			(width 0)
@@ -7149,7 +7098,7 @@
 	)
 	(wire
 		(pts
-			(xy 31.75 29.21) (xy 31.75 31.75)
+			(xy 49.53 34.29) (xy 49.53 36.83)
 		)
 		(stroke
 			(width 0)
@@ -7159,7 +7108,7 @@
 	)
 	(wire
 		(pts
-			(xy 219.71 201.93) (xy 227.33 201.93)
+			(xy 217.17 191.77) (xy 224.79 191.77)
 		)
 		(stroke
 			(width 0)
@@ -7169,7 +7118,7 @@
 	)
 	(wire
 		(pts
-			(xy 49.53 160.02) (xy 49.53 167.64)
+			(xy 64.77 134.62) (xy 64.77 142.24)
 		)
 		(stroke
 			(width 0)
@@ -7179,7 +7128,7 @@
 	)
 	(wire
 		(pts
-			(xy 173.99 96.52) (xy 204.47 96.52)
+			(xy 182.88 120.65) (xy 222.25 120.65)
 		)
 		(stroke
 			(width 0)
@@ -7189,7 +7138,17 @@
 	)
 	(wire
 		(pts
-			(xy 320.04 57.15) (xy 320.04 74.93)
+			(xy 360.68 120.65) (xy 368.3 120.65)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "90c6bdd9-f1c9-41bf-aab9-73dddca40200")
+	)
+	(wire
+		(pts
+			(xy 314.96 50.8) (xy 314.96 62.23)
 		)
 		(stroke
 			(width 0)
@@ -7199,7 +7158,7 @@
 	)
 	(wire
 		(pts
-			(xy 127 35.56) (xy 146.05 35.56)
+			(xy 144.78 40.64) (xy 163.83 40.64)
 		)
 		(stroke
 			(width 0)
@@ -7209,7 +7168,7 @@
 	)
 	(wire
 		(pts
-			(xy 140.97 232.41) (xy 137.16 232.41)
+			(xy 138.43 222.25) (xy 134.62 222.25)
 		)
 		(stroke
 			(width 0)
@@ -7219,7 +7178,7 @@
 	)
 	(wire
 		(pts
-			(xy 68.58 181.61) (xy 80.01 181.61)
+			(xy 83.82 156.21) (xy 95.25 156.21)
 		)
 		(stroke
 			(width 0)
@@ -7229,7 +7188,7 @@
 	)
 	(wire
 		(pts
-			(xy 68.58 213.36) (xy 81.28 213.36)
+			(xy 58.42 203.2) (xy 71.12 203.2)
 		)
 		(stroke
 			(width 0)
@@ -7239,7 +7198,7 @@
 	)
 	(wire
 		(pts
-			(xy 46.99 147.32) (xy 109.22 147.32)
+			(xy 62.23 121.92) (xy 113.03 121.92)
 		)
 		(stroke
 			(width 0)
@@ -7249,7 +7208,17 @@
 	)
 	(wire
 		(pts
-			(xy 111.76 231.14) (xy 111.76 246.38)
+			(xy 148.59 236.22) (xy 148.59 243.84)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "980dd8ab-c911-4552-bf50-055c5433695e")
+	)
+	(wire
+		(pts
+			(xy 109.22 220.98) (xy 109.22 236.22)
 		)
 		(stroke
 			(width 0)
@@ -7259,7 +7228,7 @@
 	)
 	(wire
 		(pts
-			(xy 90.17 41.91) (xy 92.71 41.91)
+			(xy 107.95 46.99) (xy 110.49 46.99)
 		)
 		(stroke
 			(width 0)
@@ -7269,7 +7238,7 @@
 	)
 	(wire
 		(pts
-			(xy 127 158.75) (xy 127 149.86)
+			(xy 113.03 133.35) (xy 113.03 124.46)
 		)
 		(stroke
 			(width 0)
@@ -7279,7 +7248,7 @@
 	)
 	(wire
 		(pts
-			(xy 234.95 232.41) (xy 234.95 246.38)
+			(xy 232.41 222.25) (xy 232.41 236.22)
 		)
 		(stroke
 			(width 0)
@@ -7289,7 +7258,7 @@
 	)
 	(wire
 		(pts
-			(xy 106.68 213.36) (xy 111.76 213.36)
+			(xy 101.6 203.2) (xy 109.22 203.2)
 		)
 		(stroke
 			(width 0)
@@ -7299,7 +7268,7 @@
 	)
 	(wire
 		(pts
-			(xy 219.71 232.41) (xy 219.71 246.38)
+			(xy 217.17 222.25) (xy 217.17 236.22)
 		)
 		(stroke
 			(width 0)
@@ -7309,7 +7278,7 @@
 	)
 	(wire
 		(pts
-			(xy 127 158.75) (xy 135.89 158.75)
+			(xy 113.03 133.35) (xy 121.92 133.35)
 		)
 		(stroke
 			(width 0)
@@ -7319,7 +7288,7 @@
 	)
 	(wire
 		(pts
-			(xy 43.18 46.99) (xy 43.18 49.53)
+			(xy 60.96 52.07) (xy 60.96 54.61)
 		)
 		(stroke
 			(width 0)
@@ -7329,7 +7298,7 @@
 	)
 	(wire
 		(pts
-			(xy 227.33 246.38) (xy 234.95 246.38)
+			(xy 224.79 236.22) (xy 232.41 236.22)
 		)
 		(stroke
 			(width 0)
@@ -7339,7 +7308,7 @@
 	)
 	(wire
 		(pts
-			(xy 196.85 222.25) (xy 196.85 246.38)
+			(xy 194.31 212.09) (xy 194.31 236.22)
 		)
 		(stroke
 			(width 0)
@@ -7349,7 +7318,17 @@
 	)
 	(wire
 		(pts
-			(xy 204.47 246.38) (xy 196.85 246.38)
+			(xy 251.46 241.3) (xy 251.46 243.84)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "a3a770ed-d5be-4489-8108-3a68dc13518b")
+	)
+	(wire
+		(pts
+			(xy 201.93 236.22) (xy 194.31 236.22)
 		)
 		(stroke
 			(width 0)
@@ -7359,7 +7338,7 @@
 	)
 	(wire
 		(pts
-			(xy 365.76 95.25) (xy 397.51 95.25)
+			(xy 360.68 82.55) (xy 388.62 82.55)
 		)
 		(stroke
 			(width 0)
@@ -7369,7 +7348,17 @@
 	)
 	(wire
 		(pts
-			(xy 31.75 43.18) (xy 38.1 43.18)
+			(xy 107.95 41.91) (xy 110.49 41.91)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "a66bba6a-bced-4c00-8083-58d87c13e489")
+	)
+	(wire
+		(pts
+			(xy 49.53 48.26) (xy 55.88 48.26)
 		)
 		(stroke
 			(width 0)
@@ -7379,7 +7368,7 @@
 	)
 	(wire
 		(pts
-			(xy 88.9 177.8) (xy 88.9 181.61)
+			(xy 104.14 152.4) (xy 104.14 156.21)
 		)
 		(stroke
 			(width 0)
@@ -7389,7 +7378,7 @@
 	)
 	(wire
 		(pts
-			(xy 187.96 246.38) (xy 196.85 246.38)
+			(xy 185.42 236.22) (xy 194.31 236.22)
 		)
 		(stroke
 			(width 0)
@@ -7399,7 +7388,7 @@
 	)
 	(wire
 		(pts
-			(xy 212.09 201.93) (xy 219.71 201.93)
+			(xy 209.55 191.77) (xy 217.17 191.77)
 		)
 		(stroke
 			(width 0)
@@ -7409,7 +7398,7 @@
 	)
 	(wire
 		(pts
-			(xy 227.33 201.93) (xy 227.33 214.63)
+			(xy 224.79 191.77) (xy 224.79 204.47)
 		)
 		(stroke
 			(width 0)
@@ -7419,7 +7408,7 @@
 	)
 	(wire
 		(pts
-			(xy 80.01 181.61) (xy 88.9 181.61)
+			(xy 95.25 156.21) (xy 104.14 156.21)
 		)
 		(stroke
 			(width 0)
@@ -7429,7 +7418,7 @@
 	)
 	(wire
 		(pts
-			(xy 212.09 116.84) (xy 215.9 116.84)
+			(xy 213.36 140.97) (xy 217.17 140.97)
 		)
 		(stroke
 			(width 0)
@@ -7439,17 +7428,7 @@
 	)
 	(wire
 		(pts
-			(xy 365.76 135.89) (xy 373.38 135.89)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "b4e1f037-2953-4398-a066-87c21db33d3a")
-	)
-	(wire
-		(pts
-			(xy 219.71 201.93) (xy 219.71 224.79)
+			(xy 217.17 191.77) (xy 217.17 214.63)
 		)
 		(stroke
 			(width 0)
@@ -7459,7 +7438,7 @@
 	)
 	(wire
 		(pts
-			(xy 332.74 48.26) (xy 332.74 57.15)
+			(xy 327.66 41.91) (xy 327.66 50.8)
 		)
 		(stroke
 			(width 0)
@@ -7469,7 +7448,17 @@
 	)
 	(wire
 		(pts
-			(xy 163.83 213.36) (xy 172.72 213.36)
+			(xy 265.43 77.47) (xy 269.24 77.47)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "b5be4bc7-c64f-4e3f-8e39-771ef17759ad")
+	)
+	(wire
+		(pts
+			(xy 161.29 203.2) (xy 170.18 203.2)
 		)
 		(stroke
 			(width 0)
@@ -7479,7 +7468,7 @@
 	)
 	(wire
 		(pts
-			(xy 93.98 213.36) (xy 96.52 213.36)
+			(xy 83.82 203.2) (xy 91.44 203.2)
 		)
 		(stroke
 			(width 0)
@@ -7489,7 +7478,7 @@
 	)
 	(wire
 		(pts
-			(xy 172.72 213.36) (xy 172.72 215.9)
+			(xy 170.18 203.2) (xy 170.18 205.74)
 		)
 		(stroke
 			(width 0)
@@ -7499,7 +7488,7 @@
 	)
 	(wire
 		(pts
-			(xy 24.13 181.61) (xy 31.75 181.61)
+			(xy 39.37 156.21) (xy 46.99 156.21)
 		)
 		(stroke
 			(width 0)
@@ -7509,7 +7498,7 @@
 	)
 	(wire
 		(pts
-			(xy 135.89 138.43) (xy 152.4 138.43)
+			(xy 121.92 113.03) (xy 138.43 113.03)
 		)
 		(stroke
 			(width 0)
@@ -7519,7 +7508,7 @@
 	)
 	(wire
 		(pts
-			(xy 25.4 43.18) (xy 31.75 43.18)
+			(xy 43.18 48.26) (xy 49.53 48.26)
 		)
 		(stroke
 			(width 0)
@@ -7529,7 +7518,7 @@
 	)
 	(wire
 		(pts
-			(xy 46.99 137.16) (xy 88.9 137.16)
+			(xy 62.23 111.76) (xy 104.14 111.76)
 		)
 		(stroke
 			(width 0)
@@ -7539,7 +7528,7 @@
 	)
 	(wire
 		(pts
-			(xy 68.58 176.53) (xy 68.58 181.61)
+			(xy 83.82 151.13) (xy 83.82 156.21)
 		)
 		(stroke
 			(width 0)
@@ -7549,7 +7538,7 @@
 	)
 	(wire
 		(pts
-			(xy 238.76 58.42) (xy 248.92 58.42)
+			(xy 233.68 45.72) (xy 251.46 45.72)
 		)
 		(stroke
 			(width 0)
@@ -7559,7 +7548,17 @@
 	)
 	(wire
 		(pts
-			(xy 204.47 201.93) (xy 204.47 224.79)
+			(xy 314.96 147.32) (xy 314.96 143.51)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "c7fefcc4-15fe-4d1d-811a-5605fa01c88c")
+	)
+	(wire
+		(pts
+			(xy 201.93 191.77) (xy 201.93 214.63)
 		)
 		(stroke
 			(width 0)
@@ -7569,7 +7568,7 @@
 	)
 	(wire
 		(pts
-			(xy 127 138.43) (xy 135.89 138.43)
+			(xy 113.03 113.03) (xy 121.92 113.03)
 		)
 		(stroke
 			(width 0)
@@ -7579,27 +7578,7 @@
 	)
 	(wire
 		(pts
-			(xy 248.92 246.38) (xy 242.57 246.38)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "c94277c6-bb77-4413-a201-8b6304bea71a")
-	)
-	(wire
-		(pts
-			(xy 224.79 58.42) (xy 224.79 66.04)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "ca6aa2f1-c911-4642-8239-e589cde2a916")
-	)
-	(wire
-		(pts
-			(xy 412.75 95.25) (xy 412.75 102.87)
+			(xy 407.67 82.55) (xy 407.67 90.17)
 		)
 		(stroke
 			(width 0)
@@ -7609,7 +7588,7 @@
 	)
 	(wire
 		(pts
-			(xy 215.9 116.84) (xy 215.9 120.65)
+			(xy 217.17 140.97) (xy 217.17 144.78)
 		)
 		(stroke
 			(width 0)
@@ -7619,7 +7598,7 @@
 	)
 	(wire
 		(pts
-			(xy 212.09 214.63) (xy 212.09 201.93)
+			(xy 209.55 204.47) (xy 209.55 191.77)
 		)
 		(stroke
 			(width 0)
@@ -7629,17 +7608,7 @@
 	)
 	(wire
 		(pts
-			(xy 99.06 149.86) (xy 99.06 156.21)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "d05619d1-4304-4408-b5ef-c868a2eb9840")
-	)
-	(wire
-		(pts
-			(xy 137.16 39.37) (xy 137.16 33.02)
+			(xy 154.94 44.45) (xy 154.94 38.1)
 		)
 		(stroke
 			(width 0)
@@ -7649,7 +7618,7 @@
 	)
 	(wire
 		(pts
-			(xy 41.91 181.61) (xy 49.53 181.61)
+			(xy 57.15 156.21) (xy 64.77 156.21)
 		)
 		(stroke
 			(width 0)
@@ -7659,17 +7628,7 @@
 	)
 	(wire
 		(pts
-			(xy 71.12 36.83) (xy 74.93 36.83)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "d19b0044-7ec4-4e22-ba5b-b0ae6dee183a")
-	)
-	(wire
-		(pts
-			(xy 215.9 128.27) (xy 215.9 129.54)
+			(xy 217.17 152.4) (xy 217.17 153.67)
 		)
 		(stroke
 			(width 0)
@@ -7679,7 +7638,7 @@
 	)
 	(wire
 		(pts
-			(xy 46.99 149.86) (xy 46.99 152.4)
+			(xy 62.23 124.46) (xy 62.23 127)
 		)
 		(stroke
 			(width 0)
@@ -7689,7 +7648,7 @@
 	)
 	(wire
 		(pts
-			(xy 195.58 121.92) (xy 195.58 129.54)
+			(xy 196.85 146.05) (xy 196.85 153.67)
 		)
 		(stroke
 			(width 0)
@@ -7699,7 +7658,7 @@
 	)
 	(wire
 		(pts
-			(xy 234.95 201.93) (xy 242.57 201.93)
+			(xy 232.41 191.77) (xy 240.03 191.77)
 		)
 		(stroke
 			(width 0)
@@ -7709,7 +7668,7 @@
 	)
 	(wire
 		(pts
-			(xy 181.61 109.22) (xy 181.61 129.54)
+			(xy 190.5 133.35) (xy 190.5 153.67)
 		)
 		(stroke
 			(width 0)
@@ -7719,7 +7678,7 @@
 	)
 	(wire
 		(pts
-			(xy 146.05 148.59) (xy 146.05 181.61)
+			(xy 132.08 123.19) (xy 132.08 156.21)
 		)
 		(stroke
 			(width 0)
@@ -7729,17 +7688,7 @@
 	)
 	(wire
 		(pts
-			(xy 71.12 41.91) (xy 74.93 41.91)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "d7c7b6d9-add4-484e-afcf-c220a9f622a3")
-	)
-	(wire
-		(pts
-			(xy 254 219.71) (xy 254 223.52)
+			(xy 251.46 209.55) (xy 251.46 213.36)
 		)
 		(stroke
 			(width 0)
@@ -7749,7 +7698,7 @@
 	)
 	(wire
 		(pts
-			(xy 111.76 213.36) (xy 111.76 223.52)
+			(xy 109.22 203.2) (xy 109.22 213.36)
 		)
 		(stroke
 			(width 0)
@@ -7759,37 +7708,7 @@
 	)
 	(wire
 		(pts
-			(xy 99.06 163.83) (xy 99.06 181.61)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "db7dea68-83f6-43ae-a920-d0639bc009ce")
-	)
-	(wire
-		(pts
-			(xy 109.22 163.83) (xy 109.22 181.61)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "dd33dee3-4089-4376-aeae-7adcb3addb81")
-	)
-	(wire
-		(pts
-			(xy 109.22 147.32) (xy 109.22 156.21)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "de2383b7-3b5a-4691-84fc-18d24f1d874b")
-	)
-	(wire
-		(pts
-			(xy 46.99 124.46) (xy 46.99 127)
+			(xy 62.23 99.06) (xy 62.23 101.6)
 		)
 		(stroke
 			(width 0)
@@ -7799,7 +7718,7 @@
 	)
 	(wire
 		(pts
-			(xy 163.83 243.84) (xy 163.83 246.38)
+			(xy 161.29 233.68) (xy 161.29 236.22)
 		)
 		(stroke
 			(width 0)
@@ -7809,7 +7728,7 @@
 	)
 	(wire
 		(pts
-			(xy 234.95 58.42) (xy 238.76 58.42)
+			(xy 224.79 45.72) (xy 233.68 45.72)
 		)
 		(stroke
 			(width 0)
@@ -7819,7 +7738,7 @@
 	)
 	(wire
 		(pts
-			(xy 234.95 201.93) (xy 234.95 224.79)
+			(xy 232.41 191.77) (xy 232.41 214.63)
 		)
 		(stroke
 			(width 0)
@@ -7829,7 +7748,7 @@
 	)
 	(wire
 		(pts
-			(xy 215.9 116.84) (xy 220.98 116.84)
+			(xy 217.17 140.97) (xy 222.25 140.97)
 		)
 		(stroke
 			(width 0)
@@ -7839,7 +7758,7 @@
 	)
 	(wire
 		(pts
-			(xy 80.01 139.7) (xy 80.01 167.64)
+			(xy 95.25 114.3) (xy 95.25 142.24)
 		)
 		(stroke
 			(width 0)
@@ -7849,7 +7768,7 @@
 	)
 	(wire
 		(pts
-			(xy 92.71 41.91) (xy 92.71 44.45)
+			(xy 110.49 46.99) (xy 110.49 49.53)
 		)
 		(stroke
 			(width 0)
@@ -7859,7 +7778,7 @@
 	)
 	(wire
 		(pts
-			(xy 46.99 132.08) (xy 68.58 132.08)
+			(xy 62.23 106.68) (xy 83.82 106.68)
 		)
 		(stroke
 			(width 0)
@@ -7869,7 +7788,7 @@
 	)
 	(wire
 		(pts
-			(xy 142.24 40.64) (xy 146.05 40.64)
+			(xy 160.02 45.72) (xy 163.83 45.72)
 		)
 		(stroke
 			(width 0)
@@ -7879,7 +7798,7 @@
 	)
 	(wire
 		(pts
-			(xy 135.89 158.75) (xy 152.4 158.75)
+			(xy 121.92 133.35) (xy 138.43 133.35)
 		)
 		(stroke
 			(width 0)
@@ -7889,7 +7808,7 @@
 	)
 	(wire
 		(pts
-			(xy 92.71 132.08) (xy 116.84 132.08)
+			(xy 113.03 106.68) (xy 138.43 106.68)
 		)
 		(stroke
 			(width 0)
@@ -7899,7 +7818,7 @@
 	)
 	(wire
 		(pts
-			(xy 365.76 90.17) (xy 373.38 90.17)
+			(xy 360.68 77.47) (xy 368.3 77.47)
 		)
 		(stroke
 			(width 0)
@@ -7909,7 +7828,7 @@
 	)
 	(wire
 		(pts
-			(xy 121.92 228.6) (xy 121.92 224.79)
+			(xy 119.38 218.44) (xy 119.38 214.63)
 		)
 		(stroke
 			(width 0)
@@ -7919,7 +7838,7 @@
 	)
 	(wire
 		(pts
-			(xy 204.47 201.93) (xy 212.09 201.93)
+			(xy 201.93 191.77) (xy 209.55 191.77)
 		)
 		(stroke
 			(width 0)
@@ -7929,7 +7848,7 @@
 	)
 	(wire
 		(pts
-			(xy 196.85 201.93) (xy 204.47 201.93)
+			(xy 194.31 191.77) (xy 201.93 191.77)
 		)
 		(stroke
 			(width 0)
@@ -7939,7 +7858,7 @@
 	)
 	(wire
 		(pts
-			(xy 160.02 217.17) (xy 163.83 217.17)
+			(xy 157.48 207.01) (xy 161.29 207.01)
 		)
 		(stroke
 			(width 0)
@@ -7949,7 +7868,7 @@
 	)
 	(wire
 		(pts
-			(xy 31.75 181.61) (xy 41.91 181.61)
+			(xy 46.99 156.21) (xy 57.15 156.21)
 		)
 		(stroke
 			(width 0)
@@ -7959,7 +7878,7 @@
 	)
 	(wire
 		(pts
-			(xy 195.58 104.14) (xy 196.85 104.14)
+			(xy 196.85 128.27) (xy 198.12 128.27)
 		)
 		(stroke
 			(width 0)
@@ -7969,7 +7888,7 @@
 	)
 	(wire
 		(pts
-			(xy 58.42 167.64) (xy 58.42 157.48)
+			(xy 73.66 142.24) (xy 73.66 132.08)
 		)
 		(stroke
 			(width 0)
@@ -7979,7 +7898,7 @@
 	)
 	(wire
 		(pts
-			(xy 58.42 181.61) (xy 68.58 181.61)
+			(xy 73.66 156.21) (xy 83.82 156.21)
 		)
 		(stroke
 			(width 0)
@@ -7989,7 +7908,7 @@
 	)
 	(wire
 		(pts
-			(xy 137.16 246.38) (xy 151.13 246.38)
+			(xy 134.62 236.22) (xy 148.59 236.22)
 		)
 		(stroke
 			(width 0)
@@ -7999,7 +7918,7 @@
 	)
 	(wire
 		(pts
-			(xy 163.83 217.17) (xy 163.83 213.36)
+			(xy 161.29 207.01) (xy 161.29 203.2)
 		)
 		(stroke
 			(width 0)
@@ -8009,7 +7928,17 @@
 	)
 	(wire
 		(pts
-			(xy 121.92 224.79) (xy 121.92 201.93)
+			(xy 360.68 123.19) (xy 368.3 123.19)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "f7ca6623-cfaf-4ef1-9b3d-c67f177f2217")
+	)
+	(wire
+		(pts
+			(xy 119.38 214.63) (xy 119.38 191.77)
 		)
 		(stroke
 			(width 0)
@@ -8019,7 +7948,17 @@
 	)
 	(wire
 		(pts
-			(xy 187.96 232.41) (xy 187.96 233.68)
+			(xy 88.9 44.45) (xy 92.71 44.45)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "fc172aed-d811-4850-aba8-41bdeb29528a")
+	)
+	(wire
+		(pts
+			(xy 185.42 222.25) (xy 185.42 223.52)
 		)
 		(stroke
 			(width 0)
@@ -8028,7 +7967,7 @@
 		(uuid "fed817df-e740-47e3-83c7-2e8f651a9fdc")
 	)
 	(label "VBUS"
-		(at 72.39 132.08 0)
+		(at 87.63 106.68 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -8038,7 +7977,7 @@
 		(uuid "49d6c3bc-74cf-443b-a686-01a7aaa1482a")
 	)
 	(label "LED-"
-		(at 196.85 104.14 0)
+		(at 198.12 128.27 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -8048,7 +7987,7 @@
 		)
 		(uuid "747bdf55-e11c-479a-97e3-c8795ae7b459")
 		(property "Netclass" "Power"
-			(at 196.85 105.41 0)
+			(at 198.12 129.54 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8059,7 +7998,7 @@
 		)
 	)
 	(label "PSU_PHASE"
-		(at 133.35 201.93 0)
+		(at 130.81 191.77 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -8069,7 +8008,7 @@
 		(uuid "8150804e-c2ee-47cb-b638-db116838db40")
 	)
 	(label "GND"
-		(at 182.88 109.22 0)
+		(at 181.61 133.35 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -8078,7 +8017,7 @@
 		)
 		(uuid "a721217f-2b89-4ba5-bfd9-231891208720")
 		(property "Netclass" "Default"
-			(at 182.88 105.664 0)
+			(at 181.61 129.794 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8089,7 +8028,7 @@
 		)
 	)
 	(label "D-"
-		(at 69.85 147.32 0)
+		(at 85.09 121.92 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -8099,7 +8038,7 @@
 		(uuid "d46a754e-42f7-43b0-8f8e-b25ce23d091a")
 	)
 	(label "D+"
-		(at 69.85 149.86 0)
+		(at 85.09 124.46 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -8109,7 +8048,7 @@
 		(uuid "d9243d3b-69a6-4165-aa6b-72ab7b1d7efd")
 	)
 	(label "LED+"
-		(at 184.15 88.9 0)
+		(at 198.12 118.11 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -8120,7 +8059,7 @@
 	)
 	(global_label "5V"
 		(shape input)
-		(at 116.84 132.08 0)
+		(at 138.43 106.68 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -8130,271 +8069,7 @@
 		)
 		(uuid "00479544-6238-4304-969b-490670a17820")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 122.1233 132.08 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-	)
-	(global_label "DIP2"
-		(shape input)
-		(at 71.12 41.91 180)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right)
-		)
-		(uuid "08c7da69-f6cf-4071-a181-d2c3585e5af3")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 63.7805 41.91 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-				(hide yes)
-			)
-		)
-	)
-	(global_label "3.3V"
-		(shape input)
-		(at 71.12 36.83 180)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right)
-		)
-		(uuid "110d7dea-dc42-460f-a50a-7c9527da093d")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 64.0224 36.83 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-				(hide yes)
-			)
-		)
-	)
-	(global_label "LEDSIG"
-		(shape input)
-		(at 373.38 113.03 0)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left)
-		)
-		(uuid "1474f898-d498-489b-aeb0-476b71e0a048")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 382.8966 113.03 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-	)
-	(global_label "TRIG"
-		(shape input)
-		(at 127 35.56 180)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right)
-		)
-		(uuid "17735bac-fa46-4d3c-90a1-6accf57c4927")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 119.9024 35.56 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-				(hide yes)
-			)
-		)
-	)
-	(global_label "LEDSIG"
-		(shape input)
-		(at 95.25 36.83 0)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left)
-		)
-		(uuid "1d7f8304-b7e6-4634-bfc5-b73bb9d8cf24")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 104.7666 36.83 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-	)
-	(global_label "TRIG"
-		(shape input)
-		(at 373.38 130.81 0)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left)
-		)
-		(uuid "1ff933c4-cfe6-4cc9-b127-ace2d48c8609")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 380.4776 130.81 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-	)
-	(global_label "ECHO"
-		(shape input)
-		(at 373.38 128.27 0)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left)
-		)
-		(uuid "2821bc31-35a0-4332-a0f4-a5001ba499a7")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 381.4452 128.27 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-	)
-	(global_label "3.3V"
-		(shape input)
-		(at 397.51 82.55 90)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left)
-		)
-		(uuid "2bfd3ada-4439-42d4-a8cf-477aade0b7e0")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 397.51 75.4524 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-	)
-	(global_label "BTN"
-		(shape input)
-		(at 373.38 100.33 0)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left)
-		)
-		(uuid "2dbd3d2d-9441-410e-85de-8fb2a79401a8")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 379.9333 100.33 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-	)
-	(global_label "3.3V"
-		(shape input)
-		(at 31.75 29.21 90)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left)
-		)
-		(uuid "31cbc6ea-72df-4197-89bb-856e3aa8651a")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 31.75 22.1124 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-	)
-	(global_label "3.3V"
-		(shape input)
-		(at 261.62 201.93 0)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left)
-		)
-		(uuid "363beeee-29c2-4762-b147-f7a8e0835fb8")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 268.7176 201.93 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-	)
-	(global_label "3.3V"
-		(shape input)
-		(at 320.04 44.45 90)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left)
-		)
-		(uuid "3cf6c9d6-7612-4c7f-86b2-5c7cd912abf7")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 320.04 37.3524 90)
+			(at 143.7133 106.68 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8406,29 +8081,7 @@
 	)
 	(global_label "DIP1"
 		(shape input)
-		(at 373.38 133.35 0)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left)
-		)
-		(uuid "58ebee13-52b8-48a9-8fa1-b1473948f676")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 380.7195 133.35 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-	)
-	(global_label "BTN"
-		(shape input)
-		(at 25.4 43.18 180)
+		(at 88.9 44.45 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -8436,75 +8089,9 @@
 			)
 			(justify right)
 		)
-		(uuid "5f420aef-8de4-49a9-a5a8-b4cb6a6ccb47")
+		(uuid "08c7da69-f6cf-4071-a181-d2c3585e5af3")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 18.8467 43.18 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-				(hide yes)
-			)
-		)
-	)
-	(global_label "PG"
-		(shape input)
-		(at 248.92 45.72 90)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left)
-		)
-		(uuid "622777b7-a84f-47c7-9cfb-485e60c45290")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 248.92 40.1948 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-	)
-	(global_label "DIP3"
-		(shape input)
-		(at 71.12 44.45 180)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right)
-		)
-		(uuid "65611609-1883-4a05-bde5-e2662b1c7536")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 63.7805 44.45 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-				(hide yes)
-			)
-		)
-	)
-	(global_label "ECHO"
-		(shape input)
-		(at 127 38.1 180)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right)
-		)
-		(uuid "789adf35-bf58-4663-9e36-c7815082ea80")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 118.9348 38.1 0)
+			(at 81.5605 44.45 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8516,7 +8103,315 @@
 	)
 	(global_label "LEDSIG"
 		(shape input)
-		(at 220.98 116.84 0)
+		(at 368.3 100.33 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "1474f898-d498-489b-aeb0-476b71e0a048")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 377.8166 100.33 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+	)
+	(global_label "TRIG"
+		(shape input)
+		(at 144.78 40.64 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "17735bac-fa46-4d3c-90a1-6accf57c4927")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 137.6824 40.64 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+				(hide yes)
+			)
+		)
+	)
+	(global_label "TRIG"
+		(shape input)
+		(at 368.3 118.11 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "1ff933c4-cfe6-4cc9-b127-ace2d48c8609")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 375.3976 118.11 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+	)
+	(global_label "ECHO"
+		(shape input)
+		(at 368.3 115.57 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "2821bc31-35a0-4332-a0f4-a5001ba499a7")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 376.3652 115.57 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+	)
+	(global_label "3V3"
+		(shape input)
+		(at 388.62 69.85 90)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "2bfd3ada-4439-42d4-a8cf-477aade0b7e0")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 388.62 63.3572 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+	)
+	(global_label "BTN"
+		(shape input)
+		(at 368.3 87.63 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "2dbd3d2d-9441-410e-85de-8fb2a79401a8")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 374.8533 87.63 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+	)
+	(global_label "3V3"
+		(shape input)
+		(at 49.53 34.29 90)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "31cbc6ea-72df-4197-89bb-856e3aa8651a")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 49.53 27.7972 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+	)
+	(global_label "3V3"
+		(shape input)
+		(at 259.08 191.77 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "363beeee-29c2-4762-b147-f7a8e0835fb8")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 265.5728 191.77 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+	)
+	(global_label "3V3"
+		(shape input)
+		(at 314.96 33.02 90)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "3cf6c9d6-7612-4c7f-86b2-5c7cd912abf7")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 314.96 26.5272 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+	)
+	(global_label "DIP0"
+		(shape input)
+		(at 265.43 77.47 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "42021528-05dc-4554-9afd-c55527168c13")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 258.0905 77.47 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+				(hide yes)
+			)
+		)
+	)
+	(global_label "BTN"
+		(shape input)
+		(at 43.18 48.26 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "5f420aef-8de4-49a9-a5a8-b4cb6a6ccb47")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 36.6267 48.26 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+				(hide yes)
+			)
+		)
+	)
+	(global_label "PG"
+		(shape input)
+		(at 251.46 33.02 90)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "622777b7-a84f-47c7-9cfb-485e60c45290")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 251.46 27.4948 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+	)
+	(global_label "DIP2"
+		(shape input)
+		(at 88.9 46.99 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "65611609-1883-4a05-bde5-e2662b1c7536")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 81.5605 46.99 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+				(hide yes)
+			)
+		)
+	)
+	(global_label "ECHO"
+		(shape input)
+		(at 144.78 43.18 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "789adf35-bf58-4663-9e36-c7815082ea80")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 136.7148 43.18 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+				(hide yes)
+			)
+		)
+	)
+	(global_label "LEDSIG"
+		(shape input)
+		(at 222.25 140.97 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -8526,7 +8421,7 @@
 		)
 		(uuid "79564885-a97f-434c-a076-81c3005fca4c")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 230.4966 116.84 0)
+			(at 231.7666 140.97 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8538,7 +8433,7 @@
 	)
 	(global_label "PG"
 		(shape input)
-		(at 133.35 220.98 180)
+		(at 130.81 210.82 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -8548,7 +8443,7 @@
 		)
 		(uuid "8ee3b96f-1cc2-4871-906b-6c0d9be85c07")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 127.8248 220.98 0)
+			(at 125.2848 210.82 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8560,7 +8455,7 @@
 	)
 	(global_label "24VDC"
 		(shape input)
-		(at 204.47 96.52 0)
+		(at 222.25 120.65 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -8570,7 +8465,7 @@
 		)
 		(uuid "9ddb0f41-3fe6-4e0e-95a7-99cac23944e2")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 213.5028 96.52 0)
+			(at 231.2828 120.65 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8582,7 +8477,7 @@
 	)
 	(global_label "D-"
 		(shape input)
-		(at 373.38 90.17 0)
+		(at 368.3 77.47 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -8592,7 +8487,7 @@
 		)
 		(uuid "a7c219f5-b78f-4312-924e-78a258a835f9")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 379.2076 90.17 0)
+			(at 374.1276 77.47 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8604,7 +8499,7 @@
 	)
 	(global_label "5V"
 		(shape input)
-		(at 111.76 199.39 90)
+		(at 109.22 189.23 90)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -8614,7 +8509,7 @@
 		)
 		(uuid "a7c74e1e-c215-4c50-ba74-b39cec2bed58")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 111.76 194.1067 90)
+			(at 109.22 183.9467 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8626,7 +8521,7 @@
 	)
 	(global_label "D-"
 		(shape input)
-		(at 152.4 138.43 0)
+		(at 138.43 113.03 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -8636,117 +8531,7 @@
 		)
 		(uuid "a83650e1-b3d9-4fc9-87ae-9eddefb3edcb")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 158.2276 138.43 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-	)
-	(global_label "DIP2"
-		(shape input)
-		(at 373.38 135.89 0)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left)
-		)
-		(uuid "ab4a8168-dbbe-4b99-9cd4-fae7f41d7757")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 380.7195 135.89 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-	)
-	(global_label "24VDC"
-		(shape input)
-		(at 68.58 213.36 180)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right)
-		)
-		(uuid "b30aa19d-046a-48e8-8bb0-c3f28eb793d4")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 59.5472 213.36 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-				(hide yes)
-			)
-		)
-	)
-	(global_label "D+"
-		(shape input)
-		(at 373.38 87.63 0)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left)
-		)
-		(uuid "b939c111-678f-4591-a3ce-eee80bc9e180")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 379.2076 87.63 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-	)
-	(global_label "3.3V"
-		(shape input)
-		(at 127 33.02 180)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right)
-		)
-		(uuid "cb5417a4-70ef-49ee-9587-95f139184446")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 119.9024 33.02 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-				(hide yes)
-			)
-		)
-	)
-	(global_label "3.3V"
-		(shape input)
-		(at 238.76 45.72 90)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left)
-		)
-		(uuid "cfe178c4-922b-480f-9189-9ee198fa9a53")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 238.76 38.6224 90)
+			(at 144.2576 113.03 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8758,7 +8543,29 @@
 	)
 	(global_label "DIP1"
 		(shape input)
-		(at 71.12 39.37 180)
+		(at 368.3 120.65 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "ab4a8168-dbbe-4b99-9cd4-fae7f41d7757")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 375.6395 120.65 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+	)
+	(global_label "24VDC"
+		(shape input)
+		(at 58.42 203.2 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -8766,9 +8573,9 @@
 			)
 			(justify right)
 		)
-		(uuid "d72118b3-6feb-4a7e-bdd7-a8f205d8500d")
+		(uuid "b30aa19d-046a-48e8-8bb0-c3f28eb793d4")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 63.7805 39.37 0)
+			(at 49.3872 203.2 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8780,7 +8587,7 @@
 	)
 	(global_label "D+"
 		(shape input)
-		(at 152.4 158.75 0)
+		(at 368.3 74.93 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -8788,9 +8595,9 @@
 			)
 			(justify left)
 		)
-		(uuid "e611295f-ba1f-45ee-9b03-908f30dcc364")
+		(uuid "b939c111-678f-4591-a3ce-eee80bc9e180")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 158.2276 158.75 0)
+			(at 374.1276 74.93 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8802,7 +8609,139 @@
 	)
 	(global_label "DIP3"
 		(shape input)
-		(at 373.38 115.57 0)
+		(at 88.9 49.53 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "bebc31ed-b7be-4125-aecc-9daaafcdf9a2")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 81.5605 49.53 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+				(hide yes)
+			)
+		)
+	)
+	(global_label "3V3"
+		(shape input)
+		(at 144.78 38.1 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "cb5417a4-70ef-49ee-9587-95f139184446")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 138.2872 38.1 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+				(hide yes)
+			)
+		)
+	)
+	(global_label "3V3"
+		(shape input)
+		(at 233.68 33.02 90)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "cfe178c4-922b-480f-9189-9ee198fa9a53")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 233.68 26.5272 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+	)
+	(global_label "DIP0"
+		(shape input)
+		(at 88.9 41.91 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "d72118b3-6feb-4a7e-bdd7-a8f205d8500d")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 81.5605 41.91 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+				(hide yes)
+			)
+		)
+	)
+	(global_label "DIP2"
+		(shape input)
+		(at 368.3 123.19 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "dc2e97d1-15c8-47f7-b09b-cd1c0c934580")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 375.6395 123.19 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+	)
+	(global_label "D+"
+		(shape input)
+		(at 138.43 133.35 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "e611295f-ba1f-45ee-9b03-908f30dcc364")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 144.2576 133.35 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+	)
+	(global_label "DIP3"
+		(shape input)
+		(at 368.3 102.87 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -8812,7 +8751,7 @@
 		)
 		(uuid "f2d47504-180e-4ac7-97c0-38c5e6b7c242")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 380.7195 115.57 0)
+			(at 375.6395 102.87 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8824,7 +8763,7 @@
 	)
 	(symbol
 		(lib_id "cablight-eagle-import:RESISTOR_0805")
-		(at 187.96 224.79 90)
+		(at 185.42 214.63 90)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -8833,7 +8772,7 @@
 		(fields_autoplaced yes)
 		(uuid "03b9f7e2-296d-414a-8211-d85908bc813f")
 		(property "Reference" "R8"
-			(at 190.5 223.5199 90)
+			(at 187.96 213.3599 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8842,7 +8781,7 @@
 			)
 		)
 		(property "Value" "100K"
-			(at 190.5 226.06 90)
+			(at 187.96 215.9 90)
 			(effects
 				(font
 					(size 1.016 1.016)
@@ -8852,7 +8791,7 @@
 			)
 		)
 		(property "Footprint" "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder"
-			(at 187.96 224.79 0)
+			(at 185.42 214.63 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8861,7 +8800,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 187.96 224.79 0)
+			(at 185.42 214.63 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8870,7 +8809,7 @@
 			)
 		)
 		(property "Description" "Resistors\n\nFor new designs, use the packages preceded by an '_' character since they are more reliable:\n\nThe following footprints should be used on most boards:\n\n• _0402 - Standard footprint for regular board layouts\n• _0603 - Standard footprint for regular board layouts\n• _0805 - Standard footprint for regular board layouts\n• _1206 - Standard footprint for regular board layouts\n\nFor extremely tight-pitch boards where space is at a premium, the following 'micro-pitch' footprints can be used (smaller pads, no silkscreen outline, etc.):\n\n• _0402MP - Micro-pitch footprint for very dense/compact boards\n• _0603MP - Micro-pitch footprint for very dense/compact boards\n• _0805MP - Micro-pitch footprint for very dense/compact boards\n• _1206MP - Micro-pitch footprint for very dense/compact boards"
-			(at 187.96 224.79 0)
+			(at 185.42 214.63 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8895,7 +8834,7 @@
 	)
 	(symbol
 		(lib_id "cablight-eagle-import:RESISTOR_0805")
-		(at 81.28 238.76 270)
+		(at 71.12 228.6 270)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -8903,24 +8842,26 @@
 		(dnp no)
 		(uuid "08e016a8-2155-4046-bd76-02d6e59e2b31")
 		(property "Reference" "R16"
-			(at 85.09 237.744 90)
+			(at 73.406 227.584 90)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
+				(justify left)
 			)
 		)
 		(property "Value" "470"
-			(at 85.09 239.776 90)
+			(at 73.406 229.616 90)
 			(effects
 				(font
 					(size 1.016 1.016)
 					(bold yes)
 				)
+				(justify left)
 			)
 		)
 		(property "Footprint" "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder"
-			(at 81.28 238.76 0)
+			(at 71.12 228.6 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8929,7 +8870,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 81.28 238.76 0)
+			(at 71.12 228.6 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8938,7 +8879,7 @@
 			)
 		)
 		(property "Description" "Resistors\n\nFor new designs, use the packages preceded by an '_' character since they are more reliable:\n\nThe following footprints should be used on most boards:\n\n• _0402 - Standard footprint for regular board layouts\n• _0603 - Standard footprint for regular board layouts\n• _0805 - Standard footprint for regular board layouts\n• _1206 - Standard footprint for regular board layouts\n\nFor extremely tight-pitch boards where space is at a premium, the following 'micro-pitch' footprints can be used (smaller pads, no silkscreen outline, etc.):\n\n• _0402MP - Micro-pitch footprint for very dense/compact boards\n• _0603MP - Micro-pitch footprint for very dense/compact boards\n• _0805MP - Micro-pitch footprint for very dense/compact boards\n• _1206MP - Micro-pitch footprint for very dense/compact boards"
-			(at 81.28 238.76 0)
+			(at 71.12 228.6 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8963,7 +8904,7 @@
 	)
 	(symbol
 		(lib_id "cablight-eagle-import:CAP_CERAMIC_0805")
-		(at 227.33 219.71 0)
+		(at 224.79 209.55 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -8971,7 +8912,7 @@
 		(dnp no)
 		(uuid "0ec333c5-22c5-4d13-ad5f-a68206941814")
 		(property "Reference" "CP5"
-			(at 228.6 212.852 0)
+			(at 226.06 202.692 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8980,7 +8921,7 @@
 			)
 		)
 		(property "Value" "10uF"
-			(at 228.6 215.392 0)
+			(at 226.06 205.232 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8989,7 +8930,7 @@
 			)
 		)
 		(property "Footprint" "Capacitor_SMD:C_0805_2012Metric_Pad1.18x1.45mm_HandSolder"
-			(at 227.33 219.71 0)
+			(at 224.79 209.55 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8998,7 +8939,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 227.33 219.71 0)
+			(at 224.79 209.55 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9007,7 +8948,7 @@
 			)
 		)
 		(property "Description" "Ceramic Capacitors\n\nFor new designs, use the packages preceded by an '_' character since they are more reliable:\n\nThe following footprints should be used on most boards:\n\n• _0402 - Standard footprint for regular board layouts\n• _0603 - Standard footprint for regular board layouts\n• _0805 - Standard footprint for regular board layouts\n• _1206 - Standard footprint for regular board layouts\n\nFor extremely tight-pitch boards where space is at a premium, the following 'micro-pitch' footprints can be used (smaller pads, no silkscreen outline, etc.):\n\n• _0402MP - Micro-pitch footprint for very dense/compact boards\n• _0603MP - Micro-pitch footprint for very dense/compact boards\n• _0805MP - Micro-pitch footprint for very dense/compact boards\n• _1206MP - Micro-pitch footprint for very dense/compact boards"
-			(at 227.33 219.71 0)
+			(at 224.79 209.55 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9031,75 +8972,8 @@
 		)
 	)
 	(symbol
-		(lib_id "Diode:1N5819")
-		(at 99.06 160.02 90)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board no)
-		(dnp yes)
-		(uuid "14371d83-6b81-49ca-8488-db9e69be28dc")
-		(property "Reference" "D3"
-			(at 105.41 160.3375 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "ESD321"
-			(at 102.87 160.3375 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" "GRK_Lib:ESD321_SOT5x3_DYA_TEX"
-			(at 103.505 160.02 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "http://www.vishay.com/docs/88525/1n5817.pdf"
-			(at 99.06 160.02 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "40V 1A Schottky Barrier Rectifier Diode, DO-41"
-			(at 99.06 160.02 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "2f6c0e96-eebf-4b10-81f4-a8fbe517aebc")
-		)
-		(pin "2"
-			(uuid "f635f9f1-55fe-4c06-ad4a-94a449bc55dc")
-		)
-		(instances
-			(project "cablight-project"
-				(path "/2aa36568-293b-470b-bbef-a9ff44d0879c"
-					(reference "D3")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "cablight-eagle-import:GND")
-		(at 151.13 248.92 0)
+		(at 148.59 246.38 0)
 		(mirror y)
 		(unit 1)
 		(exclude_from_sim no)
@@ -9109,7 +8983,7 @@
 		(fields_autoplaced yes)
 		(uuid "1ba5c7e0-11d5-4a42-bfdc-dfa42eba0e29")
 		(property "Reference" "#0105"
-			(at 151.13 248.92 0)
+			(at 148.59 246.38 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9118,7 +8992,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 151.13 251.46 0)
+			(at 148.59 248.92 0)
 			(effects
 				(font
 					(size 1.27 1.0795)
@@ -9126,7 +9000,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 151.13 248.92 0)
+			(at 148.59 246.38 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9135,7 +9009,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 151.13 248.92 0)
+			(at 148.59 246.38 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9144,7 +9018,7 @@
 			)
 		)
 		(property "Description" "GND"
-			(at 151.13 248.92 0)
+			(at 148.59 246.38 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9166,7 +9040,7 @@
 	)
 	(symbol
 		(lib_id "cablight-eagle-import:GND")
-		(at 142.24 49.53 0)
+		(at 160.02 54.61 0)
 		(mirror y)
 		(unit 1)
 		(exclude_from_sim no)
@@ -9176,7 +9050,7 @@
 		(fields_autoplaced yes)
 		(uuid "1e09e533-6c78-42c5-a650-bf4828e3de7c")
 		(property "Reference" "#012"
-			(at 142.24 49.53 0)
+			(at 160.02 54.61 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9185,7 +9059,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 142.24 52.07 0)
+			(at 160.02 57.15 0)
 			(effects
 				(font
 					(size 1.27 1.0795)
@@ -9193,7 +9067,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 142.24 49.53 0)
+			(at 160.02 54.61 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9202,7 +9076,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 142.24 49.53 0)
+			(at 160.02 54.61 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9211,7 +9085,7 @@
 			)
 		)
 		(property "Description" "GND"
-			(at 142.24 49.53 0)
+			(at 160.02 54.61 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9233,15 +9107,15 @@
 	)
 	(symbol
 		(lib_id "user:RCWL-1601")
-		(at 149.86 38.1 0)
+		(at 167.64 43.18 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
 		(uuid "1f942afd-304c-4f01-a7eb-2e27285bbbca")
-		(property "Reference" "RCWL-1601"
-			(at 160.782 36.322 0)
+		(property "Reference" "J2"
+			(at 178.562 41.402 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9250,7 +9124,7 @@
 			)
 		)
 		(property "Value" "RCWL-1601"
-			(at 159.512 38.354 0)
+			(at 177.292 43.434 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9260,7 +9134,7 @@
 			)
 		)
 		(property "Footprint" "GRK_Lib:Terminal Block 4-Pin 2mm Pitch"
-			(at 152.4 46.99 0)
+			(at 170.18 52.07 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9269,7 +9143,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 151.13 38.1 0)
+			(at 168.91 43.18 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9278,7 +9152,7 @@
 			)
 		)
 		(property "Description" "Ultrsonic Distance Sensor"
-			(at 151.13 38.1 0)
+			(at 168.91 43.18 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9301,7 +9175,7 @@
 		(instances
 			(project "cablight-project"
 				(path "/2aa36568-293b-470b-bbef-a9ff44d0879c"
-					(reference "RCWL-1601")
+					(reference "J2")
 					(unit 1)
 				)
 			)
@@ -9309,7 +9183,7 @@
 	)
 	(symbol
 		(lib_id "cablight-eagle-import:RESISTOR_0805")
-		(at 254 237.49 270)
+		(at 251.46 227.33 270)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -9317,7 +9191,7 @@
 		(dnp no)
 		(uuid "25edb3d9-dff4-4dc1-b751-82216e3d908a")
 		(property "Reference" "R17"
-			(at 258.572 236.474 90)
+			(at 256.032 226.314 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9325,7 +9199,7 @@
 			)
 		)
 		(property "Value" "0"
-			(at 258.826 238.76 90)
+			(at 256.286 228.6 90)
 			(effects
 				(font
 					(size 1.016 1.016)
@@ -9334,7 +9208,7 @@
 			)
 		)
 		(property "Footprint" "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder"
-			(at 254 237.49 0)
+			(at 251.46 227.33 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9343,7 +9217,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 254 237.49 0)
+			(at 251.46 227.33 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9352,7 +9226,7 @@
 			)
 		)
 		(property "Description" "Resistors\n\nFor new designs, use the packages preceded by an '_' character since they are more reliable:\n\nThe following footprints should be used on most boards:\n\n• _0402 - Standard footprint for regular board layouts\n• _0603 - Standard footprint for regular board layouts\n• _0805 - Standard footprint for regular board layouts\n• _1206 - Standard footprint for regular board layouts\n\nFor extremely tight-pitch boards where space is at a premium, the following 'micro-pitch' footprints can be used (smaller pads, no silkscreen outline, etc.):\n\n• _0402MP - Micro-pitch footprint for very dense/compact boards\n• _0603MP - Micro-pitch footprint for very dense/compact boards\n• _0805MP - Micro-pitch footprint for very dense/compact boards\n• _1206MP - Micro-pitch footprint for very dense/compact boards"
-			(at 254 237.49 0)
+			(at 251.46 227.33 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9377,7 +9251,7 @@
 	)
 	(symbol
 		(lib_id "cablight-eagle-import:GND")
-		(at 265.43 90.17 0)
+		(at 251.46 77.47 0)
 		(mirror y)
 		(unit 1)
 		(exclude_from_sim no)
@@ -9387,7 +9261,7 @@
 		(fields_autoplaced yes)
 		(uuid "26883254-951a-4a71-9f5b-653202d47a2c")
 		(property "Reference" "#0102"
-			(at 265.43 90.17 0)
+			(at 251.46 77.47 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9396,7 +9270,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 265.43 92.71 0)
+			(at 251.46 80.01 0)
 			(effects
 				(font
 					(size 1.27 1.0795)
@@ -9404,7 +9278,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 265.43 90.17 0)
+			(at 251.46 77.47 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9413,7 +9287,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 265.43 90.17 0)
+			(at 251.46 77.47 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9422,7 +9296,7 @@
 			)
 		)
 		(property "Description" "GND"
-			(at 265.43 90.17 0)
+			(at 251.46 77.47 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9444,7 +9318,7 @@
 	)
 	(symbol
 		(lib_id "cablight-eagle-import:CAP_CERAMIC_0805")
-		(at 204.47 229.87 0)
+		(at 201.93 219.71 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -9452,7 +9326,7 @@
 		(dnp no)
 		(uuid "28b53fd6-8959-45f5-a455-fcba3fc42c40")
 		(property "Reference" "CP2"
-			(at 205.74 223.012 0)
+			(at 203.2 212.852 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9461,7 +9335,7 @@
 			)
 		)
 		(property "Value" "10uF"
-			(at 205.74 225.552 0)
+			(at 203.2 215.392 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9470,7 +9344,7 @@
 			)
 		)
 		(property "Footprint" "Capacitor_SMD:C_0805_2012Metric_Pad1.18x1.45mm_HandSolder"
-			(at 204.47 229.87 0)
+			(at 201.93 219.71 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9479,7 +9353,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 204.47 229.87 0)
+			(at 201.93 219.71 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9488,7 +9362,7 @@
 			)
 		)
 		(property "Description" "Ceramic Capacitors\n\nFor new designs, use the packages preceded by an '_' character since they are more reliable:\n\nThe following footprints should be used on most boards:\n\n• _0402 - Standard footprint for regular board layouts\n• _0603 - Standard footprint for regular board layouts\n• _0805 - Standard footprint for regular board layouts\n• _1206 - Standard footprint for regular board layouts\n\nFor extremely tight-pitch boards where space is at a premium, the following 'micro-pitch' footprints can be used (smaller pads, no silkscreen outline, etc.):\n\n• _0402MP - Micro-pitch footprint for very dense/compact boards\n• _0603MP - Micro-pitch footprint for very dense/compact boards\n• _0805MP - Micro-pitch footprint for very dense/compact boards\n• _1206MP - Micro-pitch footprint for very dense/compact boards"
-			(at 204.47 229.87 0)
+			(at 201.93 219.71 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9513,7 +9387,7 @@
 	)
 	(symbol
 		(lib_id "cablight-eagle-import:CAP_CERAMIC_0805")
-		(at 172.72 220.98 0)
+		(at 170.18 210.82 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -9521,7 +9395,7 @@
 		(dnp no)
 		(uuid "29b616b2-9361-4480-a18e-2d83ec13590d")
 		(property "Reference" "C11"
-			(at 173.99 214.63 0)
+			(at 171.45 204.47 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9530,7 +9404,7 @@
 			)
 		)
 		(property "Value" "1uF"
-			(at 173.99 217.17 0)
+			(at 171.45 207.01 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9539,7 +9413,7 @@
 			)
 		)
 		(property "Footprint" "Capacitor_SMD:C_0805_2012Metric_Pad1.18x1.45mm_HandSolder"
-			(at 172.72 220.98 0)
+			(at 170.18 210.82 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9548,7 +9422,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 172.72 220.98 0)
+			(at 170.18 210.82 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9557,7 +9431,7 @@
 			)
 		)
 		(property "Description" "Ceramic Capacitors\n\nFor new designs, use the packages preceded by an '_' character since they are more reliable:\n\nThe following footprints should be used on most boards:\n\n• _0402 - Standard footprint for regular board layouts\n• _0603 - Standard footprint for regular board layouts\n• _0805 - Standard footprint for regular board layouts\n• _1206 - Standard footprint for regular board layouts\n\nFor extremely tight-pitch boards where space is at a premium, the following 'micro-pitch' footprints can be used (smaller pads, no silkscreen outline, etc.):\n\n• _0402MP - Micro-pitch footprint for very dense/compact boards\n• _0603MP - Micro-pitch footprint for very dense/compact boards\n• _0805MP - Micro-pitch footprint for very dense/compact boards\n• _1206MP - Micro-pitch footprint for very dense/compact boards"
-			(at 172.72 220.98 0)
+			(at 170.18 210.82 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9582,7 +9456,7 @@
 	)
 	(symbol
 		(lib_id "cablight-eagle-import:CAP_CERAMIC_0805")
-		(at 137.16 44.45 0)
+		(at 154.94 49.53 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -9590,7 +9464,7 @@
 		(dnp no)
 		(uuid "2c0c139f-f556-47bb-9373-0055af8b6651")
 		(property "Reference" "C14"
-			(at 131.318 41.91 0)
+			(at 149.098 46.99 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9599,7 +9473,7 @@
 			)
 		)
 		(property "Value" "1uF"
-			(at 131.318 44.45 0)
+			(at 149.098 49.53 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9608,7 +9482,7 @@
 			)
 		)
 		(property "Footprint" "Capacitor_SMD:C_0805_2012Metric_Pad1.18x1.45mm_HandSolder"
-			(at 137.16 44.45 0)
+			(at 154.94 49.53 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9617,7 +9491,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 137.16 44.45 0)
+			(at 154.94 49.53 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9626,7 +9500,7 @@
 			)
 		)
 		(property "Description" "Ceramic Capacitors\n\nFor new designs, use the packages preceded by an '_' character since they are more reliable:\n\nThe following footprints should be used on most boards:\n\n• _0402 - Standard footprint for regular board layouts\n• _0603 - Standard footprint for regular board layouts\n• _0805 - Standard footprint for regular board layouts\n• _1206 - Standard footprint for regular board layouts\n\nFor extremely tight-pitch boards where space is at a premium, the following 'micro-pitch' footprints can be used (smaller pads, no silkscreen outline, etc.):\n\n• _0402MP - Micro-pitch footprint for very dense/compact boards\n• _0603MP - Micro-pitch footprint for very dense/compact boards\n• _0805MP - Micro-pitch footprint for very dense/compact boards\n• _1206MP - Micro-pitch footprint for very dense/compact boards"
-			(at 137.16 44.45 0)
+			(at 154.94 49.53 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9651,7 +9525,7 @@
 	)
 	(symbol
 		(lib_id "cablight-eagle-import:GND")
-		(at 195.58 132.08 0)
+		(at 196.85 156.21 0)
 		(mirror y)
 		(unit 1)
 		(exclude_from_sim no)
@@ -9661,7 +9535,7 @@
 		(fields_autoplaced yes)
 		(uuid "2eeb4b83-0e08-42e9-b396-568a07880856")
 		(property "Reference" "#02"
-			(at 195.58 132.08 0)
+			(at 196.85 156.21 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9670,7 +9544,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 195.58 134.62 0)
+			(at 196.85 158.75 0)
 			(effects
 				(font
 					(size 1.27 1.0795)
@@ -9678,7 +9552,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 195.58 132.08 0)
+			(at 196.85 156.21 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9687,7 +9561,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 195.58 132.08 0)
+			(at 196.85 156.21 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9696,7 +9570,7 @@
 			)
 		)
 		(property "Description" "GND"
-			(at 195.58 132.08 0)
+			(at 196.85 156.21 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9718,7 +9592,7 @@
 	)
 	(symbol
 		(lib_id "cablight-eagle-import:GND")
-		(at 412.75 105.41 0)
+		(at 407.67 92.71 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -9727,7 +9601,7 @@
 		(fields_autoplaced yes)
 		(uuid "339d42d1-7072-4487-85ed-a8b67ccfa9db")
 		(property "Reference" "#0101010101"
-			(at 412.75 105.41 0)
+			(at 407.67 92.71 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9736,7 +9610,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 412.75 107.95 0)
+			(at 407.67 95.25 0)
 			(effects
 				(font
 					(size 1.27 1.0795)
@@ -9744,7 +9618,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 412.75 105.41 0)
+			(at 407.67 92.71 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9753,7 +9627,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 412.75 105.41 0)
+			(at 407.67 92.71 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9762,7 +9636,7 @@
 			)
 		)
 		(property "Description" "GND"
-			(at 412.75 105.41 0)
+			(at 407.67 92.71 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9784,31 +9658,33 @@
 	)
 	(symbol
 		(lib_id "Diode:1N5819")
-		(at 81.28 220.98 270)
+		(at 71.12 210.82 270)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
 		(uuid "3582c854-111d-46e8-898f-21de4ef2cc3e")
-		(property "Reference" "D10"
-			(at 74.93 220.6625 0)
+		(property "Reference" "D2"
+			(at 74.168 209.804 90)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
+				(justify left)
 			)
 		)
 		(property "Value" "1N5819"
-			(at 77.47 220.6625 0)
+			(at 74.168 211.836 90)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
+				(justify left)
 			)
 		)
 		(property "Footprint" "Diode_THT:D_DO-41_SOD81_P2.54mm_Vertical_KathodeUp"
-			(at 76.835 220.98 0)
+			(at 66.675 210.82 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9817,7 +9693,7 @@
 			)
 		)
 		(property "Datasheet" "http://www.vishay.com/docs/88525/1n5817.pdf"
-			(at 81.28 220.98 0)
+			(at 71.12 210.82 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9826,7 +9702,7 @@
 			)
 		)
 		(property "Description" "40V 1A Schottky Barrier Rectifier Diode, DO-41"
-			(at 81.28 220.98 0)
+			(at 71.12 210.82 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9843,7 +9719,7 @@
 		(instances
 			(project "cablight-project"
 				(path "/2aa36568-293b-470b-bbef-a9ff44d0879c"
-					(reference "D10")
+					(reference "D2")
 					(unit 1)
 				)
 			)
@@ -9851,7 +9727,7 @@
 	)
 	(symbol
 		(lib_id "cablight-eagle-import:GND")
-		(at 92.71 50.8 0)
+		(at 110.49 55.88 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -9860,7 +9736,7 @@
 		(fields_autoplaced yes)
 		(uuid "37d5c734-b7dc-4bc3-97e7-26a51b1ef1a4")
 		(property "Reference" "#06"
-			(at 92.71 50.8 0)
+			(at 110.49 55.88 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9869,7 +9745,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 92.71 53.34 0)
+			(at 110.49 58.42 0)
 			(effects
 				(font
 					(size 1.27 1.0795)
@@ -9877,7 +9753,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 92.71 50.8 0)
+			(at 110.49 55.88 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9886,7 +9762,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 92.71 50.8 0)
+			(at 110.49 55.88 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9895,7 +9771,7 @@
 			)
 		)
 		(property "Description" "GND"
-			(at 92.71 50.8 0)
+			(at 110.49 55.88 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9917,7 +9793,7 @@
 	)
 	(symbol
 		(lib_id "Device:R")
-		(at 254 227.33 0)
+		(at 251.46 217.17 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -9925,7 +9801,7 @@
 		(dnp no)
 		(uuid "3e24c898-d21d-4fc8-9910-d24615ae6c11")
 		(property "Reference" "R14"
-			(at 258.318 226.314 0)
+			(at 255.778 216.154 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9933,7 +9809,7 @@
 			)
 		)
 		(property "Value" "470"
-			(at 258.318 228.854 0)
+			(at 255.778 218.694 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9941,7 +9817,7 @@
 			)
 		)
 		(property "Footprint" "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder"
-			(at 252.222 227.33 90)
+			(at 249.682 217.17 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9950,7 +9826,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 254 227.33 0)
+			(at 251.46 217.17 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9959,7 +9835,7 @@
 			)
 		)
 		(property "Description" "Resistor"
-			(at 254 227.33 0)
+			(at 251.46 217.17 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9983,75 +9859,8 @@
 		)
 	)
 	(symbol
-		(lib_id "cablight-eagle-import:GND")
-		(at 99.06 184.15 0)
-		(mirror y)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board no)
-		(dnp yes)
-		(fields_autoplaced yes)
-		(uuid "413f87fc-22ec-4fda-92d9-87b6e9bcdf55")
-		(property "Reference" "#03"
-			(at 99.06 184.15 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Value" "GND"
-			(at 99.06 186.69 0)
-			(effects
-				(font
-					(size 1.27 1.0795)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 99.06 184.15 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 99.06 184.15 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "GND"
-			(at 99.06 184.15 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "5e6e21cf-90a6-4d79-b770-fc5efd293acb")
-		)
-		(instances
-			(project "cablight-project"
-				(path "/2aa36568-293b-470b-bbef-a9ff44d0879c"
-					(reference "#03")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "GRK_Global_Sym_Lib:SW_Push_With_GND")
-		(at 43.18 43.18 0)
+		(at 60.96 48.26 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -10060,7 +9869,7 @@
 		(fields_autoplaced yes)
 		(uuid "4330bab5-9521-42cb-acbd-340264b64125")
 		(property "Reference" "BTN1"
-			(at 43.18 35.56 0)
+			(at 60.96 40.64 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10068,7 +9877,7 @@
 			)
 		)
 		(property "Value" "SW_Push"
-			(at 43.18 38.1 0)
+			(at 60.96 43.18 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10076,7 +9885,7 @@
 			)
 		)
 		(property "Footprint" "GRK_Lib:Tactile Switch Wurth"
-			(at 43.18 38.1 0)
+			(at 60.96 43.18 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10085,7 +9894,7 @@
 			)
 		)
 		(property "Datasheet" "kicad-embed://WS-TASV J-Bend SMT Tact Switch 434123025826.pdf"
-			(at 43.18 38.1 0)
+			(at 60.96 43.18 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10094,7 +9903,7 @@
 			)
 		)
 		(property "Description" "Push button switch, generic, two pins"
-			(at 43.18 43.18 0)
+			(at 60.96 48.26 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10122,7 +9931,7 @@
 	)
 	(symbol
 		(lib_id "Switch:SW_Push")
-		(at 407.67 95.25 0)
+		(at 402.59 82.55 0)
 		(mirror y)
 		(unit 1)
 		(exclude_from_sim no)
@@ -10131,16 +9940,16 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "4344311b-0cef-45cd-ba52-d654ad87d558")
-		(property "Reference" "BOOT1"
-			(at 407.67 87.63 0)
+		(property "Reference" "B2"
+			(at 402.59 74.93 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 			)
 		)
-		(property "Value" "tactile"
-			(at 407.67 90.17 0)
+		(property "Value" "BOOT - TACTILE SMD"
+			(at 402.59 77.47 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10148,7 +9957,7 @@
 			)
 		)
 		(property "Footprint" "GRK_Lib:tactile Eswitch TL3365"
-			(at 407.67 90.17 0)
+			(at 402.59 77.47 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10157,7 +9966,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 407.67 90.17 0)
+			(at 402.59 77.47 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10166,7 +9975,7 @@
 			)
 		)
 		(property "Description" "Push button switch, generic, two pins"
-			(at 407.67 95.25 0)
+			(at 402.59 82.55 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10183,7 +9992,7 @@
 		(instances
 			(project ""
 				(path "/2aa36568-293b-470b-bbef-a9ff44d0879c"
-					(reference "BOOT1")
+					(reference "B2")
 					(unit 1)
 				)
 			)
@@ -10191,7 +10000,7 @@
 	)
 	(symbol
 		(lib_id "GRK_Global_Sym_Lib:ISL85410")
-		(at 148.59 215.9 0)
+		(at 146.05 205.74 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -10199,7 +10008,7 @@
 		(dnp no)
 		(uuid "46bb6b50-279a-4292-9663-b2cc0492afa8")
 		(property "Reference" "T1"
-			(at 150.495 204.47 0)
+			(at 147.955 194.31 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10208,7 +10017,7 @@
 			)
 		)
 		(property "Value" "ISL85410"
-			(at 150.495 207.01 0)
+			(at 147.955 196.85 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10216,7 +10025,7 @@
 			)
 		)
 		(property "Footprint" "GRK_Lib:ISL85410"
-			(at 150.622 204.47 0)
+			(at 148.082 194.31 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10225,7 +10034,7 @@
 			)
 		)
 		(property "Datasheet" "kicad-embed://ISL85410.pdf"
-			(at 148.59 215.9 0)
+			(at 146.05 205.74 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10234,7 +10043,7 @@
 			)
 		)
 		(property "Description" "Buck Voltage Regulator"
-			(at 148.59 215.9 0)
+			(at 146.05 205.74 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10292,7 +10101,7 @@
 	)
 	(symbol
 		(lib_id "cablight-eagle-import:CAP_CERAMIC_0805")
-		(at 219.71 229.87 0)
+		(at 217.17 219.71 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -10300,7 +10109,7 @@
 		(dnp no)
 		(uuid "46dedd7a-03f1-48f4-9505-4e2e67123e51")
 		(property "Reference" "CP4"
-			(at 220.98 223.012 0)
+			(at 218.44 212.852 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10309,7 +10118,7 @@
 			)
 		)
 		(property "Value" "10uF"
-			(at 220.98 225.552 0)
+			(at 218.44 215.392 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10318,7 +10127,7 @@
 			)
 		)
 		(property "Footprint" "Capacitor_SMD:C_0805_2012Metric_Pad1.18x1.45mm_HandSolder"
-			(at 219.71 229.87 0)
+			(at 217.17 219.71 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10327,7 +10136,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 219.71 229.87 0)
+			(at 217.17 219.71 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10336,7 +10145,7 @@
 			)
 		)
 		(property "Description" "Ceramic Capacitors\n\nFor new designs, use the packages preceded by an '_' character since they are more reliable:\n\nThe following footprints should be used on most boards:\n\n• _0402 - Standard footprint for regular board layouts\n• _0603 - Standard footprint for regular board layouts\n• _0805 - Standard footprint for regular board layouts\n• _1206 - Standard footprint for regular board layouts\n\nFor extremely tight-pitch boards where space is at a premium, the following 'micro-pitch' footprints can be used (smaller pads, no silkscreen outline, etc.):\n\n• _0402MP - Micro-pitch footprint for very dense/compact boards\n• _0603MP - Micro-pitch footprint for very dense/compact boards\n• _0805MP - Micro-pitch footprint for very dense/compact boards\n• _1206MP - Micro-pitch footprint for very dense/compact boards"
-			(at 219.71 229.87 0)
+			(at 217.17 219.71 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10361,7 +10170,7 @@
 	)
 	(symbol
 		(lib_id "cablight-eagle-import:RESISTOR_0805")
-		(at 58.42 172.72 270)
+		(at 73.66 147.32 270)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -10370,7 +10179,7 @@
 		(fields_autoplaced yes)
 		(uuid "4fda2639-bca5-4e53-aaab-b5fdbc7a9426")
 		(property "Reference" "R13"
-			(at 60.96 171.4499 90)
+			(at 76.2 146.0499 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10379,7 +10188,7 @@
 			)
 		)
 		(property "Value" "2M"
-			(at 60.96 173.99 90)
+			(at 76.2 148.59 90)
 			(effects
 				(font
 					(size 1.016 1.016)
@@ -10389,7 +10198,7 @@
 			)
 		)
 		(property "Footprint" "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder"
-			(at 58.42 172.72 0)
+			(at 73.66 147.32 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10398,7 +10207,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 58.42 172.72 0)
+			(at 73.66 147.32 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10407,7 +10216,7 @@
 			)
 		)
 		(property "Description" "Resistors\n\nFor new designs, use the packages preceded by an '_' character since they are more reliable:\n\nThe following footprints should be used on most boards:\n\n• _0402 - Standard footprint for regular board layouts\n• _0603 - Standard footprint for regular board layouts\n• _0805 - Standard footprint for regular board layouts\n• _1206 - Standard footprint for regular board layouts\n\nFor extremely tight-pitch boards where space is at a premium, the following 'micro-pitch' footprints can be used (smaller pads, no silkscreen outline, etc.):\n\n• _0402MP - Micro-pitch footprint for very dense/compact boards\n• _0603MP - Micro-pitch footprint for very dense/compact boards\n• _0805MP - Micro-pitch footprint for very dense/compact boards\n• _1206MP - Micro-pitch footprint for very dense/compact boards"
-			(at 58.42 172.72 0)
+			(at 73.66 147.32 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10432,7 +10241,7 @@
 	)
 	(symbol
 		(lib_id "Device:L")
-		(at 171.45 201.93 90)
+		(at 168.91 191.77 90)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -10441,7 +10250,7 @@
 		(fields_autoplaced yes)
 		(uuid "51952e0d-b9d9-4dda-b74e-be326d4dc286")
 		(property "Reference" "L1"
-			(at 171.45 196.85 90)
+			(at 168.91 186.69 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10449,7 +10258,7 @@
 			)
 		)
 		(property "Value" "22uH"
-			(at 171.45 199.39 90)
+			(at 168.91 189.23 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10457,7 +10266,7 @@
 			)
 		)
 		(property "Footprint" "GRK_Lib:Wurth Inductor 22uH 1.15A 225mOhm"
-			(at 171.45 201.93 0)
+			(at 168.91 191.77 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10466,7 +10275,7 @@
 			)
 		)
 		(property "Datasheet" "kicad-embed://Wurth Semi-Sheilded Power Inductor 22uH SMT.pdf"
-			(at 171.45 201.93 0)
+			(at 168.91 191.77 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10475,7 +10284,7 @@
 			)
 		)
 		(property "Description" "Wurth Elektronil 74404052220 - Fixed IND 22uH 1.15A 225mOhm SMD"
-			(at 171.45 201.93 0)
+			(at 168.91 191.77 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10500,7 +10309,7 @@
 	)
 	(symbol
 		(lib_id "cablight-eagle-import:CAP_CERAMIC_0805")
-		(at 212.09 219.71 0)
+		(at 209.55 209.55 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -10508,7 +10317,7 @@
 		(dnp no)
 		(uuid "597ef829-f829-4359-b027-70c8e8cd6e42")
 		(property "Reference" "CP3"
-			(at 213.36 212.852 0)
+			(at 210.82 202.692 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10517,7 +10326,7 @@
 			)
 		)
 		(property "Value" "10Uf"
-			(at 213.36 215.392 0)
+			(at 210.82 205.232 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10526,7 +10335,7 @@
 			)
 		)
 		(property "Footprint" "Capacitor_SMD:C_0805_2012Metric_Pad1.18x1.45mm_HandSolder"
-			(at 212.09 219.71 0)
+			(at 209.55 209.55 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10535,7 +10344,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 212.09 219.71 0)
+			(at 209.55 209.55 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10544,7 +10353,7 @@
 			)
 		)
 		(property "Description" "Ceramic Capacitors\n\nFor new designs, use the packages preceded by an '_' character since they are more reliable:\n\nThe following footprints should be used on most boards:\n\n• _0402 - Standard footprint for regular board layouts\n• _0603 - Standard footprint for regular board layouts\n• _0805 - Standard footprint for regular board layouts\n• _1206 - Standard footprint for regular board layouts\n\nFor extremely tight-pitch boards where space is at a premium, the following 'micro-pitch' footprints can be used (smaller pads, no silkscreen outline, etc.):\n\n• _0402MP - Micro-pitch footprint for very dense/compact boards\n• _0603MP - Micro-pitch footprint for very dense/compact boards\n• _0805MP - Micro-pitch footprint for very dense/compact boards\n• _1206MP - Micro-pitch footprint for very dense/compact boards"
-			(at 212.09 219.71 0)
+			(at 209.55 209.55 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10569,8 +10378,7 @@
 	)
 	(symbol
 		(lib_id "Jumper:Jumper_2_Bridged")
-		(at 101.6 213.36 0)
-		(mirror x)
+		(at 96.52 203.2 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -10578,24 +10386,23 @@
 		(dnp no)
 		(uuid "59f40f79-188f-4360-ba88-a25f70f0aa2d")
 		(property "Reference" "SW1"
-			(at 101.6 211.074 0)
+			(at 96.52 197.866 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 			)
 		)
-		(property "Value" "switch_SPDT_SLW_121586"
-			(at 97.536 206.756 0)
+		(property "Value" "SHUNT JUMPER"
+			(at 96.52 200.406 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(hide yes)
 			)
 		)
 		(property "Footprint" "GRK_Lib:1x02_P2.54mm_Vertical_Shunt"
-			(at 101.6 213.36 0)
+			(at 96.52 203.2 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10604,7 +10411,7 @@
 			)
 		)
 		(property "Datasheet" "kicad-embed://shunt-jumper-254mm-msa-g-data-sheet.pdf"
-			(at 101.6 213.36 0)
+			(at 96.52 203.2 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10613,7 +10420,7 @@
 			)
 		)
 		(property "Description" "Jumper, 2-pole, closed/bridged"
-			(at 101.6 213.36 0)
+			(at 96.52 203.2 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10638,7 +10445,7 @@
 	)
 	(symbol
 		(lib_id "cablight-eagle-import:GND")
-		(at 146.05 184.15 0)
+		(at 132.08 158.75 0)
 		(mirror y)
 		(unit 1)
 		(exclude_from_sim no)
@@ -10648,7 +10455,7 @@
 		(fields_autoplaced yes)
 		(uuid "5d960d2a-f882-4aae-860d-087dd69ee7a2")
 		(property "Reference" "#08"
-			(at 146.05 184.15 0)
+			(at 132.08 158.75 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10657,7 +10464,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 146.05 186.69 0)
+			(at 132.08 161.29 0)
 			(effects
 				(font
 					(size 1.27 1.0795)
@@ -10665,7 +10472,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 146.05 184.15 0)
+			(at 132.08 158.75 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10674,7 +10481,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 146.05 184.15 0)
+			(at 132.08 158.75 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10683,7 +10490,7 @@
 			)
 		)
 		(property "Description" "GND"
-			(at 146.05 184.15 0)
+			(at 132.08 158.75 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10705,7 +10512,7 @@
 	)
 	(symbol
 		(lib_id "cablight-eagle-import:RESISTOR_0805")
-		(at 163.83 238.76 90)
+		(at 161.29 228.6 90)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -10714,7 +10521,7 @@
 		(fields_autoplaced yes)
 		(uuid "5e87dde1-31e9-409c-8b3a-46f96019e1e9")
 		(property "Reference" "R10"
-			(at 166.37 237.4899 90)
+			(at 163.83 227.3299 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10723,7 +10530,7 @@
 			)
 		)
 		(property "Value" "100K"
-			(at 166.37 240.03 90)
+			(at 163.83 229.87 90)
 			(effects
 				(font
 					(size 1.016 1.016)
@@ -10733,7 +10540,7 @@
 			)
 		)
 		(property "Footprint" "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder"
-			(at 163.83 238.76 0)
+			(at 161.29 228.6 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10742,7 +10549,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 163.83 238.76 0)
+			(at 161.29 228.6 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10751,7 +10558,7 @@
 			)
 		)
 		(property "Description" "Resistors\n\nFor new designs, use the packages preceded by an '_' character since they are more reliable:\n\nThe following footprints should be used on most boards:\n\n• _0402 - Standard footprint for regular board layouts\n• _0603 - Standard footprint for regular board layouts\n• _0805 - Standard footprint for regular board layouts\n• _1206 - Standard footprint for regular board layouts\n\nFor extremely tight-pitch boards where space is at a premium, the following 'micro-pitch' footprints can be used (smaller pads, no silkscreen outline, etc.):\n\n• _0402MP - Micro-pitch footprint for very dense/compact boards\n• _0603MP - Micro-pitch footprint for very dense/compact boards\n• _0805MP - Micro-pitch footprint for very dense/compact boards\n• _1206MP - Micro-pitch footprint for very dense/compact boards"
-			(at 163.83 238.76 0)
+			(at 161.29 228.6 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10776,7 +10583,7 @@
 	)
 	(symbol
 		(lib_id "cablight-eagle-import:CAP_CERAMIC_0805")
-		(at 325.12 57.15 90)
+		(at 320.04 50.8 90)
 		(mirror x)
 		(unit 1)
 		(exclude_from_sim no)
@@ -10785,7 +10592,7 @@
 		(dnp no)
 		(uuid "5f04a2fe-3a88-4c00-996e-663cc39bda0c")
 		(property "Reference" "C3"
-			(at 325.12 59.944 90)
+			(at 320.04 53.594 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10794,7 +10601,7 @@
 			)
 		)
 		(property "Value" "0u1F"
-			(at 326.898 62.23 90)
+			(at 321.818 55.88 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10803,7 +10610,7 @@
 			)
 		)
 		(property "Footprint" "Capacitor_SMD:C_0805_2012Metric_Pad1.18x1.45mm_HandSolder"
-			(at 325.12 57.15 0)
+			(at 320.04 50.8 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10812,7 +10619,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 325.12 57.15 0)
+			(at 320.04 50.8 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10821,7 +10628,7 @@
 			)
 		)
 		(property "Description" "Ceramic Capacitors\n\nFor new designs, use the packages preceded by an '_' character since they are more reliable:\n\nThe following footprints should be used on most boards:\n\n• _0402 - Standard footprint for regular board layouts\n• _0603 - Standard footprint for regular board layouts\n• _0805 - Standard footprint for regular board layouts\n• _1206 - Standard footprint for regular board layouts\n\nFor extremely tight-pitch boards where space is at a premium, the following 'micro-pitch' footprints can be used (smaller pads, no silkscreen outline, etc.):\n\n• _0402MP - Micro-pitch footprint for very dense/compact boards\n• _0603MP - Micro-pitch footprint for very dense/compact boards\n• _0805MP - Micro-pitch footprint for very dense/compact boards\n• _1206MP - Micro-pitch footprint for very dense/compact boards"
-			(at 325.12 57.15 0)
+			(at 320.04 50.8 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10846,7 +10653,7 @@
 	)
 	(symbol
 		(lib_id "cablight-eagle-import:GND")
-		(at 320.04 158.75 0)
+		(at 314.96 149.86 0)
 		(mirror y)
 		(unit 1)
 		(exclude_from_sim no)
@@ -10856,7 +10663,7 @@
 		(fields_autoplaced yes)
 		(uuid "66405d2e-85cf-4636-b886-ad3c1963d0f8")
 		(property "Reference" "#018"
-			(at 320.04 158.75 0)
+			(at 314.96 149.86 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10865,7 +10672,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 320.04 161.29 0)
+			(at 314.96 152.4 0)
 			(effects
 				(font
 					(size 1.27 1.0795)
@@ -10873,7 +10680,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 320.04 158.75 0)
+			(at 314.96 149.86 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10882,7 +10689,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 320.04 158.75 0)
+			(at 314.96 149.86 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10891,7 +10698,7 @@
 			)
 		)
 		(property "Description" "GND"
-			(at 320.04 158.75 0)
+			(at 314.96 149.86 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10913,7 +10720,7 @@
 	)
 	(symbol
 		(lib_id "Switch:SW_Push")
-		(at 229.87 58.42 0)
+		(at 219.71 45.72 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -10921,16 +10728,16 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "672d72fb-f878-4eaf-93d6-8ee05673ffee")
-		(property "Reference" "RESET1"
-			(at 229.87 50.8 0)
+		(property "Reference" "B1"
+			(at 219.71 38.1 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 			)
 		)
-		(property "Value" "Tactile"
-			(at 229.87 53.34 0)
+		(property "Value" "RESET - TACTILE SMD"
+			(at 219.71 40.64 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10938,7 +10745,7 @@
 			)
 		)
 		(property "Footprint" "GRK_Lib:tactile Eswitch TL3365"
-			(at 229.87 53.34 0)
+			(at 219.71 40.64 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10947,7 +10754,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 229.87 53.34 0)
+			(at 219.71 40.64 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10956,7 +10763,7 @@
 			)
 		)
 		(property "Description" "Push button switch, generic, two pins"
-			(at 229.87 58.42 0)
+			(at 219.71 45.72 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10973,7 +10780,7 @@
 		(instances
 			(project "cablight-project"
 				(path "/2aa36568-293b-470b-bbef-a9ff44d0879c"
-					(reference "RESET1")
+					(reference "B1")
 					(unit 1)
 				)
 			)
@@ -10981,7 +10788,7 @@
 	)
 	(symbol
 		(lib_id "cablight-eagle-import:GND")
-		(at 238.76 68.58 0)
+		(at 233.68 55.88 0)
 		(mirror y)
 		(unit 1)
 		(exclude_from_sim no)
@@ -10991,7 +10798,7 @@
 		(fields_autoplaced yes)
 		(uuid "6738b5de-9fb0-4d1c-b2c8-b7115f0d48f3")
 		(property "Reference" "#014"
-			(at 238.76 68.58 0)
+			(at 233.68 55.88 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11000,7 +10807,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 238.76 71.12 0)
+			(at 233.68 58.42 0)
 			(effects
 				(font
 					(size 1.27 1.0795)
@@ -11008,7 +10815,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 238.76 68.58 0)
+			(at 233.68 55.88 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11017,7 +10824,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 238.76 68.58 0)
+			(at 233.68 55.88 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11026,7 +10833,7 @@
 			)
 		)
 		(property "Description" "GND"
-			(at 238.76 68.58 0)
+			(at 233.68 55.88 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11048,7 +10855,7 @@
 	)
 	(symbol
 		(lib_id "cablight-eagle-import:GND")
-		(at 81.28 256.54 0)
+		(at 71.12 246.38 0)
 		(mirror y)
 		(unit 1)
 		(exclude_from_sim no)
@@ -11058,7 +10865,7 @@
 		(fields_autoplaced yes)
 		(uuid "6aef2811-6d51-488d-98f4-1c65da5d8dc0")
 		(property "Reference" "#017"
-			(at 81.28 256.54 0)
+			(at 71.12 246.38 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11067,7 +10874,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 81.28 259.08 0)
+			(at 71.12 248.92 0)
 			(effects
 				(font
 					(size 1.27 1.0795)
@@ -11075,7 +10882,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 81.28 256.54 0)
+			(at 71.12 246.38 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11084,7 +10891,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 81.28 256.54 0)
+			(at 71.12 246.38 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11093,7 +10900,7 @@
 			)
 		)
 		(property "Description" "GND"
-			(at 81.28 256.54 0)
+			(at 71.12 246.38 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11115,7 +10922,7 @@
 	)
 	(symbol
 		(lib_id "cablight-eagle-import:RESISTOR_0805")
-		(at 81.28 248.92 270)
+		(at 71.12 238.76 270)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -11123,24 +10930,26 @@
 		(dnp no)
 		(uuid "6b052ea6-ee60-49d0-a632-372edfef21ac")
 		(property "Reference" "R15"
-			(at 85.09 247.904 90)
+			(at 73.152 237.998 90)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
+				(justify left)
 			)
 		)
 		(property "Value" "0"
-			(at 85.09 249.936 90)
+			(at 73.152 240.03 90)
 			(effects
 				(font
 					(size 1.016 1.016)
 					(bold yes)
 				)
+				(justify left)
 			)
 		)
 		(property "Footprint" "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder"
-			(at 81.28 248.92 0)
+			(at 71.12 238.76 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11149,7 +10958,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 81.28 248.92 0)
+			(at 71.12 238.76 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11158,7 +10967,7 @@
 			)
 		)
 		(property "Description" "Resistors\n\nFor new designs, use the packages preceded by an '_' character since they are more reliable:\n\nThe following footprints should be used on most boards:\n\n• _0402 - Standard footprint for regular board layouts\n• _0603 - Standard footprint for regular board layouts\n• _0805 - Standard footprint for regular board layouts\n• _1206 - Standard footprint for regular board layouts\n\nFor extremely tight-pitch boards where space is at a premium, the following 'micro-pitch' footprints can be used (smaller pads, no silkscreen outline, etc.):\n\n• _0402MP - Micro-pitch footprint for very dense/compact boards\n• _0603MP - Micro-pitch footprint for very dense/compact boards\n• _0805MP - Micro-pitch footprint for very dense/compact boards\n• _1206MP - Micro-pitch footprint for very dense/compact boards"
-			(at 81.28 248.92 0)
+			(at 71.12 238.76 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11183,7 +10992,7 @@
 	)
 	(symbol
 		(lib_id "Switch:SW_DIP_x04")
-		(at 82.55 41.91 0)
+		(at 100.33 46.99 0)
 		(mirror y)
 		(unit 1)
 		(exclude_from_sim no)
@@ -11193,7 +11002,7 @@
 		(fields_autoplaced yes)
 		(uuid "74520ec1-a735-40fe-b0d2-916d1f04d72b")
 		(property "Reference" "DIP1"
-			(at 82.55 29.21 0)
+			(at 100.33 34.29 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11201,7 +11010,7 @@
 			)
 		)
 		(property "Value" "SW_DIP_x04"
-			(at 82.55 31.75 0)
+			(at 100.33 36.83 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11209,7 +11018,7 @@
 			)
 		)
 		(property "Footprint" "GRK_Lib:DIP-4 DS04-254 SAME SKY"
-			(at 82.55 41.91 0)
+			(at 100.33 46.99 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11218,7 +11027,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 82.55 41.91 0)
+			(at 100.33 46.99 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11227,7 +11036,7 @@
 			)
 		)
 		(property "Description" "4x DIP Switch, Single Pole Single Throw (SPST) switch, small symbol"
-			(at 82.55 41.91 0)
+			(at 100.33 46.99 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11270,7 +11079,7 @@
 	)
 	(symbol
 		(lib_id "cablight-eagle-import:CAP_CERAMIC_0805")
-		(at 68.58 173.99 0)
+		(at 83.82 148.59 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -11279,7 +11088,7 @@
 		(fields_autoplaced yes)
 		(uuid "749f7e10-8ae3-4a37-b596-bfdb16ec2f59")
 		(property "Reference" "C8"
-			(at 71.12 171.4499 0)
+			(at 86.36 146.0499 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11288,7 +11097,7 @@
 			)
 		)
 		(property "Value" "100nF"
-			(at 71.12 173.9899 0)
+			(at 86.36 148.5899 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11297,7 +11106,7 @@
 			)
 		)
 		(property "Footprint" "Capacitor_SMD:C_0805_2012Metric_Pad1.18x1.45mm_HandSolder"
-			(at 68.58 173.99 0)
+			(at 83.82 148.59 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11306,7 +11115,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 68.58 173.99 0)
+			(at 83.82 148.59 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11315,7 +11124,7 @@
 			)
 		)
 		(property "Description" "Ceramic Capacitors\n\nFor new designs, use the packages preceded by an '_' character since they are more reliable:\n\nThe following footprints should be used on most boards:\n\n• _0402 - Standard footprint for regular board layouts\n• _0603 - Standard footprint for regular board layouts\n• _0805 - Standard footprint for regular board layouts\n• _1206 - Standard footprint for regular board layouts\n\nFor extremely tight-pitch boards where space is at a premium, the following 'micro-pitch' footprints can be used (smaller pads, no silkscreen outline, etc.):\n\n• _0402MP - Micro-pitch footprint for very dense/compact boards\n• _0603MP - Micro-pitch footprint for very dense/compact boards\n• _0805MP - Micro-pitch footprint for very dense/compact boards\n• _1206MP - Micro-pitch footprint for very dense/compact boards"
-			(at 68.58 173.99 0)
+			(at 83.82 148.59 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11340,7 +11149,7 @@
 	)
 	(symbol
 		(lib_id "cablight-eagle-import:RESISTOR_0805")
-		(at 397.51 88.9 270)
+		(at 388.62 76.2 270)
 		(mirror x)
 		(unit 1)
 		(exclude_from_sim no)
@@ -11350,7 +11159,7 @@
 		(fields_autoplaced yes)
 		(uuid "74c7f843-20eb-4a5b-8ede-5624fe7c9e78")
 		(property "Reference" "R2"
-			(at 394.97 87.6299 90)
+			(at 386.08 74.9299 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11359,7 +11168,7 @@
 			)
 		)
 		(property "Value" "10K"
-			(at 394.97 90.17 90)
+			(at 386.08 77.47 90)
 			(effects
 				(font
 					(size 1.016 1.016)
@@ -11369,7 +11178,7 @@
 			)
 		)
 		(property "Footprint" "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder"
-			(at 397.51 88.9 0)
+			(at 388.62 76.2 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11378,7 +11187,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 397.51 88.9 0)
+			(at 388.62 76.2 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11387,7 +11196,7 @@
 			)
 		)
 		(property "Description" "Resistors\n\nFor new designs, use the packages preceded by an '_' character since they are more reliable:\n\nThe following footprints should be used on most boards:\n\n• _0402 - Standard footprint for regular board layouts\n• _0603 - Standard footprint for regular board layouts\n• _0805 - Standard footprint for regular board layouts\n• _1206 - Standard footprint for regular board layouts\n\nFor extremely tight-pitch boards where space is at a premium, the following 'micro-pitch' footprints can be used (smaller pads, no silkscreen outline, etc.):\n\n• _0402MP - Micro-pitch footprint for very dense/compact boards\n• _0603MP - Micro-pitch footprint for very dense/compact boards\n• _0805MP - Micro-pitch footprint for very dense/compact boards\n• _1206MP - Micro-pitch footprint for very dense/compact boards"
-			(at 397.51 88.9 0)
+			(at 388.62 76.2 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11412,7 +11221,7 @@
 	)
 	(symbol
 		(lib_id "GRK_Global_Sym_Lib:TestPoint")
-		(at 248.92 246.38 180)
+		(at 251.46 241.3 270)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -11420,7 +11229,7 @@
 		(dnp no)
 		(uuid "78cb0ba6-4193-4258-b139-202f6b0b1c8c")
 		(property "Reference" "TP2"
-			(at 250.698 255.016 0)
+			(at 256.286 240.538 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11429,7 +11238,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 250.698 252.476 0)
+			(at 256.286 242.57 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11438,7 +11247,7 @@
 			)
 		)
 		(property "Footprint" "TestPoint:TestPoint_THTPad_D1.0mm_Drill0.5mm"
-			(at 243.84 246.38 0)
+			(at 251.46 246.38 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11447,7 +11256,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 243.84 246.38 0)
+			(at 251.46 246.38 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11456,7 +11265,7 @@
 			)
 		)
 		(property "Description" "test point"
-			(at 248.92 246.38 0)
+			(at 251.46 241.3 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11478,7 +11287,7 @@
 	)
 	(symbol
 		(lib_id "cablight-eagle-import:CAP_CERAMIC_0805")
-		(at 242.57 219.71 0)
+		(at 240.03 209.55 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -11486,7 +11295,7 @@
 		(dnp no)
 		(uuid "79092bfb-f6a2-45d7-82ad-b6f2f4efd571")
 		(property "Reference" "CP7"
-			(at 243.84 212.852 0)
+			(at 241.3 202.692 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11495,7 +11304,7 @@
 			)
 		)
 		(property "Value" "10uF"
-			(at 243.84 215.392 0)
+			(at 241.3 205.232 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11504,7 +11313,7 @@
 			)
 		)
 		(property "Footprint" "Capacitor_SMD:C_0805_2012Metric_Pad1.18x1.45mm_HandSolder"
-			(at 242.57 219.71 0)
+			(at 240.03 209.55 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11513,7 +11322,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 242.57 219.71 0)
+			(at 240.03 209.55 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11522,7 +11331,7 @@
 			)
 		)
 		(property "Description" "Ceramic Capacitors\n\nFor new designs, use the packages preceded by an '_' character since they are more reliable:\n\nThe following footprints should be used on most boards:\n\n• _0402 - Standard footprint for regular board layouts\n• _0603 - Standard footprint for regular board layouts\n• _0805 - Standard footprint for regular board layouts\n• _1206 - Standard footprint for regular board layouts\n\nFor extremely tight-pitch boards where space is at a premium, the following 'micro-pitch' footprints can be used (smaller pads, no silkscreen outline, etc.):\n\n• _0402MP - Micro-pitch footprint for very dense/compact boards\n• _0603MP - Micro-pitch footprint for very dense/compact boards\n• _0805MP - Micro-pitch footprint for very dense/compact boards\n• _1206MP - Micro-pitch footprint for very dense/compact boards"
-			(at 242.57 219.71 0)
+			(at 240.03 209.55 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11547,7 +11356,7 @@
 	)
 	(symbol
 		(lib_id "cablight-eagle-import:CAP_CERAMIC_0805")
-		(at 325.12 48.26 90)
+		(at 320.04 41.91 90)
 		(mirror x)
 		(unit 1)
 		(exclude_from_sim no)
@@ -11556,7 +11365,7 @@
 		(dnp no)
 		(uuid "7a06e90b-3547-4ba9-8e97-64514ec8262d")
 		(property "Reference" "C5"
-			(at 325.12 50.8 90)
+			(at 320.04 44.45 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11564,8 +11373,8 @@
 				(justify left)
 			)
 		)
-		(property "Value" "10uF"
-			(at 326.136 53.086 90)
+		(property "Value" "22uF"
+			(at 321.056 46.736 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11574,7 +11383,7 @@
 			)
 		)
 		(property "Footprint" "Capacitor_SMD:C_0805_2012Metric_Pad1.18x1.45mm_HandSolder"
-			(at 325.12 48.26 0)
+			(at 320.04 41.91 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11583,7 +11392,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 325.12 48.26 0)
+			(at 320.04 41.91 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11592,7 +11401,7 @@
 			)
 		)
 		(property "Description" "Ceramic Capacitors\n\nFor new designs, use the packages preceded by an '_' character since they are more reliable:\n\nThe following footprints should be used on most boards:\n\n• _0402 - Standard footprint for regular board layouts\n• _0603 - Standard footprint for regular board layouts\n• _0805 - Standard footprint for regular board layouts\n• _1206 - Standard footprint for regular board layouts\n\nFor extremely tight-pitch boards where space is at a premium, the following 'micro-pitch' footprints can be used (smaller pads, no silkscreen outline, etc.):\n\n• _0402MP - Micro-pitch footprint for very dense/compact boards\n• _0603MP - Micro-pitch footprint for very dense/compact boards\n• _0805MP - Micro-pitch footprint for very dense/compact boards\n• _1206MP - Micro-pitch footprint for very dense/compact boards"
-			(at 325.12 48.26 0)
+			(at 320.04 41.91 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11617,7 +11426,7 @@
 	)
 	(symbol
 		(lib_id "Power_Protection:TPD2EUSB30")
-		(at 135.89 148.59 90)
+		(at 121.92 123.19 90)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -11625,25 +11434,25 @@
 		(dnp no)
 		(uuid "7e5bd366-0b29-4ba6-a782-cac302391448")
 		(property "Reference" "U1"
-			(at 160.528 147.066 90)
+			(at 135.128 121.666 90)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(justify left)
+				(justify right)
 			)
 		)
 		(property "Value" "TPD2EUSB30"
-			(at 160.528 149.606 90)
+			(at 135.128 124.206 90)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(justify left)
+				(justify right)
 			)
 		)
 		(property "Footprint" "GRK_Lib:DRT3"
-			(at 143.51 167.64 0)
+			(at 129.54 142.24 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11652,7 +11461,7 @@
 			)
 		)
 		(property "Datasheet" "http://www.ti.com/lit/ds/symlink/tpd2eusb30a.pdf"
-			(at 135.89 148.59 0)
+			(at 121.92 123.19 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11661,7 +11470,7 @@
 			)
 		)
 		(property "Description" "2-Channel ESD Protection for Super-Speed USB 3.0 Interface, DRT-3"
-			(at 135.89 148.59 0)
+			(at 121.92 123.19 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11689,7 +11498,7 @@
 	)
 	(symbol
 		(lib_id "cablight-eagle-import:CAP_CERAMIC_0805")
-		(at 234.95 229.87 0)
+		(at 232.41 219.71 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -11697,7 +11506,7 @@
 		(dnp no)
 		(uuid "83e45721-23aa-4f5e-9f3b-425e7b794412")
 		(property "Reference" "CP6"
-			(at 236.22 223.012 0)
+			(at 233.68 212.852 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11706,7 +11515,7 @@
 			)
 		)
 		(property "Value" "10uF"
-			(at 236.22 225.552 0)
+			(at 233.68 215.392 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11715,7 +11524,7 @@
 			)
 		)
 		(property "Footprint" "Capacitor_SMD:C_0805_2012Metric_Pad1.18x1.45mm_HandSolder"
-			(at 234.95 229.87 0)
+			(at 232.41 219.71 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11724,7 +11533,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 234.95 229.87 0)
+			(at 232.41 219.71 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11733,7 +11542,7 @@
 			)
 		)
 		(property "Description" "Ceramic Capacitors\n\nFor new designs, use the packages preceded by an '_' character since they are more reliable:\n\nThe following footprints should be used on most boards:\n\n• _0402 - Standard footprint for regular board layouts\n• _0603 - Standard footprint for regular board layouts\n• _0805 - Standard footprint for regular board layouts\n• _1206 - Standard footprint for regular board layouts\n\nFor extremely tight-pitch boards where space is at a premium, the following 'micro-pitch' footprints can be used (smaller pads, no silkscreen outline, etc.):\n\n• _0402MP - Micro-pitch footprint for very dense/compact boards\n• _0603MP - Micro-pitch footprint for very dense/compact boards\n• _0805MP - Micro-pitch footprint for very dense/compact boards\n• _1206MP - Micro-pitch footprint for very dense/compact boards"
-			(at 234.95 229.87 0)
+			(at 232.41 219.71 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11758,7 +11567,7 @@
 	)
 	(symbol
 		(lib_id "Device:D")
-		(at 90.17 213.36 180)
+		(at 80.01 203.2 180)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -11766,7 +11575,7 @@
 		(dnp no)
 		(uuid "841590b3-0aaa-4867-89ea-4e014c39b744")
 		(property "Reference" "D1"
-			(at 90.17 210.566 0)
+			(at 80.01 197.358 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11774,7 +11583,7 @@
 			)
 		)
 		(property "Value" "1N5819"
-			(at 89.916 216.916 0)
+			(at 80.01 199.644 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11782,7 +11591,7 @@
 			)
 		)
 		(property "Footprint" "Diode_THT:D_DO-41_SOD81_P2.54mm_Vertical_KathodeUp"
-			(at 90.17 213.36 0)
+			(at 80.01 203.2 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11791,7 +11600,7 @@
 			)
 		)
 		(property "Datasheet" "kicad-embed://1N5817-D.PDF"
-			(at 90.17 213.36 0)
+			(at 80.01 203.2 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11800,7 +11609,7 @@
 			)
 		)
 		(property "Description" "Diode"
-			(at 90.17 213.36 0)
+			(at 80.01 203.2 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11809,7 +11618,7 @@
 			)
 		)
 		(property "Sim.Device" "D"
-			(at 90.17 213.36 0)
+			(at 80.01 203.2 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11818,7 +11627,7 @@
 			)
 		)
 		(property "Sim.Pins" "1=K 2=A"
-			(at 90.17 213.36 0)
+			(at 80.01 203.2 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11843,16 +11652,15 @@
 	)
 	(symbol
 		(lib_id "Espressif:ESP32-S3-WROOM-1")
-		(at 320.04 115.57 0)
+		(at 314.96 102.87 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(fields_autoplaced yes)
 		(uuid "8679a5f9-5ebb-4bd4-b98d-f2ed492d11df")
 		(property "Reference" "U3"
-			(at 322.1833 72.39 0)
+			(at 275.336 59.436 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11861,7 +11669,7 @@
 			)
 		)
 		(property "Value" "ESP32-S3-WROOM-1U"
-			(at 322.1833 74.93 0)
+			(at 275.336 61.976 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11870,7 +11678,7 @@
 			)
 		)
 		(property "Footprint" "GRK_Lib:ESP32-S3-WROOM-1U"
-			(at 322.58 163.83 0)
+			(at 317.5 151.13 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11879,7 +11687,7 @@
 			)
 		)
 		(property "Datasheet" "kicad-embed://esp32-s3-wroom-1_wroom-1u_datasheet_en.pdf"
-			(at 322.58 166.37 0)
+			(at 317.5 153.67 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11888,7 +11696,7 @@
 			)
 		)
 		(property "Description" "2.4 GHz WiFi (802.11 b/g/n) and Bluetooth ® 5 (LE) module Built around ESP32S3 series of SoCs, Xtensa ® dualcore 32bit LX7 microprocessor Flash up to 16 MB, PSRAM up to 8 MB 36 GPIOs, rich set of peripherals Onboard PCB antenna"
-			(at 320.04 115.57 0)
+			(at 314.96 102.87 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12030,7 +11838,7 @@
 	)
 	(symbol
 		(lib_id "cablight-eagle-import:GND")
-		(at 332.74 59.69 0)
+		(at 327.66 53.34 0)
 		(mirror y)
 		(unit 1)
 		(exclude_from_sim no)
@@ -12040,7 +11848,7 @@
 		(fields_autoplaced yes)
 		(uuid "8682b3c2-8574-4d89-a8a9-897043223483")
 		(property "Reference" "#01010101"
-			(at 332.74 59.69 0)
+			(at 327.66 53.34 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12049,7 +11857,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 332.74 62.23 0)
+			(at 327.66 55.88 0)
 			(effects
 				(font
 					(size 1.27 1.0795)
@@ -12057,7 +11865,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 332.74 59.69 0)
+			(at 327.66 53.34 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12066,7 +11874,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 332.74 59.69 0)
+			(at 327.66 53.34 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12075,7 +11883,7 @@
 			)
 		)
 		(property "Description" "GND"
-			(at 332.74 59.69 0)
+			(at 327.66 53.34 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12097,15 +11905,15 @@
 	)
 	(symbol
 		(lib_id "Diode:1N5819")
-		(at 88.9 132.08 180)
+		(at 109.22 106.68 180)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
 		(uuid "8880db78-7aba-42c8-b2f9-dca6117f9848")
-		(property "Reference" "D2"
-			(at 89.2175 125.73 0)
+		(property "Reference" "D3"
+			(at 109.5375 100.33 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12113,7 +11921,7 @@
 			)
 		)
 		(property "Value" "1N5819"
-			(at 89.2175 128.27 0)
+			(at 109.5375 102.87 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12121,7 +11929,7 @@
 			)
 		)
 		(property "Footprint" "Diode_THT:D_DO-41_SOD81_P2.54mm_Vertical_KathodeUp"
-			(at 88.9 127.635 0)
+			(at 109.22 102.235 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12130,7 +11938,7 @@
 			)
 		)
 		(property "Datasheet" "http://www.vishay.com/docs/88525/1n5817.pdf"
-			(at 88.9 132.08 0)
+			(at 109.22 106.68 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12139,7 +11947,7 @@
 			)
 		)
 		(property "Description" "40V 1A Schottky Barrier Rectifier Diode, DO-41"
-			(at 88.9 132.08 0)
+			(at 109.22 106.68 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12156,7 +11964,7 @@
 		(instances
 			(project ""
 				(path "/2aa36568-293b-470b-bbef-a9ff44d0879c"
-					(reference "D2")
+					(reference "D3")
 					(unit 1)
 				)
 			)
@@ -12164,7 +11972,7 @@
 	)
 	(symbol
 		(lib_id "cablight-eagle-import:RESISTOR_0805")
-		(at 31.75 36.83 90)
+		(at 49.53 41.91 90)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -12173,7 +11981,7 @@
 		(fields_autoplaced yes)
 		(uuid "8c6055d9-75ce-433b-8706-4685a3843d34")
 		(property "Reference" "R1"
-			(at 34.29 35.5599 90)
+			(at 52.07 40.6399 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12182,7 +11990,7 @@
 			)
 		)
 		(property "Value" "10k"
-			(at 34.29 38.1 90)
+			(at 52.07 43.18 90)
 			(effects
 				(font
 					(size 1.016 1.016)
@@ -12192,7 +12000,7 @@
 			)
 		)
 		(property "Footprint" "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder"
-			(at 31.75 36.83 0)
+			(at 49.53 41.91 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12201,7 +12009,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 31.75 36.83 0)
+			(at 49.53 41.91 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12210,7 +12018,7 @@
 			)
 		)
 		(property "Description" "Resistors\n\nFor new designs, use the packages preceded by an '_' character since they are more reliable:\n\nThe following footprints should be used on most boards:\n\n• _0402 - Standard footprint for regular board layouts\n• _0603 - Standard footprint for regular board layouts\n• _0805 - Standard footprint for regular board layouts\n• _1206 - Standard footprint for regular board layouts\n\nFor extremely tight-pitch boards where space is at a premium, the following 'micro-pitch' footprints can be used (smaller pads, no silkscreen outline, etc.):\n\n• _0402MP - Micro-pitch footprint for very dense/compact boards\n• _0603MP - Micro-pitch footprint for very dense/compact boards\n• _0805MP - Micro-pitch footprint for very dense/compact boards\n• _1206MP - Micro-pitch footprint for very dense/compact boards"
-			(at 31.75 36.83 0)
+			(at 49.53 41.91 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12235,7 +12043,7 @@
 	)
 	(symbol
 		(lib_id "cablight-eagle-import:GND")
-		(at 224.79 68.58 0)
+		(at 214.63 55.88 0)
 		(mirror y)
 		(unit 1)
 		(exclude_from_sim no)
@@ -12245,7 +12053,7 @@
 		(fields_autoplaced yes)
 		(uuid "95df34b2-bba4-4ad4-8c86-3dcae999b35d")
 		(property "Reference" "#016"
-			(at 224.79 68.58 0)
+			(at 214.63 55.88 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12254,7 +12062,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 224.79 71.12 0)
+			(at 214.63 58.42 0)
 			(effects
 				(font
 					(size 1.27 1.0795)
@@ -12262,7 +12070,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 224.79 68.58 0)
+			(at 214.63 55.88 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12271,7 +12079,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 224.79 68.58 0)
+			(at 214.63 55.88 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12280,7 +12088,7 @@
 			)
 		)
 		(property "Description" "GND"
-			(at 224.79 68.58 0)
+			(at 214.63 55.88 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12302,7 +12110,7 @@
 	)
 	(symbol
 		(lib_id "cablight-eagle-import:CAP_CERAMIC_0805")
-		(at 111.76 228.6 0)
+		(at 109.22 218.44 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -12311,7 +12119,7 @@
 		(fields_autoplaced yes)
 		(uuid "9a0e6e15-9f95-4772-9397-c58e9b8ce9cd")
 		(property "Reference" "C9"
-			(at 114.3 226.0599 0)
+			(at 111.76 215.8999 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12320,7 +12128,7 @@
 			)
 		)
 		(property "Value" "4.7uF"
-			(at 114.3 228.5999 0)
+			(at 111.76 218.4399 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12329,7 +12137,7 @@
 			)
 		)
 		(property "Footprint" "Capacitor_SMD:C_0805_2012Metric_Pad1.18x1.45mm_HandSolder"
-			(at 111.76 228.6 0)
+			(at 109.22 218.44 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12338,7 +12146,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 111.76 228.6 0)
+			(at 109.22 218.44 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12347,7 +12155,7 @@
 			)
 		)
 		(property "Description" "Ceramic Capacitors\n\nFor new designs, use the packages preceded by an '_' character since they are more reliable:\n\nThe following footprints should be used on most boards:\n\n• _0402 - Standard footprint for regular board layouts\n• _0603 - Standard footprint for regular board layouts\n• _0805 - Standard footprint for regular board layouts\n• _1206 - Standard footprint for regular board layouts\n\nFor extremely tight-pitch boards where space is at a premium, the following 'micro-pitch' footprints can be used (smaller pads, no silkscreen outline, etc.):\n\n• _0402MP - Micro-pitch footprint for very dense/compact boards\n• _0603MP - Micro-pitch footprint for very dense/compact boards\n• _0805MP - Micro-pitch footprint for very dense/compact boards\n• _1206MP - Micro-pitch footprint for very dense/compact boards"
-			(at 111.76 228.6 0)
+			(at 109.22 218.44 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12372,7 +12180,7 @@
 	)
 	(symbol
 		(lib_id "Device:LED")
-		(at 81.28 229.87 90)
+		(at 71.12 219.71 90)
 		(mirror x)
 		(unit 1)
 		(exclude_from_sim no)
@@ -12380,24 +12188,27 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "9abe76b4-c6cc-4bb2-b538-9a72cad31e30")
-		(property "Reference" "LED-W1"
-			(at 74.93 228.2825 0)
+		(property "Reference" "LED1"
+			(at 74.676 218.44 90)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
+				(justify right)
 			)
 		)
-		(property "Value" "LED"
-			(at 77.47 228.2825 0)
+		(property "Value" "LED 0603"
+			(at 74.676 220.98 90)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
+				(justify right)
+				(hide yes)
 			)
 		)
 		(property "Footprint" "LED_SMD:LED_0603_1608Metric_Pad1.05x0.95mm_HandSolder"
-			(at 81.28 229.87 0)
+			(at 71.12 219.71 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12406,7 +12217,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 81.28 229.87 0)
+			(at 71.12 219.71 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12415,7 +12226,7 @@
 			)
 		)
 		(property "Description" "Light emitting diode"
-			(at 81.28 229.87 0)
+			(at 71.12 219.71 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12424,7 +12235,7 @@
 			)
 		)
 		(property "Sim.Pins" "1=K 2=A"
-			(at 81.28 229.87 0)
+			(at 71.12 219.71 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12441,7 +12252,7 @@
 		(instances
 			(project "cablight-project"
 				(path "/2aa36568-293b-470b-bbef-a9ff44d0879c"
-					(reference "LED-W1")
+					(reference "LED1")
 					(unit 1)
 				)
 			)
@@ -12449,7 +12260,7 @@
 	)
 	(symbol
 		(lib_id "extra:Screw_Term_1x4_5mm")
-		(at 172.72 96.52 0)
+		(at 181.61 120.65 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -12457,8 +12268,8 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "9be8f213-a223-4f5d-8566-746e7cbd68df")
-		(property "Reference" "J3"
-			(at 167.64 90.17 0)
+		(property "Reference" "J1"
+			(at 176.53 114.3 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12466,7 +12277,7 @@
 			)
 		)
 		(property "Value" "Screw_Term_1x4_5mm"
-			(at 166.878 99.568 0)
+			(at 175.768 123.698 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12475,7 +12286,7 @@
 			)
 		)
 		(property "Footprint" "GRK_Lib:Molex 4pin Terminal Block"
-			(at 172.72 96.52 0)
+			(at 181.61 120.65 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12484,7 +12295,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 167.64 96.52 0)
+			(at 176.53 120.65 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12493,7 +12304,7 @@
 			)
 		)
 		(property "Description" "Molex Screw Terminal, single row, 01x04 5mm pitch"
-			(at 172.72 96.52 0)
+			(at 181.61 120.65 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12516,7 +12327,7 @@
 		(instances
 			(project "cablight-project"
 				(path "/2aa36568-293b-470b-bbef-a9ff44d0879c"
-					(reference "J3")
+					(reference "J1")
 					(unit 1)
 				)
 			)
@@ -12524,7 +12335,7 @@
 	)
 	(symbol
 		(lib_id "cablight-eagle-import:RESISTOR_0805")
-		(at 187.96 238.76 90)
+		(at 185.42 228.6 90)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -12533,7 +12344,7 @@
 		(fields_autoplaced yes)
 		(uuid "9ed84421-077c-456c-b63d-79d872331d80")
 		(property "Reference" "R9"
-			(at 190.5 237.4899 90)
+			(at 187.96 227.3299 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12542,7 +12353,7 @@
 			)
 		)
 		(property "Value" "22K1"
-			(at 190.5 240.03 90)
+			(at 187.96 229.87 90)
 			(effects
 				(font
 					(size 1.016 1.016)
@@ -12552,7 +12363,7 @@
 			)
 		)
 		(property "Footprint" "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder"
-			(at 187.96 238.76 0)
+			(at 185.42 228.6 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12561,7 +12372,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 187.96 238.76 0)
+			(at 185.42 228.6 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12570,7 +12381,7 @@
 			)
 		)
 		(property "Description" "Resistors\n\nFor new designs, use the packages preceded by an '_' character since they are more reliable:\n\nThe following footprints should be used on most boards:\n\n• _0402 - Standard footprint for regular board layouts\n• _0603 - Standard footprint for regular board layouts\n• _0805 - Standard footprint for regular board layouts\n• _1206 - Standard footprint for regular board layouts\n\nFor extremely tight-pitch boards where space is at a premium, the following 'micro-pitch' footprints can be used (smaller pads, no silkscreen outline, etc.):\n\n• _0402MP - Micro-pitch footprint for very dense/compact boards\n• _0603MP - Micro-pitch footprint for very dense/compact boards\n• _0805MP - Micro-pitch footprint for very dense/compact boards\n• _1206MP - Micro-pitch footprint for very dense/compact boards"
-			(at 187.96 238.76 0)
+			(at 185.42 228.6 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12595,7 +12406,7 @@
 	)
 	(symbol
 		(lib_id "cablight-eagle-import:GND")
-		(at 41.91 184.15 0)
+		(at 57.15 158.75 0)
 		(mirror y)
 		(unit 1)
 		(exclude_from_sim no)
@@ -12605,7 +12416,7 @@
 		(fields_autoplaced yes)
 		(uuid "a0deff20-08e0-4de7-85f8-746cbfe29d2e")
 		(property "Reference" "#0103"
-			(at 41.91 184.15 0)
+			(at 57.15 158.75 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12614,7 +12425,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 41.91 186.69 0)
+			(at 57.15 161.29 0)
 			(effects
 				(font
 					(size 1.27 1.0795)
@@ -12622,7 +12433,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 41.91 184.15 0)
+			(at 57.15 158.75 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12631,7 +12442,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 41.91 184.15 0)
+			(at 57.15 158.75 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12640,7 +12451,7 @@
 			)
 		)
 		(property "Description" "GND"
-			(at 41.91 184.15 0)
+			(at 57.15 158.75 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12661,75 +12472,8 @@
 		)
 	)
 	(symbol
-		(lib_id "Diode:1N5819")
-		(at 109.22 160.02 90)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board no)
-		(dnp yes)
-		(uuid "a68b491d-3457-4678-99e7-09f21600bda9")
-		(property "Reference" "D5"
-			(at 115.57 160.3375 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "ESD321"
-			(at 113.03 160.3375 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" "GRK_Lib:ESD321_SOT5x3_DYA_TEX"
-			(at 113.665 160.02 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "http://www.vishay.com/docs/88525/1n5817.pdf"
-			(at 109.22 160.02 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "40V 1A Schottky Barrier Rectifier Diode, DO-41"
-			(at 109.22 160.02 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "c58accf4-3f82-497e-a5b8-06583e7c2cb1")
-		)
-		(pin "2"
-			(uuid "65be5d45-c3c0-48c3-9e3d-53b927b5fc88")
-		)
-		(instances
-			(project "cablight-project"
-				(path "/2aa36568-293b-470b-bbef-a9ff44d0879c"
-					(reference "D5")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "cablight-eagle-import:GND")
-		(at 137.16 49.53 0)
+		(at 154.94 54.61 0)
 		(mirror y)
 		(unit 1)
 		(exclude_from_sim no)
@@ -12739,7 +12483,7 @@
 		(fields_autoplaced yes)
 		(uuid "ab064fa9-da7c-425e-b212-7b0fb80b2f6e")
 		(property "Reference" "#07"
-			(at 137.16 49.53 0)
+			(at 154.94 54.61 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12748,7 +12492,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 137.16 52.07 0)
+			(at 154.94 57.15 0)
 			(effects
 				(font
 					(size 1.27 1.0795)
@@ -12756,7 +12500,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 137.16 49.53 0)
+			(at 154.94 54.61 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12765,7 +12509,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 137.16 49.53 0)
+			(at 154.94 54.61 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12774,7 +12518,7 @@
 			)
 		)
 		(property "Description" "GND"
-			(at 137.16 49.53 0)
+			(at 154.94 54.61 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12796,15 +12540,15 @@
 	)
 	(symbol
 		(lib_id "GRK_Global_Sym_Lib:USB_C_Receptacle_USB2.0_14P")
-		(at 31.75 149.86 0)
+		(at 46.99 124.46 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
 		(uuid "b41e97b1-4ab2-4580-a560-9402942ad34d")
-		(property "Reference" "USBC-V1"
-			(at 27.178 124.968 0)
+		(property "Reference" "USBC1"
+			(at 42.418 99.568 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12812,7 +12556,7 @@
 			)
 		)
 		(property "Value" "USB_C_Receptacle_USB2.0_14P"
-			(at 32.004 120.396 0)
+			(at 46.99 94.742 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12820,7 +12564,7 @@
 			)
 		)
 		(property "Footprint" "GRK_Lib:usbc-GCT_USB4160-03-0170-C_REVA2"
-			(at 35.56 149.86 0)
+			(at 50.8 124.46 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12829,7 +12573,7 @@
 			)
 		)
 		(property "Datasheet" "https://www.usb.org/sites/default/files/documents/usb_type-c.zip"
-			(at 35.56 149.86 0)
+			(at 50.8 124.46 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12838,7 +12582,7 @@
 			)
 		)
 		(property "Description" "USB 2.0-only 14P Type-C Receptacle connector"
-			(at 31.75 149.86 0)
+			(at 46.99 124.46 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12900,74 +12644,7 @@
 		(instances
 			(project ""
 				(path "/2aa36568-293b-470b-bbef-a9ff44d0879c"
-					(reference "USBC-V1")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "cablight-eagle-import:GND")
-		(at 109.22 184.15 0)
-		(mirror y)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board no)
-		(dnp yes)
-		(fields_autoplaced yes)
-		(uuid "b749071e-7732-4b2a-be11-bdbaff9e50b4")
-		(property "Reference" "#04"
-			(at 109.22 184.15 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Value" "GND"
-			(at 109.22 186.69 0)
-			(effects
-				(font
-					(size 1.27 1.0795)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 109.22 184.15 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 109.22 184.15 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "GND"
-			(at 109.22 184.15 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "1b9f181b-c4cf-467a-9e29-739dea22f452")
-		)
-		(instances
-			(project "cablight-project"
-				(path "/2aa36568-293b-470b-bbef-a9ff44d0879c"
-					(reference "#04")
+					(reference "USBC1")
 					(unit 1)
 				)
 			)
@@ -12975,7 +12652,7 @@
 	)
 	(symbol
 		(lib_id "cablight-eagle-import:RESISTOR_0805")
-		(at 49.53 172.72 270)
+		(at 64.77 147.32 270)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -12984,7 +12661,7 @@
 		(fields_autoplaced yes)
 		(uuid "b88aecfd-699c-4d63-bdc0-c07398e2b40b")
 		(property "Reference" "R12"
-			(at 52.07 171.4499 90)
+			(at 67.31 146.0499 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12993,7 +12670,7 @@
 			)
 		)
 		(property "Value" "2M"
-			(at 52.07 173.99 90)
+			(at 67.31 148.59 90)
 			(effects
 				(font
 					(size 1.016 1.016)
@@ -13003,7 +12680,7 @@
 			)
 		)
 		(property "Footprint" "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder"
-			(at 49.53 172.72 0)
+			(at 64.77 147.32 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13012,7 +12689,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 49.53 172.72 0)
+			(at 64.77 147.32 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13021,7 +12698,7 @@
 			)
 		)
 		(property "Description" "Resistors\n\nFor new designs, use the packages preceded by an '_' character since they are more reliable:\n\nThe following footprints should be used on most boards:\n\n• _0402 - Standard footprint for regular board layouts\n• _0603 - Standard footprint for regular board layouts\n• _0805 - Standard footprint for regular board layouts\n• _1206 - Standard footprint for regular board layouts\n\nFor extremely tight-pitch boards where space is at a premium, the following 'micro-pitch' footprints can be used (smaller pads, no silkscreen outline, etc.):\n\n• _0402MP - Micro-pitch footprint for very dense/compact boards\n• _0603MP - Micro-pitch footprint for very dense/compact boards\n• _0805MP - Micro-pitch footprint for very dense/compact boards\n• _1206MP - Micro-pitch footprint for very dense/compact boards"
-			(at 49.53 172.72 0)
+			(at 64.77 147.32 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13045,34 +12722,35 @@
 		)
 	)
 	(symbol
-		(lib_id "cablight-eagle-import:CAP_CERAMIC_0805")
-		(at 196.85 219.71 0)
+		(lib_id "cablight-eagle-import:GND")
+		(at 251.46 246.38 0)
+		(mirror y)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "bad45d63-17f5-4582-918e-a1a968d91931")
-		(property "Reference" "CP1"
-			(at 198.12 212.852 0)
+		(fields_autoplaced yes)
+		(uuid "ba85c253-0e9d-4911-8fcb-b32a2aa347e2")
+		(property "Reference" "#03"
+			(at 251.46 246.38 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(justify left)
+				(hide yes)
 			)
 		)
-		(property "Value" "10uF"
-			(at 198.12 215.392 0)
+		(property "Value" "GND"
+			(at 251.46 248.92 0)
 			(effects
 				(font
-					(size 1.27 1.27)
+					(size 1.27 1.0795)
 				)
-				(justify left)
 			)
 		)
-		(property "Footprint" "Capacitor_SMD:C_0805_2012Metric_Pad1.18x1.45mm_HandSolder"
-			(at 196.85 219.71 0)
+		(property "Footprint" ""
+			(at 251.46 246.38 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13081,7 +12759,73 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 196.85 219.71 0)
+			(at 251.46 246.38 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "GND"
+			(at 251.46 246.38 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "65be359c-b9d9-425e-9640-cfcab333f350")
+		)
+		(instances
+			(project "cablight-project"
+				(path "/2aa36568-293b-470b-bbef-a9ff44d0879c"
+					(reference "#03")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "cablight-eagle-import:CAP_CERAMIC_0805")
+		(at 194.31 209.55 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "bad45d63-17f5-4582-918e-a1a968d91931")
+		(property "Reference" "CP1"
+			(at 195.58 202.692 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "10uF"
+			(at 195.58 205.232 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Capacitor_SMD:C_0805_2012Metric_Pad1.18x1.45mm_HandSolder"
+			(at 194.31 209.55 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 194.31 209.55 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13090,7 +12834,7 @@
 			)
 		)
 		(property "Description" "Ceramic Capacitors\n\nFor new designs, use the packages preceded by an '_' character since they are more reliable:\n\nThe following footprints should be used on most boards:\n\n• _0402 - Standard footprint for regular board layouts\n• _0603 - Standard footprint for regular board layouts\n• _0805 - Standard footprint for regular board layouts\n• _1206 - Standard footprint for regular board layouts\n\nFor extremely tight-pitch boards where space is at a premium, the following 'micro-pitch' footprints can be used (smaller pads, no silkscreen outline, etc.):\n\n• _0402MP - Micro-pitch footprint for very dense/compact boards\n• _0603MP - Micro-pitch footprint for very dense/compact boards\n• _0805MP - Micro-pitch footprint for very dense/compact boards\n• _1206MP - Micro-pitch footprint for very dense/compact boards"
-			(at 196.85 219.71 0)
+			(at 194.31 209.55 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13115,7 +12859,7 @@
 	)
 	(symbol
 		(lib_id "cablight-eagle-import:GND")
-		(at 215.9 132.08 0)
+		(at 217.17 156.21 0)
 		(mirror y)
 		(unit 1)
 		(exclude_from_sim no)
@@ -13125,7 +12869,7 @@
 		(fields_autoplaced yes)
 		(uuid "bb26eab2-53b1-4b7e-a574-b0045ef5bd96")
 		(property "Reference" "#05"
-			(at 215.9 132.08 0)
+			(at 217.17 156.21 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13134,7 +12878,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 215.9 134.62 0)
+			(at 217.17 158.75 0)
 			(effects
 				(font
 					(size 1.27 1.0795)
@@ -13142,7 +12886,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 215.9 132.08 0)
+			(at 217.17 156.21 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13151,7 +12895,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 215.9 132.08 0)
+			(at 217.17 156.21 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13160,7 +12904,7 @@
 			)
 		)
 		(property "Description" "GND"
-			(at 215.9 132.08 0)
+			(at 217.17 156.21 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13182,7 +12926,7 @@
 	)
 	(symbol
 		(lib_id "cablight-eagle-import:GND")
-		(at 397.51 105.41 0)
+		(at 388.62 92.71 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -13191,7 +12935,7 @@
 		(fields_autoplaced yes)
 		(uuid "bdf9e5fb-1aac-4119-9297-6bbc7ad067e3")
 		(property "Reference" "#015"
-			(at 397.51 105.41 0)
+			(at 388.62 92.71 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13200,7 +12944,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 397.51 107.95 0)
+			(at 388.62 95.25 0)
 			(effects
 				(font
 					(size 1.27 1.0795)
@@ -13208,7 +12952,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 397.51 105.41 0)
+			(at 388.62 92.71 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13217,7 +12961,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 397.51 105.41 0)
+			(at 388.62 92.71 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13226,7 +12970,7 @@
 			)
 		)
 		(property "Description" "GND"
-			(at 397.51 105.41 0)
+			(at 388.62 92.71 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13248,7 +12992,7 @@
 	)
 	(symbol
 		(lib_id "user:R")
-		(at 208.28 116.84 270)
+		(at 209.55 140.97 270)
 		(mirror x)
 		(unit 1)
 		(exclude_from_sim no)
@@ -13257,7 +13001,7 @@
 		(dnp no)
 		(uuid "be65dd1a-932d-449b-a5a1-5ba6dc16600e")
 		(property "Reference" "R5"
-			(at 208.28 114.554 90)
+			(at 209.55 138.684 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13265,7 +13009,7 @@
 			)
 		)
 		(property "Value" "47R"
-			(at 208.28 119.126 90)
+			(at 209.55 143.256 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13273,7 +13017,7 @@
 			)
 		)
 		(property "Footprint" "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder"
-			(at 208.28 118.618 90)
+			(at 209.55 142.748 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13282,7 +13026,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 208.28 116.84 0)
+			(at 209.55 140.97 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13291,7 +13035,7 @@
 			)
 		)
 		(property "Description" "ResistorFromKit"
-			(at 208.28 116.84 0)
+			(at 209.55 140.97 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13316,7 +13060,7 @@
 	)
 	(symbol
 		(lib_id "cablight-eagle-import:CAP_CERAMIC_0805")
-		(at 265.43 85.09 0)
+		(at 251.46 72.39 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -13324,7 +13068,7 @@
 		(dnp no)
 		(uuid "c45ecd67-1da6-4065-9d2c-bad3b9aa3ed1")
 		(property "Reference" "C4"
-			(at 261.62 82.55 0)
+			(at 247.65 69.85 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13332,7 +13076,7 @@
 			)
 		)
 		(property "Value" "1uF"
-			(at 261.62 84.836 0)
+			(at 247.65 72.136 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13340,7 +13084,7 @@
 			)
 		)
 		(property "Footprint" "Capacitor_SMD:C_0805_2012Metric_Pad1.18x1.45mm_HandSolder"
-			(at 265.43 85.09 0)
+			(at 251.46 72.39 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13349,7 +13093,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 265.43 85.09 0)
+			(at 251.46 72.39 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13358,7 +13102,7 @@
 			)
 		)
 		(property "Description" "Ceramic Capacitors\n\nFor new designs, use the packages preceded by an '_' character since they are more reliable:\n\nThe following footprints should be used on most boards:\n\n• _0402 - Standard footprint for regular board layouts\n• _0603 - Standard footprint for regular board layouts\n• _0805 - Standard footprint for regular board layouts\n• _1206 - Standard footprint for regular board layouts\n\nFor extremely tight-pitch boards where space is at a premium, the following 'micro-pitch' footprints can be used (smaller pads, no silkscreen outline, etc.):\n\n• _0402MP - Micro-pitch footprint for very dense/compact boards\n• _0603MP - Micro-pitch footprint for very dense/compact boards\n• _0805MP - Micro-pitch footprint for very dense/compact boards\n• _1206MP - Micro-pitch footprint for very dense/compact boards"
-			(at 265.43 85.09 0)
+			(at 251.46 72.39 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13383,7 +13127,7 @@
 	)
 	(symbol
 		(lib_id "cablight-eagle-import:GND")
-		(at 181.61 132.08 0)
+		(at 190.5 156.21 0)
 		(mirror y)
 		(unit 1)
 		(exclude_from_sim no)
@@ -13393,7 +13137,7 @@
 		(fields_autoplaced yes)
 		(uuid "c6c63b44-62aa-43f3-bd19-224038852c0a")
 		(property "Reference" "#01"
-			(at 181.61 132.08 0)
+			(at 190.5 156.21 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13402,7 +13146,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 181.61 134.62 0)
+			(at 190.5 158.75 0)
 			(effects
 				(font
 					(size 1.27 1.0795)
@@ -13410,7 +13154,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 181.61 132.08 0)
+			(at 190.5 156.21 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13419,7 +13163,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 181.61 132.08 0)
+			(at 190.5 156.21 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13428,7 +13172,7 @@
 			)
 		)
 		(property "Description" "GND"
-			(at 181.61 132.08 0)
+			(at 190.5 156.21 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13450,7 +13194,7 @@
 	)
 	(symbol
 		(lib_id "user:R")
-		(at 215.9 124.46 0)
+		(at 217.17 148.59 0)
 		(mirror y)
 		(unit 1)
 		(exclude_from_sim no)
@@ -13459,7 +13203,7 @@
 		(dnp no)
 		(uuid "cade276f-d4e2-41e8-9c50-da3f63ba115d")
 		(property "Reference" "R4"
-			(at 214.122 123.19 0)
+			(at 215.392 147.32 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13468,7 +13212,7 @@
 			)
 		)
 		(property "Value" "10K"
-			(at 214.122 125.73 0)
+			(at 215.392 149.86 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13477,7 +13221,7 @@
 			)
 		)
 		(property "Footprint" "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder"
-			(at 217.678 124.46 90)
+			(at 218.948 148.59 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13486,7 +13230,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 215.9 124.46 0)
+			(at 217.17 148.59 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13495,7 +13239,7 @@
 			)
 		)
 		(property "Description" "ResistorFromKit"
-			(at 215.9 124.46 0)
+			(at 217.17 148.59 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13520,7 +13264,7 @@
 	)
 	(symbol
 		(lib_id "GRK_Global_Sym_Lib:TestPoint")
-		(at 254 201.93 0)
+		(at 251.46 191.77 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -13528,7 +13272,7 @@
 		(dnp no)
 		(uuid "cdc2d0f6-9bf3-457a-8dd5-42654f49c3b5")
 		(property "Reference" "TP1"
-			(at 252.222 193.294 0)
+			(at 249.682 183.134 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13537,7 +13281,7 @@
 			)
 		)
 		(property "Value" "3V3"
-			(at 252.222 195.834 0)
+			(at 249.682 185.674 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13546,7 +13290,7 @@
 			)
 		)
 		(property "Footprint" "TestPoint:TestPoint_THTPad_D1.0mm_Drill0.5mm"
-			(at 259.08 201.93 0)
+			(at 256.54 191.77 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13555,7 +13299,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 259.08 201.93 0)
+			(at 256.54 191.77 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13564,7 +13308,7 @@
 			)
 		)
 		(property "Description" "test point"
-			(at 254 201.93 0)
+			(at 251.46 191.77 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13586,7 +13330,7 @@
 	)
 	(symbol
 		(lib_id "cablight-eagle-import:CAP_CERAMIC_0805")
-		(at 238.76 63.5 0)
+		(at 233.68 50.8 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -13595,7 +13339,7 @@
 		(fields_autoplaced yes)
 		(uuid "d23aed87-43f6-40cb-8adb-b2651e265179")
 		(property "Reference" "C6"
-			(at 241.3 60.9599 0)
+			(at 236.22 48.2599 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13604,7 +13348,7 @@
 			)
 		)
 		(property "Value" "0u1F"
-			(at 241.3 63.4999 0)
+			(at 236.22 50.7999 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13613,7 +13357,7 @@
 			)
 		)
 		(property "Footprint" "Capacitor_SMD:C_0805_2012Metric_Pad1.18x1.45mm_HandSolder"
-			(at 238.76 63.5 0)
+			(at 233.68 50.8 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13622,7 +13366,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 238.76 63.5 0)
+			(at 233.68 50.8 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13631,7 +13375,7 @@
 			)
 		)
 		(property "Description" "Ceramic Capacitors\n\nFor new designs, use the packages preceded by an '_' character since they are more reliable:\n\nThe following footprints should be used on most boards:\n\n• _0402 - Standard footprint for regular board layouts\n• _0603 - Standard footprint for regular board layouts\n• _0805 - Standard footprint for regular board layouts\n• _1206 - Standard footprint for regular board layouts\n\nFor extremely tight-pitch boards where space is at a premium, the following 'micro-pitch' footprints can be used (smaller pads, no silkscreen outline, etc.):\n\n• _0402MP - Micro-pitch footprint for very dense/compact boards\n• _0603MP - Micro-pitch footprint for very dense/compact boards\n• _0805MP - Micro-pitch footprint for very dense/compact boards\n• _1206MP - Micro-pitch footprint for very dense/compact boards"
-			(at 238.76 63.5 0)
+			(at 233.68 50.8 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13656,7 +13400,7 @@
 	)
 	(symbol
 		(lib_id "cablight-eagle-import:GND")
-		(at 49.53 52.07 0)
+		(at 67.31 57.15 0)
 		(mirror y)
 		(unit 1)
 		(exclude_from_sim no)
@@ -13666,7 +13410,7 @@
 		(fields_autoplaced yes)
 		(uuid "d47f9a76-336c-40bf-a1b0-a1c8e7878171")
 		(property "Reference" "#010101010101"
-			(at 49.53 52.07 0)
+			(at 67.31 57.15 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13675,7 +13419,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 49.53 54.61 0)
+			(at 67.31 59.69 0)
 			(effects
 				(font
 					(size 1.27 1.0795)
@@ -13683,7 +13427,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 49.53 52.07 0)
+			(at 67.31 57.15 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13692,7 +13436,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 49.53 52.07 0)
+			(at 67.31 57.15 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13701,7 +13445,7 @@
 			)
 		)
 		(property "Description" "GND"
-			(at 49.53 52.07 0)
+			(at 67.31 57.15 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13723,31 +13467,32 @@
 	)
 	(symbol
 		(lib_id "Device:LED")
-		(at 254 215.9 90)
+		(at 251.46 205.74 90)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
 		(uuid "dbfc31e9-3160-4b60-98dc-f326fe47146f")
-		(property "Reference" "LED-OK1"
-			(at 260.858 214.376 90)
+		(property "Reference" "LED2"
+			(at 257.048 206.756 90)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 			)
 		)
-		(property "Value" "LED"
-			(at 261.112 217.17 90)
+		(property "Value" "LED 0603"
+			(at 256.794 205.486 90)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
+				(hide yes)
 			)
 		)
 		(property "Footprint" "LED_SMD:LED_0603_1608Metric_Pad1.05x0.95mm_HandSolder"
-			(at 254 215.9 0)
+			(at 251.46 205.74 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13756,7 +13501,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 254 215.9 0)
+			(at 251.46 205.74 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13765,7 +13510,7 @@
 			)
 		)
 		(property "Description" "Light emitting diode"
-			(at 254 215.9 0)
+			(at 251.46 205.74 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13774,7 +13519,7 @@
 			)
 		)
 		(property "Sim.Pins" "1=K 2=A"
-			(at 254 215.9 0)
+			(at 251.46 205.74 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13791,7 +13536,7 @@
 		(instances
 			(project ""
 				(path "/2aa36568-293b-470b-bbef-a9ff44d0879c"
-					(reference "LED-OK1")
+					(reference "LED2")
 					(unit 1)
 				)
 			)
@@ -13799,7 +13544,7 @@
 	)
 	(symbol
 		(lib_id "user:IRLB8721PBF")
-		(at 198.12 116.84 0)
+		(at 199.39 140.97 0)
 		(mirror y)
 		(unit 1)
 		(exclude_from_sim no)
@@ -13808,7 +13553,7 @@
 		(dnp no)
 		(uuid "e258bde6-1540-4bf9-874e-dcc23910937f")
 		(property "Reference" "Q1"
-			(at 199.136 108.966 0)
+			(at 200.406 133.096 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13817,7 +13562,7 @@
 			)
 		)
 		(property "Value" "IRLB8721PBF"
-			(at 209.042 111.252 0)
+			(at 210.312 135.382 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13826,7 +13571,7 @@
 			)
 		)
 		(property "Footprint" "GRK_Lib:TO-220F-3_H_Heatsink"
-			(at 193.04 118.745 0)
+			(at 194.31 142.875 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13837,7 +13582,7 @@
 			)
 		)
 		(property "Datasheet" "http://www.infineon.com/dgdl/irlb8721pbf.pdf?fileId=5546d462533600a40153566056732591"
-			(at 193.04 120.65 0)
+			(at 194.31 144.78 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13847,7 +13592,7 @@
 			)
 		)
 		(property "Description" "62A Id, 30V Vds, 8.7 mOhm Rds, N-Channel HEXFET Power MOSFET, TO-220"
-			(at 198.12 116.84 0)
+			(at 199.39 140.97 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13875,7 +13620,7 @@
 	)
 	(symbol
 		(lib_id "cablight-eagle-import:CAP_CERAMIC_0805")
-		(at 397.51 100.33 0)
+		(at 388.62 87.63 0)
 		(mirror y)
 		(unit 1)
 		(exclude_from_sim no)
@@ -13885,7 +13630,7 @@
 		(fields_autoplaced yes)
 		(uuid "e408c91d-074e-4f9a-8126-60f5f08511b3")
 		(property "Reference" "C7"
-			(at 394.97 97.7899 0)
+			(at 386.08 85.0899 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13894,7 +13639,7 @@
 			)
 		)
 		(property "Value" "0u1F"
-			(at 394.97 100.3299 0)
+			(at 386.08 87.6299 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13903,7 +13648,7 @@
 			)
 		)
 		(property "Footprint" "Capacitor_SMD:C_0805_2012Metric_Pad1.18x1.45mm_HandSolder"
-			(at 397.51 100.33 0)
+			(at 388.62 87.63 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13912,7 +13657,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 397.51 100.33 0)
+			(at 388.62 87.63 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13921,7 +13666,7 @@
 			)
 		)
 		(property "Description" "Ceramic Capacitors\n\nFor new designs, use the packages preceded by an '_' character since they are more reliable:\n\nThe following footprints should be used on most boards:\n\n• _0402 - Standard footprint for regular board layouts\n• _0603 - Standard footprint for regular board layouts\n• _0805 - Standard footprint for regular board layouts\n• _1206 - Standard footprint for regular board layouts\n\nFor extremely tight-pitch boards where space is at a premium, the following 'micro-pitch' footprints can be used (smaller pads, no silkscreen outline, etc.):\n\n• _0402MP - Micro-pitch footprint for very dense/compact boards\n• _0603MP - Micro-pitch footprint for very dense/compact boards\n• _0805MP - Micro-pitch footprint for very dense/compact boards\n• _1206MP - Micro-pitch footprint for very dense/compact boards"
-			(at 397.51 100.33 0)
+			(at 388.62 87.63 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13946,7 +13691,7 @@
 	)
 	(symbol
 		(lib_id "Device:Fuse_Small")
-		(at 179.07 85.09 0)
+		(at 190.5 114.3 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -13955,7 +13700,7 @@
 		(fields_autoplaced yes)
 		(uuid "e7e4955b-a2d6-4025-80e9-2d4ae36b9b1e")
 		(property "Reference" "F1"
-			(at 179.07 80.01 0)
+			(at 190.5 109.22 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13963,7 +13708,7 @@
 			)
 		)
 		(property "Value" "8A"
-			(at 179.07 82.55 0)
+			(at 190.5 111.76 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13971,7 +13716,7 @@
 			)
 		)
 		(property "Footprint" "Fuse:Fuse_1206_3216Metric_Pad1.42x1.75mm_HandSolder"
-			(at 179.07 85.09 0)
+			(at 190.5 114.3 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13980,7 +13725,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 179.07 85.09 0)
+			(at 190.5 114.3 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13989,7 +13734,7 @@
 			)
 		)
 		(property "Description" "Fuse, small symbol"
-			(at 179.07 85.09 0)
+			(at 190.5 114.3 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -14014,7 +13759,7 @@
 	)
 	(symbol
 		(lib_id "cablight-eagle-import:RESISTOR_0805")
-		(at 238.76 53.34 90)
+		(at 233.68 40.64 90)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -14023,7 +13768,7 @@
 		(fields_autoplaced yes)
 		(uuid "ea08e7db-4616-4ecf-b534-aa2554007fab")
 		(property "Reference" "R3"
-			(at 241.3 52.0699 90)
+			(at 236.22 39.3699 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -14032,7 +13777,7 @@
 			)
 		)
 		(property "Value" "10K"
-			(at 241.3 54.61 90)
+			(at 236.22 41.91 90)
 			(effects
 				(font
 					(size 1.016 1.016)
@@ -14042,7 +13787,7 @@
 			)
 		)
 		(property "Footprint" "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder"
-			(at 238.76 53.34 0)
+			(at 233.68 40.64 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -14051,7 +13796,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 238.76 53.34 0)
+			(at 233.68 40.64 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -14060,7 +13805,7 @@
 			)
 		)
 		(property "Description" "Resistors\n\nFor new designs, use the packages preceded by an '_' character since they are more reliable:\n\nThe following footprints should be used on most boards:\n\n• _0402 - Standard footprint for regular board layouts\n• _0603 - Standard footprint for regular board layouts\n• _0805 - Standard footprint for regular board layouts\n• _1206 - Standard footprint for regular board layouts\n\nFor extremely tight-pitch boards where space is at a premium, the following 'micro-pitch' footprints can be used (smaller pads, no silkscreen outline, etc.):\n\n• _0402MP - Micro-pitch footprint for very dense/compact boards\n• _0603MP - Micro-pitch footprint for very dense/compact boards\n• _0805MP - Micro-pitch footprint for very dense/compact boards\n• _1206MP - Micro-pitch footprint for very dense/compact boards"
-			(at 238.76 53.34 0)
+			(at 233.68 40.64 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -14085,7 +13830,7 @@
 	)
 	(symbol
 		(lib_id "cablight-eagle-import:RESISTOR_0805")
-		(at 130.81 207.01 180)
+		(at 128.27 196.85 180)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -14093,7 +13838,7 @@
 		(dnp no)
 		(uuid "ee15763d-3b8d-4a56-820b-8cce679eb5be")
 		(property "Reference" "R11"
-			(at 130.81 209.804 0)
+			(at 128.27 199.644 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -14101,7 +13846,7 @@
 			)
 		)
 		(property "Value" "100K"
-			(at 130.81 211.836 0)
+			(at 128.27 201.676 0)
 			(effects
 				(font
 					(size 1.016 1.016)
@@ -14110,7 +13855,7 @@
 			)
 		)
 		(property "Footprint" "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder"
-			(at 130.81 207.01 0)
+			(at 128.27 196.85 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -14119,7 +13864,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 130.81 207.01 0)
+			(at 128.27 196.85 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -14128,7 +13873,7 @@
 			)
 		)
 		(property "Description" "Resistors\n\nFor new designs, use the packages preceded by an '_' character since they are more reliable:\n\nThe following footprints should be used on most boards:\n\n• _0402 - Standard footprint for regular board layouts\n• _0603 - Standard footprint for regular board layouts\n• _0805 - Standard footprint for regular board layouts\n• _1206 - Standard footprint for regular board layouts\n\nFor extremely tight-pitch boards where space is at a premium, the following 'micro-pitch' footprints can be used (smaller pads, no silkscreen outline, etc.):\n\n• _0402MP - Micro-pitch footprint for very dense/compact boards\n• _0603MP - Micro-pitch footprint for very dense/compact boards\n• _0805MP - Micro-pitch footprint for very dense/compact boards\n• _1206MP - Micro-pitch footprint for very dense/compact boards"
-			(at 130.81 207.01 0)
+			(at 128.27 196.85 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -14153,7 +13898,7 @@
 	)
 	(symbol
 		(lib_id "cablight-eagle-import:RESISTOR_0805")
-		(at 80.01 172.72 270)
+		(at 95.25 147.32 270)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -14162,7 +13907,7 @@
 		(fields_autoplaced yes)
 		(uuid "efab1838-4105-46a6-9523-62a421be6100")
 		(property "Reference" "R6"
-			(at 82.55 171.4499 90)
+			(at 97.79 146.0499 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -14171,7 +13916,7 @@
 			)
 		)
 		(property "Value" "5K1"
-			(at 82.55 173.99 90)
+			(at 97.79 148.59 90)
 			(effects
 				(font
 					(size 1.016 1.016)
@@ -14181,7 +13926,7 @@
 			)
 		)
 		(property "Footprint" "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder"
-			(at 80.01 172.72 0)
+			(at 95.25 147.32 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -14190,7 +13935,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 80.01 172.72 0)
+			(at 95.25 147.32 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -14199,7 +13944,7 @@
 			)
 		)
 		(property "Description" "Resistors\n\nFor new designs, use the packages preceded by an '_' character since they are more reliable:\n\nThe following footprints should be used on most boards:\n\n• _0402 - Standard footprint for regular board layouts\n• _0603 - Standard footprint for regular board layouts\n• _0805 - Standard footprint for regular board layouts\n• _1206 - Standard footprint for regular board layouts\n\nFor extremely tight-pitch boards where space is at a premium, the following 'micro-pitch' footprints can be used (smaller pads, no silkscreen outline, etc.):\n\n• _0402MP - Micro-pitch footprint for very dense/compact boards\n• _0603MP - Micro-pitch footprint for very dense/compact boards\n• _0805MP - Micro-pitch footprint for very dense/compact boards\n• _1206MP - Micro-pitch footprint for very dense/compact boards"
-			(at 80.01 172.72 0)
+			(at 95.25 147.32 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -14224,7 +13969,7 @@
 	)
 	(symbol
 		(lib_id "cablight-eagle-import:RESISTOR_0805")
-		(at 88.9 172.72 270)
+		(at 104.14 147.32 270)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -14233,7 +13978,7 @@
 		(fields_autoplaced yes)
 		(uuid "f0ee2848-563d-4423-85a3-ce2b21f71f10")
 		(property "Reference" "R7"
-			(at 91.44 171.4499 90)
+			(at 106.68 146.0499 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -14242,7 +13987,7 @@
 			)
 		)
 		(property "Value" "5K1"
-			(at 91.44 173.99 90)
+			(at 106.68 148.59 90)
 			(effects
 				(font
 					(size 1.016 1.016)
@@ -14252,7 +13997,7 @@
 			)
 		)
 		(property "Footprint" "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder"
-			(at 88.9 172.72 0)
+			(at 104.14 147.32 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -14261,7 +14006,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 88.9 172.72 0)
+			(at 104.14 147.32 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -14270,7 +14015,7 @@
 			)
 		)
 		(property "Description" "Resistors\n\nFor new designs, use the packages preceded by an '_' character since they are more reliable:\n\nThe following footprints should be used on most boards:\n\n• _0402 - Standard footprint for regular board layouts\n• _0603 - Standard footprint for regular board layouts\n• _0805 - Standard footprint for regular board layouts\n• _1206 - Standard footprint for regular board layouts\n\nFor extremely tight-pitch boards where space is at a premium, the following 'micro-pitch' footprints can be used (smaller pads, no silkscreen outline, etc.):\n\n• _0402MP - Micro-pitch footprint for very dense/compact boards\n• _0603MP - Micro-pitch footprint for very dense/compact boards\n• _0805MP - Micro-pitch footprint for very dense/compact boards\n• _1206MP - Micro-pitch footprint for very dense/compact boards"
-			(at 88.9 172.72 0)
+			(at 104.14 147.32 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -14295,7 +14040,7 @@
 	)
 	(symbol
 		(lib_id "cablight-eagle-import:CAP_CERAMIC_0805")
-		(at 180.34 220.98 0)
+		(at 177.8 210.82 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -14303,7 +14048,7 @@
 		(dnp no)
 		(uuid "f1cda285-e779-4dc7-8e12-364d15e8d38d")
 		(property "Reference" "C12"
-			(at 181.61 214.63 0)
+			(at 179.07 204.47 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -14312,7 +14057,7 @@
 			)
 		)
 		(property "Value" "27pF"
-			(at 181.61 217.17 0)
+			(at 179.07 207.01 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -14321,7 +14066,7 @@
 			)
 		)
 		(property "Footprint" "Capacitor_SMD:C_0805_2012Metric_Pad1.18x1.45mm_HandSolder"
-			(at 180.34 220.98 0)
+			(at 177.8 210.82 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -14330,7 +14075,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 180.34 220.98 0)
+			(at 177.8 210.82 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -14339,7 +14084,7 @@
 			)
 		)
 		(property "Description" "Ceramic Capacitors\n\nFor new designs, use the packages preceded by an '_' character since they are more reliable:\n\nThe following footprints should be used on most boards:\n\n• _0402 - Standard footprint for regular board layouts\n• _0603 - Standard footprint for regular board layouts\n• _0805 - Standard footprint for regular board layouts\n• _1206 - Standard footprint for regular board layouts\n\nFor extremely tight-pitch boards where space is at a premium, the following 'micro-pitch' footprints can be used (smaller pads, no silkscreen outline, etc.):\n\n• _0402MP - Micro-pitch footprint for very dense/compact boards\n• _0603MP - Micro-pitch footprint for very dense/compact boards\n• _0805MP - Micro-pitch footprint for very dense/compact boards\n• _1206MP - Micro-pitch footprint for very dense/compact boards"
-			(at 180.34 220.98 0)
+			(at 177.8 210.82 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -14364,7 +14109,7 @@
 	)
 	(symbol
 		(lib_id "cablight-eagle-import:CAP_CERAMIC_0805")
-		(at 133.35 228.6 90)
+		(at 130.81 218.44 90)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -14372,7 +14117,7 @@
 		(dnp no)
 		(uuid "f5e5ad8d-6238-4b24-91d1-79e2134c3509")
 		(property "Reference" "C10"
-			(at 131.826 231.648 90)
+			(at 129.286 221.488 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -14380,7 +14125,7 @@
 			)
 		)
 		(property "Value" "100nF"
-			(at 131.572 234.188 90)
+			(at 129.032 224.028 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -14388,7 +14133,7 @@
 			)
 		)
 		(property "Footprint" "Capacitor_SMD:C_0805_2012Metric_Pad1.18x1.45mm_HandSolder"
-			(at 133.35 228.6 0)
+			(at 130.81 218.44 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -14397,7 +14142,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 133.35 228.6 0)
+			(at 130.81 218.44 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -14406,7 +14151,7 @@
 			)
 		)
 		(property "Description" "Ceramic Capacitors\n\nFor new designs, use the packages preceded by an '_' character since they are more reliable:\n\nThe following footprints should be used on most boards:\n\n• _0402 - Standard footprint for regular board layouts\n• _0603 - Standard footprint for regular board layouts\n• _0805 - Standard footprint for regular board layouts\n• _1206 - Standard footprint for regular board layouts\n\nFor extremely tight-pitch boards where space is at a premium, the following 'micro-pitch' footprints can be used (smaller pads, no silkscreen outline, etc.):\n\n• _0402MP - Micro-pitch footprint for very dense/compact boards\n• _0603MP - Micro-pitch footprint for very dense/compact boards\n• _0805MP - Micro-pitch footprint for very dense/compact boards\n• _1206MP - Micro-pitch footprint for very dense/compact boards"
-			(at 133.35 228.6 0)
+			(at 130.81 218.44 0)
 			(effects
 				(font
 					(size 1.27 1.27)
