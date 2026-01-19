@@ -37,9 +37,9 @@
         "other_text_thickness": 0.05,
         "other_text_upright": false,
         "pads": {
-          "drill": 1.5,
-          "height": 3.0,
-          "width": 3.0
+          "drill": 0.0,
+          "height": 0.6,
+          "width": 1.325
         },
         "silk_line_width": 0.15,
         "silk_text_italic": false,
@@ -69,6 +69,10 @@
         }
       ],
       "drc_exclusions": [
+        [
+          "mirrored_text_on_front_layer|109850000|47000000|034092e8-e5ae-44c1-a5ea-fed56101d0e3|00000000-0000-0000-0000-000000000000",
+          ""
+        ],
         [
           "starved_thermal|106250000|82375000|070291fc-e5e7-4a83-a449-467b285141c2|617fe89e-a9fb-4687-9341-cdf10c991e40|B.Cu",
           ""
@@ -171,10 +175,10 @@
         "min_silk_clearance": 0.2,
         "min_text_height": 1.0,
         "min_text_thickness": 0.15,
-        "min_through_hole_diameter": 0.2,
+        "min_through_hole_diameter": 0.3,
         "min_track_width": 0.2,
         "min_via_annular_width": 0.15,
-        "min_via_diameter": 0.25,
+        "min_via_diameter": 0.3,
         "solder_mask_to_copper_clearance": 0.0,
         "use_height_for_length_calcs": true
       },
