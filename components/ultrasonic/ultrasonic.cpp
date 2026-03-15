@@ -128,9 +128,13 @@ HCSR04::trigger_ranging_session()
   // Send a 10 microsecond pulse to the trigger pin.
   // Delay is too short to bother moving the pusle to a peripheral.
   taskENTER_CRITICAL(&mux);
-  GPIO_SET_FAST_0_31(_trig_pin);
+  // TODO: figure out why this doesn't work with seeed studio. maybe GPIO ints different? 
+  // GPIO_SET_FAST_0_31(_trig_pin);
+  gpio_set_level(_trig_pin, 1);
   ets_delay_us(10); // esp32 lowest level c api for delay
-  GPIO_CLEAR_FAST_0_31(_trig_pin);
+  gpio_set_level(_trig_pin, 0);
+
+  // GPIO_CLEAR_FAST_0_31(_trig_pin);
   taskEXIT_CRITICAL(&mux);
 }
 
@@ -152,7 +156,7 @@ HCSR04::reset()
       tag, "Increasing delay between ranges: %dms", _delay_between_ranging_ms);
   }
 
-  _pulse_in_flight = false;
+  _pulse_in_flight = 0;
 }
 
 float
